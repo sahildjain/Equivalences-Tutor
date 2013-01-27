@@ -30,6 +30,17 @@ public class ASTPrintVisitor implements ASTVisitor {
 		padding = oldPadding;
 	}
 	
-	public void 
+	public void visitNotNode(ASTNotNode node) {
+		String oldPadding = padding;
+		stream.println(padding + "Not");
+		padding = padding + "  ";
+		node.getUnary().visit(this);
+		padding = oldPadding;
+	}
+
+	public void visitIdentifierNode(ASTIdentifierNode node) {
+		stream.println(padding + "Identifier");
+		stream.println(padding + node.getId());
+	}
 
 }
