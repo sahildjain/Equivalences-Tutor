@@ -1,6 +1,8 @@
 package AST;
 
 import java.io.PrintStream;
+import java.util.Iterator;
+import java.util.List;
 
 public class ASTPrintVisitor implements ASTVisitor {
 	
@@ -64,6 +66,19 @@ public class ASTPrintVisitor implements ASTVisitor {
 		stream.println(padding + "Only If");
 		padding = padding + indent;
 		node.getDoubleConditional().visit(this);
+		padding = oldPadding;
+	}
+
+	public void visitProgramNode(ASTProgramNode node) {
+		String oldPadding = padding;
+		stream.println(padding + "Expression");
+		padding = padding + indent;
+		List<ASTExpressionNode> expressions = node.getExpressions();
+		Iterator<ASTExpressionNode> it = expressions.iterator();
+		while(it.hasNext()) {
+			ASTExpressionNode expression = it.next();
+			expression.visit(this);
+		}
 		padding = oldPadding;
 	}
 

@@ -8,5 +8,6 @@ public interface ASTVisitor {
 	public void visitIdentifierNode(ASTIdentifierNode node);
 	public void visitIfThenNode(ASTIfThenNode node);
 	public void visitIffNode(ASTIffNode node);
+	public void visitProgramNode(ASTProgramNode node);
 	
 }

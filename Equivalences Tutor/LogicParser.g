@@ -7,10 +7,18 @@ options {
 
 @header {
   package eqtutor;
+  import java.util.LinkedList;
+  import java.util.List;
+  import AST.*;
 }
 
-expr
-  : iffexpr
+program returns [AST tree]
+	@init {List<ASTExpressionNode> expressions = new LinkedList<ASTExpressionNode>();}
+  : expr
+  ;
+
+expr returns [ASTExpressionNode node]
+  :
   ;
 
 iffexpr returns [ASTDoubleConditionalNode node]
