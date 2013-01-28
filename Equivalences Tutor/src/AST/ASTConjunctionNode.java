@@ -1,5 +1,5 @@
 package AST;
 
-public class ASTConjunctionNode {
+public abstract class ASTConjunctionNode extends ASTDisjunctionNode {
 
 }

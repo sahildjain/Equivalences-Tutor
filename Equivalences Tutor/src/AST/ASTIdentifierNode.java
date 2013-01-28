@@ -1,6 +1,6 @@
 package AST;
 
-public class ASTIdentifierNode extends ASTNode {
+public class ASTIdentifierNode extends ASTLiteralNode {
 	
 	private String id;
 	
