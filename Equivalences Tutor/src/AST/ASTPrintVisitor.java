@@ -16,8 +16,8 @@ public class ASTPrintVisitor implements ASTVisitor {
 		String oldPadding = padding;
 		stream.println(padding + "And");
 		padding = padding + "  ";
-		node.getExpression1().visit(this);
-		node.getExpression2().visit(this);
+		node.getUnary().visit(this);
+		node.getConjunction().visit(this);
 		padding = oldPadding;
 	}
 	
@@ -25,8 +25,8 @@ public class ASTPrintVisitor implements ASTVisitor {
 		String oldPadding = padding;
 		stream.println(padding + "Or");
 		padding = padding + "  ";
-		node.getExpression1().visit(this);
-		node.getExpression2().visit(this);
+		node.getConjunction().visit(this);
+		node.getDisjunction().visit(this);
 		padding = oldPadding;
 	}
 	
