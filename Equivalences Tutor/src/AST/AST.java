@@ -2,9 +2,9 @@ package AST;
 
 public class AST {
 	
-	private ASTExpressionNode root;
+	private ASTProgramNode root;
 	
-	public AST(ASTExpressionNode root) {
+	public AST(ASTProgramNode root) {
 		this.root = root;
 	}
 	
@@ -12,7 +12,7 @@ public class AST {
 		getRoot().visit(visitor);
 	}
 	
-	public ASTExpressionNode getRoot() {
+	public ASTProgramNode getRoot() {
 		return this.root;
 	}
 

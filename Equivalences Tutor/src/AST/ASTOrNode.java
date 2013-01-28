@@ -18,7 +18,6 @@ public class ASTOrNode extends ASTDisjunctionNode {
 		return this.disjunction;
 	}
 
-	@Override
 	public void visit(ASTVisitor visitor) {
 		visitor.visitOrNode(this);
 	}
