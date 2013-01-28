@@ -11,5 +11,9 @@ public class ASTNotNode extends ASTUnaryNode {
 	public ASTUnaryNode getUnary() {
 		return this.unary;
 	}
+	
+	public void visit(ASTVisitor visitor) {
+		visitor.visitNotNode(this);
+	}
 
 }

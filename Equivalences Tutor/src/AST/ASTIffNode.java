@@ -17,5 +17,9 @@ public class ASTIffNode extends ASTDoubleConditionalNode {
 	public ASTDoubleConditionalNode getDoubleConditional() {
 		return this.doubleConditional;
 	}
+	
+	public void visit(ASTVisitor visitor) {
+		visitor.visitIffNode(this);
+	}
 
 }

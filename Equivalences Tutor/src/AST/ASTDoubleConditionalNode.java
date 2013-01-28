@@ -1,5 +1,5 @@
 package AST;
 
-public abstract class ASTDoubleConditionalNode {
+public abstract class ASTDoubleConditionalNode extends ASTNode {
 
 }

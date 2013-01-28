@@ -18,4 +18,8 @@ public class ASTAndNode extends ASTConjunctionNode {
 		return this.conjunction;
 	}
 	
+	public void visit(ASTVisitor visitor) {
+		visitor.visitAndNode(this);
+	}
+	
 }
