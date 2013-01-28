@@ -3,19 +3,23 @@ package AST;
 public class ASTIfThenNode extends ASTConditionalNode {
 	
 	private ASTDisjunctionNode disjunction;
-	private ASTIfThenNode ifthen;
+	private ASTConditionalNode conditional;
 
-	public ASTIfThenNode(ASTDisjunctionNode disjunction, ASTIfThenNode ifthen) {
+	public ASTIfThenNode(ASTDisjunctionNode disjunction, ASTConditionalNode conditional) {
 		this.disjunction = disjunction;
-		this.ifthen = ifthen;
+		this.conditional = conditional;
 	}
 	
 	public ASTDisjunctionNode getDisjunction() {
 		return this.disjunction;
 	}
 	
-	public ASTIfThenNode getIfThen() {
-		return this.ifthen;
+	public ASTConditionalNode getConditional() {
+		return this.conditional;
+	}
+	
+	public void visit(ASTVisitor visitor) {
+		visitor.visitIfThenNode(this);
 	}
 
 }

@@ -11,5 +11,9 @@ public class ASTIdentifierNode extends ASTLiteralNode {
 	public String getId() {
 		return this.id;
 	}
+	
+	public void visit(ASTVisitor visitor) {
+		visitor.visitIdentifierNode(this);
+	}
 
 }

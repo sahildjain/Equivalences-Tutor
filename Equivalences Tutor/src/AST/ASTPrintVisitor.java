@@ -15,7 +15,7 @@ public class ASTPrintVisitor implements ASTVisitor {
 	public void visitAndNode(ASTAndNode node) {
 		String oldPadding = padding;
 		stream.println(padding + "And");
-		padding = padding + "  ";
+		padding = padding + indent;
 		node.getUnary().visit(this);
 		node.getConjunction().visit(this);
 		padding = oldPadding;
@@ -24,7 +24,7 @@ public class ASTPrintVisitor implements ASTVisitor {
 	public void visitOrNode(ASTOrNode node) {
 		String oldPadding = padding;
 		stream.println(padding + "Or");
-		padding = padding + "  ";
+		padding = padding + indent;
 		node.getConjunction().visit(this);
 		node.getDisjunction().visit(this);
 		padding = oldPadding;
@@ -33,7 +33,7 @@ public class ASTPrintVisitor implements ASTVisitor {
 	public void visitNotNode(ASTNotNode node) {
 		String oldPadding = padding;
 		stream.println(padding + "Not");
-		padding = padding + "  ";
+		padding = padding + indent;
 		node.getUnary().visit(this);
 		padding = oldPadding;
 	}
@@ -41,6 +41,30 @@ public class ASTPrintVisitor implements ASTVisitor {
 	public void visitIdentifierNode(ASTIdentifierNode node) {
 		stream.println(padding + "Identifier");
 		stream.println(padding + node.getId());
+	}
+
+	public void visitIfThenNode(ASTIfThenNode node) {
+		String oldPadding = padding;
+		stream.println(padding + "If");
+		padding = padding + indent;
+		node.getDisjunction().visit(this);
+		padding = oldPadding;
+		stream.println(padding + "Then");
+		padding = padding + indent;
+		node.getConditional().visit(this);
+		padding = oldPadding;
+	}
+
+	public void visitIffNode(ASTIffNode node) {
+		String oldPadding = padding;
+		stream.println(padding + "If");
+		padding = padding + indent;
+		node.getConditional().visit(this);
+		padding = oldPadding;
+		stream.println(padding + "Only If");
+		padding = padding + indent;
+		node.getDoubleConditional().visit(this);
+		padding = oldPadding;
 	}
 
 }
