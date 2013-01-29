@@ -21,27 +21,21 @@ options {
   }
   
   public boolean hasFoundError() {
-    retutn this.hasFoundError;
+    return this.hasFoundError;
   }
 }
 
 program returns [AST tree]
-	@init {List<ASTExpressionNode> expressions = new LinkedList<ASTExpressionNode>();}
-  : (expr {expressions.add($expr.node);})* EOF
-    {$tree = new AST(new ASTProgramNode(expressions));}
-  ;
-
-expr returns [ASTExpressionNode node]
-  : iffexpr ($node = $iffexpr.node;)
+  : e = iffexpr {$tree = new AST(new ASTProgramNode($e.node));} EOF
   ;
 
 iffexpr returns [ASTDoubleConditionalNode node]
-  : ifexpr IFF iff = expr {$node = new ASTIffNode($ifexpr.node, $iff.node);}
-  | ifexpr ($node = $ifexpr.node;)
+  : ifexpr IFF iff = iffexpr {$node = new ASTIffNode($ifexpr.node, $iff.node);}
+  | ifexpr {$node = $ifexpr.node}
   ;
   	
 ifexpr returns [ASTConditionalNode node]
-  : orexpr IFTHEN if = ifexpr {$node = new ASTIfThenNode($orexpr.node, $if.node);}
+  : orexpr IFTHEN ifthen = ifexpr {$node = new ASTIfThenNode($orexpr.node, $ifthen.node);}
   | orexpr {$node = $orexpr.node;}
   ;
 
