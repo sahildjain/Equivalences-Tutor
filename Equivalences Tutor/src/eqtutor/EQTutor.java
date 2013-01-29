@@ -14,13 +14,16 @@ import AST.*;
 public class EQTutor {
 	
 	public static void main(String[] args) throws FileNotFoundException {
-		//String src = "a & b | c";
-		PropositionalExpressionGenerator formula = new PropositionalExpressionGenerator(1);
-		String src = formula.generate();
+		String src = getFormula();
 		System.out.println("Formula: " + src);
 		LogicParser parser = getParser(src);
 		AST tree = getTree(parser);
 		printTreeToConsole(tree);
+	}
+	
+	private static String getFormula() {
+		PropositionalExpressionGenerator formula = new PropositionalExpressionGenerator(1);
+		return formula.generate();
 	}
 
 	private static void printTreeToConsole(AST tree) {
