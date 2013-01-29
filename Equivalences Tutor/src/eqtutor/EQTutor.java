@@ -15,7 +15,7 @@ public class EQTutor {
 	
 	public static void main(String[] args) throws FileNotFoundException {
 		//String src = "a & b | c";
-		PropositionalFormulaGenerator formula = new PropositionalFormulaGenerator(1);
+		PropositionalExpressionGenerator formula = new PropositionalExpressionGenerator(1);
 		String src = formula.generate();
 		System.out.println("Formula: " + src);
 		LogicParser parser = getParser(src);

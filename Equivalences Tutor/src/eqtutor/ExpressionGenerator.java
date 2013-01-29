@@ -8,8 +8,7 @@ public abstract class ExpressionGenerator {
 	
 	public Operator getRandomOperator() {
 		Random rand = new Random();
-		int i = rand.nextInt(1000);
-		i = i % 4;
+		int i = rand.nextInt(4);
 		return Operator.values()[i];
 	}
 	

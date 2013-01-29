@@ -1,10 +1,10 @@
 package eqtutor;
 
-public class PropositionalFormulaGenerator extends ExpressionGenerator {
+public class PropositionalExpressionGenerator extends ExpressionGenerator {
 
 	private int difficulty;
 	
-	public PropositionalFormulaGenerator(int difficulty) {
+	public PropositionalExpressionGenerator(int difficulty) {
 		this.setDifficulty(difficulty);
 	}
 	
