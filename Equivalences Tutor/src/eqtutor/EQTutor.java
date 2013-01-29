@@ -14,7 +14,9 @@ import AST.*;
 public class EQTutor {
 	
 	public static void main(String[] args) throws FileNotFoundException {
-		String src = "a & b | c";
+		//String src = "a & b | c";
+		PropositionalFormulaGenerator formula = new PropositionalFormulaGenerator(1);
+		String src = formula.generate();
 		System.out.println("Formula: " + src);
 		LogicParser parser = getParser(src);
 		AST tree = getTree(parser);
