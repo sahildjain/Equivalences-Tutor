@@ -14,7 +14,7 @@ import AST.*;
 public class EQTutor {
 	
 	public static void main(String[] args) throws FileNotFoundException {
-		String src = "a <> b -> c & d | e <> f";
+		String src = "a & b | c";
 		System.out.println("Formula: " + src);
 		CharStream stream = new ANTLRStringStream(src);
 		LogicLexer lexer = new LogicLexer(stream);
