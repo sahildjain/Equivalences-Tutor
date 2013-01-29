@@ -48,6 +48,7 @@ andexpr returns [ASTConjunctionNode node]
   : notexpr AND and = andexpr {$node = new ASTAndNode($notexpr.node, $and.node);}
   | notexpr {$node = $notexpr.node;}
   ;
+
 notexpr returns [ASTUnaryNode node]
   : NOT not = notexpr {$node = new ASTNotNode($not.node);}
   | identifier {$node = $identifier.node;}
