@@ -54,6 +54,7 @@ notexpr returns [ASTUnaryNode node]
   | identifier {$node = $identifier.node;}
   ;
 
+//edit the ASTLiteralNode, that will fix the paren problem
 identifier returns [ASTLiteralNode node]
   : ID {$node = new ASTIdentifierNode($ID.text);}
   //| LPAREN! expr RPAREN!
