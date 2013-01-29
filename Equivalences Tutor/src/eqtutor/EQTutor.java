@@ -16,19 +16,33 @@ public class EQTutor {
 	public static void main(String[] args) throws FileNotFoundException {
 		String src = "a & b | c";
 		System.out.println("Formula: " + src);
-		CharStream stream = new ANTLRStringStream(src);
-		LogicLexer lexer = new LogicLexer(stream);
-		TokenStream tokens = new CommonTokenStream(lexer);
-		LogicParser parser = new LogicParser(tokens);
+		LogicParser parser = getParser(src);
+		AST tree = getTree(parser);
+		printTreeToConsole(tree);
+	}
+
+	private static void printTreeToConsole(AST tree) {
+		PrintStream p = System.out;
+		ASTPrintVisitor printVisitor = new ASTPrintVisitor(p);
+		tree.visit(printVisitor);
+	}
+
+	private static AST getTree(LogicParser parser) {
 		AST tree = null;
 		try {
 			tree = parser.program();
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		PrintStream p = System.out;
-		ASTPrintVisitor printVisitor = new ASTPrintVisitor(p);
-		tree.visit(printVisitor);
+		return tree;
+	}
+
+	private static LogicParser getParser(String src) {
+		CharStream stream = new ANTLRStringStream(src);
+		LogicLexer lexer = new LogicLexer(stream);
+		TokenStream tokens = new CommonTokenStream(lexer);
+		LogicParser parser = new LogicParser(tokens);
+		return parser;
 	}
 
 }
