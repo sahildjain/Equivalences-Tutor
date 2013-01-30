@@ -1,21 +1,21 @@
 package AST;
 
-public class ASTAndNode extends ASTConjunctionNode {
+public class ASTAndNode extends ASTPropositionalBinaryNode {
 	
-	private ASTUnaryNode unary;
-	private ASTConjunctionNode conjunction;
+	private ASTPropositionalNode unary;
+	private ASTPropositionalNode propositional;
 	
-	public ASTAndNode(ASTUnaryNode unary, ASTConjunctionNode conjunction) {
+	public ASTAndNode(ASTPropositionalNode unary, ASTPropositionalNode propositional) {
 		this.unary = unary;
-		this.conjunction = conjunction;
+		this.propositional = propositional;
 	}
 	
-	public ASTUnaryNode getUnary() {
+	public ASTPropositionalNode getUnary() {
 		return this.unary;
 	}
 	
-	public ASTConjunctionNode getConjunction() {
-		return this.conjunction;
+	public ASTPropositionalNode getPropositional() {
+		return this.propositional;
 	}
 	
 	public void visit(ASTVisitor visitor) {

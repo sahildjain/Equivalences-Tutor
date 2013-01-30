@@ -1,20 +1,20 @@
 package AST;
 
-public class ASTOrNode extends ASTDisjunctionNode {
+public class ASTOrNode extends ASTPropositionalBinaryNode {
 	
-	private ASTConjunctionNode conjunction;
-	private ASTDisjunctionNode disjunction;
+	private ASTPropositionalNode conjunction;
+	private ASTPropositionalNode disjunction;
 
-	public ASTOrNode(ASTConjunctionNode conjunction, ASTDisjunctionNode disjunction) {
+	public ASTOrNode(ASTPropositionalNode conjunction, ASTPropositionalNode disjunction) {
 		this.conjunction = conjunction;
 		this.disjunction = disjunction;
 	}
 	
-	public ASTConjunctionNode getConjunction() {
+	public ASTPropositionalNode getConjunction() {
 		return this.conjunction;
 	}
 	
-	public ASTDisjunctionNode getDisjunction() {
+	public ASTPropositionalNode getDisjunction() {
 		return this.disjunction;
 	}
 

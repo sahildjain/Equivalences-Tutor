@@ -2,13 +2,13 @@ package AST;
 
 public class ASTProgramNode extends ASTNode{
 
-	private ASTDoubleConditionalNode doubleConditional;
+	private ASTPropositionalNode doubleConditional;
 	
-	public ASTProgramNode(ASTDoubleConditionalNode doubleConditional) {
+	public ASTProgramNode(ASTPropositionalNode doubleConditional) {
 		this.doubleConditional = doubleConditional;
 	}
 	
-	public ASTDoubleConditionalNode getDoubleConditional() {
+	public ASTPropositionalNode getDoubleConditional() {
 		return this.doubleConditional;
 	}
 	

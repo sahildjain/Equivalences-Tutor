@@ -1,6 +1,6 @@
 package eqtutor;
 
-public enum Operator {
+public enum BinaryOperator {
 	OR,
 	AND,
 	IFTHEN,

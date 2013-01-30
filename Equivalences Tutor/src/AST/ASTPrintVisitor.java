@@ -17,7 +17,7 @@ public class ASTPrintVisitor implements ASTVisitor {
 		stream.println(padding + "And");
 		padding = padding + indent;
 		node.getUnary().visit(this);
-		node.getConjunction().visit(this);
+		node.getPropositional().visit(this);
 		padding = oldPadding;
 	}
 	

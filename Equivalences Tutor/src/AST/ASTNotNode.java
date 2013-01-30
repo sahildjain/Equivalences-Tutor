@@ -1,14 +1,14 @@
 package AST;
 
-public class ASTNotNode extends ASTUnaryNode {
+public class ASTNotNode extends ASTPropositionalUnaryNode {
 	
-	private ASTUnaryNode unary;
+	private ASTPropositionalNode unary;
 	
-	public ASTNotNode(ASTUnaryNode unary) {
+	public ASTNotNode(ASTPropositionalNode unary) {
 		this.unary = unary;
 	}
 	
-	public ASTUnaryNode getUnary() {
+	public ASTPropositionalNode getUnary() {
 		return this.unary;
 	}
 	

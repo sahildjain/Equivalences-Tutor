@@ -1,6 +1,6 @@
 package AST;
 
-public class ASTIdentifierNode extends ASTLiteralNode {
+public class ASTIdentifierNode extends ASTPropositionalBinaryNode {
 	
 	private String id;
 	

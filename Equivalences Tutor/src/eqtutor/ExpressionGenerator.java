@@ -6,23 +6,23 @@ public abstract class ExpressionGenerator {
 	
 	public abstract String generate();
 	
-	public Operator getRandomOperator() {
+	public BinaryOperator getRandomOperator() {
 		Random rand = new Random();
 		int i = rand.nextInt(4);
-		return Operator.values()[i];
+		return BinaryOperator.values()[i];
 	}
 	
-	public String getOperatorSymbol(Operator operator) {
-		if(operator.equals(Operator.AND)) {
+	public String getOperatorSymbol(BinaryOperator operator) {
+		if(operator.equals(BinaryOperator.AND)) {
 			return " & ";
 		}
-		if(operator.equals(Operator.OR)) {
+		if(operator.equals(BinaryOperator.OR)) {
 			return " | ";
 		}
-		if(operator.equals(Operator.IFF)) {
+		if(operator.equals(BinaryOperator.IFF)) {
 			return " <> "; 
 		}
-		if(operator.equals(Operator.IFTHEN)) {
+		if(operator.equals(BinaryOperator.IFTHEN)) {
 			return " -> ";
 		}
 		return null;

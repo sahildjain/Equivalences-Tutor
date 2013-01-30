@@ -1,20 +1,20 @@
 package AST;
 
-public class ASTIfThenNode extends ASTConditionalNode {
+public class ASTIfThenNode extends ASTPropositionalBinaryNode {
 	
-	private ASTDisjunctionNode disjunction;
-	private ASTConditionalNode conditional;
+	private ASTPropositionalNode disjunction;
+	private ASTPropositionalNode conditional;
 
-	public ASTIfThenNode(ASTDisjunctionNode disjunction, ASTConditionalNode conditional) {
+	public ASTIfThenNode(ASTPropositionalNode disjunction, ASTPropositionalNode conditional) {
 		this.disjunction = disjunction;
 		this.conditional = conditional;
 	}
 	
-	public ASTDisjunctionNode getDisjunction() {
+	public ASTPropositionalNode getDisjunction() {
 		return this.disjunction;
 	}
 	
-	public ASTConditionalNode getConditional() {
+	public ASTPropositionalNode getConditional() {
 		return this.conditional;
 	}
 	

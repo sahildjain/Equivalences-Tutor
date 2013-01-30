@@ -15,6 +15,7 @@ public class EQTutor {
 	
 	public static void main(String[] args) throws FileNotFoundException {
 		String src = getFormula();
+		//String src = "a & b -> c";
 		System.out.println("Formula: " + src);
 		LogicParser parser = getParser(src);
 		AST tree = getTree(parser);
@@ -22,16 +23,18 @@ public class EQTutor {
 	}
 	
 	private static String getFormula() {
-		PropositionalExpressionGenerator formula = new PropositionalExpressionGenerator(1);
+		PropositionalExpressionGenerator formula = new PropositionalExpressionGenerator(5, 0);
 		return formula.generate();
 	}
-
-	private static void printTreeToConsole(AST tree) {
-		PrintStream p = System.out;
-		ASTPrintVisitor printVisitor = new ASTPrintVisitor(p);
-		tree.visit(printVisitor);
+	
+	private static LogicParser getParser(String src) {
+		CharStream stream = new ANTLRStringStream(src);
+		LogicLexer lexer = new LogicLexer(stream);
+		TokenStream tokens = new CommonTokenStream(lexer);
+		LogicParser parser = new LogicParser(tokens);
+		return parser;
 	}
-
+	
 	private static AST getTree(LogicParser parser) {
 		AST tree = null;
 		try {
@@ -42,12 +45,10 @@ public class EQTutor {
 		return tree;
 	}
 
-	private static LogicParser getParser(String src) {
-		CharStream stream = new ANTLRStringStream(src);
-		LogicLexer lexer = new LogicLexer(stream);
-		TokenStream tokens = new CommonTokenStream(lexer);
-		LogicParser parser = new LogicParser(tokens);
-		return parser;
+	private static void printTreeToConsole(AST tree) {
+		PrintStream p = System.out;
+		ASTPrintVisitor printVisitor = new ASTPrintVisitor(p);
+		tree.visit(printVisitor);
 	}
 
 }

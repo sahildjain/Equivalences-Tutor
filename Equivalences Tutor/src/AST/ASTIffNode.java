@@ -1,20 +1,20 @@
 package AST;
 
-public class ASTIffNode extends ASTDoubleConditionalNode {
+public class ASTIffNode extends ASTPropositionalBinaryNode {
 	
-	private ASTConditionalNode conditional;
-	private ASTDoubleConditionalNode doubleConditional;
+	private ASTPropositionalNode conditional;
+	private ASTPropositionalNode doubleConditional;
 
-	public ASTIffNode(ASTConditionalNode conditional, ASTDoubleConditionalNode doubleConditional) {
+	public ASTIffNode(ASTPropositionalNode conditional, ASTPropositionalNode doubleConditional) {
 		this.conditional = conditional;
 		this.doubleConditional = doubleConditional;
 	}
 	
-	public ASTConditionalNode getConditional() {
+	public ASTPropositionalNode getConditional() {
 		return this.conditional;
 	}
 	
-	public ASTDoubleConditionalNode getDoubleConditional() {
+	public ASTPropositionalNode getDoubleConditional() {
 		return this.doubleConditional;
 	}
 	
