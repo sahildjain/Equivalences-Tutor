@@ -1,5 +1,7 @@
 package eqtutor;
 
+import java.util.Random;
+
 public class PropositionalExpressionGenerator extends ExpressionGenerator {
 
 	private int atoms;
@@ -16,14 +18,23 @@ public class PropositionalExpressionGenerator extends ExpressionGenerator {
 		int nestings = getNestings();
 		int atoms = getAtoms();
 		for(int i = 0; i < atoms; i++) {
-			int ascii = 97 + i;
-			stringBuilder.append(Character.toString((char) ascii));
+			stringBuilder.append(getAtom(i));
 			operator = getRandomOperator();
 			if(i != atoms - 1) {
 				stringBuilder.append(getOperatorSymbol(operator));
 			}
 		}
 		return stringBuilder.toString();
+	}
+	
+	private String getAtom(int offset) {
+		int ascii = 97 + offset;
+		Random random = new Random();
+		int rand = random.nextInt(10);
+		if(rand > 7) {
+			return "!" + Character.toString((char) ascii);
+		}
+		return Character.toString((char) ascii);
 	}
 
 	public int getAtoms() {

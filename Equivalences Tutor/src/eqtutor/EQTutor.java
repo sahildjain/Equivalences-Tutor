@@ -23,7 +23,7 @@ public class EQTutor {
 	}
 	
 	private static String getFormula() {
-		PropositionalExpressionGenerator formula = new PropositionalExpressionGenerator(5, 0);
+		PropositionalExpressionGenerator formula = new PropositionalExpressionGenerator(10, 0);
 		return formula.generate();
 	}
 	

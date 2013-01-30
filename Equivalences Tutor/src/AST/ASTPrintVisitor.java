@@ -39,8 +39,7 @@ public class ASTPrintVisitor implements ASTVisitor {
 	}
 
 	public void visitIdentifierNode(ASTIdentifierNode node) {
-		stream.println(padding + "Identifier");
-		stream.println(padding + indent + node.getId());
+		stream.println(padding + "Identifier " + node.getId());
 	}
 
 	public void visitIfThenNode(ASTIfThenNode node) {
@@ -73,16 +72,6 @@ public class ASTPrintVisitor implements ASTVisitor {
 		padding = padding + indent;
 		node.getDoubleConditional().visit(this);
 		padding = oldPadding;
-		/*String oldPadding = padding;
-		stream.println(padding + "Expression");
-		padding = padding + indent;
-		List<ASTExpressionNode> expressions = node.getExpressions();
-		Iterator<ASTExpressionNode> it = expressions.iterator();
-		while(it.hasNext()) {
-			ASTExpressionNode expression = it.next();
-			expression.visit(this);
-		}
-		padding = oldPadding;*/
 	}
 
 }
