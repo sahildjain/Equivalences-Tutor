@@ -14,12 +14,12 @@ public class PropositionalExpressionGenerator extends ExpressionGenerator {
 	
 	public String generate() {
 		StringBuilder stringBuilder = new StringBuilder();
-		/*int nestings = getNestings();*/
+		int nestings = getNestings();
 		int atoms = getAtoms();
 		Random randomAtoms = new Random();
 		int randAtoms;
-		for(int i = 0; i < atoms; i += randAtoms) {
-			randAtoms = randomAtoms.nextInt(atoms - i);
+		for(int i = 0; i < atoms; i+=atoms) {
+			//randAtoms = randomAtoms.nextInt(atoms - i);
 			/*Random randomNestings = new Random();
 			int randNestings = randomNestings.nextInt(nestings);
 			if(randNestings > randAtoms) {
@@ -30,7 +30,7 @@ public class PropositionalExpressionGenerator extends ExpressionGenerator {
 			//if(randAtoms == atoms) {
 			//	end = true;
 			//}
-			PropositionalExpressionGenerator gen = new PropositionalExpressionGenerator(randAtoms, 0);
+			PropositionalExpressionGenerator gen = new PropositionalExpressionGenerator(atoms, nestings);
 			stringBuilder.append(gen.generateExpression(i));
 		}
 		return stringBuilder.toString();
