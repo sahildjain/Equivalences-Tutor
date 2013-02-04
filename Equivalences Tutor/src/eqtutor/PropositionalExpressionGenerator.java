@@ -18,37 +18,12 @@ public class PropositionalExpressionGenerator extends ExpressionGenerator {
 		int atoms = getAtoms();
 		Random randomAtoms = new Random();
 		int randAtoms;
-		for(int i = 0; i < atoms; i+=atoms) {
-			//randAtoms = randomAtoms.nextInt(atoms - i);
-			/*Random randomNestings = new Random();
-			int randNestings = randomNestings.nextInt(nestings);
-			if(randNestings > randAtoms) {
-				randNestings = randAtoms - 1;
-			}
-			nestings -= randNestings;*/
-			//boolean end = false;
-			//if(randAtoms == atoms) {
-			//	end = true;
-			//}
-			PropositionalExpressionGenerator gen = new PropositionalExpressionGenerator(atoms, nestings);
-			stringBuilder.append(gen.generateExpression(i));
+		for(int i = 1; i < atoms; i += randAtoms) {
+			randAtoms = randomAtoms.nextInt(atoms);
+			PropositionalExpressionGenerator gen = new PropositionalExpressionGenerator(randAtoms, nestings);
+			stringBuilder.append(gen.generateExpression(i) + getOperatorSymbol(BinaryOperator.AND));
 		}
-		return stringBuilder.toString();
-	}
-	
-	private String generateString(int offset) {
-		int nestings = getNestings();
-		int atoms = getAtoms();
-		if(atoms == 1) {
-			return getAtom(offset);
-		}
-		StringBuilder stringBuilder = new StringBuilder();
-		int i;
-		for(i = 0; i < atoms; i++) {
-			BinaryOperator operator = getRandomOperator();
-			stringBuilder.append(getAtom(offset + i) + getOperatorSymbol(operator));
-		}
-		return stringBuilder.toString();
+		return stringBuilder.delete(stringBuilder.length() - 1, stringBuilder.length()).toString();
 	}
 	
 	private String generateExpression(int offset) {
@@ -71,9 +46,9 @@ public class PropositionalExpressionGenerator extends ExpressionGenerator {
 		}
 		return stringBuilder.toString();
 	}
-
+	
 	private String getAtom(int offset) {
-		int ascii = 97 + offset;
+		int ascii = 96 + offset;
 		Random random = new Random();
 		int rand = random.nextInt(10);
 		if(rand >= 7) {
@@ -89,5 +64,7 @@ public class PropositionalExpressionGenerator extends ExpressionGenerator {
 	public int getNestings() {
 		return nestings;
 	}
+	
+	
 	
 }

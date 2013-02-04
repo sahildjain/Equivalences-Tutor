@@ -10,11 +10,11 @@ public class ASTAndNode extends ASTPropositionalBinaryNode {
 		this.propositional = propositional;
 	}
 	
-	public ASTPropositionalNode getUnary() {
+	public ASTPropositionalNode getLeft() {
 		return this.unary;
 	}
 	
-	public ASTPropositionalNode getPropositional() {
+	public ASTPropositionalNode getRight() {
 		return this.propositional;
 	}
 	

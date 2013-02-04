@@ -1,6 +1,6 @@
 package AST;
 
-public class ASTProgramNode extends ASTNode{
+public class ASTProgramNode extends ASTNode {
 
 	private ASTPropositionalNode doubleConditional;
 	
@@ -8,7 +8,7 @@ public class ASTProgramNode extends ASTNode{
 		this.doubleConditional = doubleConditional;
 	}
 	
-	public ASTPropositionalNode getDoubleConditional() {
+	public ASTPropositionalNode getLeaf() {
 		return this.doubleConditional;
 	}
 	

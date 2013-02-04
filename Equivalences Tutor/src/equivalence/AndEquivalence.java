@@ -12,9 +12,21 @@ public class AndEquivalence extends Equivalence {
 		this.setAndNode(andNode);
 	}
 	
+	//A & A = A
 	public AST idempotency() {
 		AST tree = getTree();
-		
+		return tree;
+	}
+	
+	//A & B = B & A
+	public AST commutativity() {
+		AST tree = getTree();
+		return tree;
+	}
+	
+	//(A & B) & C = A & (B & C)
+	public AST associativity() {
+		AST tree = getTree();
 		return tree;
 	}
 

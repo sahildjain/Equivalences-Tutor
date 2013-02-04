@@ -10,11 +10,11 @@ public class ASTIffNode extends ASTPropositionalBinaryNode {
 		this.doubleConditional = doubleConditional;
 	}
 	
-	public ASTPropositionalNode getConditional() {
+	public ASTPropositionalNode getLeft() {
 		return this.conditional;
 	}
 	
-	public ASTPropositionalNode getDoubleConditional() {
+	public ASTPropositionalNode getRight() {
 		return this.doubleConditional;
 	}
 	

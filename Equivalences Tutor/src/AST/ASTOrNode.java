@@ -10,11 +10,11 @@ public class ASTOrNode extends ASTPropositionalBinaryNode {
 		this.disjunction = disjunction;
 	}
 	
-	public ASTPropositionalNode getConjunction() {
+	public ASTPropositionalNode getLeft() {
 		return this.conjunction;
 	}
 	
-	public ASTPropositionalNode getDisjunction() {
+	public ASTPropositionalNode getRight() {
 		return this.disjunction;
 	}
 

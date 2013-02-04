@@ -10,11 +10,11 @@ public class ASTIfThenNode extends ASTPropositionalBinaryNode {
 		this.conditional = conditional;
 	}
 	
-	public ASTPropositionalNode getDisjunction() {
+	public ASTPropositionalNode getLeft() {
 		return this.disjunction;
 	}
 	
-	public ASTPropositionalNode getConditional() {
+	public ASTPropositionalNode getRight() {
 		return this.conditional;
 	}
 	

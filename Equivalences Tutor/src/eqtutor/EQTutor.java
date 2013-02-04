@@ -9,17 +9,25 @@ import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.TokenStream;
 
+import equivalence.NodeEquivalence;
+
 import AST.*;
 
 public class EQTutor {
 	
 	public static void main(String[] args) throws FileNotFoundException {
 		EQTutor eqtutor = new EQTutor(); 
-		String src = eqtutor.getFormula();
+		ASTNode node1 = new ASTIdentifierNode("Test");
+		ASTNode node2 = new ASTIdentifierNode("Test");
+		NodeEquivalence test = new NodeEquivalence(node1, node2);
+		boolean ret = test.isEquivalent();
+		System.out.println(ret);
+		//String src = eqtutor.getFormula();
+		/*String src = "!(a | b) & c";
 		System.out.println("Formula: " + src);
 		LogicParser parser = eqtutor.getParser(src);
 		AST tree = eqtutor.getTree(parser);
-		eqtutor.printTreeToConsole(tree);
+		eqtutor.printTreeToConsole(tree);*/
 	}
 	
 	private String getFormula() {

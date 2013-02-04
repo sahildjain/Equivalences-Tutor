@@ -8,7 +8,7 @@ public class ASTNotNode extends ASTPropositionalUnaryNode {
 		this.unary = unary;
 	}
 	
-	public ASTPropositionalNode getUnary() {
+	public ASTPropositionalNode getLeaf() {
 		return this.unary;
 	}
 	

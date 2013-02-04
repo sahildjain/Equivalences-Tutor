@@ -1,6 +1,6 @@
 package AST;
 
-public class ASTIdentifierNode extends ASTPropositionalBinaryNode {
+public class ASTIdentifierNode extends ASTPropositionalUnaryNode {
 	
 	private String id;
 	
@@ -8,7 +8,7 @@ public class ASTIdentifierNode extends ASTPropositionalBinaryNode {
 		this.id = id;
 	}
 	
-	public String getId() {
+	public String getLeaf() {
 		return this.id;
 	}
 	
