@@ -34,8 +34,32 @@ public class AndEquivalence extends Equivalence {
 	}
 	
 	//(A & B) & C = A & (B & C)
-	public AST associativity() {
+	public AST associativityLeft() {
 		AST tree = getTree();
+		ASTAndNode andNode = getAndNode();
+		ASTPropositionalNode left = andNode.getLeft();
+		ASTPropositionalNode right = andNode.getRight();
+		if(left instanceof ASTAndNode) {
+			ASTPropositionalNode newLeft = ((ASTAndNode) left).getLeft();
+			ASTPropositionalNode newRight = new ASTAndNode(((ASTAndNode) left).getRight(), right);
+			ASTAndNode newAndNode = new ASTAndNode(newLeft, newRight);
+			return findAndReplace(tree, andNode, newAndNode);
+		}
+		return tree;
+	}
+	
+	//A & (B & C) = (A & B) & C
+	public AST associativityRight() {
+		AST tree = getTree();
+		ASTAndNode andNode = getAndNode();
+		ASTPropositionalNode left = andNode.getLeft();
+		ASTPropositionalNode right = andNode.getRight();
+		if(right instanceof ASTAndNode) {
+			ASTPropositionalNode newRight = ((ASTAndNode) right).getRight();
+			ASTPropositionalNode newLeft = new ASTAndNode(left, ((ASTAndNode) right).getLeft());
+			ASTAndNode newAndNode = new ASTAndNode(newLeft, newRight);
+			return findAndReplace(tree, andNode, newAndNode);
+		}
 		return tree;
 	}
 
