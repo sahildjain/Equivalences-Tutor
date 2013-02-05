@@ -17,17 +17,24 @@ public class EQTutor {
 	
 	public static void main(String[] args) throws FileNotFoundException {
 		EQTutor eqtutor = new EQTutor(); 
-		ASTNode node1 = new ASTAndNode(new ASTNotNode(new ASTIdentifierNode("Test")), new ASTIdentifierNode("Test"));
-		ASTNode node2 = new ASTAndNode(new ASTNotNode(new ASTIdentifierNode("Test")), new ASTIdentifierNode("Test"));
-		NodeEquivalence test = new NodeEquivalence(node1, node2);
-		boolean ret = test.isEquivalent();
-		System.out.println(ret);
 		//String src = eqtutor.getFormula();
-		String src = "!((a | b) & c) & d | !f";
+		String src = "a -> !b";
 		System.out.println("Formula: " + src);
+		System.out.println();
 		LogicParser parser = eqtutor.getParser(src);
 		AST tree = eqtutor.getTree(parser);
 		eqtutor.printTreeToConsole(tree);
+		System.out.println();
+		String src2 = "a -> !b";
+		System.out.println("Formula: " + src2);
+		System.out.println();
+		LogicParser parser2 = eqtutor.getParser(src2);
+		AST tree2 = eqtutor.getTree(parser2);
+		eqtutor.printTreeToConsole(tree2);
+		NodeEquivalence test = new NodeEquivalence(tree2.getRoot(), tree.getRoot());
+		System.out.println();
+		System.out.println("Equal: " + test.isEquivalent());
+		
 	}
 	
 	private String getFormula() {
