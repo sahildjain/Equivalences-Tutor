@@ -15,13 +15,22 @@ public class AndEquivalence extends Equivalence {
 	//A & A = A
 	public AST idempotency() {
 		AST tree = getTree();
+		ASTAndNode andNode = getAndNode();
+		NodeEquivalence equivalence = new NodeEquivalence(andNode.getLeft(), andNode.getRight());
+		if(equivalence.isEquivalent()) {
+			return findAndReplace(tree, andNode, andNode.getLeft());
+		}
 		return tree;
 	}
 	
 	//A & B = B & A
 	public AST commutativity() {
 		AST tree = getTree();
-		return tree;
+		ASTAndNode andNode = getAndNode();
+		ASTPropositionalNode left = andNode.getLeft();
+		ASTPropositionalNode right = andNode.getRight();
+		ASTAndNode newNode = new ASTAndNode(right, left);
+		return findAndReplace(tree, andNode, newNode);
 	}
 	
 	//(A & B) & C = A & (B & C)

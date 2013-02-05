@@ -15,10 +15,25 @@ public class NodeEquivalence {
 	public boolean isEquivalent() {
 		ASTNode node1 = getNode1();
 		ASTNode node2 = getNode2();
-		/*if(!node1.getClass().equals(node2.getClass())) {
-			return false;
-		}*/
-		if(node1 instanceof ASTPropositionalBinaryNode && node2 instanceof ASTPropositionalBinaryNode) {
+		
+		if(node1 instanceof ASTNotNode && node2 instanceof ASTNotNode) {
+			ASTNotNode notNode1 = (ASTNotNode) node1;
+			ASTNotNode notNode2 = (ASTNotNode) node2;
+			NodeEquivalence equivalence = new NodeEquivalence(notNode1.getLeaf(), notNode2.getLeaf());
+			return equivalence.isEquivalent();
+		}
+		if(node1 instanceof ASTIdentifierNode && node2 instanceof ASTIdentifierNode) {
+			String id1 = ((ASTIdentifierNode) node1).getLeaf();
+			String id2 = ((ASTIdentifierNode) node2).getLeaf();
+			return id1.equals(id2);
+		}
+		if(node1 instanceof ASTProgramNode && node2 instanceof ASTProgramNode) {
+			ASTProgramNode program1 = (ASTProgramNode) node1;
+			ASTProgramNode program2 = (ASTProgramNode) node2;
+			NodeEquivalence equivalence = new NodeEquivalence(program1.getLeaf(), program2.getLeaf());
+			return equivalence.isEquivalent();
+		}
+		if(node1.getClass().equals(node2.getClass())) {
 			ASTPropositionalBinaryNode binaryNode1 = (ASTPropositionalBinaryNode) node1;
 			ASTPropositionalBinaryNode binaryNode2 = (ASTPropositionalBinaryNode) node2;
 			NodeEquivalence leftEquivalence = new NodeEquivalence(binaryNode1.getLeft(), binaryNode2.getLeft());
@@ -27,18 +42,7 @@ public class NodeEquivalence {
 			boolean right = rightEquivalence.isEquivalent();
 			return left && right;
 		}
-		if(node1 instanceof ASTNotNode && node2 instanceof ASTNotNode) {
-			ASTNotNode notNode1 = (ASTNotNode) node1;
-			ASTNotNode notNode2 = (ASTNotNode) node2;
-			NodeEquivalence equivalence = new NodeEquivalence(notNode1, notNode2);
-			return equivalence.isEquivalent();
-		}
-		if(node1 instanceof ASTIdentifierNode && node2 instanceof ASTIdentifierNode) {
-			String id1 = (ASTIdentifierNode) node1.getLeaf();
-			String id2 = (ASTIdentifierNode) node2.getLeaf();
-			return id1.equals(id2);
-		}
-		return true;
+		return false;
 	}
 	
 	public ASTNode getNode1() {

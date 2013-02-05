@@ -5,7 +5,7 @@ public class AST {
 	private ASTProgramNode root;
 	
 	public AST(ASTProgramNode root) {
-		this.root = root;
+		this.setRoot(root);
 	}
 	
 	public void visit(ASTVisitor visitor) {
@@ -14,6 +14,10 @@ public class AST {
 	
 	public ASTProgramNode getRoot() {
 		return this.root;
+	}
+	
+	public void setRoot(ASTProgramNode root) {
+		this.root = root;
 	}
 
 }

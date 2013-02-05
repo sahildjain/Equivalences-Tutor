@@ -1,6 +1,6 @@
 package AST;
 
-public class ASTProgramNode extends ASTNode {
+public class ASTProgramNode extends ASTPropositionalUnaryNode {
 
 	private ASTPropositionalNode doubleConditional;
 	
