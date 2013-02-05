@@ -23,11 +23,11 @@ public class EQTutor {
 		boolean ret = test.isEquivalent();
 		System.out.println(ret);
 		//String src = eqtutor.getFormula();
-		/*String src = "!((a | b) & c) & d | !f";
+		String src = "!((a | b) & c) & d | !f";
 		System.out.println("Formula: " + src);
 		LogicParser parser = eqtutor.getParser(src);
 		AST tree = eqtutor.getTree(parser);
-		eqtutor.printTreeToConsole(tree);*/
+		eqtutor.printTreeToConsole(tree);
 	}
 	
 	private String getFormula() {

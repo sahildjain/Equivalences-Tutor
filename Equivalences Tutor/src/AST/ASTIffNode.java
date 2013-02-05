@@ -22,4 +22,12 @@ public class ASTIffNode extends ASTPropositionalBinaryNode {
 		visitor.visitIffNode(this);
 	}
 
+	public void setLeft(ASTPropositionalNode left) {
+		this.conditional = left;
+	}
+
+	public void setRight(ASTPropositionalNode right) {
+		this.doubleConditional = right;
+	}
+
 }

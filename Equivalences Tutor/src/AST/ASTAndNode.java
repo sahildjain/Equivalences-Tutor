@@ -21,5 +21,13 @@ public class ASTAndNode extends ASTPropositionalBinaryNode {
 	public void visit(ASTVisitor visitor) {
 		visitor.visitAndNode(this);
 	}
+
+	public void setLeft(ASTPropositionalNode left) {
+		this.unary = left;
+	}
+
+	public void setRight(ASTPropositionalNode right) {
+		this.propositional = right;
+	}
 	
 }

@@ -22,4 +22,12 @@ public class ASTIfThenNode extends ASTPropositionalBinaryNode {
 		visitor.visitIfThenNode(this);
 	}
 
+	public void setLeft(ASTPropositionalNode left) {
+		this.disjunction = left;
+	}
+
+	public void setRight(ASTPropositionalNode right) {
+		this.conditional = right;
+	}
+
 }

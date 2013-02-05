@@ -22,4 +22,12 @@ public class ASTOrNode extends ASTPropositionalBinaryNode {
 		visitor.visitOrNode(this);
 	}
 
+	public void setLeft(ASTPropositionalNode left) {
+		this.conjunction = left;
+	}
+
+	public void setRight(ASTPropositionalNode right) {
+		this.disjunction = right;
+	}
+
 }

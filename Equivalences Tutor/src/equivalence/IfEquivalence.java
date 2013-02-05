@@ -12,7 +12,7 @@ public class IfEquivalence extends Equivalence {
 		this.setIfNode(ifNode);
 	}
 	
-	//A -> B = !A | B
+	// A -> B = !A | B
 	public AST ifToOrEquivalence() {
 		AST tree = getTree();
 		ASTIfThenNode ifNode = getIfNode();
@@ -23,7 +23,7 @@ public class IfEquivalence extends Equivalence {
 		return findAndReplace(tree, ifNode, orNode);
 	}
 	
-	//A -> B = !(A & !B)
+	// A -> B = !(A & !B)
 	public AST ifToAndEquivalence() {
 		AST tree = getTree();
 		ASTIfThenNode ifNode = getIfNode();
