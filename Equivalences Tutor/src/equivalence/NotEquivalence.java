@@ -12,6 +12,7 @@ public class NotEquivalence extends Equivalence {
 		this.setNotNode(notNode);
 	}
 	
+	// !!A = A
 	public AST doubleNegation() {
 		AST tree = getTree();
 		ASTNotNode notNode = getNotNode();
@@ -19,6 +20,40 @@ public class NotEquivalence extends Equivalence {
 			ASTNotNode secondNotNode = (ASTNotNode) notNode.getLeaf();
 			ASTPropositionalNode node = secondNotNode.getLeaf();
 			return findAndReplace(tree, notNode, node);
+		}
+		return tree;
+	}
+	
+	// !(A & B) = !A | !B
+	public AST deMorganAnd() {
+		AST tree = getTree();
+		ASTNotNode notNode = getNotNode();
+		ASTPropositionalNode leaf = notNode.getLeaf();
+		if(leaf instanceof ASTAndNode) {
+			ASTAndNode andNode = (ASTAndNode) leaf;
+			ASTPropositionalNode left = andNode.getLeft();
+			ASTPropositionalNode right = andNode.getRight();
+			ASTNotNode notLeft = new ASTNotNode(left);
+			ASTNotNode notRight = new ASTNotNode(right);
+			ASTOrNode orNode = new ASTOrNode(notLeft, notRight);
+			return findAndReplace(tree, notNode, orNode);
+		}
+		return tree;
+	}
+	
+	// !(A | B) = !A & !B
+	public AST deMorganOr() {
+		AST tree = getTree();
+		ASTNotNode notNode = getNotNode();
+		ASTPropositionalNode leaf = notNode.getLeaf();
+		if(leaf instanceof ASTOrNode) {
+			ASTOrNode orNode = (ASTOrNode) leaf;
+			ASTPropositionalNode left = orNode.getLeft();
+			ASTPropositionalNode right = orNode.getRight();
+			ASTNotNode notLeft = new ASTNotNode(left);
+			ASTNotNode notRight = new ASTNotNode(right);
+			ASTAndNode andNode = new ASTAndNode(notLeft, notRight);
+			return findAndReplace(tree, notNode, andNode);
 		}
 		return tree;
 	}

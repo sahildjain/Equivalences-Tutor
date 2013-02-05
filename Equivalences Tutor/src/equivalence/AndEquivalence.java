@@ -62,7 +62,7 @@ public class AndEquivalence extends Equivalence {
 		}
 		return tree;
 	}
-
+	
 	public AST getTree() {
 		return tree;
 	}

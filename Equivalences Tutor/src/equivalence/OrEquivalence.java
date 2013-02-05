@@ -12,6 +12,7 @@ public class OrEquivalence extends Equivalence {
 		this.setOrNode(orNode);
 	}
 	
+	//A | B = B | A
 	public AST commutativity() {
 		AST tree = getTree();
 		ASTOrNode orNode = getOrNode();
@@ -21,6 +22,7 @@ public class OrEquivalence extends Equivalence {
 		return findAndReplace(tree, orNode, newNode);
 	}
 	
+	//A & A = A
 	public AST idempotence() {
 		AST tree = getTree();
 		ASTOrNode orNode = getOrNode();

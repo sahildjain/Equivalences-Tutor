@@ -12,6 +12,7 @@ public class IffEquivalence  extends Equivalence {
 		this.setIffNode(iffNode);
 	}
 	
+	//A <-> B = (A -> B) & (B -> A)
 	public AST iffToAndEquivalence() {
 		AST tree = getTree();
 		ASTIffNode iffNode = getIffNode();
@@ -23,6 +24,7 @@ public class IffEquivalence  extends Equivalence {
 		return findAndReplace(tree, iffNode, andNode);
 	}
 	
+	//A <-> B = (A & B) | (!A & !B)
 	public AST iffToOrNodeEquivalence() {
 		AST tree = getTree();
 		ASTIffNode iffNode = getIffNode();
@@ -36,6 +38,7 @@ public class IffEquivalence  extends Equivalence {
 		return findAndReplace(tree, iffNode, orNode);
 	}
 	
+	//A <-> B = !A <-> !B
 	public AST negate() {
 		AST tree = getTree();
 		ASTIffNode iffNode = getIffNode();
