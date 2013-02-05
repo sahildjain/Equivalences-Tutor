@@ -34,8 +34,8 @@ public class NodeEquivalence {
 			return equivalence.isEquivalent();
 		}
 		if(node1 instanceof ASTIdentifierNode && node2 instanceof ASTIdentifierNode) {
-			ASTIdentifierNode id1 = (ASTIdentifierNode) node1;
-			ASTIdentifierNode id2 = (ASTIdentifierNode) node2;
+			String id1 = (ASTIdentifierNode) node1.getLeaf();
+			String id2 = (ASTIdentifierNode) node2.getLeaf();
 			return id1.equals(id2);
 		}
 		return true;
