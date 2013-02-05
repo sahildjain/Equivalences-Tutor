@@ -33,7 +33,7 @@ public class AndEquivalence extends Equivalence {
 		return findAndReplace(tree, andNode, newNode);
 	}
 	
-	//(A & B) & C = A & (B & C)
+	// (A & B) & C = A & (B & C)
 	public AST associativityLeft() {
 		AST tree = getTree();
 		ASTAndNode andNode = getAndNode();
@@ -48,7 +48,7 @@ public class AndEquivalence extends Equivalence {
 		return tree;
 	}
 	
-	//A & (B & C) = (A & B) & C
+	// A & (B & C) = (A & B) & C
 	public AST associativityRight() {
 		AST tree = getTree();
 		ASTAndNode andNode = getAndNode();
@@ -61,6 +61,19 @@ public class AndEquivalence extends Equivalence {
 			return findAndReplace(tree, andNode, newAndNode);
 		}
 		return tree;
+	}
+	
+	// A & B = !(!A | !B)
+	public AST deMorgan() {
+		AST tree = getTree();
+		ASTAndNode andNode = getAndNode();
+		ASTPropositionalNode left = andNode.getLeft();
+		ASTPropositionalNode right = andNode.getRight();
+		ASTNotNode notLeft = new ASTNotNode(left);
+		ASTNotNode notRight = new ASTNotNode(right);
+		ASTOrNode orNode = new ASTOrNode(notLeft, notRight);
+		ASTNotNode notNode = new ASTNotNode(orNode);
+		return findAndReplace(tree, andNode, notNode);
 	}
 	
 	public AST getTree() {
