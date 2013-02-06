@@ -87,62 +87,46 @@ equivalences.
 \begin{enumerate}
   \item A $\land$ B $\equiv$ B $\land$ A \emph{(Commutativity of And)}
 
-\begin{tabular}{| c | c | c |}
-  \hline
-  A & B & A $\land$ B \\ \hline
-  0 & 0 & 0 \\
-  0 & 1 & 0 \\
-  1 & 0 & 0 \\
-  1 & 1 & 1 \\ \hline
-\end{tabular}
-\quad
-\begin{tabular}{| c | c | c |}
-  \hline
-  A & B & B $\land$ A \\ \hline
-  0 & 0 & 0 \\
-  0 & 1 & 0 \\
-  1 & 0 & 0 \\
-  1 & 1 & 1 \\ \hline
-\end{tabular}
+\begin{center}
+  \begin{tabular}{| c | c | c | c |}
+    \hline
+    A & B & A $\land$ B & B $\land$ A \\ \hline
+    0 & 0 & 0 & 0 \\
+    0 & 1 & 0 & 0 \\
+    1 & 0 & 0 & 0 \\
+    1 & 1 & 1 & 1 \\ \hline
+  \end{tabular}
+\end{center}
 
   \item A $\land$ A $\equiv$ A \emph{(Idempotence of And)}
 
-\begin{tabular}{| c | c |}
-  \hline
-  A & A $\land$ A \\ \hline
-  0 & 0 \\
-  0 & 0 \\
-  1 & 1 \\
-  1 & 1 \\ \hline
-\end{tabular}
+\begin{center}
+  \begin{tabular}{| c | c |}
+    \hline
+    A & A $\land$ A \\ \hline
+    0 & 0 \\
+    0 & 0 \\
+    1 & 1 \\
+    1 & 1 \\ \hline
+  \end{tabular}
+\end{center}
 
   \item (A $\land$ B) $\land$ C $\equiv$ A $\land$ (B $\land$ C) \emph{(Associaticity of And)}
 
-\begin{tabular}{| c | c | c | c |}
-  \hline
-  A & B & C & (A $\land$ B) $\land$ C \\ \hline
-  0 & 0 & 0 & 0 \\
-  0 & 0 & 1 & 0 \\
-  0 & 1 & 0 & 0 \\
-  0 & 1 & 1 & 0 \\
-  1 & 0 & 0 & 0 \\
-  1 & 0 & 1 & 0 \\
-  1 & 1 & 0 & 0 \\
-  1 & 1 & 1 & 1 \\ \hline
-\end{tabular}
-\quad
-\begin{tabular}{| c | c | c | c |}
-  \hline
-  A & B & C & A $\land$ (B $\land$ C) \\ \hline
-  0 & 0 & 0 & 0 \\
-  0 & 0 & 1 & 0 \\
-  0 & 1 & 0 & 0 \\
-  0 & 1 & 1 & 0 \\
-  1 & 0 & 0 & 0 \\
-  1 & 0 & 1 & 0 \\
-  1 & 1 & 0 & 0 \\
-  1 & 1 & 1 & 1 \\ \hline
-\end{tabular}
+\begin{center}
+  \begin{tabular}{| c | c | c | c | c |}
+    \hline
+    A & B & C & (A $\land$ B) $\land$ C & A $\land$ (B $\land$ C) \\ \hline
+    0 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 1 & 0 & 0 \\
+    0 & 1 & 0 & 0 & 0 \\
+    0 & 1 & 1 & 0 & 0 \\
+    1 & 0 & 0 & 0 & 0 \\
+    1 & 0 & 1 & 0 & 0 \\
+    1 & 1 & 0 & 0 & 0 \\
+    1 & 1 & 1 & 1 & 1 \\ \hline
+  \end{tabular}
+\end{center}
 \end{enumerate}
 
 \subsubsection{Or Equivalences}
@@ -150,63 +134,46 @@ equivalences.
 
   \item A $\lor$ B $\equiv$ B $\lor$ A \emph{(Commutativity of Or)}
 
-\begin{tabular}{| c | c | c |}
-  \hline
-  A & B & A $\lor$ B \\ \hline
-  0 & 0 & 0 \\
-  0 & 1 & 1 \\
-  1 & 0 & 1 \\
-  1 & 1 & 1 \\ \hline
-\end{tabular}
-\quad
-\begin{tabular}{| c | c | c |}
-  \hline
-  A & B & B $\lor$ A \\ \hline
-  0 & 0 & 0 \\
-  0 & 1 & 1 \\
-  1 & 0 & 1 \\
-  1 & 1 & 1 \\ \hline
-\end{tabular}
+\begin{center}
+  \begin{tabular}{| c | c | c | c |}
+    \hline
+    A & B & A $\lor$ B & B $\lor$ A\\ \hline
+    0 & 0 & 0 & 0 \\
+    0 & 1 & 1 & 1 \\
+    1 & 0 & 1 & 1 \\
+    1 & 1 & 1 & 1 \\ \hline
+  \end{tabular}
+\end{center}
 
 \item A $\lor$ A $\equiv$ A \emph{(Idempotence of Or)}
 
-\begin{tabular}{| c | c |}
-  \hline
-  A & A $\lor$ A \\ \hline
-  0 & 0 \\
-  0 & 0 \\
-  1 & 1 \\
-  1 & 1 \\ \hline
-\end{tabular}
+\begin{center}
+  \begin{tabular}{| c | c |}
+    \hline
+    A & A $\lor$ A \\ \hline
+    0 & 0 \\
+    0 & 0 \\
+    1 & 1 \\
+    1 & 1 \\ \hline
+  \end{tabular}
+\end{center}
 
   \item (A $\lor$ B) $\lor$ C $\equiv$ A $\lor$ (B $\lor$ C) \emph{(Associaticity of Or)}
 
-\begin{tabular}{| c | c | c | c |}
-  \hline
-  A & B & C & (A $\lor$ B) $\lor$ C \\ \hline
-  0 & 0 & 0 & 0 \\
-  0 & 0 & 1 & 1 \\
-  0 & 1 & 0 & 1 \\
-  0 & 1 & 1 & 1 \\
-  1 & 0 & 0 & 1 \\
-  1 & 0 & 1 & 1 \\
-  1 & 1 & 0 & 1 \\
-  1 & 1 & 1 & 1 \\ \hline
-\end{tabular}
-\quad
-\begin{tabular}{| c | c | c | c |}
-  \hline
-  A & B & C & A $\lor$ (B $\lor$ C) \\ \hline
-  0 & 0 & 0 & 0 \\
-  0 & 0 & 1 & 1 \\
-  0 & 1 & 0 & 1 \\
-  0 & 1 & 1 & 1 \\
-  1 & 0 & 0 & 1 \\
-  1 & 0 & 1 & 1 \\
-  1 & 1 & 0 & 1 \\
-  1 & 1 & 1 & 1 \\ \hline
-\end{tabular}
-
+\begin{center}
+  \begin{tabular}{| c | c | c | c | c |}
+    \hline
+    A & B & C & (A $\lor$ B) $\lor$ C & A $\lor$ (B $\lor$ C) \\ \hline
+    0 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 1 & 1 & 1 \\
+    0 & 1 & 0 & 1 & 1 \\
+    0 & 1 & 1 & 1 & 1 \\
+    1 & 0 & 0 & 1 & 1 \\
+    1 & 0 & 1 & 1 & 1 \\
+    1 & 1 & 0 & 1 & 1 \\
+    1 & 1 & 1 & 1 & 1 \\ \hline
+  \end{tabular}
+\end{center}
 \end{enumerate}
 
 \subsubsection{Not Equivalences}
@@ -214,32 +181,159 @@ equivalences.
 
   \item A $\equiv$ $\neg$$\neg$A
 
-\begin{tabular}{| c | c | c |}
-  \hline
-  A & $\neg$A & $\neg$$\neg$A \\ \hline
-  0 & 1 & 0 \\
-  1 & 0 & 1 \\ \hline
-\end{tabular}
+\begin{center}
+  \begin{tabular}{| c | c | c |}
+    \hline
+    A & $\neg$A & $\neg$$\neg$A \\ \hline
+    0 & 1 & 0 \\
+    1 & 0 & 1 \\ \hline
+  \end{tabular}
+\end{center}
 
 \end{enumerate}
 
 \subsubsection{Implies Equivalences}
 \begin{enumerate}
 
+  \item A $\to$ B $\equiv$ $\neg$A $\lor$ B
+
+\begin{center}
+  \begin{tabular}{| c | c | c | c | c |}
+    \hline
+    A & B & $\neg$A & A $\to$ B & $\neg$A $\lor$ B \\ \hline
+    0 & 0 & 1 & 1 & 1 \\
+    0 & 1 & 1 & 1 & 1 \\ 
+    1 & 0 & 0 & 0 & 0 \\
+    1 & 1 & 0 & 1 & 1 \\ \hline
+  \end{tabular}
+\end{center}
+
+  \item A $\to$ B $\equiv$ $\neg$(A $\land$ $\neg$B)
+
+\begin{center}
+  \begin{tabular}{| c | c | c | c | c | c |}
+    \hline
+    A & B & $\neg$B & A $\land$ $\neg$B & A $\to$ B & $\neg$(A $\land$ $\neg$B) \\ \hline
+    0 & 0 & 1 & 0 & 1 & 1 \\
+    0 & 1 & 0 & 0 & 1 & 1 \\
+    1 & 0 & 1 & 1 & 0 & 0 \\
+    1 & 1 & 0 & 0 & 1 & 1 \\ \hline
+  \end{tabular}
+\end{center}
+
+  \item $\neg$(A $\to$ B) $\equiv$ A $\land$ $\neg$B
+
+\begin{center}
+  \begin{tabular}{| c | c | c | c | c | c |}
+    \hline
+    A & B & $\neg$B & A $\to$ B & $\neg$(A $\to$ B) & A $\land$ $\neg$B \\ \hline
+    0 & 0 & 1 & 1 & 0 & 0 \\
+    0 & 1 & 0 & 1 & 0 & 0 \\
+    1 & 0 & 1 & 0 & 1 & 1 \\
+    1 & 1 & 0 & 1 & 0 & 0 \\ \hline
+  \end{tabular}
+\end{center}
 \end{enumerate}
 
 \subsubsection{If and Only If Equivalences}
 \begin{enumerate}
+
+  \item A $\leftrightarrow$ B $\equiv$ (A $\to$ B) $\land$ (B $\to$ A)
+
+\begin{center}
+  \begin{tabular} {| c | c | c | c | c | c |}
+    \hline
+    A & B & A $\to$ B & B $\to$ A & A $\leftrightarrow$ B & (A $\to$ B) $\land$ (B $\to$ A) \\ \hline
+    0 & 0 & 1 & 1 & 1 & 1 \\
+    0 & 1 & 1 & 0 & 0 & 0 \\
+    1 & 0 & 0 & 1 & 0 & 0 \\
+    1 & 1 & 1 & 1 & 1 & 1 \\ \hline
+  \end{tabular} 
+\end{center}
+
+  \item A $\leftrightarrow$ B $\equiv$ (A $\land$ B) $\lor$ ($\neg$A $\land$ $\neg$B)
+
+\begin{center}
+  \begin{tabular} {| c | c | c | c | c | c | c |}
+    \hline
+    A & B & A $\land$ B & $\neg$A & $\neg$B & A $\leftrightarrow$ B & (A $\land$ B) $\lor$ ($\neg$A $\land$ $\neg$B) \\ \hline
+    0 & 0 & 0 & 1 & 1 & 1 & 1 \\
+    0 & 1 & 0 & 1 & 0 & 0 & 0 \\
+    1 & 0 & 0 & 0 & 1 & 0 & 0 \\
+    1 & 1 & 1 & 0 & 0 & 1 & 1 \\ \hline
+  \end{tabular} 
+\end{center}
 
 \end{enumerate}
 
 \subsubsection{De Morgan Equivalences}
 \begin{enumerate}
 
+  \item $\neg$(A $\land$ B) $\equiv$ $\neg$A $\lor$ $\neg$B
+
+\begin{center}
+  \begin{tabular}{| c | c | c | c |}
+    \hline
+    A & B & $\neg$(A $\land$ B) & $\neg$A $\lor$ $\neg$B \\ \hline
+    0 & 0 & 1 & 1 \\
+    0 & 1 & 1 & 1 \\ 
+    1 & 0 & 1 & 1 \\
+    1 & 1 & 0 & 0 \\ \hline
+  \end{tabular}
+\end{center}
+
+  \item $\neg$(A $\lor$ B) $\equiv$ $\neg$A $\land$ $\neg$B
+
+\begin{center}
+  \begin{tabular}{| c | c | c | c |}
+    \hline
+    A & B & $\neg$(A $\lor$ B) & $\neg$A $\land$ $\neg$B \\ \hline
+    0 & 0 & 1 & 1 \\
+    0 & 1 & 0 & 0 \\ 
+    1 & 0 & 0 & 0 \\
+    1 & 1 & 0 & 0 \\ \hline
+  \end{tabular}
+\end{center}
+
 \end{enumerate}
 
 \subsubsection{Distributibivity of And and Or}
 \begin{enumerate}
+
+  \item A $\land$ (B $\lor$ C) $\equiv$ (A $\land$ B) $\lor$ (A $\land$ C)
+
+\begin{center}
+  \begin{tabular}{| c | c | c | c | c |}
+    \hline
+    A & B & C & A $\land$ (B $\lor$ C) & (A $\land$ B) $\lor$ (A $\land$ C) \\ \hline
+    0 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 1 & 0 & 0 \\
+    0 & 1 & 0 & 0 & 0 \\
+    0 & 1 & 1 & 0 & 0 \\
+    1 & 0 & 0 & 0 & 0 \\
+    1 & 0 & 1 & 1 & 1 \\
+    1 & 1 & 0 & 1 & 1 \\
+    1 & 1 & 1 & 1 & 1 \\ \hline
+  \end{tabular}
+\end{center}
+
+  \item A $\lor$ (B $\land$ C) $\equiv$ (A $\lor$ B) $\land$ (A $\lor$ C)
+
+\begin{center}
+  \begin{tabular}{| c | c | c | c | c |}
+    \hline
+    A & B & C & A $\lor$ (B $\land$ C) & (A $\lor$ B) $\land$ (A $\lor$ C) \\ \hline
+    0 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 1 & 0 & 0 \\
+    0 & 1 & 0 & 0 & 0 \\
+    0 & 1 & 1 & 1 & 1 \\
+    1 & 0 & 0 & 1 & 1 \\
+    1 & 0 & 1 & 1 & 1 \\
+    1 & 1 & 0 & 1 & 1 \\
+    1 & 1 & 1 & 1 & 1 \\ \hline
+  \end{tabular}
+\end{center}
+
 
 \end{enumerate}
 
