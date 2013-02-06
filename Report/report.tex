@@ -1,7 +1,11 @@
 \documentclass[11pt]{article}
 \usepackage{a4, fullpage}
-\usepackage[inner=4cm,outer=4cm,bottom=2cm]{geometry}
 \usepackage{bibtopic}
+\usepackage{float}
+\usepackage{amssymb,amsmath}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{multicol}
 
 \begin{document}
 
@@ -26,7 +30,8 @@
 
 % Introduction
 \section{Introduction}
-\emph{Logic} refers to the study of different modes of reasoning conducted or
+
+\emph{Logic} refers to the study of different modes of reasoning conducted or 
 assessed according to strict principles of validity. Due to Logic being one of 
 the most fundamental aspects of Computer Science, it is taught to every student
 pursuing a Computing degree at Imperial College London. During the first term 
@@ -35,23 +40,209 @@ provide the students with knowledge of the syntax and semantics of Propositional
 and Predicate logic. Students can apply this knowledge to complete equivalences
 and natural deduction proofs.
 
+A logical system is made up of three things:
+\begin{enumerate}
+  \item Syntax - this is the formal language specified to express different
+         concepts.
+  \item Semantics - this is what provides meaning to the language.
+  \item Proof theory - this is a way of arguing in the language. This allows us
+         to identify valid statements in the language.
+\end{enumerate}
+
 In logic, two statements are logically equivalent if they contain the same
 logical content. Mendelson stated that "two statements are equivalent if they
 have the same truth value in every model." This can be illustrated in the 
-following example:
+following example: \\ \bigskip 
 
-Statement 1: \emph{If Sahil is a final year student, he has to do an individual
-project}
+Statement 1: \emph{If Sahil is a final year student, 
+then he has to do an individual project} \\ \bigskip 
 
-Statement 2: \emph{If Sahil is not a final year student, he does not have to do
-an individual project}
+Statement 2: \emph{If Sahil is not 
+doing an individual project, then he is not a final year student} \\ \bigskip 
 
+As we can see, both statements have the same result in same models. When two logic 
+statements are equivalent, they can be derived by each other, with the use of 
+equivalences which we know to be true.
 
+At the moment, there are a two programs which specifically built to support the
+Logic course at Imperial College London. These are:
+\begin{enumerate}
+  \item Pandora - learning support tool designed to guide the construction of
+         natural deduction proofs. 
+  \item LOST - application which helps in the learning of logic semantics.
+\end{enumerate}
 
+There is no current application which lets the students learn and practice
+equivalences. 
+
+\subsection{Report Structure}
 \newpage
 
 % Background
 \section{Background}
+
+\subsection{Propositional Equivalences}
+
+\subsubsection{And Equivalences}
+\begin{enumerate}
+  \item A $\land$ B $\equiv$ B $\land$ A \emph{(Commutativity of And)}
+
+\begin{tabular}{| c | c | c |}
+  \hline
+  A & B & A $\land$ B \\ \hline
+  0 & 0 & 0 \\
+  0 & 1 & 0 \\
+  1 & 0 & 0 \\
+  1 & 1 & 1 \\ \hline
+\end{tabular}
+\quad
+\begin{tabular}{| c | c | c |}
+  \hline
+  A & B & B $\land$ A \\ \hline
+  0 & 0 & 0 \\
+  0 & 1 & 0 \\
+  1 & 0 & 0 \\
+  1 & 1 & 1 \\ \hline
+\end{tabular}
+
+  \item A $\land$ A $\equiv$ A \emph{(Idempotence of And)}
+
+\begin{tabular}{| c | c |}
+  \hline
+  A & A $\land$ A \\ \hline
+  0 & 0 \\
+  0 & 0 \\
+  1 & 1 \\
+  1 & 1 \\ \hline
+\end{tabular}
+
+  \item (A $\land$ B) $\land$ C $\equiv$ A $\land$ (B $\land$ C) \emph{(Associaticity of And)}
+
+\begin{tabular}{| c | c | c | c |}
+  \hline
+  A & B & C & (A $\land$ B) $\land$ C \\ \hline
+  0 & 0 & 0 & 0 \\
+  0 & 0 & 1 & 0 \\
+  0 & 1 & 0 & 0 \\
+  0 & 1 & 1 & 0 \\
+  1 & 0 & 0 & 0 \\
+  1 & 0 & 1 & 0 \\
+  1 & 1 & 0 & 0 \\
+  1 & 1 & 1 & 1 \\ \hline
+\end{tabular}
+\quad
+\begin{tabular}{| c | c | c | c |}
+  \hline
+  A & B & C & A $\land$ (B $\land$ C) \\ \hline
+  0 & 0 & 0 & 0 \\
+  0 & 0 & 1 & 0 \\
+  0 & 1 & 0 & 0 \\
+  0 & 1 & 1 & 0 \\
+  1 & 0 & 0 & 0 \\
+  1 & 0 & 1 & 0 \\
+  1 & 1 & 0 & 0 \\
+  1 & 1 & 1 & 1 \\ \hline
+\end{tabular}
+\end{enumerate}
+
+\subsubsection{Or Equivalences}
+\begin{enumerate}
+
+  \item A $\lor$ B $\equiv$ B $\lor$ A \emph{(Commutativity of Or)}
+
+\begin{tabular}{| c | c | c |}
+  \hline
+  A & B & A $\lor$ B \\ \hline
+  0 & 0 & 0 \\
+  0 & 1 & 1 \\
+  1 & 0 & 1 \\
+  1 & 1 & 1 \\ \hline
+\end{tabular}
+\quad
+\begin{tabular}{| c | c | c |}
+  \hline
+  A & B & B $\lor$ A \\ \hline
+  0 & 0 & 0 \\
+  0 & 1 & 1 \\
+  1 & 0 & 1 \\
+  1 & 1 & 1 \\ \hline
+\end{tabular}
+
+\item A $\lor$ A $\equiv$ A \emph{(Idempotence of Or)}
+
+\begin{tabular}{| c | c |}
+  \hline
+  A & A $\lor$ A \\ \hline
+  0 & 0 \\
+  0 & 0 \\
+  1 & 1 \\
+  1 & 1 \\ \hline
+\end{tabular}
+
+  \item (A $\lor$ B) $\lor$ C $\equiv$ A $\lor$ (B $\lor$ C) \emph{(Associaticity of Or)}
+
+\begin{tabular}{| c | c | c | c |}
+  \hline
+  A & B & C & (A $\lor$ B) $\lor$ C \\ \hline
+  0 & 0 & 0 & 0 \\
+  0 & 0 & 1 & 1 \\
+  0 & 1 & 0 & 1 \\
+  0 & 1 & 1 & 1 \\
+  1 & 0 & 0 & 1 \\
+  1 & 0 & 1 & 1 \\
+  1 & 1 & 0 & 1 \\
+  1 & 1 & 1 & 1 \\ \hline
+\end{tabular}
+\quad
+\begin{tabular}{| c | c | c | c |}
+  \hline
+  A & B & C & A $\lor$ (B $\lor$ C) \\ \hline
+  0 & 0 & 0 & 0 \\
+  0 & 0 & 1 & 1 \\
+  0 & 1 & 0 & 1 \\
+  0 & 1 & 1 & 1 \\
+  1 & 0 & 0 & 1 \\
+  1 & 0 & 1 & 1 \\
+  1 & 1 & 0 & 1 \\
+  1 & 1 & 1 & 1 \\ \hline
+\end{tabular}
+
+\end{enumerate}
+
+\subsubsection{Not Equivalences}
+\begin{enumerate}
+
+  \item A $\equiv$ $\neg$$\neg$A
+
+\begin{tabular}{| c | c | c |}
+  \hline
+  A & $\neg$A & $\neg$$\neg$A \\ \hline
+  0 & 1 & 0 \\
+  1 & 0 & 1 \\ \hline
+\end{tabular}
+
+\end{enumerate}
+
+\subsubsection{Implies Equivalences}
+\begin{enumerate}
+
+\end{enumerate}
+
+\subsubsection{If and Only If Equivalences}
+\begin{enumerate}
+
+\end{enumerate}
+
+\subsubsection{De Morgan Equivalences}
+\begin{enumerate}
+
+\end{enumerate}
+
+\subsubsection{Distributibivity of And and Or}
+\begin{enumerate}
+
+\end{enumerate}
+
 \newpage
 
 % Project Plan
