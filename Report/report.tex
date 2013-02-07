@@ -1,4 +1,4 @@
-\documentclass[11pt]{article}
+\documentclass[12pt]{article}
 \usepackage{a4, fullpage}
 \usepackage{bibtopic}
 \usepackage{float}
@@ -343,7 +343,7 @@ As we are building a completely new application, we have to start from the
 very basics of what to do. The inital stages of the project consisted of the
 following:
 \begin{enumerate}
-  \item Meeting up with project supervisor to discuss what she would like as
+	\item Meeting up with project supervisor to discuss what she would like as
 				an end result of the project.
 	\item Reading through equivalence notes from previous years.
 	\item Talk to a few first year students to know where they found problems
@@ -447,19 +447,23 @@ program returns [AST tree]
   ;
 
 iffexpr returns [ASTPropositionalNode node]
-  : ifthen = ifexpr {$node = $ifthen.node;} (IFF iff = iffexpr {$node = new ASTIffNode($ifthen.node, $iff.node);})*
+  : ifthen = ifexpr {$node = $ifthen.node;} 
+	  (IFF iff = iffexpr {$node = new ASTIffNode($ifthen.node, $iff.node);})*
   ;
   	
 ifexpr returns [ASTPropositionalNode node]
-  : or = orexpr {$node = $or.node;} (IFTHEN ifthen = ifexpr {$node = new ASTIfThenNode($or.node, $ifthen.node);})*
+  : or = orexpr {$node = $or.node;} 
+		(IFTHEN ifthen = ifexpr {$node = new ASTIfThenNode($or.node, $ifthen.node);})*
   ;
 
 orexpr returns [ASTPropositionalNode node]
-  : and = andexpr {$node = $and.node;} (OR or = orexpr {$node = new ASTOrNode($and.node, $or.node);})*
+  : and = andexpr {$node = $and.node;} 
+		(OR or = orexpr {$node = new ASTOrNode($and.node, $or.node);})*
   ;
 
 andexpr returns [ASTPropositionalNode node]
-  : not = notexpr {$node = $not.node;} (AND and = andexpr {$node = new ASTAndNode($not.node, $and.node);})*
+  : not = notexpr {$node = $not.node;} 
+		(AND and = andexpr {$node = new ASTAndNode($not.node, $and.node);})*
   ;
   
 notexpr returns [ASTPropositionalNode node]
