@@ -62,6 +62,8 @@ As we can see, both statements have the same result in same models. When two log
 statements are equivalent, they can be derived by each other, with the use of 
 equivalences which we know to be true.
 
+\subsection{Current Logic Tutorial Applications}
+
 At the moment, there are a two programs which specifically built to support the
 Logic course at Imperial College London. These are:
 
@@ -71,8 +73,7 @@ Logic course at Imperial College London. These are:
   \item LOST - application which helps in the learning of logic semantics.
 \end{enumerate}
 
-There is no current application which lets the students learn and practice
-equivalences.
+There is no current tutorial tool for logic equivalences.
 
 \subsection{Requirements}
 
@@ -81,20 +82,18 @@ with the following features:
 
 \begin{itemize}
 
-	\item Input start and end states of an equivalence, and perform the
-				equivalence.
+	\item Input start and end states of a propositional or predicate equivalence, 
+         and perform the equivalence.
 	\item Choose a difficulty of equivalence and practice an auto-generated
-				level.
+			   level.
 	\item Choose between a logic tree view and a logic expression view while
-				completing a level.
+				 completing a level.
 	\item Give the student the ability to view previously completed levels.
 	\item Give the student the ability to save uncompleted levels, which they
-				can complete at a later time.
+				 can complete at a later time.
 	\item Automatically suggest a higher level to the student if they are
-				progressing well.
+				 progressing well.
 \end{itemize}
-
-\subsection{Report Structure}
 
 \newpage
 
@@ -390,6 +389,26 @@ in the next few subsections.
 
 \newpage
 
+\section{Design and Implementation Overview}
+\subsection{Lexer and Parser}
+As we have had previous experiences with writing lexers and parsers, this was not
+a hard part of the development process. With the use of ANTLR, which is a lexer
+and parser generator, I have achieved a fully functional parser for propositional
+logic, which can easily be extended to account for predicate logic in future
+development.
+
+\subsection{Logic Tree Structure}
+To generate the logic tree, I chose not to use the ANTLR generated Abstract Syntax
+Trees. Instead, I wrote a tree structure of my own. The parser grammar can be seen
+in the appendix, which would help with the understanding of the tree structure as well.
+
+\subsection{Graphical User Interface}
+I am now starting to develop the GUI for the application. As the main implementation
+of the application is in Java, I have chosen to use the Swing library to develop
+the GUI.
+
+\newpage
+
 % Project Plan
 \section{Project Plan}
 As we are building a completely new application, we have to start from the
@@ -421,7 +440,7 @@ After this further research, I realised that using the ANTLR generated ASTs woul
 not be the most convenient tree structure to use in the long run, so I decided
 to create a tree structure of my own.
 
-Future steps include:
+Future steps include (in order of implementation):
 \begin{enumerate}
 	\item Designing the GUI
 	\item Developing the GUI
@@ -434,7 +453,61 @@ Future steps include:
 
 %Evaluation Plan
 \section{Evaluation Plan}
+\subsection{User Feedback}
+As this is a tutorial tool, the best way to evaluate the application is to see
+if the people who use it find it useful in learning equivalences. There are a number
+of aspects which would need to be evaluated. These are discussed below.
 
+\subsubsection{Ease of Use}
+For a tutorial tool, or any application, to be a good application, it has to be
+user friendly. When talking about this application specifically, we have to
+consider many different areas when talking about ease of use:
+\begin{enumerate}
+  \item Inputting start and end states for an equivalence - this would be the
+         first step for a user to complete an equivalence, unless they are using
+         the auto-generated equivalences. Input of logic expressions should be
+         simple and fast. If this aspect of the tutorial tool is not easy to use,
+         the user would not want to waste time on the application as it would be
+         too time consuming.
+  \item Solving equivalences - this part is the main feature of the application.
+         This aspect of the application should be very simple and not require many
+         clicks or lots of typing, and should provide an easy way of undoing rules
+         that the user might have applied. Both the tree method and the expression
+         method of solving equivalences should be very easy and fast to use.
+  \item Saving and opening uncompleted equivalences - this feature of the tutorial
+         tool would be essential for a user who might have a specific equivalence 
+         too hard to complete at a given point, so they can return to it in the
+         future when they are more comfortable with equivalences. It should
+         be easy to see the start and end states of the uncompleted levels, and
+         the users should be allowed to sort it by date or difficulty if need be.
+  \item Generating new levels - if the user does not have any equivalences to 
+         enter themselves, they can generate levels of their chosen level, or
+         generate a level which the application thinks is suitable. This again,
+         should be done within a few clicks of the mouse, as the user would not
+         want to waste time on it.
+  \item Viewing Progress Report - the user can keep track of their progress with
+         equivalences. This should be shown with easy to read and understand
+         statistics of the user's progress. 
+\end{enumerate}
+
+\subsubsection{Difficulty}
+Every tutorial tool needs to give the user tougher challenges as they progress.
+In this application, we keep track of certain statistics of each user, such as
+the number of completed levels, number of incomplete levels, average steps needed
+to complete a level, number of easy/medium/hard levels completed, etc. 
+As there is a level generator, we need to keep track of these statistics, and
+after analysing the data, the application would generate a suitable level for the
+user.
+To test this aspect of the application, we would have a few users who would complete
+generated levels, and with time, they would see the levels getting harder and harder.
+After a certain time, we would ask the users if they felt that the levels were getting
+harder and if they felt under-challenged or over-challenged. This would provide the
+basis of evaluation of the level generation aspect of the tutorial tool.
+
+\subsection{Testing}
+Thorough testing is essential to any application. Many tests will be written to
+check that no completed part of the application is broken once new parts are added,
+making sure that every feature of the application works.
 \newpage
 
 \section{Appendix}
