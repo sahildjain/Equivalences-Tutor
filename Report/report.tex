@@ -1,1009 +1,535 @@
 \documentclass[12pt]{article}
-
 \usepackage{a4, fullpage}
-
 \usepackage{bibtopic}
-
 \usepackage{float}
-
 \usepackage{amssymb,amsmath}
-
 \usepackage[T1]{fontenc}
-
 \usepackage{graphicx}
-
 \usepackage{multicol}
-
-
+\usepackage{alltt}
 
 \begin{document}
 
-
-
 \title{Equivalences Tutor\\BEng Final Report}
 
-
-
 \author{Sahil Deepak Jain\\Department of Computing\\Imperial College London\\Supervisor: Dr. Fariba Sadri}
-
 \date{\today}
-
-
-
 \maketitle
-
 \newpage
-
-
 
 % Abstract
 
 \begin{abstract}
 
-
-
 \end{abstract}
-
 \newpage
-
-
 
 % Table Of Contents
-
 \tableofcontents
 
-
-
 \newpage
-
-
-
 % Introduction
-
 \section{Introduction}
 
-
-
 \emph{Logic} refers to the study of different modes of reasoning conducted or 
-
 assessed according to strict principles of validity. Due to Logic being one of 
-
 the most fundamental aspects of Computer Science, it is taught to every student
-
 pursuing a Computing degree at Imperial College London. During the first term 
-
 in university, every Computing student is taught the Logic course, which aims to
-
 provide the students with knowledge of the syntax and semantics of Propositional 
-
 and Predicate logic. Students can apply this knowledge to complete equivalences
-
 and natural deduction proofs.
-
-
 
 A logical system is made up of three things:
 
 \begin{enumerate}
-
   \item Syntax - this is the formal language specified to express different
-
          concepts.
-
   \item Semantics - this is what provides meaning to the language.
-
   \item Proof theory - this is a way of arguing in the language. This allows us
-
          to identify valid statements in the language.
-
 \end{enumerate}
 
-
-
 In logic, two statements are logically equivalent if they contain the same
-
 logical content. Mendelson stated that "two statements are equivalent if they
-
 have the same truth value in every model." This can be illustrated in the 
-
 following example: \\ \bigskip 
-
-
-
 Statement 1: \emph{If Sahil is a final year student, 
-
 then he has to do an individual project} \\ \bigskip 
-
-
-
 Statement 2: \emph{If Sahil is not 
-
 doing an individual project, then he is not a final year student} \\ \bigskip 
-
-
-
 As we can see, both statements have the same result in same models. When two logic 
-
 statements are equivalent, they can be derived by each other, with the use of 
-
 equivalences which we know to be true.
 
-
-
 At the moment, there are a two programs which specifically built to support the
-
 Logic course at Imperial College London. These are:
 
 \begin{enumerate}
-
   \item Pandora - learning support tool designed to guide the construction of
-
          natural deduction proofs. 
-
   \item LOST - application which helps in the learning of logic semantics.
-
 \end{enumerate}
 
-
-
 There is no current application which lets the students learn and practice
-
 equivalences.
-
-
 
 \subsection{Requirements}
 
-
-
 The aim of this project is to provide a web based equivalence tutorial tool
-
 with the following features:
 
 \begin{itemize}
 
 	\item Input start and end states of an equivalence, and perform the
-
 				equivalence.
-
 	\item Choose a difficulty of equivalence and practice an auto-generated
-
 				level.
-
 	\item Choose between a logic tree view and a logic expression view while
-
 				completing a level.
-
 	\item Give the student the ability to view previously completed levels.
-
 	\item Give the student the ability to save uncompleted levels, which they
-
 				can complete at a later time.
-
 	\item Automatically suggest a higher level to the student if they are
-
 				progressing well.
-
 \end{itemize}
-
-
 
 \subsection{Report Structure}
 
 \newpage
 
 
-
 % Background
-
 \section{Background}
-
-
-
 \subsection{Propositional Equivalences}
 
-
+The first thing I had to look at were the logic equivalences which the students
+are taught in their respective logic courses. These equivalences are described
+in the next few subsections.
 
 \subsubsection{And Equivalences}
-
 \begin{enumerate}
 
   \item A $\land$ B $\equiv$ B $\land$ A \emph{(Commutativity of And)}
 
-
-
 \begin{center}
-
   \begin{tabular}{| c | c | c | c |}
-
     \hline
-
     A & B & A $\land$ B & B $\land$ A \\ \hline
-
     0 & 0 & 0 & 0 \\
-
     0 & 1 & 0 & 0 \\
-
     1 & 0 & 0 & 0 \\
-
     1 & 1 & 1 & 1 \\ \hline
-
   \end{tabular}
-
 \end{center}
-
-
 
   \item A $\land$ A $\equiv$ A \emph{(Idempotence of And)}
 
-
-
 \begin{center}
-
   \begin{tabular}{| c | c |}
-
     \hline
-
     A & A $\land$ A \\ \hline
-
     0 & 0 \\
-
     0 & 0 \\
-
     1 & 1 \\
-
     1 & 1 \\ \hline
-
   \end{tabular}
-
 \end{center}
-
-
 
   \item (A $\land$ B) $\land$ C $\equiv$ A $\land$ (B $\land$ C) \emph{(Associaticity of And)}
 
-
-
 \begin{center}
-
   \begin{tabular}{| c | c | c | c | c |}
-
     \hline
-
     A & B & C & (A $\land$ B) $\land$ C & A $\land$ (B $\land$ C) \\ \hline
-
     0 & 0 & 0 & 0 & 0 \\
-
     0 & 0 & 1 & 0 & 0 \\
-
     0 & 1 & 0 & 0 & 0 \\
-
     0 & 1 & 1 & 0 & 0 \\
-
     1 & 0 & 0 & 0 & 0 \\
-
     1 & 0 & 1 & 0 & 0 \\
-
     1 & 1 & 0 & 0 & 0 \\
-
     1 & 1 & 1 & 1 & 1 \\ \hline
-
   \end{tabular}
-
 \end{center}
-
 \end{enumerate}
 
-
-
 \subsubsection{Or Equivalences}
-
 \begin{enumerate}
-
-
 
   \item A $\lor$ B $\equiv$ B $\lor$ A \emph{(Commutativity of Or)}
 
-
-
 \begin{center}
-
   \begin{tabular}{| c | c | c | c |}
-
     \hline
-
     A & B & A $\lor$ B & B $\lor$ A\\ \hline
-
     0 & 0 & 0 & 0 \\
-
     0 & 1 & 1 & 1 \\
-
     1 & 0 & 1 & 1 \\
-
     1 & 1 & 1 & 1 \\ \hline
-
   \end{tabular}
-
 \end{center}
-
-
 
 \item A $\lor$ A $\equiv$ A \emph{(Idempotence of Or)}
 
-
-
 \begin{center}
-
   \begin{tabular}{| c | c |}
-
     \hline
-
     A & A $\lor$ A \\ \hline
-
     0 & 0 \\
-
     0 & 0 \\
-
     1 & 1 \\
-
     1 & 1 \\ \hline
-
   \end{tabular}
-
 \end{center}
-
-
 
   \item (A $\lor$ B) $\lor$ C $\equiv$ A $\lor$ (B $\lor$ C) \emph{(Associaticity of Or)}
 
-
-
 \begin{center}
-
   \begin{tabular}{| c | c | c | c | c |}
-
     \hline
-
     A & B & C & (A $\lor$ B) $\lor$ C & A $\lor$ (B $\lor$ C) \\ \hline
-
     0 & 0 & 0 & 0 & 0 \\
-
     0 & 0 & 1 & 1 & 1 \\
-
     0 & 1 & 0 & 1 & 1 \\
-
     0 & 1 & 1 & 1 & 1 \\
-
     1 & 0 & 0 & 1 & 1 \\
-
     1 & 0 & 1 & 1 & 1 \\
-
     1 & 1 & 0 & 1 & 1 \\
-
     1 & 1 & 1 & 1 & 1 \\ \hline
-
   \end{tabular}
-
 \end{center}
-
 \end{enumerate}
 
-
-
 \subsubsection{Not Equivalences}
-
 \begin{enumerate}
-
-
 
   \item A $\equiv$ $\neg$$\neg$A
 
-
-
 \begin{center}
-
   \begin{tabular}{| c | c | c |}
-
     \hline
-
     A & $\neg$A & $\neg$$\neg$A \\ \hline
-
     0 & 1 & 0 \\
-
     1 & 0 & 1 \\ \hline
-
   \end{tabular}
-
 \end{center}
-
-
 
 \end{enumerate}
 
-
-
 \subsubsection{Implies Equivalences}
-
 \begin{enumerate}
-
-
 
   \item A $\to$ B $\equiv$ $\neg$A $\lor$ B
 
-
-
 \begin{center}
-
   \begin{tabular}{| c | c | c | c | c |}
-
     \hline
-
     A & B & $\neg$A & A $\to$ B & $\neg$A $\lor$ B \\ \hline
-
     0 & 0 & 1 & 1 & 1 \\
-
     0 & 1 & 1 & 1 & 1 \\ 
-
     1 & 0 & 0 & 0 & 0 \\
-
     1 & 1 & 0 & 1 & 1 \\ \hline
-
   \end{tabular}
-
 \end{center}
-
-
 
   \item A $\to$ B $\equiv$ $\neg$(A $\land$ $\neg$B)
 
-
-
 \begin{center}
-
   \begin{tabular}{| c | c | c | c | c | c |}
-
     \hline
-
     A & B & $\neg$B & A $\land$ $\neg$B & A $\to$ B & $\neg$(A $\land$ $\neg$B) \\ \hline
-
     0 & 0 & 1 & 0 & 1 & 1 \\
-
     0 & 1 & 0 & 0 & 1 & 1 \\
-
     1 & 0 & 1 & 1 & 0 & 0 \\
-
     1 & 1 & 0 & 0 & 1 & 1 \\ \hline
-
   \end{tabular}
-
 \end{center}
-
-
 
   \item $\neg$(A $\to$ B) $\equiv$ A $\land$ $\neg$B
 
-
-
 \begin{center}
-
   \begin{tabular}{| c | c | c | c | c | c |}
-
     \hline
-
     A & B & $\neg$B & A $\to$ B & $\neg$(A $\to$ B) & A $\land$ $\neg$B \\ \hline
-
     0 & 0 & 1 & 1 & 0 & 0 \\
-
     0 & 1 & 0 & 1 & 0 & 0 \\
-
     1 & 0 & 1 & 0 & 1 & 1 \\
-
     1 & 1 & 0 & 1 & 0 & 0 \\ \hline
-
   \end{tabular}
-
 \end{center}
-
 \end{enumerate}
 
-
-
 \subsubsection{If and Only If Equivalences}
-
 \begin{enumerate}
-
-
 
   \item A $\leftrightarrow$ B $\equiv$ (A $\to$ B) $\land$ (B $\to$ A)
 
-
-
 \begin{center}
-
   \begin{tabular} {| c | c | c | c | c | c |}
-
     \hline
-
     A & B & A $\to$ B & B $\to$ A & A $\leftrightarrow$ B & (A $\to$ B) $\land$ (B $\to$ A) \\ \hline
-
     0 & 0 & 1 & 1 & 1 & 1 \\
-
     0 & 1 & 1 & 0 & 0 & 0 \\
-
     1 & 0 & 0 & 1 & 0 & 0 \\
-
     1 & 1 & 1 & 1 & 1 & 1 \\ \hline
-
   \end{tabular} 
-
 \end{center}
-
-
 
   \item A $\leftrightarrow$ B $\equiv$ (A $\land$ B) $\lor$ ($\neg$A $\land$ $\neg$B)
 
-
-
 \begin{center}
-
   \begin{tabular} {| c | c | c | c | c | c | c |}
-
     \hline
-
     A & B & A $\land$ B & $\neg$A & $\neg$B & A $\leftrightarrow$ B & (A $\land$ B) $\lor$ ($\neg$A $\land$ $\neg$B) \\ \hline
-
     0 & 0 & 0 & 1 & 1 & 1 & 1 \\
-
     0 & 1 & 0 & 1 & 0 & 0 & 0 \\
-
     1 & 0 & 0 & 0 & 1 & 0 & 0 \\
-
     1 & 1 & 1 & 0 & 0 & 1 & 1 \\ \hline
-
   \end{tabular} 
-
 \end{center}
-
-
-
 \end{enumerate}
-
-
 
 \subsubsection{De Morgan Equivalences}
 
 \begin{enumerate}
 
-
-
   \item $\neg$(A $\land$ B) $\equiv$ $\neg$A $\lor$ $\neg$B
 
-
-
 \begin{center}
-
   \begin{tabular}{| c | c | c | c |}
-
     \hline
-
     A & B & $\neg$(A $\land$ B) & $\neg$A $\lor$ $\neg$B \\ \hline
-
     0 & 0 & 1 & 1 \\
-
     0 & 1 & 1 & 1 \\ 
-
     1 & 0 & 1 & 1 \\
-
     1 & 1 & 0 & 0 \\ \hline
-
   \end{tabular}
-
 \end{center}
-
-
 
   \item $\neg$(A $\lor$ B) $\equiv$ $\neg$A $\land$ $\neg$B
 
-
-
 \begin{center}
-
   \begin{tabular}{| c | c | c | c |}
-
     \hline
-
     A & B & $\neg$(A $\lor$ B) & $\neg$A $\land$ $\neg$B \\ \hline
-
     0 & 0 & 1 & 1 \\
-
     0 & 1 & 0 & 0 \\ 
-
     1 & 0 & 0 & 0 \\
-
     1 & 1 & 0 & 0 \\ \hline
-
   \end{tabular}
-
 \end{center}
-
-
-
 \end{enumerate}
 
-
-
 \subsubsection{Distributibivity of And and Or}
-
 \begin{enumerate}
-
-
 
   \item A $\land$ (B $\lor$ C) $\equiv$ (A $\land$ B) $\lor$ (A $\land$ C)
 
-
-
 \begin{center}
-
   \begin{tabular}{| c | c | c | c | c |}
-
     \hline
-
     A & B & C & A $\land$ (B $\lor$ C) & (A $\land$ B) $\lor$ (A $\land$ C) \\ \hline
-
     0 & 0 & 0 & 0 & 0 \\
-
     0 & 0 & 1 & 0 & 0 \\
-
     0 & 1 & 0 & 0 & 0 \\
-
     0 & 1 & 1 & 0 & 0 \\
-
     1 & 0 & 0 & 0 & 0 \\
-
     1 & 0 & 1 & 1 & 1 \\
-
     1 & 1 & 0 & 1 & 1 \\
-
     1 & 1 & 1 & 1 & 1 \\ \hline
-
   \end{tabular}
-
 \end{center}
-
-
 
   \item A $\lor$ (B $\land$ C) $\equiv$ (A $\lor$ B) $\land$ (A $\lor$ C)
 
-
-
 \begin{center}
-
   \begin{tabular}{| c | c | c | c | c |}
-
     \hline
-
     A & B & C & A $\lor$ (B $\land$ C) & (A $\lor$ B) $\land$ (A $\lor$ C) \\ \hline
-
     0 & 0 & 0 & 0 & 0 \\
-
     0 & 0 & 1 & 0 & 0 \\
-
     0 & 1 & 0 & 0 & 0 \\
-
     0 & 1 & 1 & 1 & 1 \\
-
     1 & 0 & 0 & 1 & 1 \\
-
     1 & 0 & 1 & 1 & 1 \\
-
     1 & 1 & 0 & 1 & 1 \\
-
     1 & 1 & 1 & 1 & 1 \\ \hline
-
   \end{tabular}
-
 \end{center}
-
 \end{enumerate}
-
-
-
 \subsection{Equivalence Examples}
-
 \begin{enumerate}
 
-	\item 
+  \item $\neg$(p $\to$ q) $\equiv$ p $\land$ $\neg$q
+  \begin{enumerate}
+    \item $\neg$(p $\to$ q)
+    \item $\neg$($\neg$p $\lor$ q) \hfill a, Implication rule
+    \item $\neg$$\neg$p $\land$ $\neg$q \hfill b, De Morgan's law
+    \item p $\land$ $\neg$q \hfill c, Double Negation rule
+  \end{enumerate}
+  
+  \item $\neg$((p $\land$ q) $\to$ r) $\equiv$ (p $\land$ q) $\land$ $\neg$r
+  \begin{enumerate}
+    \item $\neg$((p $\land$ q) $\to$ r)
+    \item $\neg$($\neg$(p $\land$ q) $\lor$ r) \hfill a, Implication rule
+    \item $\neg$$\neg$(p $\land$ q) $\land$ $\neg$ r \hfill b, De Morgan's law
+    \item (p $\land$ q) $\land$ $\neg$r \hfill c, Double Negation rule
+  \end{enumerate}
 
-\begin{alttt}
-
-
-
-\end{alttt}		
-
+  \item $\neg$(p $\lor$ $\neg$q) $\lor$ ($\neg$p $\land$ $\neg$q) $\equiv$ $\neg$p
+  \begin{enumerate}
+    \item $\neg$(p $\lor$ $\neg$q) $\lor$ ($\neg$p $\land$ $\neg$q)
+    \item $\neg$(p $\lor$ $\neg$q) $\lor$ $\neg$(p $\land$ q) \hfill a, De Morgan's law
+    \item $\neg$[(p $\lor$ $\neg$q) $\land$ (p $\land$ q)] \hfill b, De Morgan's law
+    \item $\neg$[p $\lor$ ($\neg$q $\land$ q)] \hfill c, Distributivity
+    \item $\neg$(p $\lor$ $\bot$) \hfill d, And rule
+    \item $\neg$p \hfill e, Or rule
+  \end{enumerate}
 \end{enumerate}
-
-
 
 \newpage
 
-
-
 % Project Plan
-
 \section{Project Plan}
-
 As we are building a completely new application, we have to start from the
-
 very basics of what to do. The inital stages of the project consisted of the
-
 following:
-
 \begin{enumerate}
-
 	\item Meeting up with project supervisor to discuss what she would like as
-
-				an end result of the project.
-
+				 an end result of the project.
 	\item Reading through equivalence notes from previous years.
-
 	\item Talk to a few first year students to know where they found problems
-
-				with equivalences.
-
+				 with equivalences.
 	\item Research about the best way to model logic expressions so they could
-
-				be easily manipulated in future development.
-
+   			 be easily manipulated in future development.
 \end{enumerate}
 
-
-
 Once these steps had been carried out, I had a rough idea of where to begin 
-
 the development aspect of the application. After thorough research, I had realised
-
 that the best way to model the logic expressions was to use a tree structure, which
-
 was suggested by Fariba as well. To create the tree structure, I chose to use
-
 ANTLR. This stage consisted of:
 
 \begin{enumerate}
-
 	\item Writing the Lexer rules.
-
 	\item Writing the Parser rules.
-
 	\item Research more about the Abstract Syntax Tree (AST) returned by ANTLR.
-
 \end{enumerate}
-
-
 
 After this further research, I realised that using the ANTLR generated ASTs would
-
 not be the most convenient tree structure to use in the long run, so I decided
-
 to create a tree structure of my own.
 
-
-
 Future steps include:
-
 \begin{enumerate}
-
 	\item Designing the GUI
-
 	\item Developing the GUI
-
 	\item Writing the equivalence rules which alter the tree structure
-
 	\item Writing the logic expression generator
-
 	\item Writing the progress tracker
-
-	\item  	
-
+  \item Extending the application to support predicate equivalences
 \end{enumerate}
-
-
-
 \newpage
-
-
 
 %Evaluation Plan
-
 \section{Evaluation Plan}
 
-
-
 \newpage
-
-
 
 \section{Appendix}
 
 \subsection{Lexer Grammar}
 
 \begin{verbatim}
-
 lexer grammar LogicLexer;
 
-
-
 options {
-
   language = Java;
-
 }
-
-
 
 @header {
-
   package eqtutor;
-
 }
-
-
 
 WHITESPACE:			( '\t' | ' ' | '\r' | '\n' | '\u000C' )+ { $channel = HIDDEN; };
 
-
-
 AND	:						'&';
-
 OR	:						'|';
-
 IFTHEN	:				'->';
-
 IFF 	:					'<>';
-
-
-
 NOT 	:					'!';
 
-
-
 LPAREN  :				'(';
-
 RPAREN  :				')';
 
-
-
 ID	:						('A'..'Z'|'a'..'z') ('A'..'Z'|'a'..'z'|'_')*;
-
 \end{verbatim}
 
-
-
 \newpage
-
-
 
 \subsection{Parser Grammar}
 
 \begin{verbatim}
-
 parser grammar LogicParser;
 
-
-
 options {
-
   tokenVocab = LogicLexer;
-
 }
-
-
 
 @header {
-
   package eqtutor;
 
-  
-
   import java.util.LinkedList;
-
   import java.util.List;
-
   import AST.*;
-
 }
-
-
 
 @members {
-
   private boolean hasFoundError = false;
 
-  
-
   public void displayRecognitionError(String[] tokenNames, RecognitionException e) {
-
     hasFoundError = true;
-
   }
-
-  
 
   public boolean hasFoundError() {
-
     return this.hasFoundError;
-
   }
-
 }
 
-
-
 program returns [AST tree]
-
   : e = iffexpr {$tree = new AST(new ASTProgramNode($e.node));} EOF
-
   ;
-
-
 
 iffexpr returns [ASTPropositionalNode node]
-
   : ifthen = ifexpr {$node = $ifthen.node;} 
-
 	  (IFF iff = iffexpr {$node = new ASTIffNode($ifthen.node, $iff.node);})*
-
   ;
-
   	
-
 ifexpr returns [ASTPropositionalNode node]
-
   : or = orexpr {$node = $or.node;} 
-
 		(IFTHEN ifthen = ifexpr {$node = new ASTIfThenNode($or.node, $ifthen.node);})*
-
   ;
-
-
 
 orexpr returns [ASTPropositionalNode node]
-
   : and = andexpr {$node = $and.node;} 
-
 		(OR or = orexpr {$node = new ASTOrNode($and.node, $or.node);})*
-
   ;
-
-
 
 andexpr returns [ASTPropositionalNode node]
-
   : not = notexpr {$node = $not.node;} 
-
 		(AND and = andexpr {$node = new ASTAndNode($not.node, $and.node);})*
-
   ;
-
-  
 
 notexpr returns [ASTPropositionalNode node]
-
   : NOT not = notexpr {$node = new ASTNotNode($not.node);}
-
   | id = identifier {$node = $id.node;}
-
   ;
-
-
 
 identifier returns [ASTPropositionalNode node]
-
   : ID {$node = new ASTIdentifierNode($ID.text);}
-
   | LPAREN iffexpr RPAREN {$node = $iffexpr.node;}
-
   ;
-
 \end{verbatim}
 
 \end{document}
