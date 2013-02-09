@@ -5,10 +5,11 @@ import AST.*;
 public abstract class Equivalence {
 	
 	public AST findAndReplace(AST tree, ASTPropositionalNode originalNode, ASTPropositionalNode newNode) {
-		ASTProgramNode programNode = tree.getRoot();
-		ASTPropositionalNode leaf = programNode.getLeaf();
-		
+		ASTPropositionalNode leaf = tree.getRoot().getLeaf();
+		if(new NodeEquivalence(originalNode, leaf).isEquivalent()) {
+			tree.getRoot().setLeaf(newNode);
+		}
 		return tree;
 	}
-	
+		
 }

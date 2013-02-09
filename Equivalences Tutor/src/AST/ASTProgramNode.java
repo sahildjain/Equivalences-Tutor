@@ -12,6 +12,10 @@ public class ASTProgramNode extends ASTPropositionalUnaryNode {
 		return this.doubleConditional;
 	}
 	
+	public void setLeaf(ASTPropositionalNode leaf) {
+		this.doubleConditional = leaf;
+	}
+	
 	public void visit(ASTVisitor visitor) {
 		visitor.visitProgramNode(this);
 	}

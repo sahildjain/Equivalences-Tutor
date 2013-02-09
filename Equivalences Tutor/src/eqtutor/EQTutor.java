@@ -9,8 +9,7 @@ import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.TokenStream;
 
-import equivalence.NodeEquivalence;
-
+import equivalence.*;
 import AST.*;
 
 public class EQTutor {
@@ -18,22 +17,17 @@ public class EQTutor {
 	public static void main(String[] args) throws FileNotFoundException {
 		EQTutor eqtutor = new EQTutor(); 
 		//String src = eqtutor.getFormula();
-		String src = "a -> !b";
+		String src = "a & b";
 		System.out.println("Formula: " + src);
 		System.out.println();
 		LogicParser parser = eqtutor.getParser(src);
 		AST tree = eqtutor.getTree(parser);
 		eqtutor.printTreeToConsole(tree);
 		System.out.println();
-		String src2 = "a -> !b";
-		System.out.println("Formula: " + src2);
-		System.out.println();
-		LogicParser parser2 = eqtutor.getParser(src2);
-		AST tree2 = eqtutor.getTree(parser2);
-		eqtutor.printTreeToConsole(tree2);
-		NodeEquivalence test = new NodeEquivalence(tree2.getRoot(), tree.getRoot());
-		System.out.println();
-		System.out.println("Equal: " + test.isEquivalent());
+		System.out.println("performing a test equivalence");
+		AndEquivalence andEquivalence = new AndEquivalence(tree, new ASTAndNode(new ASTIdentifierNode("a"), new ASTIdentifierNode("b")));
+		AST newTree = andEquivalence.deMorgan();
+		eqtutor.printTreeToConsole(newTree);
 		
 	}
 	
