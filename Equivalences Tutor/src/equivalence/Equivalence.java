@@ -20,11 +20,18 @@ public abstract class Equivalence {
 			ASTPropositionalBinaryNode binaryParent = (ASTPropositionalBinaryNode) parent;
 			ASTPropositionalNode childLeftNode = binaryParent.getLeft();
 			NodeEquivalence nodeEquivalence = new NodeEquivalence(childLeftNode, originalNode);
-			boolean equal = nodeEquivalence.isEquivalent();
-			if(equal) {
+			boolean equalLeft = nodeEquivalence.isEquivalent();
+			ASTPropositionalNode childRightNode = binaryParent.getRight();
+			nodeEquivalence = new NodeEquivalence(childRightNode, originalNode);
+			boolean equalRight = nodeEquivalence.isEquivalent();
+			if(equalLeft && equalRight) {
+			}
+			if(equalLeft) {
+				binaryParent.setLeft(newNode);
+			}
+			if(equalRight) {
 				
 			}
-			
 		}
 		return parent;
 	}
