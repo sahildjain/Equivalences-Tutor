@@ -20,7 +20,9 @@ public class IfEquivalence extends Equivalence {
 		ASTPropositionalNode right = ifNode.getRight();
 		ASTNotNode notNode = new ASTNotNode(left);
 		ASTOrNode orNode = new ASTOrNode(notNode, right);
-		return findAndReplace(tree, ifNode, orNode);
+		ASTPropositionalNode node = findAndReplace(tree.getRoot(), ifNode, orNode);
+		tree.setRoot((ASTProgramNode) node);
+		return tree;
 	}
 	
 	// A -> B = !(A & !B)
@@ -32,7 +34,10 @@ public class IfEquivalence extends Equivalence {
 		ASTNotNode notNode1 = new ASTNotNode(right);
 		ASTAndNode andNode = new ASTAndNode(left, notNode1);
 		ASTNotNode notNode2 = new ASTNotNode(andNode);
-		return findAndReplace(tree, ifNode, notNode2);
+		//return findAndReplace(tree, ifNode, notNode2);
+		ASTPropositionalNode node = findAndReplace(tree.getRoot(), ifNode, notNode2);
+		tree.setRoot((ASTProgramNode) node);
+		return tree;
 	}
 	
 	public ASTIfThenNode getIfNode() {

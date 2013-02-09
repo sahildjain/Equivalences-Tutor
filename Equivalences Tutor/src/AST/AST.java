@@ -16,8 +16,8 @@ public class AST {
 		return this.root;
 	}
 	
-	public void setRoot(ASTProgramNode root) {
-		this.root = root;
+	public void setRoot(ASTProgramNode node) {
+		this.root = node;
 	}
 
 }

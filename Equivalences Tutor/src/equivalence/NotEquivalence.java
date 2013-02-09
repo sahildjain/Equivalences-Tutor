@@ -18,8 +18,9 @@ public class NotEquivalence extends Equivalence {
 		ASTNotNode notNode = getNotNode();
 		if(containsDoubleNegation()) {
 			ASTNotNode secondNotNode = (ASTNotNode) notNode.getLeaf();
-			ASTPropositionalNode node = secondNotNode.getLeaf();
-			return findAndReplace(tree, notNode, node);
+			ASTPropositionalNode secondNode = secondNotNode.getLeaf();
+			ASTPropositionalNode node = findAndReplace(tree.getRoot(), notNode, secondNode);
+			tree.setRoot((ASTProgramNode) node);
 		}
 		return tree;
 	}
@@ -36,7 +37,8 @@ public class NotEquivalence extends Equivalence {
 			ASTNotNode notLeft = new ASTNotNode(left);
 			ASTNotNode notRight = new ASTNotNode(right);
 			ASTOrNode orNode = new ASTOrNode(notLeft, notRight);
-			return findAndReplace(tree, notNode, orNode);
+			ASTPropositionalNode node = findAndReplace(tree.getRoot(), notNode, orNode);
+			tree.setRoot((ASTProgramNode) node);
 		}
 		return tree;
 	}
@@ -53,7 +55,8 @@ public class NotEquivalence extends Equivalence {
 			ASTNotNode notLeft = new ASTNotNode(left);
 			ASTNotNode notRight = new ASTNotNode(right);
 			ASTAndNode andNode = new ASTAndNode(notLeft, notRight);
-			return findAndReplace(tree, notNode, andNode);
+			ASTPropositionalNode node = findAndReplace(tree.getRoot(), notNode, andNode);
+			tree.setRoot((ASTProgramNode) node);
 		}
 		return tree;
 	}

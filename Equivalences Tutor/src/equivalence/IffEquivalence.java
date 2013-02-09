@@ -21,7 +21,9 @@ public class IffEquivalence  extends Equivalence {
 		ASTIfThenNode ifThenNode1 = new ASTIfThenNode(left, right);
 		ASTIfThenNode ifThenNode2 = new ASTIfThenNode(right, left);
 		ASTAndNode andNode = new ASTAndNode(ifThenNode1, ifThenNode2);
-		return findAndReplace(tree, iffNode, andNode);
+		ASTPropositionalNode node = findAndReplace(tree.getRoot(), iffNode, andNode);
+		tree.setRoot((ASTProgramNode) node);
+		return tree;
 	}
 	
 	// A <-> B = (A & B) | (!A & !B)
@@ -35,7 +37,9 @@ public class IffEquivalence  extends Equivalence {
 		ASTNotNode notRight = new ASTNotNode(right);
 		ASTAndNode andNode2 = new ASTAndNode(notLeft, notRight);
 		ASTOrNode orNode = new ASTOrNode(andNode1, andNode2);
-		return findAndReplace(tree, iffNode, orNode);
+		ASTPropositionalNode node = findAndReplace(tree.getRoot(), iffNode, orNode);
+		tree.setRoot((ASTProgramNode) node);
+		return tree;
 	}
 	
 	// A <-> B = !A <-> !B
@@ -47,7 +51,9 @@ public class IffEquivalence  extends Equivalence {
 		ASTNotNode notLeft = new ASTNotNode(left);
 		ASTNotNode notRight = new ASTNotNode(right);
 		ASTIffNode newIffNode = new ASTIffNode(notLeft, notRight);
-		return findAndReplace(tree, iffNode, newIffNode);
+		ASTPropositionalNode node = findAndReplace(tree.getRoot(), iffNode, newIffNode);
+		tree.setRoot((ASTProgramNode) node);
+		return tree;
 	}
 	
 	// A <-> !B = !(A <-> B) AND !A <-> B = !(A <-> B)
@@ -65,7 +71,9 @@ public class IffEquivalence  extends Equivalence {
 			ASTPropositionalNode newRight = ((ASTNotNode) right).getLeaf();
 			newNode = new ASTIffNode(left, newRight);
 		}
-		return findAndReplace(tree, iffNode, newNode);
+		ASTPropositionalNode node = findAndReplace(tree.getRoot(), iffNode, newNode);
+		tree.setRoot((ASTProgramNode) node);
+		return tree;
 	}
 
 	public AST getTree() {

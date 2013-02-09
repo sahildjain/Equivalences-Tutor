@@ -19,7 +19,9 @@ public class OrEquivalence extends Equivalence {
 		ASTPropositionalNode left = orNode.getLeft();
 		ASTPropositionalNode right = orNode.getRight();
 		ASTOrNode newNode = new ASTOrNode(right, left);
-		return findAndReplace(tree, orNode, newNode);
+		ASTPropositionalNode node = findAndReplace(tree.getRoot(), orNode, newNode);
+		tree.setRoot((ASTProgramNode) node);
+		return tree;
 	}
 	
 	// A & A = A
@@ -28,7 +30,8 @@ public class OrEquivalence extends Equivalence {
 		ASTOrNode orNode = getOrNode();
 		NodeEquivalence equivalence = new NodeEquivalence(orNode.getLeft(), orNode.getRight());
 		if(equivalence.isEquivalent()) {
-			return findAndReplace(tree, orNode, orNode.getLeft());
+			ASTPropositionalNode node = findAndReplace(tree.getRoot(), orNode, orNode.getLeft());
+			tree.setRoot((ASTProgramNode) node);
 		}
 		return tree;
 	}

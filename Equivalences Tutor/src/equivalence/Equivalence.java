@@ -4,12 +4,29 @@ import AST.*;
 
 public abstract class Equivalence {
 	
-	public AST findAndReplace(AST tree, ASTPropositionalNode originalNode, ASTPropositionalNode newNode) {
-		ASTPropositionalNode leaf = tree.getRoot().getLeaf();
-		if(new NodeEquivalence(originalNode, leaf).isEquivalent()) {
-			tree.getRoot().setLeaf(newNode);
+	public ASTPropositionalNode findAndReplace(ASTPropositionalNode parent, ASTPropositionalNode originalNode, ASTPropositionalNode newNode) {
+		if(parent instanceof ASTPropositionalUnaryNode) {
+			ASTPropositionalUnaryNode unaryParent = (ASTPropositionalUnaryNode) parent;
+			ASTPropositionalNode childNode = unaryParent.getLeaf();
+			NodeEquivalence nodeEquivalence = new NodeEquivalence(childNode, originalNode);
+			boolean equal = nodeEquivalence.isEquivalent();
+			if(equal) {
+				unaryParent.setLeaf(newNode);
+				return unaryParent;
+			}
+			findAndReplace(childNode, originalNode, newNode);
 		}
-		return tree;
+		if(parent instanceof ASTPropositionalBinaryNode) {
+			ASTPropositionalBinaryNode binaryParent = (ASTPropositionalBinaryNode) parent;
+			ASTPropositionalNode childLeftNode = binaryParent.getLeft();
+			NodeEquivalence nodeEquivalence = new NodeEquivalence(childLeftNode, originalNode);
+			boolean equal = nodeEquivalence.isEquivalent();
+			if(equal) {
+				
+			}
+			
+		}
+		return null;
 	}
 		
 }

@@ -16,4 +16,8 @@ public class ASTNotNode extends ASTPropositionalUnaryNode {
 		visitor.visitNotNode(this);
 	}
 
+	public void setLeaf(ASTPropositionalNode leaf) {
+		this.unary = leaf;
+	}
+
 }

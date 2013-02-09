@@ -18,7 +18,8 @@ public class AndEquivalence extends Equivalence {
 		ASTAndNode andNode = getAndNode();
 		NodeEquivalence equivalence = new NodeEquivalence(andNode.getLeft(), andNode.getRight());
 		if(equivalence.isEquivalent()) {
-			return findAndReplace(tree, andNode, andNode.getLeft());
+			ASTPropositionalNode node = findAndReplace(tree.getRoot(), andNode, andNode.getLeft());
+			tree.setRoot((ASTProgramNode) node);
 		}
 		return tree;
 	}
@@ -30,7 +31,9 @@ public class AndEquivalence extends Equivalence {
 		ASTPropositionalNode left = andNode.getLeft();
 		ASTPropositionalNode right = andNode.getRight();
 		ASTAndNode newNode = new ASTAndNode(right, left);
-		return findAndReplace(tree, andNode, newNode);
+		ASTPropositionalNode node = findAndReplace(tree.getRoot(), andNode, newNode);
+		tree.setRoot((ASTProgramNode) node);
+		return tree;
 	}
 	
 	// (A & B) & C = A & (B & C)
@@ -43,7 +46,8 @@ public class AndEquivalence extends Equivalence {
 			ASTPropositionalNode newLeft = ((ASTAndNode) left).getLeft();
 			ASTPropositionalNode newRight = new ASTAndNode(((ASTAndNode) left).getRight(), right);
 			ASTAndNode newAndNode = new ASTAndNode(newLeft, newRight);
-			return findAndReplace(tree, andNode, newAndNode);
+			ASTPropositionalNode node = findAndReplace(tree.getRoot(), andNode, newAndNode);
+			tree.setRoot((ASTProgramNode) node);
 		}
 		return tree;
 	}
@@ -58,7 +62,8 @@ public class AndEquivalence extends Equivalence {
 			ASTPropositionalNode newRight = ((ASTAndNode) right).getRight();
 			ASTPropositionalNode newLeft = new ASTAndNode(left, ((ASTAndNode) right).getLeft());
 			ASTAndNode newAndNode = new ASTAndNode(newLeft, newRight);
-			return findAndReplace(tree, andNode, newAndNode);
+			ASTPropositionalNode node = findAndReplace(tree.getRoot(), andNode, newAndNode);
+			tree.setRoot((ASTProgramNode) node);
 		}
 		return tree;
 	}
@@ -73,7 +78,9 @@ public class AndEquivalence extends Equivalence {
 		ASTNotNode notRight = new ASTNotNode(right);
 		ASTOrNode orNode = new ASTOrNode(notLeft, notRight);
 		ASTNotNode notNode = new ASTNotNode(orNode);
-		return findAndReplace(tree, andNode, notNode);
+		ASTPropositionalNode node = findAndReplace(tree.getRoot(), andNode, notNode);
+		tree.setRoot((ASTProgramNode) node);
+		return tree;
 	}
 	
 	public AST getTree() {
