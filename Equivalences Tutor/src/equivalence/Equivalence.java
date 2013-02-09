@@ -26,7 +26,6 @@ public abstract class Equivalence {
 			}
 			
 		}
-		return null;
+		return parent;
 	}
-		
 }
