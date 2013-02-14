@@ -25,13 +25,19 @@ public abstract class Equivalence {
 			nodeEquivalence = new NodeEquivalence(childRightNode, originalNode);
 			boolean equalRight = nodeEquivalence.isEquivalent();
 			if(equalLeft && equalRight) {
+				
 			}
 			if(equalLeft) {
 				binaryParent.setLeft(newNode);
+				return binaryParent;
 			}
 			if(equalRight) {
-				
+				binaryParent.setRight(newNode);
+				return binaryParent;
 			}
+		}
+		if(parent instanceof ASTIdentifierNode) {
+			
 		}
 		return parent;
 	}
