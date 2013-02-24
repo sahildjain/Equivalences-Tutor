@@ -1,52 +1,33 @@
 package gui;
 
-import java.awt.EventQueue;
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import java.awt.BorderLayout;
 
 public class gui {
-
+	
 	private JFrame frame;
-	private final JPanel panel = new JPanel();
+	private JPanel buttonsPanel;
+	private JButton quit;
+	final QuitListener quitListen = new QuitListener();
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					gui window = new gui();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	public void createGui(int size) {
+		frame = new JFrame("Equivalences Tutor");
+		frame.setSize(size * 10, size * 20);
+		buttonsPanel = new JPanel();
+		quit = new JButton("Quit");
+		buttonsPanel.add(quit);
+		quit.addActionListener(quitListen);
+		frame.add(buttonsPanel, BorderLayout.SOUTH);
 	}
-
-	/**
-	 * Create the application.
-	 */
-	public gui() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-		panel.setBounds(36, 38, 155, 153);
-		frame.getContentPane().add(panel);
-		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(238, 38, 155, 153);
-		frame.getContentPane().add(panel_1);
-	}
+	
+	private class QuitListener implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			System.exit(0);
+		}
+    }
 }

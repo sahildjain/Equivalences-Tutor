@@ -4,10 +4,12 @@ public class ASTIffNode extends ASTPropositionalBinaryNode {
 	
 	private ASTPropositionalNode conditional;
 	private ASTPropositionalNode doubleConditional;
+	private int key;
 
-	public ASTIffNode(ASTPropositionalNode conditional, ASTPropositionalNode doubleConditional) {
+	public ASTIffNode(int key, ASTPropositionalNode conditional, ASTPropositionalNode doubleConditional) {
 		this.conditional = conditional;
 		this.doubleConditional = doubleConditional;
+		this.setKey(key);
 	}
 	
 	public ASTPropositionalNode getLeft() {
@@ -28,6 +30,14 @@ public class ASTIffNode extends ASTPropositionalBinaryNode {
 
 	public void setRight(ASTPropositionalNode right) {
 		this.doubleConditional = right;
+	}
+
+	public int getKey() {
+		return key;
+	}
+
+	public void setKey(int key) {
+		this.key = key;
 	}
 
 }

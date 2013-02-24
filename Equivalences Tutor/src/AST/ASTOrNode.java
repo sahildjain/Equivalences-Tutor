@@ -4,10 +4,12 @@ public class ASTOrNode extends ASTPropositionalBinaryNode {
 	
 	private ASTPropositionalNode conjunction;
 	private ASTPropositionalNode disjunction;
+	private int key;
 
-	public ASTOrNode(ASTPropositionalNode conjunction, ASTPropositionalNode disjunction) {
+	public ASTOrNode(int key, ASTPropositionalNode conjunction, ASTPropositionalNode disjunction) {
 		this.conjunction = conjunction;
 		this.disjunction = disjunction;
+		this.setKey(key);
 	}
 	
 	public ASTPropositionalNode getLeft() {
@@ -28,6 +30,14 @@ public class ASTOrNode extends ASTPropositionalBinaryNode {
 
 	public void setRight(ASTPropositionalNode right) {
 		this.disjunction = right;
+	}
+
+	public int getKey() {
+		return key;
+	}
+
+	public void setKey(int key) {
+		this.key = key;
 	}
 
 }

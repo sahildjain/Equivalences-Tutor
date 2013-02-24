@@ -3,9 +3,11 @@ package AST;
 public class ASTProgramNode extends ASTPropositionalUnaryNode {
 
 	private ASTPropositionalNode doubleConditional;
+	private int key;
 	
-	public ASTProgramNode(ASTPropositionalNode doubleConditional) {
+	public ASTProgramNode(int key, ASTPropositionalNode doubleConditional) {
 		this.doubleConditional = doubleConditional;
+		this.setKey(key);
 	}
 	
 	public ASTPropositionalNode getLeaf() {
@@ -18,6 +20,14 @@ public class ASTProgramNode extends ASTPropositionalUnaryNode {
 	
 	public void visit(ASTVisitor visitor) {
 		visitor.visitProgramNode(this);
+	}
+
+	public int getKey() {
+		return key;
+	}
+
+	public void setKey(int key) {
+		this.key = key;
 	}
 
 }

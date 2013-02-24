@@ -3,9 +3,11 @@ package AST;
 public class ASTNotNode extends ASTPropositionalUnaryNode {
 	
 	private ASTPropositionalNode unary;
+	private int key;
 	
-	public ASTNotNode(ASTPropositionalNode unary) {
+	public ASTNotNode(int key, ASTPropositionalNode unary) {
 		this.unary = unary;
+		this.setKey(key);
 	}
 	
 	public ASTPropositionalNode getLeaf() {
@@ -18,6 +20,14 @@ public class ASTNotNode extends ASTPropositionalUnaryNode {
 
 	public void setLeaf(ASTPropositionalNode leaf) {
 		this.unary = leaf;
+	}
+
+	public int getKey() {
+		return key;
+	}
+
+	public void setKey(int key) {
+		this.key = key;
 	}
 
 }

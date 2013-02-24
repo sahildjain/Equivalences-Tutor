@@ -1,4 +1,4 @@
-// $ANTLR 3.4 /homes/sdj09/LogicParser.g 2013-01-30 14:51:02
+// $ANTLR 3.4 /homes/sdj09/LogicParser.g 2013-02-24 16:21:32
 
   package eqtutor;
   
@@ -50,6 +50,8 @@ public class LogicParser extends Parser {
 
       private boolean hasFoundError = false;
       
+      private int counter = 0;
+      
       public void displayRecognitionError(String[] tokenNames, RecognitionException e) {
         hasFoundError = true;
       }
@@ -61,7 +63,7 @@ public class LogicParser extends Parser {
 
 
     // $ANTLR start "program"
-    // /homes/sdj09/LogicParser.g:27:1: program returns [AST tree] : e= iffexpr EOF ;
+    // /homes/sdj09/LogicParser.g:29:1: program returns [AST tree] : e= iffexpr EOF ;
     public final AST program() throws RecognitionException {
         AST tree = null;
 
@@ -70,8 +72,8 @@ public class LogicParser extends Parser {
 
 
         try {
-            // /homes/sdj09/LogicParser.g:28:3: (e= iffexpr EOF )
-            // /homes/sdj09/LogicParser.g:28:5: e= iffexpr EOF
+            // /homes/sdj09/LogicParser.g:30:3: (e= iffexpr EOF )
+            // /homes/sdj09/LogicParser.g:30:5: e= iffexpr EOF
             {
             pushFollow(FOLLOW_iffexpr_in_program48);
             e=iffexpr();
@@ -79,7 +81,7 @@ public class LogicParser extends Parser {
             state._fsp--;
 
 
-            tree = new AST(new ASTProgramNode(e));
+            tree = new AST(++counter, new ASTProgramNode(++counter, e));
 
             match(input,EOF,FOLLOW_EOF_in_program52); 
 
@@ -101,7 +103,7 @@ public class LogicParser extends Parser {
 
 
     // $ANTLR start "iffexpr"
-    // /homes/sdj09/LogicParser.g:31:1: iffexpr returns [ASTPropositionalNode node] : ifthen= ifexpr ( IFF iff= iffexpr )* ;
+    // /homes/sdj09/LogicParser.g:33:1: iffexpr returns [ASTPropositionalNode node] : ifthen= ifexpr ( IFF iff= iffexpr )* ;
     public final ASTPropositionalNode iffexpr() throws RecognitionException {
         ASTPropositionalNode node = null;
 
@@ -112,8 +114,8 @@ public class LogicParser extends Parser {
 
 
         try {
-            // /homes/sdj09/LogicParser.g:32:3: (ifthen= ifexpr ( IFF iff= iffexpr )* )
-            // /homes/sdj09/LogicParser.g:32:5: ifthen= ifexpr ( IFF iff= iffexpr )*
+            // /homes/sdj09/LogicParser.g:34:3: (ifthen= ifexpr ( IFF iff= iffexpr )* )
+            // /homes/sdj09/LogicParser.g:34:5: ifthen= ifexpr ( IFF iff= iffexpr )*
             {
             pushFollow(FOLLOW_ifexpr_in_iffexpr73);
             ifthen=ifexpr();
@@ -123,7 +125,7 @@ public class LogicParser extends Parser {
 
             node = ifthen;
 
-            // /homes/sdj09/LogicParser.g:32:45: ( IFF iff= iffexpr )*
+            // /homes/sdj09/LogicParser.g:34:45: ( IFF iff= iffexpr )*
             loop1:
             do {
                 int alt1=2;
@@ -136,7 +138,7 @@ public class LogicParser extends Parser {
 
                 switch (alt1) {
             	case 1 :
-            	    // /homes/sdj09/LogicParser.g:32:46: IFF iff= iffexpr
+            	    // /homes/sdj09/LogicParser.g:34:46: IFF iff= iffexpr
             	    {
             	    match(input,IFF,FOLLOW_IFF_in_iffexpr78); 
 
@@ -146,7 +148,7 @@ public class LogicParser extends Parser {
             	    state._fsp--;
 
 
-            	    node = new ASTIffNode(ifthen, iff);
+            	    node = new ASTIffNode(++counter, ifthen, iff);
 
             	    }
             	    break;
@@ -175,7 +177,7 @@ public class LogicParser extends Parser {
 
 
     // $ANTLR start "ifexpr"
-    // /homes/sdj09/LogicParser.g:35:1: ifexpr returns [ASTPropositionalNode node] : or= orexpr ( IFTHEN ifthen= ifexpr )* ;
+    // /homes/sdj09/LogicParser.g:37:1: ifexpr returns [ASTPropositionalNode node] : or= orexpr ( IFTHEN ifthen= ifexpr )* ;
     public final ASTPropositionalNode ifexpr() throws RecognitionException {
         ASTPropositionalNode node = null;
 
@@ -186,8 +188,8 @@ public class LogicParser extends Parser {
 
 
         try {
-            // /homes/sdj09/LogicParser.g:36:3: (or= orexpr ( IFTHEN ifthen= ifexpr )* )
-            // /homes/sdj09/LogicParser.g:36:5: or= orexpr ( IFTHEN ifthen= ifexpr )*
+            // /homes/sdj09/LogicParser.g:38:3: (or= orexpr ( IFTHEN ifthen= ifexpr )* )
+            // /homes/sdj09/LogicParser.g:38:5: or= orexpr ( IFTHEN ifthen= ifexpr )*
             {
             pushFollow(FOLLOW_orexpr_in_ifexpr112);
             or=orexpr();
@@ -197,7 +199,7 @@ public class LogicParser extends Parser {
 
             node = or;
 
-            // /homes/sdj09/LogicParser.g:36:37: ( IFTHEN ifthen= ifexpr )*
+            // /homes/sdj09/LogicParser.g:38:37: ( IFTHEN ifthen= ifexpr )*
             loop2:
             do {
                 int alt2=2;
@@ -210,7 +212,7 @@ public class LogicParser extends Parser {
 
                 switch (alt2) {
             	case 1 :
-            	    // /homes/sdj09/LogicParser.g:36:38: IFTHEN ifthen= ifexpr
+            	    // /homes/sdj09/LogicParser.g:38:38: IFTHEN ifthen= ifexpr
             	    {
             	    match(input,IFTHEN,FOLLOW_IFTHEN_in_ifexpr117); 
 
@@ -220,7 +222,7 @@ public class LogicParser extends Parser {
             	    state._fsp--;
 
 
-            	    node = new ASTIfThenNode(or, ifthen);
+            	    node = new ASTIfThenNode(++counter, or, ifthen);
 
             	    }
             	    break;
@@ -249,7 +251,7 @@ public class LogicParser extends Parser {
 
 
     // $ANTLR start "orexpr"
-    // /homes/sdj09/LogicParser.g:39:1: orexpr returns [ASTPropositionalNode node] : and= andexpr ( OR or= orexpr )* ;
+    // /homes/sdj09/LogicParser.g:41:1: orexpr returns [ASTPropositionalNode node] : and= andexpr ( OR or= orexpr )* ;
     public final ASTPropositionalNode orexpr() throws RecognitionException {
         ASTPropositionalNode node = null;
 
@@ -260,8 +262,8 @@ public class LogicParser extends Parser {
 
 
         try {
-            // /homes/sdj09/LogicParser.g:40:3: (and= andexpr ( OR or= orexpr )* )
-            // /homes/sdj09/LogicParser.g:40:5: and= andexpr ( OR or= orexpr )*
+            // /homes/sdj09/LogicParser.g:42:3: (and= andexpr ( OR or= orexpr )* )
+            // /homes/sdj09/LogicParser.g:42:5: and= andexpr ( OR or= orexpr )*
             {
             pushFollow(FOLLOW_andexpr_in_orexpr148);
             and=andexpr();
@@ -271,7 +273,7 @@ public class LogicParser extends Parser {
 
             node = and;
 
-            // /homes/sdj09/LogicParser.g:40:40: ( OR or= orexpr )*
+            // /homes/sdj09/LogicParser.g:42:40: ( OR or= orexpr )*
             loop3:
             do {
                 int alt3=2;
@@ -284,7 +286,7 @@ public class LogicParser extends Parser {
 
                 switch (alt3) {
             	case 1 :
-            	    // /homes/sdj09/LogicParser.g:40:41: OR or= orexpr
+            	    // /homes/sdj09/LogicParser.g:42:41: OR or= orexpr
             	    {
             	    match(input,OR,FOLLOW_OR_in_orexpr153); 
 
@@ -294,7 +296,7 @@ public class LogicParser extends Parser {
             	    state._fsp--;
 
 
-            	    node = new ASTOrNode(and, or);
+            	    node = new ASTOrNode(++counter, and, or);
 
             	    }
             	    break;
@@ -323,7 +325,7 @@ public class LogicParser extends Parser {
 
 
     // $ANTLR start "andexpr"
-    // /homes/sdj09/LogicParser.g:43:1: andexpr returns [ASTPropositionalNode node] : not= notexpr ( AND and= andexpr )* ;
+    // /homes/sdj09/LogicParser.g:45:1: andexpr returns [ASTPropositionalNode node] : not= notexpr ( AND and= andexpr )* ;
     public final ASTPropositionalNode andexpr() throws RecognitionException {
         ASTPropositionalNode node = null;
 
@@ -334,8 +336,8 @@ public class LogicParser extends Parser {
 
 
         try {
-            // /homes/sdj09/LogicParser.g:44:3: (not= notexpr ( AND and= andexpr )* )
-            // /homes/sdj09/LogicParser.g:44:5: not= notexpr ( AND and= andexpr )*
+            // /homes/sdj09/LogicParser.g:46:3: (not= notexpr ( AND and= andexpr )* )
+            // /homes/sdj09/LogicParser.g:46:5: not= notexpr ( AND and= andexpr )*
             {
             pushFollow(FOLLOW_notexpr_in_andexpr184);
             not=notexpr();
@@ -345,7 +347,7 @@ public class LogicParser extends Parser {
 
             node = not;
 
-            // /homes/sdj09/LogicParser.g:44:40: ( AND and= andexpr )*
+            // /homes/sdj09/LogicParser.g:46:40: ( AND and= andexpr )*
             loop4:
             do {
                 int alt4=2;
@@ -358,7 +360,7 @@ public class LogicParser extends Parser {
 
                 switch (alt4) {
             	case 1 :
-            	    // /homes/sdj09/LogicParser.g:44:41: AND and= andexpr
+            	    // /homes/sdj09/LogicParser.g:46:41: AND and= andexpr
             	    {
             	    match(input,AND,FOLLOW_AND_in_andexpr189); 
 
@@ -368,7 +370,7 @@ public class LogicParser extends Parser {
             	    state._fsp--;
 
 
-            	    node = new ASTAndNode(not, and);
+            	    node = new ASTAndNode(++counter, not, and);
 
             	    }
             	    break;
@@ -397,7 +399,7 @@ public class LogicParser extends Parser {
 
 
     // $ANTLR start "notexpr"
-    // /homes/sdj09/LogicParser.g:47:1: notexpr returns [ASTPropositionalNode node] : ( NOT not= notexpr |id= identifier );
+    // /homes/sdj09/LogicParser.g:49:1: notexpr returns [ASTPropositionalNode node] : ( NOT not= notexpr |id= identifier );
     public final ASTPropositionalNode notexpr() throws RecognitionException {
         ASTPropositionalNode node = null;
 
@@ -408,7 +410,7 @@ public class LogicParser extends Parser {
 
 
         try {
-            // /homes/sdj09/LogicParser.g:48:3: ( NOT not= notexpr |id= identifier )
+            // /homes/sdj09/LogicParser.g:50:3: ( NOT not= notexpr |id= identifier )
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -427,7 +429,7 @@ public class LogicParser extends Parser {
             }
             switch (alt5) {
                 case 1 :
-                    // /homes/sdj09/LogicParser.g:48:5: NOT not= notexpr
+                    // /homes/sdj09/LogicParser.g:50:5: NOT not= notexpr
                     {
                     match(input,NOT,FOLLOW_NOT_in_notexpr218); 
 
@@ -437,12 +439,12 @@ public class LogicParser extends Parser {
                     state._fsp--;
 
 
-                    node = new ASTNotNode(not);
+                    node = new ASTNotNode(++counter, not);
 
                     }
                     break;
                 case 2 :
-                    // /homes/sdj09/LogicParser.g:49:5: id= identifier
+                    // /homes/sdj09/LogicParser.g:51:5: id= identifier
                     {
                     pushFollow(FOLLOW_identifier_in_notexpr236);
                     id=identifier();
@@ -472,7 +474,7 @@ public class LogicParser extends Parser {
 
 
     // $ANTLR start "identifier"
-    // /homes/sdj09/LogicParser.g:52:1: identifier returns [ASTPropositionalNode node] : ( ID | LPAREN iffexpr RPAREN );
+    // /homes/sdj09/LogicParser.g:54:1: identifier returns [ASTPropositionalNode node] : ( ID | LPAREN iffexpr RPAREN );
     public final ASTPropositionalNode identifier() throws RecognitionException {
         ASTPropositionalNode node = null;
 
@@ -482,7 +484,7 @@ public class LogicParser extends Parser {
 
 
         try {
-            // /homes/sdj09/LogicParser.g:53:3: ( ID | LPAREN iffexpr RPAREN )
+            // /homes/sdj09/LogicParser.g:55:3: ( ID | LPAREN iffexpr RPAREN )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -501,16 +503,16 @@ public class LogicParser extends Parser {
             }
             switch (alt6) {
                 case 1 :
-                    // /homes/sdj09/LogicParser.g:53:5: ID
+                    // /homes/sdj09/LogicParser.g:55:5: ID
                     {
                     ID1=(Token)match(input,ID,FOLLOW_ID_in_identifier255); 
 
-                    node = new ASTIdentifierNode((ID1!=null?ID1.getText():null));
+                    node = new ASTIdentifierNode(++counter, (ID1!=null?ID1.getText():null));
 
                     }
                     break;
                 case 2 :
-                    // /homes/sdj09/LogicParser.g:54:5: LPAREN iffexpr RPAREN
+                    // /homes/sdj09/LogicParser.g:56:5: LPAREN iffexpr RPAREN
                     {
                     match(input,LPAREN,FOLLOW_LPAREN_in_identifier263); 
 

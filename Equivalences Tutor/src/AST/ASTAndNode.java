@@ -4,10 +4,12 @@ public class ASTAndNode extends ASTPropositionalBinaryNode {
 	
 	private ASTPropositionalNode unary;
 	private ASTPropositionalNode propositional;
+	private int key;
 	
-	public ASTAndNode(ASTPropositionalNode unary, ASTPropositionalNode propositional) {
+	public ASTAndNode(int key, ASTPropositionalNode unary, ASTPropositionalNode propositional) {
 		this.unary = unary;
 		this.propositional = propositional;
+		this.setKey(key);
 	}
 	
 	public ASTPropositionalNode getLeft() {
@@ -28,6 +30,14 @@ public class ASTAndNode extends ASTPropositionalBinaryNode {
 
 	public void setRight(ASTPropositionalNode right) {
 		this.propositional = right;
+	}
+
+	public int getKey() {
+		return key;
+	}
+
+	public void setKey(int key) {
+		this.key = key;
 	}
 	
 }
