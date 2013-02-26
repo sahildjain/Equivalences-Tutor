@@ -22,7 +22,7 @@ public class AST {
 		this.root = node;
 	}
 
-	public int getCounter() {
+	public int getKey() {
 		return this.key;
 	}
 

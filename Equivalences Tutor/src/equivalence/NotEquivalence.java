@@ -34,9 +34,11 @@ public class NotEquivalence extends Equivalence {
 			ASTAndNode andNode = (ASTAndNode) leaf;
 			ASTPropositionalNode left = andNode.getLeft();
 			ASTPropositionalNode right = andNode.getRight();
-			ASTNotNode notLeft = new ASTNotNode(left);
-			ASTNotNode notRight = new ASTNotNode(right);
-			ASTOrNode orNode = new ASTOrNode(notLeft, notRight);
+			ASTNotNode notLeft = new ASTNotNode(tree.getKey(), left);
+			tree.setKey(tree.getKey() + 1);
+			ASTNotNode notRight = new ASTNotNode(tree.getKey(), right);
+			tree.setKey(tree.getKey() + 1);
+			ASTOrNode orNode = new ASTOrNode(andNode.getKey(), notLeft, notRight);
 			ASTPropositionalNode node = findAndReplace(tree.getRoot(), notNode, orNode);
 			tree.setRoot((ASTProgramNode) node);
 		}
@@ -52,9 +54,10 @@ public class NotEquivalence extends Equivalence {
 			ASTOrNode orNode = (ASTOrNode) leaf;
 			ASTPropositionalNode left = orNode.getLeft();
 			ASTPropositionalNode right = orNode.getRight();
-			ASTNotNode notLeft = new ASTNotNode(left);
-			ASTNotNode notRight = new ASTNotNode(right);
-			ASTAndNode andNode = new ASTAndNode(notLeft, notRight);
+			ASTNotNode notLeft = new ASTNotNode(notNode.getKey(), left);
+			ASTNotNode notRight = new ASTNotNode(orNode.getKey(), right);
+			ASTAndNode andNode = new ASTAndNode(tree.getKey(), notLeft, notRight);
+			tree.setKey(tree.getKey() + 1);
 			ASTPropositionalNode node = findAndReplace(tree.getRoot(), notNode, andNode);
 			tree.setRoot((ASTProgramNode) node);
 		}

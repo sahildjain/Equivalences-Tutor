@@ -18,7 +18,7 @@ public class OrEquivalence extends Equivalence {
 		ASTOrNode orNode = getOrNode();
 		ASTPropositionalNode left = orNode.getLeft();
 		ASTPropositionalNode right = orNode.getRight();
-		ASTOrNode newNode = new ASTOrNode(right, left);
+		ASTOrNode newNode = new ASTOrNode(orNode.getKey(), right, left);
 		ASTPropositionalNode node = findAndReplace(tree.getRoot(), orNode, newNode);
 		tree.setRoot((ASTProgramNode) node);
 		return tree;
