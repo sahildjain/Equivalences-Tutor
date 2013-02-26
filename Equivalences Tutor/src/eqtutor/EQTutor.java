@@ -54,7 +54,7 @@ public class EQTutor {
 		return tree;
 	}
 
-	public void printTreeToConsole(AST tree) {
+	public static void printTreeToConsole(AST tree) {
 		PrintStream p = System.out;
 		ASTPrintVisitor printVisitor = new ASTPrintVisitor(p);
 		tree.visit(printVisitor);

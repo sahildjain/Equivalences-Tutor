@@ -22,6 +22,7 @@ public class Gui {
 	private JButton submitStart;
 	private JButton states;
 	private JTextField startState;
+	StatesInputDialogListener inputListener;
 	
 	public void createGui(int size) {
 		createFrame("Equivalences Tutor", size);
@@ -51,13 +52,19 @@ public class Gui {
 		buttons = new JPanel(new MigLayout());
 		
 		states = new JButton("New Equivalence");
+	    inputListener = new StatesInputDialogListener();
+		states.addActionListener(inputListener);
 		
+		JButton test = new JButton("Test");
+		TestListener testListener = new TestListener();
+		test.addActionListener(testListener);
 		
 		quit = new JButton("Quit");
 		QuitListener quitListener = new QuitListener();
 		quit.addActionListener(quitListener);
 		
 		buttons.add(states, BorderLayout.WEST);
+		buttons.add(test, BorderLayout.WEST);
 		buttons.add(quit, BorderLayout.EAST);
 		
 	}
@@ -65,6 +72,17 @@ public class Gui {
 	private void createFrame(String string, int size) {
 		frame = new JFrame(string);
 		frame.setSize(size * 20, size * 20);
+	}
+	
+	private class TestListener implements ActionListener {
+
+		public void actionPerformed(ActionEvent e) {
+			System.out.println("start state: " + inputListener.getStartState());
+			EQTutor.printTreeToConsole(inputListener.getStartTree());
+			System.out.println("end state: " + inputListener.getEndState());
+			EQTutor.printTreeToConsole(inputListener.getEndTree());
+		}
+		
 	}
 
 }
