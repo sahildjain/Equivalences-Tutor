@@ -26,4 +26,15 @@ public class ASTIdentifierNode extends ASTPropositionalNode {
 		this.key = key;
 	}
 
+	public boolean equals(ASTPropositionalNode node) {
+		if(!(node instanceof ASTIdentifierNode)) {
+			return false;
+		}
+		return getLeaf().equals(((ASTIdentifierNode) node).getLeaf());
+	}
+
+	public String toString() {
+		return getLeaf();
+	}
+
 }

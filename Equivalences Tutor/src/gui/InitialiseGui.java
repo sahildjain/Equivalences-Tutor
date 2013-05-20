@@ -6,7 +6,7 @@ public class InitialiseGui {
 		javax.swing.SwingUtilities.invokeLater(new Runnable(){
 			public void run(){
 				final Gui gui = new Gui();
-				gui.createGui(30);
+				gui.createGui(20);
 			}
 		});
 	}

@@ -30,4 +30,18 @@ public class ASTProgramNode extends ASTPropositionalUnaryNode {
 		this.key = key;
 	}
 
+	public boolean equals(ASTPropositionalNode node) {
+		if(!(node instanceof ASTProgramNode)) {
+			return false;
+		}
+		return getLeaf().equals(((ASTProgramNode) node).getLeaf());
+	}
+
+	public String toString() {
+		System.out.println(getLeaf().toString());
+		return getLeaf().toString();
+	}
+	
+	
+
 }

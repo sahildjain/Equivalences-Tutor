@@ -29,5 +29,16 @@ public class ASTNotNode extends ASTPropositionalUnaryNode {
 	public void setKey(int key) {
 		this.key = key;
 	}
+	
+	public boolean equals(ASTPropositionalNode node) {
+		if(!(node instanceof ASTNotNode)) {
+			return false;
+		}
+		return getLeaf().equals(((ASTNotNode) node).getLeaf());
+	}
+	
+	public String toString() {
+		return "\u00AC(" + getLeaf().toString() + ")";
+	}
 
 }

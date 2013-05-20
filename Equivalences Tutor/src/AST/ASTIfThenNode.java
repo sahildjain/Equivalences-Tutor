@@ -40,4 +40,23 @@ public class ASTIfThenNode extends ASTPropositionalBinaryNode {
 		this.key = key;
 	}
 
+	public boolean equals(ASTPropositionalNode node) {
+		if(!(node instanceof ASTIfThenNode)) {
+			return false;
+		}
+		boolean left = getLeft().equals(((ASTIfThenNode) node).getLeft());
+		boolean right = getRight().equals(((ASTIfThenNode) node).getRight());
+		return left && right;
+	}
+	
+	public String toString() {
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("(");
+		stringBuilder.append(getLeft().toString());
+		stringBuilder.append(" \u2192 ");
+		stringBuilder.append(getRight().toString());
+		stringBuilder.append(")");
+		return stringBuilder.toString();
+	}
+
 }

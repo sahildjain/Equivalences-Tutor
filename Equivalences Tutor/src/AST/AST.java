@@ -10,6 +10,10 @@ public class AST {
 		this.setKey(key);
 	}
 	
+	public boolean equals(AST tree) {
+		return getRoot().equals(tree.getRoot());
+	}
+	
 	public void visit(ASTVisitor visitor) {
 		getRoot().visit(visitor);
 	}
@@ -28,6 +32,11 @@ public class AST {
 
 	public void setKey(int key) {
 		this.key = key;
+	}
+	
+	public String toString() {
+		return getRoot().toString();
+		
 	}
 
 }

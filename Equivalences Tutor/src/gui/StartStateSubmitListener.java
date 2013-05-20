@@ -22,7 +22,7 @@ public class StartStateSubmitListener implements ActionListener {
 		EQTutor eqtutor = new EQTutor();
 		LogicParser parser = eqtutor.getParser(text);
 		AST tree = eqtutor.getTree(parser);
-		eqtutor.printTreeToConsole(tree);
+		EQTutor.printTreeToConsole(tree);
 	}
 
 }

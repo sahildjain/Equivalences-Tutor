@@ -39,5 +39,25 @@ public class ASTAndNode extends ASTPropositionalBinaryNode {
 	public void setKey(int key) {
 		this.key = key;
 	}
+
+	public boolean equals(ASTPropositionalNode node) {
+		if(!(node instanceof ASTAndNode)) {
+			return false;
+		}
+		boolean left = getLeft().equals(((ASTAndNode) node).getLeft());
+		boolean right = getRight().equals(((ASTAndNode) node).getRight());
+		return left && right;
+	}
+
+	public String toString() {
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("(");
+		stringBuilder.append(getLeft().toString());
+		stringBuilder.append(" \u2227 ");
+		stringBuilder.append(getRight().toString());
+		stringBuilder.append(")");
+		return stringBuilder.toString();
+	}
+	
 	
 }
