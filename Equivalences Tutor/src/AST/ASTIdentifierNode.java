@@ -1,5 +1,7 @@
 package AST;
 
+import java.util.TreeMap;
+
 public class ASTIdentifierNode extends ASTPropositionalNode {
 	
 	private String id;
@@ -35,6 +37,22 @@ public class ASTIdentifierNode extends ASTPropositionalNode {
 
 	public String toString() {
 		return getLeaf();
+	}
+
+	public TreeMap<String, Integer> numIdentifiers(TreeMap<String, Integer> identifiers) {
+		int value = 1;
+		if(identifiers.containsKey(getLeaf())) {
+			value = identifiers.get(getLeaf()) + 1;
+		}
+		identifiers.put(getLeaf(), value);
+		return identifiers;
+	}
+
+	//TODO
+	@Override
+	public int value() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

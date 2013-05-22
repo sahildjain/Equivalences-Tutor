@@ -1,5 +1,7 @@
 package AST;
 
+import java.util.TreeMap;
+
 public class ASTNotNode extends ASTPropositionalUnaryNode {
 	
 	private ASTPropositionalNode unary;
@@ -39,6 +41,18 @@ public class ASTNotNode extends ASTPropositionalUnaryNode {
 	
 	public String toString() {
 		return "\u00AC(" + getLeaf().toString() + ")";
+	}
+	
+	public TreeMap<String, Integer> numIdentifiers(TreeMap<String, Integer> identifiers) {
+		return getLeaf().numIdentifiers(identifiers);
+	}
+
+	public int value() {
+		int leaf = getLeaf().value();
+		if(leaf == 1) {
+			return 0;
+		}
+		return 1;
 	}
 
 }

@@ -1,5 +1,7 @@
 package AST;
 
+import java.util.TreeMap;
+
 public class ASTIffNode extends ASTPropositionalBinaryNode {
 	
 	private ASTPropositionalNode conditional;
@@ -57,6 +59,21 @@ public class ASTIffNode extends ASTPropositionalBinaryNode {
 		stringBuilder.append(getRight().toString());
 		stringBuilder.append(")");
 		return stringBuilder.toString();
+	}
+
+	public TreeMap<String, Integer> numIdentifiers(TreeMap<String, Integer> identifiers) {
+		identifiers = getLeft().numIdentifiers(identifiers);
+		identifiers = getRight().numIdentifiers(identifiers);
+		return identifiers;
+	}
+
+	public int value() {
+		int left = getLeft().value();
+		int right = getRight().value();
+		if(left == right) {
+			return 1;
+		}
+		return 0;
 	}
 
 }

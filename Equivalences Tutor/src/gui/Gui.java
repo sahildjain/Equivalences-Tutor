@@ -32,16 +32,6 @@ public class Gui {
 		menu.add(newEquivalence, BorderLayout.NORTH);
 	}
 
-	/*private void createEquivalencePanel() {
-		inputField = new JPanel(new MigLayout());
-		startState = new JTextField(40);
-		inputField.add(startState, BorderLayout.NORTH);
-		submitStart = new JButton("Submit Start State");
-		StartStateSubmitListener startListener = new StartStateSubmitListener(startState);
-		submitStart.addActionListener(startListener);
-		inputField.add(submitStart, BorderLayout.NORTH);
-	}*/
-
 	private void createFrame(String string, int size) {
 		frame = new JFrame(string);
 		frame.setSize(size * 50, size * 40);

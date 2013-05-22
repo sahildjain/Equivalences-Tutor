@@ -1,5 +1,7 @@
 package AST;
 
+import java.util.TreeMap;
+
 public class ASTProgramNode extends ASTPropositionalUnaryNode {
 
 	private ASTPropositionalNode doubleConditional;
@@ -42,6 +44,14 @@ public class ASTProgramNode extends ASTPropositionalUnaryNode {
 		return getLeaf().toString();
 	}
 	
-	
+	public TreeMap<String, Integer> numIdentifiers(TreeMap<String, Integer> identifiers) {
+		identifiers = getLeaf().numIdentifiers(identifiers);
+		return identifiers;
+	}
 
+	public int value() {
+		return getLeaf().value();
+	}
+
+	
 }

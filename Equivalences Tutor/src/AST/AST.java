@@ -1,5 +1,7 @@
 package AST;
 
+import java.util.TreeMap;
+
 public class AST {
 	
 	private ASTProgramNode root;
@@ -36,7 +38,28 @@ public class AST {
 	
 	public String toString() {
 		return getRoot().toString();
+	}
+	
+	public boolean equivalent(AST tree) {
 		
+		return false;
+	}
+	
+	public int[][] truthTable() {
+		int numIdentifiers = numIdentifiers();
+		int temp = (int) Math.pow(2, numIdentifiers);
+		int[][] truthTable = new int[temp][numIdentifiers];
+		for(int i = 0; i < temp; ++i) {
+			String binary = Integer.toBinaryString(i);
+			
+		}
+		return null;
+	}
+	
+	private int numIdentifiers() {
+		TreeMap<String, Integer> identifiers = new TreeMap<String, Integer>();
+		identifiers = getRoot().numIdentifiers(identifiers);
+		return identifiers.size();
 	}
 
 }
