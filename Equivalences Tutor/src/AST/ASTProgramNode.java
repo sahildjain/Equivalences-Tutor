@@ -40,7 +40,6 @@ public class ASTProgramNode extends ASTPropositionalUnaryNode {
 	}
 
 	public String toString() {
-		System.out.println(getLeaf().toString());
 		return getLeaf().toString();
 	}
 	

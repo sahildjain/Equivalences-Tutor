@@ -11,6 +11,7 @@ public class Gui {
 	private JFrame frame;
 	private JPanel menu;
 	private JButton newEquivalence;
+	private JButton quit;
 	
 	public void createGui(int size) {
 		createFrame("Equivalences Tutor", size);
@@ -29,7 +30,10 @@ public class Gui {
 		newEquivalence = new JButton("New Personal Equivalence");
 		NewPersonalEquivalenceListener listener = new NewPersonalEquivalenceListener(frame, menu);
 		newEquivalence.addActionListener(listener);
-		menu.add(newEquivalence, BorderLayout.NORTH);
+		quit = new JButton("Quit");
+		QuitListener quitListener = new QuitListener();
+		quit.addActionListener(quitListener);
+		menu.add(newEquivalence, BorderLayout.CENTER);
 	}
 
 	private void createFrame(String string, int size) {

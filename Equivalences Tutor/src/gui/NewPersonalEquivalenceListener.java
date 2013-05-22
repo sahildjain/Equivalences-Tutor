@@ -25,7 +25,7 @@ public class NewPersonalEquivalenceListener implements ActionListener {
 	
 	private JButton quit;
 	private JButton states;
-	private JButton saveButton;
+	protected JButton saveButton;
 	private JButton menuButton;
 	private JButton submitLeft;
 	private JButton submitRight;
@@ -43,6 +43,8 @@ public class NewPersonalEquivalenceListener implements ActionListener {
 	
 	private EquivalenceLinkedList left = new EquivalenceLinkedList();
 	private EquivalenceLinkedList right = new EquivalenceLinkedList();
+	
+	private SaveListener saveListener;
 	
 
 	public NewPersonalEquivalenceListener(JFrame frame, JPanel menu) {
@@ -99,6 +101,8 @@ public class NewPersonalEquivalenceListener implements ActionListener {
 		
 		//Add the Save Button
 		saveButton = new JButton("Save");
+		saveListener = new SaveListener(this);
+		saveButton.addActionListener(saveListener);
 		
 		//Add the Quit Button
 		quit = new JButton("Quit");
