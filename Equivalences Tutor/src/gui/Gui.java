@@ -9,9 +9,13 @@ import net.miginfocom.swing.MigLayout;
 public class Gui {
 	
 	private JFrame frame;
+	
 	private JPanel menu;
-	private JButton newEquivalence;
+	
+	private JButton hardEquivalence;
+	private JButton easyEquivalence;
 	private JButton quit;
+	private JButton loadEquivalence;
 	
 	public void createGui(int size) {
 		createFrame("Equivalences Tutor", size);
@@ -20,20 +24,29 @@ public class Gui {
 	}
 
 	private void addToFrame() {
-		frame.add(menu, BorderLayout.NORTH);
+		frame.add(menu, BorderLayout.CENTER);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 	}
 	
 	private void createMenuPanel() {
 		menu = new JPanel(new MigLayout());
-		newEquivalence = new JButton("New Personal Equivalence");
-		NewPersonalEquivalenceListener listener = new NewPersonalEquivalenceListener(frame, menu);
-		newEquivalence.addActionListener(listener);
+		hardEquivalence = new JButton("Hard Personal Equivalence");
+		HardEquivalence listener = new HardEquivalence(frame, menu);
+		hardEquivalence.addActionListener(listener);
+		easyEquivalence = new JButton("Easy Personal Equivalence");
+		EasyEquivalence easyListener = new EasyEquivalence(frame, menu);
+		easyEquivalence.addActionListener(easyListener);
+		loadEquivalence = new JButton("Load Equivalence From File");
+		LoadEquivalenceListener loadListener = new LoadEquivalenceListener(loadEquivalence);
+		loadEquivalence.addActionListener(loadListener);
 		quit = new JButton("Quit");
 		QuitListener quitListener = new QuitListener();
 		quit.addActionListener(quitListener);
-		menu.add(newEquivalence, BorderLayout.CENTER);
+		menu.add(easyEquivalence, BorderLayout.NORTH);
+		menu.add(hardEquivalence, BorderLayout.NORTH);
+		menu.add(loadEquivalence, BorderLayout.NORTH);
+		menu.add(quit, BorderLayout.SOUTH);
 	}
 
 	private void createFrame(String string, int size) {
