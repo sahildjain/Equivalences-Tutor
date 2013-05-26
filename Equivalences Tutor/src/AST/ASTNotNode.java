@@ -1,6 +1,12 @@
 package AST;
 
+import java.awt.BorderLayout;
 import java.util.TreeMap;
+
+import javax.swing.JButton;
+import javax.swing.JPanel;
+
+import net.miginfocom.swing.MigLayout;
 
 public class ASTNotNode extends ASTPropositionalUnaryNode {
 	
@@ -53,6 +59,15 @@ public class ASTNotNode extends ASTPropositionalUnaryNode {
 			return 0;
 		}
 		return 1;
+	}
+
+	public JPanel createJPanel() {
+		JPanel panel = new JPanel(new MigLayout());
+		JPanel child = getLeaf().createJPanel();
+		JButton button = new JButton("\u00AC");
+		panel.add(button, BorderLayout.WEST);
+		panel.add(child, BorderLayout.CENTER);
+		return panel;
 	}
 
 }

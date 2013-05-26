@@ -82,7 +82,7 @@ public class HardEquivalence extends NewPersonalEquivalenceListener {
 		}
 	}
 	
-	private void completeEquivalence() {
+	protected void completeEquivalence() {
 		textFieldLeft.setVisible(false);
 		textFieldRight.setVisible(false);
 		submitLeft.setVisible(false);
@@ -103,6 +103,16 @@ public class HardEquivalence extends NewPersonalEquivalenceListener {
 	
 	public void setTextAreaRight(JTextArea right) {
 		this.textAreaRight = right;
+	}
+
+	protected void hidePanels() {
+		getSubmitLeft().setVisible(false);
+		getSubmitRight().setVisible(false);
+		getTextAreaLeft().setVisible(false);
+		getTextAreaRight().setVisible(false);
+		getTextFieldLeft().setVisible(false);
+		getTextFieldRight().setVisible(false);
+		getButtons().setVisible(false);
 	}
 	
 

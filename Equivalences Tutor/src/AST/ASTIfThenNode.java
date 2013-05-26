@@ -1,6 +1,12 @@
 package AST;
 
+import java.awt.BorderLayout;
 import java.util.TreeMap;
+
+import javax.swing.JButton;
+import javax.swing.JPanel;
+
+import net.miginfocom.swing.MigLayout;
 
 public class ASTIfThenNode extends ASTPropositionalBinaryNode {
 	
@@ -75,5 +81,17 @@ public class ASTIfThenNode extends ASTPropositionalBinaryNode {
 		}
 		return 1;
 	}
+	
+	public JPanel createJPanel() {
+		JPanel panel = new JPanel(new MigLayout());
+		JPanel left = getLeft().createJPanel();
+		JPanel right = getRight().createJPanel();
+		JButton button = new JButton("\u2192");
+		panel.add(left, BorderLayout.WEST);
+		panel.add(button, BorderLayout.CENTER);
+		panel.add(right, BorderLayout.EAST);
+		return panel;
+	}
+
 
 }

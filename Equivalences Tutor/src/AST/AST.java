@@ -40,12 +40,13 @@ public class AST {
 		return getRoot().toString();
 	}
 	
+	// TODO
 	public boolean equivalent(AST tree) {
-		
+		numIdentifiers();
 		return false;
 	}
 	
-	public int[][] truthTable() {
+	/*public int[][] truthTable() {
 		int numIdentifiers = numIdentifiers();
 		int temp = (int) Math.pow(2, numIdentifiers);
 		int[][] truthTable = new int[temp][numIdentifiers];
@@ -54,7 +55,7 @@ public class AST {
 			
 		}
 		return null;
-	}
+	}*/
 	
 	private int numIdentifiers() {
 		TreeMap<String, Integer> identifiers = new TreeMap<String, Integer>();

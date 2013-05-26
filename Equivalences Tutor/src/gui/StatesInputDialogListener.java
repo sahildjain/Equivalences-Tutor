@@ -28,7 +28,9 @@ public class StatesInputDialogListener implements ActionListener{
 		setStartState(startState);
 		setEndState(endState);
 		updateLists();
+		System.out.println("updates lists");
 		getListener().updateEquivalenceLeft();
+		System.out.println("updated left");
 		getListener().updateEquivalenceRight();
 	}
 

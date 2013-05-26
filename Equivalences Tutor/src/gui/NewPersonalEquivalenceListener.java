@@ -24,6 +24,7 @@ public abstract class NewPersonalEquivalenceListener implements ActionListener {
 	
 	private JButton quit;
 	private JButton states;
+	private JButton undoButton;
 	protected JButton saveButton;
 	private JButton menuButton;
 	protected JButton submitLeft;
@@ -41,6 +42,8 @@ public abstract class NewPersonalEquivalenceListener implements ActionListener {
 	
 	protected JTextField textFieldLeft;
 	protected JTextField textFieldRight;
+	
+	private UndoListener undoListener;
 	
 
 	public NewPersonalEquivalenceListener(JFrame frame, JPanel menu) {
@@ -68,11 +71,18 @@ public abstract class NewPersonalEquivalenceListener implements ActionListener {
 		
 		//Add the Back to Menu Button
 		menuButton = new JButton("Back to Menu");
+		//hidePanels();
+		//getMenu().setVisible(true);
 		
 		//Add the Save Button
 		saveButton = new JButton("Save");
 		saveListener = new SaveListener(this);
 		saveButton.addActionListener(saveListener);
+		
+		//Add the Undo Button
+		undoButton = new JButton("Undo");
+		undoListener = new UndoListener(this, "LEFT");
+		undoButton.addActionListener(undoListener);
 		
 		//Add the Quit Button
 		quit = new JButton("Quit");
@@ -82,6 +92,7 @@ public abstract class NewPersonalEquivalenceListener implements ActionListener {
 		buttons.add(states, BorderLayout.WEST);
 		buttons.add(menuButton, BorderLayout.WEST);
 		buttons.add(saveButton, BorderLayout.WEST);
+		buttons.add(undoButton, BorderLayout.WEST);
 		buttons.add(quit, BorderLayout.EAST);
 		
 	}
@@ -89,6 +100,10 @@ public abstract class NewPersonalEquivalenceListener implements ActionListener {
 	protected abstract void updateEquivalenceLeft();
 	
 	protected abstract void updateEquivalenceRight(); 
+	
+	protected abstract void completeEquivalence();
+	
+	protected abstract void hidePanels();
 	
 	protected void updateLeftList(EquivalenceLinkNode node) {
 		getLeft().add(node);
@@ -160,6 +175,10 @@ public abstract class NewPersonalEquivalenceListener implements ActionListener {
 
 	public void setTextFieldRight(JTextField textFieldRight) {
 		this.textFieldRight = textFieldRight;
+	}
+	
+	public JPanel getButtons() {
+		return this.buttons;
 	}
 	
 }

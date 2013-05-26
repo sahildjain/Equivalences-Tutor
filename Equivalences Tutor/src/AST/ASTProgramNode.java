@@ -2,6 +2,8 @@ package AST;
 
 import java.util.TreeMap;
 
+import javax.swing.JPanel;
+
 public class ASTProgramNode extends ASTPropositionalUnaryNode {
 
 	private ASTPropositionalNode doubleConditional;
@@ -50,6 +52,10 @@ public class ASTProgramNode extends ASTPropositionalUnaryNode {
 
 	public int value() {
 		return getLeaf().value();
+	}
+
+	public JPanel createJPanel() {
+		return getLeaf().createJPanel();
 	}
 
 	

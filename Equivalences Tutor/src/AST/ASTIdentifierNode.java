@@ -2,6 +2,11 @@ package AST;
 
 import java.util.TreeMap;
 
+import javax.swing.JButton;
+import javax.swing.JPanel;
+
+import net.miginfocom.swing.MigLayout;
+
 public class ASTIdentifierNode extends ASTPropositionalNode {
 	
 	private String id;
@@ -53,6 +58,13 @@ public class ASTIdentifierNode extends ASTPropositionalNode {
 	public int value() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	public JPanel createJPanel() {
+		JPanel panel = new JPanel(new MigLayout());
+		JButton button = new JButton(getLeaf());
+		panel.add(button);
+		return panel;
 	}
 
 }

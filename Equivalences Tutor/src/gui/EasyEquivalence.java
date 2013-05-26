@@ -7,6 +7,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import equivalence.EquivalenceLinkNode;
+import equivalence.EquivalenceLinkedList;
+
 import net.miginfocom.swing.MigLayout;
 
 public class EasyEquivalence extends NewPersonalEquivalenceListener {
@@ -45,10 +48,35 @@ public class EasyEquivalence extends NewPersonalEquivalenceListener {
 	}
 	
 	protected void updateEquivalenceLeft() {
-		
+		JPanel leftPanel = getLeftPanel();
+		EquivalenceLinkedList list = getLeft();
+		EquivalenceLinkNode curr = list.getHead();
+		while(curr != null) {
+			JPanel panel = curr.getTree().getRoot().createJPanel();
+			System.out.println(panel.getComponentCount());
+			leftPanel.add(panel, BorderLayout.CENTER);
+			leftPanel.updateUI();
+			curr = curr.getNext();
+		}
+		setLeftPanel(leftPanel);
 	}
 
 	protected void updateEquivalenceRight() {
+		JPanel rightPanel = getRightPanel();
+		EquivalenceLinkedList list = getRight();
+		EquivalenceLinkNode curr = list.getHead();
+		while(curr != null) {
+			JPanel panel = curr.getTree().getRoot().createJPanel();
+			System.out.println(panel.getComponentCount());
+			rightPanel.add(panel, BorderLayout.CENTER);
+			rightPanel.updateUI();
+			curr = curr.getNext();
+		}
+		setRightPanel(rightPanel);
+	}
+	
+	//TODO
+	protected void completeEquivalence() {
 		
 	}
 
@@ -66,6 +94,16 @@ public class EasyEquivalence extends NewPersonalEquivalenceListener {
 
 	public void setRightPanel(JPanel rightPanel) {
 		this.rightPanel = rightPanel;
+	}
+
+	protected void hidePanels() {
+		getLeftPanel().setVisible(false);
+		getRightPanel().setVisible(false);
+		getTextFieldLeft().setVisible(false);
+		getTextFieldRight().setVisible(false);
+		getSubmitLeft().setVisible(false);
+		getSubmitRight().setVisible(false);
+		getButtons().setVisible(false);
 	}
 
 }

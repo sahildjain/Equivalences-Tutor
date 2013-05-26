@@ -36,15 +36,31 @@ public class EquivalenceLinkedList {
 		setLast(node);
 	}
 	
-	/*TODO write delete function
-	public void delete(EquivalenceLinkNode node) {
-		EquivalenceLinkNode curr = getFirst();
-		EquivalenceLinkNode temp = getFirst().getNext();
-		if(size == 0) {
+	public void removeLast() {
+		if(isEmpty()) {
 			return;
 		}
-		//TODO
-	}*/
+		if(size == 1) {
+			setSize(0);
+			setHead(null);
+			return;
+		}
+		if(size == 2) {
+			getHead().setNext(null);
+			setSize(1);
+			return;
+		}
+		EquivalenceLinkNode prev = null;
+		EquivalenceLinkNode curr = getHead();
+		EquivalenceLinkNode next = curr.getNext();
+		while(next != null) {
+			prev = curr;
+			curr = next;
+			next = next.getNext();
+		}
+		prev.setNext(null);
+		setSize(getSize() - 1);
+	}
 	
 	public EquivalenceLinkNode getHead() {
 		return head;
