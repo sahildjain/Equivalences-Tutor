@@ -7,7 +7,6 @@ import java.awt.BorderLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import net.miginfocom.swing.MigLayout;
@@ -33,24 +32,14 @@ public class AndDialog extends JDialog {
 		setVisible(true);
 	}
 	
-	private JPanel addIdempotence() {
-		JPanel tempPanel = new JPanel(new MigLayout());
-		JLabel tempLabel = new JLabel("Idempotence: A \u2227 A = A");
-		JButton select = new JButton("Select");
-		tempPanel.add(tempLabel, BorderLayout.WEST);
-		tempPanel.add(new JPanel(new MigLayout()), BorderLayout.CENTER);
-		tempPanel.add(select, BorderLayout.EAST);
-		return tempPanel;
+	private JButton addIdempotence() {
+		JButton button = new JButton("Idempotence: A \u2227 A = A");
+		return button;
 	}
 	
-	private JPanel addCommutativity() {
-		JPanel tempPanel = new JPanel(new MigLayout());
-		JLabel tempLabel = new JLabel("Commutativity: A \u2227 B = B \u2227 A");
-		JButton select = new JButton("Select");
-		tempPanel.add(tempLabel, BorderLayout.WEST);
-		tempPanel.add(new JPanel(new MigLayout()), BorderLayout.CENTER);
-		tempPanel.add(select, BorderLayout.EAST);
-		return tempPanel;
+	private JButton addCommutativity() {
+		JButton button = new JButton("Commutativity: A \u2227 B = B \u2227 A");
+		return button;
 	}
 
 	public JFrame getFrame() {

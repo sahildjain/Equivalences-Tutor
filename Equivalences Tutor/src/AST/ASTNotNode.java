@@ -69,7 +69,7 @@ public class ASTNotNode extends ASTPropositionalUnaryNode {
 		JPanel panel = new JPanel(new MigLayout());
 		JPanel child = getLeaf().createJPanel(l);
 		JButton button = new JButton("\u00AC");
-		NotButtonListener listener = new NotButtonListener(getKey());
+		NotButtonListener listener = new NotButtonListener(l, getKey());
 		button.addActionListener(listener);
 		panel.add(button, BorderLayout.WEST);
 		panel.add(child, BorderLayout.CENTER);
