@@ -24,11 +24,12 @@ public abstract class NewPersonalEquivalenceListener implements ActionListener {
 	
 	private JButton quit;
 	private JButton states;
-	private JButton undoButton;
 	protected JButton saveButton;
 	private JButton menuButton;
 	protected JButton submitLeft;
-	protected JButton submitRight;	
+	protected JButton submitRight;
+	protected JButton undoLeft;
+	protected JButton undoRight;
 	
 	private StatesInputDialogListener inputListener;
 	
@@ -43,7 +44,8 @@ public abstract class NewPersonalEquivalenceListener implements ActionListener {
 	protected JTextField textFieldLeft;
 	protected JTextField textFieldRight;
 	
-	private UndoListener undoListener;
+	protected UndoListener undoLeftListener;
+	protected UndoListener undoRightListener;
 	
 
 	public NewPersonalEquivalenceListener(JFrame frame, JPanel menu) {
@@ -79,11 +81,6 @@ public abstract class NewPersonalEquivalenceListener implements ActionListener {
 		saveListener = new SaveListener(this);
 		saveButton.addActionListener(saveListener);
 		
-		//Add the Undo Button
-		undoButton = new JButton("Undo");
-		undoListener = new UndoListener(this, "LEFT");
-		undoButton.addActionListener(undoListener);
-		
 		//Add the Quit Button
 		quit = new JButton("Quit");
 		QuitListener quitListener = new QuitListener();
@@ -92,7 +89,6 @@ public abstract class NewPersonalEquivalenceListener implements ActionListener {
 		buttons.add(states, BorderLayout.WEST);
 		buttons.add(menuButton, BorderLayout.WEST);
 		buttons.add(saveButton, BorderLayout.WEST);
-		buttons.add(undoButton, BorderLayout.WEST);
 		buttons.add(quit, BorderLayout.EAST);
 		
 	}

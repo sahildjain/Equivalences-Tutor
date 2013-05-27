@@ -1,5 +1,7 @@
 package AST;
 
+import gui.NewPersonalEquivalenceListener;
+
 import java.util.TreeMap;
 
 import javax.swing.JPanel;
@@ -54,8 +56,8 @@ public class ASTProgramNode extends ASTPropositionalUnaryNode {
 		return getLeaf().value();
 	}
 
-	public JPanel createJPanel() {
-		return getLeaf().createJPanel();
+	public JPanel createJPanel(NewPersonalEquivalenceListener l) {
+		return getLeaf().createJPanel(l);
 	}
 
 	

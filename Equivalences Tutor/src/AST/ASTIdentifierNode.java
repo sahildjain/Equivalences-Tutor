@@ -1,9 +1,13 @@
 package AST;
 
+import gui.NewPersonalEquivalenceListener;
+
 import java.util.TreeMap;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
+import buttonlisteners.IdentifierButtonListener;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -60,9 +64,11 @@ public class ASTIdentifierNode extends ASTPropositionalNode {
 		return 0;
 	}
 
-	public JPanel createJPanel() {
+	public JPanel createJPanel(NewPersonalEquivalenceListener l) {
 		JPanel panel = new JPanel(new MigLayout());
 		JButton button = new JButton(getLeaf());
+		IdentifierButtonListener listener = new IdentifierButtonListener(getKey());
+		button.addActionListener(listener);
 		panel.add(button);
 		return panel;
 	}

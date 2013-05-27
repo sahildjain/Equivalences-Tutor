@@ -52,7 +52,7 @@ public class EasyEquivalence extends NewPersonalEquivalenceListener {
 		EquivalenceLinkedList list = getLeft();
 		EquivalenceLinkNode curr = list.getHead();
 		while(curr != null) {
-			JPanel panel = curr.getTree().getRoot().createJPanel();
+			JPanel panel = curr.getTree().getRoot().createJPanel(this);
 			System.out.println(panel.getComponentCount());
 			leftPanel.add(panel, BorderLayout.CENTER);
 			leftPanel.updateUI();
@@ -66,7 +66,7 @@ public class EasyEquivalence extends NewPersonalEquivalenceListener {
 		EquivalenceLinkedList list = getRight();
 		EquivalenceLinkNode curr = list.getHead();
 		while(curr != null) {
-			JPanel panel = curr.getTree().getRoot().createJPanel();
+			JPanel panel = curr.getTree().getRoot().createJPanel(this);
 			System.out.println(panel.getComponentCount());
 			rightPanel.add(panel, BorderLayout.CENTER);
 			rightPanel.updateUI();

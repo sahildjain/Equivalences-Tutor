@@ -1,10 +1,14 @@
 package AST;
 
+import gui.NewPersonalEquivalenceListener;
+
 import java.awt.BorderLayout;
 import java.util.TreeMap;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
+import buttonlisteners.NotButtonListener;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -61,10 +65,12 @@ public class ASTNotNode extends ASTPropositionalUnaryNode {
 		return 1;
 	}
 
-	public JPanel createJPanel() {
+	public JPanel createJPanel(NewPersonalEquivalenceListener l) {
 		JPanel panel = new JPanel(new MigLayout());
-		JPanel child = getLeaf().createJPanel();
+		JPanel child = getLeaf().createJPanel(l);
 		JButton button = new JButton("\u00AC");
+		NotButtonListener listener = new NotButtonListener(getKey());
+		button.addActionListener(listener);
 		panel.add(button, BorderLayout.WEST);
 		panel.add(child, BorderLayout.CENTER);
 		return panel;

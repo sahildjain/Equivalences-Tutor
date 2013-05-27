@@ -1,10 +1,14 @@
 package AST;
 
+import gui.NewPersonalEquivalenceListener;
+
 import java.awt.BorderLayout;
 import java.util.TreeMap;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
+import buttonlisteners.IffButtonListener;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -82,11 +86,13 @@ public class ASTIffNode extends ASTPropositionalBinaryNode {
 		return 0;
 	}
 	
-	public JPanel createJPanel() {
+	public JPanel createJPanel(NewPersonalEquivalenceListener l) {
 		JPanel panel = new JPanel(new MigLayout());
-		JPanel left = getLeft().createJPanel();
-		JPanel right = getRight().createJPanel();
+		JPanel left = getLeft().createJPanel(l);
+		JPanel right = getRight().createJPanel(l);
 		JButton button = new JButton("\u2194");
+		IffButtonListener listener = new IffButtonListener(getKey());
+		button.addActionListener(listener);
 		panel.add(left, BorderLayout.WEST);
 		panel.add(button, BorderLayout.CENTER);
 		panel.add(right, BorderLayout.EAST);

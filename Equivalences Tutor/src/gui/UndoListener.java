@@ -25,7 +25,9 @@ public class UndoListener implements ActionListener {
 	}
 
 	private void undoRight() {
-		
+		EquivalenceLinkedList list = getListener().getRight();
+		list.removeLast();
+		getListener().updateEquivalenceRight();
 	}
 
 	private void undoLeft() {
@@ -50,6 +52,4 @@ public class UndoListener implements ActionListener {
 		this.side = side;
 	}
 	
-	
-
 }
