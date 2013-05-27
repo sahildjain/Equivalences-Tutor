@@ -91,13 +91,12 @@ public class ASTAndNode extends ASTPropositionalBinaryNode {
 		JPanel left = getLeft().createJPanel(l);
 		JPanel right = getRight().createJPanel(l);
 		JButton button = new JButton("\u2227");
-		AndButtonListener listener = new AndButtonListener(getKey());
+		AndButtonListener listener = new AndButtonListener(l, getKey());
 		button.addActionListener(listener);
 		panel.add(left, BorderLayout.WEST);
 		panel.add(button, BorderLayout.CENTER);
 		panel.add(right, BorderLayout.EAST);
 		return panel;
 	}
-	
 	
 }

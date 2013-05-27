@@ -11,6 +11,7 @@ public class OrButtonListener implements ActionListener {
 	
 	private NewPersonalEquivalenceListener listener;
 	private int key;
+	private OrDialog dialog;
 	
 	public OrButtonListener(NewPersonalEquivalenceListener listener, int key) {
 		this.setListener(listener);
@@ -18,7 +19,7 @@ public class OrButtonListener implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		OrDialog dialog = new OrDialog(listener);
+		setDialog(new OrDialog(listener));
 	}
 
 	public int getKey() {
@@ -35,6 +36,14 @@ public class OrButtonListener implements ActionListener {
 
 	public void setListener(NewPersonalEquivalenceListener listener) {
 		this.listener = listener;
+	}
+
+	public OrDialog getDialog() {
+		return dialog;
+	}
+
+	public void setDialog(OrDialog dialog) {
+		this.dialog = dialog;
 	}
 
 }

@@ -18,16 +18,15 @@ public class OrDialog extends JDialog {
 	private JFrame frame;
 	
 	private JPanel panel;
-	private JPanel filler;
 	
 	private NewPersonalEquivalenceListener listener;
 	
 	public OrDialog(NewPersonalEquivalenceListener listener) {
 		this.setListener(listener);
 		this.setFrame(listener.getFrame());
-		filler = new JPanel(new MigLayout());
 		panel = new JPanel(new MigLayout());
-		panel.add(addIdempotence());
+		panel.add(addIdempotence(), BorderLayout.NORTH);
+		panel.add(addCommutativity(), BorderLayout.NORTH);
 		getContentPane().add(panel);
 		pack();
 		setLocationRelativeTo(getFrame());
@@ -35,15 +34,24 @@ public class OrDialog extends JDialog {
 	}
 	
 	private JPanel addIdempotence() {
-		JPanel idempotencePanel = new JPanel(new MigLayout());
-		JLabel idempotenceLabel = new JLabel("Idempotence: A | A = A");
-		JButton idempotenceButton = new JButton("SELECT");
-		idempotencePanel.add(idempotenceLabel, BorderLayout.WEST);
-		idempotencePanel.add(filler, BorderLayout.CENTER);
-		idempotencePanel.add(idempotenceButton, BorderLayout.EAST);
-		return idempotencePanel;
+		JPanel tempPanel = new JPanel(new MigLayout());
+		JLabel tempLabel = new JLabel("Idempotence: A \u2228 A = A");
+		JButton select = new JButton("Select");
+		tempPanel.add(tempLabel, BorderLayout.WEST);
+		tempPanel.add(new JPanel(new MigLayout()), BorderLayout.CENTER);
+		tempPanel.add(select, BorderLayout.EAST);
+		return tempPanel;
 	}
 	
+	private JPanel addCommutativity() {
+		JPanel tempPanel = new JPanel(new MigLayout());
+		JLabel tempLabel = new JLabel("Commutativity: A \u2228 B = B \u2228 A");
+		JButton select = new JButton("Select");
+		tempPanel.add(tempLabel, BorderLayout.WEST);
+		tempPanel.add(new JPanel(new MigLayout()), BorderLayout.CENTER);
+		tempPanel.add(select, BorderLayout.EAST);
+		return tempPanel;
+	}
 
 	public NewPersonalEquivalenceListener getListener() {
 		return listener;
