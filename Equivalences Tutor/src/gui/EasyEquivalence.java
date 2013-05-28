@@ -26,8 +26,8 @@ public class EasyEquivalence extends NewPersonalEquivalenceListener {
 		JPanel left = new JPanel(new MigLayout());
 		JPanel centre = new JPanel(new MigLayout());
 		JPanel right = new JPanel(new MigLayout());
-		leftPanel = new JPanel(new MigLayout("debug"));
-		rightPanel = new JPanel(new MigLayout("debug"));
+		leftPanel = new JPanel(new MigLayout());
+		rightPanel = new JPanel(new MigLayout());
 		textFieldLeft = new JTextField(60);
 		textFieldRight = new JTextField(60);
 		submitLeft = new JButton("Submit");
@@ -67,7 +67,7 @@ public class EasyEquivalence extends NewPersonalEquivalenceListener {
 		EquivalenceLinkNode curr = list.getHead();
 		while(curr != null) {
 			JPanel panel = curr.getTree().getRoot().createJPanel(this);
-			rightPanel.add(panel, BorderLayout.CENTER);
+			rightPanel.add(panel, BorderLayout.NORTH);
 			rightPanel.updateUI();
 			curr = curr.getNext();
 		}

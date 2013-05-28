@@ -9,6 +9,7 @@ public class AndEquivalence extends Equivalence {
 	
 	public AndEquivalence(AST tree, int key) {
 		this.setTree(tree);
+		this.setKey(key);
 	}
 	
 	// A & A = A
@@ -17,12 +18,14 @@ public class AndEquivalence extends Equivalence {
 		int key = getKey();
 		ASTNode node = find(tree.getRoot(), key);
 		if(node instanceof ASTAndNode) {
-			NodeEquivalence equivalence = new NodeEquivalence(((ASTAndNode) node).getLeft(),((ASTAndNode) node).getRight());
+			ASTAndNode andNode = (ASTAndNode) node;
+			NodeEquivalence equivalence = new NodeEquivalence(andNode.getLeft(),((ASTAndNode) node).getRight());
 			if(equivalence.isEquivalent()) {
-				ASTPropositionalNode p = replace(tree.getRoot().getLeaf(), (ASTAndNode) node, key);
+				ASTIdentifierNode identifer = new ASTIdentifierNode(tree.getKey() + 1, andNode.getLeft().toString());
+				ASTPropositionalNode p = replace(tree.getRoot().getLeaf(), identifer, key);
 				ASTProgramNode program = tree.getRoot();
 				program.setLeaf(p);
-				AST t = new AST(tree.getKey(), program);
+				AST t = new AST(tree.getKey() + 2, program);
 				return t;
 			}
 		}
@@ -31,19 +34,44 @@ public class AndEquivalence extends Equivalence {
 	
 	// A & B = B & A
 	public AST commutativity() {
-		/*
 		AST tree = getTree();
-		ASTAndNode andNode = getAndNode();
-		ASTPropositionalNode left = andNode.getLeft();
-		ASTPropositionalNode right = andNode.getRight();
-		ASTAndNode newNode = new ASTAndNode(andNode.getKey(), right, left);
-		ASTPropositionalNode node = findAndReplace(tree.getRoot(), andNode, newNode);
-		tree.setRoot((ASTProgramNode) node);
-		return tree;*/
+		int key = getKey();
+		ASTNode node  = find(tree.getRoot(), key);
+		if(node instanceof ASTAndNode) {
+			ASTAndNode andNode = (ASTAndNode) node;
+			ASTAndNode newNode = new ASTAndNode(tree.getKey() + 1, andNode.getRight(), andNode.getLeft());
+			ASTPropositionalNode p = replace(tree.getRoot().getLeaf(), newNode, key);
+			ASTProgramNode program = tree.getRoot();
+			program.setLeaf(p);
+			AST t = new AST(tree.getKey() + 2, program);
+			return t;
+		}
+		return null;
 	}
 	
 	// (A & B) & C = A & (B & C)
 	public AST associativityLeft() {
+		AST tree = getTree();
+		int key = getKey();
+		ASTNode node  = find(tree.getRoot(), key);
+		if(node instanceof ASTAndNode) {
+			ASTAndNode andNode = (ASTAndNode) node;
+			ASTPropositionalNode left = andNode.getLeft();
+			ASTPropositionalNode right = andNode.getRight();
+			ASTPropositionalNode newLeft = ((ASTAndNode) left).getLeft();
+			ASTPropositionalNode newRight = new ASTAndNode(key, ((ASTAndNode) left).getRight(), right);
+			ASTAndNode newAndNode = new ASTAndNode(left.getKey(), newLeft, newRight);
+			ASTPropositionalNode p = replace(tree.getRoot().getLeaf(), newAndNode, key);
+			ASTProgramNode program = tree.getRoot();
+			program.setLeaf(p);
+			AST t = new AST(tree.getKey() + 2, program);
+			return t;
+		}
+		return null;
+	}
+	
+	// (A & B) & C = A & (B & C)
+	//public AST associativityLeft() {
 		/*
 		AST tree = getTree();
 		ASTAndNode andNode = getAndNode();
@@ -59,10 +87,10 @@ public class AndEquivalence extends Equivalence {
 			tree.setRoot((ASTProgramNode) node);
 		}
 		return tree;*/
-	}
+	//}
 	
 	// A & (B & C) = (A & B) & C
-	public AST associativityRight() {
+	//public AST associativityRight() {
 		/*
 		AST tree = getTree();
 		ASTAndNode andNode = getAndNode();
@@ -79,10 +107,10 @@ public class AndEquivalence extends Equivalence {
 		}
 		return tree;
 		*/
-	}
+	//}
 	
 	// A & B = !(!A | !B)
-	public AST deMorgan() {
+	//public AST deMorgan() {
 		/*
 		AST tree = getTree();
 		ASTAndNode andNode = getAndNode();
@@ -99,7 +127,7 @@ public class AndEquivalence extends Equivalence {
 		tree.setRoot((ASTProgramNode) node);
 		return tree;
 		*/
-	}
+	//}
 	
 	public AST getTree() {
 		return tree;

@@ -32,6 +32,7 @@ public class AndDialog extends JDialog {
 		panel = new JPanel(new MigLayout());
 		panel.add(addIdempotence(), BorderLayout.NORTH);
 		panel.add(addCommutativity(), BorderLayout.NORTH);
+		panel.add(addAssociaticityLeft(), BorderLayout.NORTH);
 		getContentPane().add(panel);
 		pack();
 		setLocationRelativeTo(getFrame());
@@ -46,6 +47,13 @@ public class AndDialog extends JDialog {
 	
 	private JButton addCommutativity() {
 		JButton button = new JButton("Commutativity: A \u2227 B = B \u2227 A");
+		button.addActionListener(new CommutativityListener());
+		return button;
+	}
+	
+	private JButton addAssociaticityLeft() {
+		JButton button = new JButton("Associativity: (A \u2227 B) \u2227 C = A \u2227 (B \u2227 C)");
+		button.addActionListener(new AssociativityLeftListener());
 		return button;
 	}
 
@@ -78,6 +86,30 @@ public class AndDialog extends JDialog {
 		public void actionPerformed(ActionEvent e) {
 			AndEquivalence eq = new AndEquivalence(getListener().getLeft().getLast().getTree(), getKey());
 			AST tree = eq.idempotence();
+			EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
+			getListener().updateLeftList(node);
+			getListener().updateEquivalenceLeft();
+		}
+		
+	}
+	
+	private class CommutativityListener implements ActionListener {
+
+		public void actionPerformed(ActionEvent e) {
+			AndEquivalence eq = new AndEquivalence(getListener().getLeft().getLast().getTree(), getKey());
+			AST tree = eq.commutativity();
+			EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
+			getListener().updateLeftList(node);
+			getListener().updateEquivalenceLeft();
+		}
+		
+	}
+	
+	private class AssociativityLeftListener implements ActionListener {
+
+		public void actionPerformed(ActionEvent e) {
+			AndEquivalence eq = new AndEquivalence(getListener().getLeft().getLast().getTree(), getKey());
+			AST tree = eq.associativityLeft();
 			EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
 			getListener().updateLeftList(node);
 			getListener().updateEquivalenceLeft();
