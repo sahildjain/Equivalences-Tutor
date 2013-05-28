@@ -1,13 +1,19 @@
 package dialogs;
 
+import equivalence.AndEquivalence;
+import equivalence.EquivalenceLinkNode;
 import gui.NewPersonalEquivalenceListener;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import AST.AST;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -15,14 +21,14 @@ import net.miginfocom.swing.MigLayout;
 public class AndDialog extends JDialog {
 	
 	private JFrame frame;
-	
 	private JPanel panel;
-	
 	private NewPersonalEquivalenceListener listener;
+	private int key;
 	
-	public AndDialog(NewPersonalEquivalenceListener listener) {
+	public AndDialog(NewPersonalEquivalenceListener listener, int key) {
 		this.setListener(listener);
 		this.setFrame(listener.getFrame());
+		this.setKey(key);
 		panel = new JPanel(new MigLayout());
 		panel.add(addIdempotence(), BorderLayout.NORTH);
 		panel.add(addCommutativity(), BorderLayout.NORTH);
@@ -34,6 +40,7 @@ public class AndDialog extends JDialog {
 	
 	private JButton addIdempotence() {
 		JButton button = new JButton("Idempotence: A \u2227 A = A");
+		button.addActionListener(new IdempotenceListener());
 		return button;
 	}
 	
@@ -56,6 +63,26 @@ public class AndDialog extends JDialog {
 
 	public void setListener(NewPersonalEquivalenceListener listener) {
 		this.listener = listener;
+	}
+
+	public int getKey() {
+		return key;
+	}
+
+	public void setKey(int key) {
+		this.key = key;
+	}
+	
+	private class IdempotenceListener implements ActionListener {
+
+		public void actionPerformed(ActionEvent e) {
+			AndEquivalence eq = new AndEquivalence(getListener().getLeft().getLast().getTree(), getKey());
+			AST tree = eq.idempotence();
+			EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
+			getListener().updateLeftList(node);
+			getListener().updateEquivalenceLeft();
+		}
+		
 	}
 
 }

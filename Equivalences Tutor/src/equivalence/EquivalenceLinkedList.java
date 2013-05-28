@@ -4,12 +4,10 @@ package equivalence;
 public class EquivalenceLinkedList {
 	
 	private EquivalenceLinkNode head;
-	private EquivalenceLinkNode last;
 	private int size;
 
 	public EquivalenceLinkedList() {
 		this.setHead(null);
-		this.setLast(null);
 		this.setSize(0);
 	}
 	
@@ -20,7 +18,6 @@ public class EquivalenceLinkedList {
 	public void add(EquivalenceLinkNode node) {
 		if(isEmpty()) {
 			setHead(node);
-			setLast(node);
 			size = 1;
 			return;
 		}
@@ -33,7 +30,6 @@ public class EquivalenceLinkedList {
 		curr.setNext(node);
 		node.setPrevious(curr);
 		setSize(getSize() + 1);
-		setLast(node);
 	}
 	
 	public void removeLast() {
@@ -79,11 +75,13 @@ public class EquivalenceLinkedList {
 	}
 
 	public EquivalenceLinkNode getLast() {
-		return last;
-	}
-
-	public void setLast(EquivalenceLinkNode last) {
-		this.last = last;
+		EquivalenceLinkNode curr = getHead();
+		EquivalenceLinkNode next = curr.getNext();
+		while(next != null) {
+			curr = next;
+			next = next.getNext();
+		}
+		return curr;
 	}
 
 }

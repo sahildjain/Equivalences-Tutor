@@ -93,19 +93,19 @@ public abstract class NewPersonalEquivalenceListener implements ActionListener {
 		
 	}
 	
-	protected abstract void updateEquivalenceLeft();
+	public abstract void updateEquivalenceLeft();
 	
-	protected abstract void updateEquivalenceRight(); 
+	public abstract void updateEquivalenceRight(); 
 	
 	protected abstract void completeEquivalence();
 	
 	protected abstract void hidePanels();
 	
-	protected void updateLeftList(EquivalenceLinkNode node) {
+	public void updateLeftList(EquivalenceLinkNode node) {
 		getLeft().add(node);
 	}
 
-	protected void updateRightList(EquivalenceLinkNode node) {
+	public void updateRightList(EquivalenceLinkNode node) {
 		getRight().add(node);
 	}	
 

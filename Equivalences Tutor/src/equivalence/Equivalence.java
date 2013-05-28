@@ -4,41 +4,55 @@ import AST.*;
 
 public abstract class Equivalence {
 	
-	public ASTPropositionalNode findAndReplace(ASTPropositionalNode parent, ASTPropositionalNode originalNode, ASTPropositionalNode newNode) {
-		if(parent instanceof ASTPropositionalUnaryNode) {
-			ASTPropositionalUnaryNode unaryParent = (ASTPropositionalUnaryNode) parent;
-			ASTPropositionalNode childNode = unaryParent.getLeaf();
-			NodeEquivalence nodeEquivalence = new NodeEquivalence(childNode, originalNode);
-			boolean equal = nodeEquivalence.isEquivalent();
-			if(equal) {
-				unaryParent.setLeaf(newNode);
-				return unaryParent;
-			}
-			findAndReplace(childNode, originalNode, newNode);
+	public static ASTNode find(ASTNode node, int key) {
+		if(node.getKey() == key) {
+			return node;
 		}
-		if(parent instanceof ASTPropositionalBinaryNode) {
-			ASTPropositionalBinaryNode binaryParent = (ASTPropositionalBinaryNode) parent;
-			ASTPropositionalNode childLeftNode = binaryParent.getLeft();
-			NodeEquivalence nodeEquivalence = new NodeEquivalence(childLeftNode, originalNode);
-			boolean equalLeft = nodeEquivalence.isEquivalent();
-			ASTPropositionalNode childRightNode = binaryParent.getRight();
-			nodeEquivalence = new NodeEquivalence(childRightNode, originalNode);
-			boolean equalRight = nodeEquivalence.isEquivalent();
-			if(equalLeft && equalRight) {
-				
+		if(node instanceof ASTPropositionalBinaryNode) {
+			ASTPropositionalBinaryNode binary = (ASTPropositionalBinaryNode) node;
+			ASTNode left = find(binary.getLeft(), key);
+			ASTNode right = find(binary.getRight(), key);
+			if(left != null) {
+				return left;
 			}
-			if(equalLeft) {
-				binaryParent.setLeft(newNode);
-				return binaryParent;
-			}
-			if(equalRight) {
-				binaryParent.setRight(newNode);
-				return binaryParent;
+			if(right != null) {
+				return right;
 			}
 		}
-		if(parent instanceof ASTIdentifierNode) {
-			
+		if(node instanceof ASTPropositionalUnaryNode) {
+			ASTPropositionalUnaryNode unary = (ASTPropositionalUnaryNode) node;
+			ASTNode ret = find(unary.getLeaf(), key);
+			if(ret != null) {
+				return ret;
+			}
 		}
-		return parent;
+		return null;
 	}
+	
+	public static ASTPropositionalNode replace(ASTPropositionalNode prop, ASTNode node, int key) {
+		System.out.println("1");
+		if(prop.getKey() == key) {
+			return (ASTPropositionalNode) node;
+		}
+		System.out.println("2");
+		if(prop instanceof ASTPropositionalBinaryNode) {
+			ASTPropositionalBinaryNode binary = (ASTPropositionalBinaryNode) prop;
+			if(find(binary.getLeft(), key) != null) {
+				binary.setLeft(replace(((ASTPropositionalBinaryNode) prop).getLeft(), node, key));
+			}
+			if(find(((ASTPropositionalBinaryNode) prop).getRight(), key) != null) {
+				binary.setRight(replace(((ASTPropositionalBinaryNode) prop).getRight(), node, key));
+			}
+			return binary;
+		}
+		System.out.println("3");
+		if(prop instanceof ASTPropositionalUnaryNode) {
+			ASTPropositionalUnaryNode unary = (ASTPropositionalUnaryNode) prop;
+			unary.setLeaf(replace(unary.getLeaf(), node, key));
+			return unary;
+		}
+		System.out.println("4");
+		return null;
+	}
+
 }

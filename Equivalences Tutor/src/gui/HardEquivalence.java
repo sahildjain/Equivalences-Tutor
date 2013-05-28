@@ -58,7 +58,7 @@ public class HardEquivalence extends NewPersonalEquivalenceListener {
 		equivalence.add(right, BorderLayout.EAST);
 	}
 	
-	protected void updateEquivalenceLeft() {
+	public void updateEquivalenceLeft() {
 		JTextArea textArea = getTextAreaLeft();
 		textArea.setText("");
 		EquivalenceLinkedList list = getLeft();
@@ -74,7 +74,7 @@ public class HardEquivalence extends NewPersonalEquivalenceListener {
 		}
 	}
 	
-	protected void updateEquivalenceRight() {
+	public void updateEquivalenceRight() {
 		JTextArea textArea = getTextAreaRight();
 		textArea.setText("");
 		EquivalenceLinkedList list = getRight();

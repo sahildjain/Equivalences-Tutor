@@ -30,7 +30,7 @@ public class ASTIdentifierNode extends ASTPropositionalNode {
 	}
 
 	public int getKey() {
-		return key;
+		return this.key;
 	}
 
 	public void setKey(int key) {

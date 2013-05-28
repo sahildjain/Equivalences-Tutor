@@ -16,7 +16,7 @@ public class AndButtonListener extends AbstractButtonListener implements ActionL
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		setDialog(new AndDialog(getListener()));
+		setDialog(new AndDialog(getListener(), getKey()));
 	}
 
 	public AndDialog getDialog() {

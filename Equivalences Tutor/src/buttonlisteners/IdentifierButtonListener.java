@@ -16,7 +16,7 @@ public class IdentifierButtonListener extends AbstractButtonListener implements 
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		setDialog(new IdentifierDialog(getListener()));
+		setDialog(new IdentifierDialog(getListener(), getKey()));
 	}
 
 	public IdentifierDialog getDialog() {
