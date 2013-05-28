@@ -30,11 +30,9 @@ public abstract class Equivalence {
 	}
 	
 	public static ASTPropositionalNode replace(ASTPropositionalNode prop, ASTNode node, int key) {
-		System.out.println("1");
 		if(prop.getKey() == key) {
 			return (ASTPropositionalNode) node;
 		}
-		System.out.println("2");
 		if(prop instanceof ASTPropositionalBinaryNode) {
 			ASTPropositionalBinaryNode binary = (ASTPropositionalBinaryNode) prop;
 			if(find(binary.getLeft(), key) != null) {
@@ -45,13 +43,11 @@ public abstract class Equivalence {
 			}
 			return binary;
 		}
-		System.out.println("3");
 		if(prop instanceof ASTPropositionalUnaryNode) {
 			ASTPropositionalUnaryNode unary = (ASTPropositionalUnaryNode) prop;
 			unary.setLeaf(replace(unary.getLeaf(), node, key));
 			return unary;
 		}
-		System.out.println("4");
 		return null;
 	}
 

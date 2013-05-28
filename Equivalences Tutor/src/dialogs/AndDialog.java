@@ -33,6 +33,8 @@ public class AndDialog extends JDialog {
 		panel.add(addIdempotence(), BorderLayout.NORTH);
 		panel.add(addCommutativity(), BorderLayout.NORTH);
 		panel.add(addAssociaticityLeft(), BorderLayout.NORTH);
+		panel.add(addAssociaticityRight(), BorderLayout.NORTH);
+		panel.add(addDeMorgan(), BorderLayout.NORTH);
 		getContentPane().add(panel);
 		pack();
 		setLocationRelativeTo(getFrame());
@@ -54,6 +56,18 @@ public class AndDialog extends JDialog {
 	private JButton addAssociaticityLeft() {
 		JButton button = new JButton("Associativity: (A \u2227 B) \u2227 C = A \u2227 (B \u2227 C)");
 		button.addActionListener(new AssociativityLeftListener());
+		return button;
+	}
+	
+	private JButton addAssociaticityRight() {
+		JButton button = new JButton("Associativity: A \u2227 (B \u2227 C) = (A \u2227 B) \u2227 C");
+		button.addActionListener(new AssociativityRightListener());
+		return button;
+	}
+	
+	private JButton addDeMorgan() {
+		JButton button = new JButton("De Morgan's: A \u2227 B = \u00AC(\u00ACA \u2228 \u00ACB)");
+		button.addActionListener(new DeMorganListener());
 		return button;
 	}
 
@@ -116,5 +130,30 @@ public class AndDialog extends JDialog {
 		}
 		
 	}
+	
+	private class AssociativityRightListener implements ActionListener {
+
+		public void actionPerformed(ActionEvent e) {
+			AndEquivalence eq = new AndEquivalence(getListener().getLeft().getLast().getTree(), getKey());
+			AST tree = eq.associativityRight();
+			EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
+			getListener().updateLeftList(node);
+			getListener().updateEquivalenceLeft();
+		}
+		
+	}
+	
+	private class DeMorganListener implements ActionListener {
+
+		public void actionPerformed(ActionEvent e) {
+			AndEquivalence eq = new AndEquivalence(getListener().getLeft().getLast().getTree(), getKey());
+			AST tree = eq.deMorgan();
+			EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
+			getListener().updateLeftList(node);
+			getListener().updateEquivalenceLeft();
+		}
+		
+	}
+
 
 }
