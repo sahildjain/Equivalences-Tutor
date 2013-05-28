@@ -7,35 +7,16 @@ import java.awt.event.ActionListener;
 
 import dialogs.IdentifierDialog;
 
-public class IdentifierButtonListener implements ActionListener {
+public class IdentifierButtonListener extends AbstractButtonListener implements ActionListener {
 	
-	private int key;
-	private NewPersonalEquivalenceListener listener;
 	private IdentifierDialog dialog;
 	
 	public IdentifierButtonListener(NewPersonalEquivalenceListener listener, int key) {
-		this.setListener(listener);
-		this.setKey(key);
+		super(listener, key);
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		setDialog(new IdentifierDialog(listener));
-	}
-
-	public int getKey() {
-		return key;
-	}
-
-	public void setKey(int key) {
-		this.key = key;
-	}
-
-	public NewPersonalEquivalenceListener getListener() {
-		return listener;
-	}
-
-	public void setListener(NewPersonalEquivalenceListener listener) {
-		this.listener = listener;
+		setDialog(new IdentifierDialog(getListener()));
 	}
 
 	public IdentifierDialog getDialog() {

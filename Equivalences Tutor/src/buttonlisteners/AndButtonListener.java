@@ -7,27 +7,16 @@ import java.awt.event.ActionListener;
 
 import dialogs.AndDialog;
 
-public class AndButtonListener implements ActionListener {
+public class AndButtonListener extends AbstractButtonListener implements ActionListener {
 	
-	private int key;
-	private NewPersonalEquivalenceListener listener;
 	private AndDialog dialog;
 	
 	public AndButtonListener(NewPersonalEquivalenceListener listener, int key) {
-		this.setKey(key);
-		this.listener = listener;
+		super(listener, key);
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		setDialog(new AndDialog(listener));
-	}
-
-	public int getKey() {
-		return key;
-	}
-
-	public void setKey(int key) {
-		this.key = key;
+		setDialog(new AndDialog(getListener()));
 	}
 
 	public AndDialog getDialog() {

@@ -7,35 +7,16 @@ import java.awt.event.ActionListener;
 
 import dialogs.OrDialog;
 
-public class OrButtonListener implements ActionListener {
-	
-	private NewPersonalEquivalenceListener listener;
-	private int key;
+public class OrButtonListener extends AbstractButtonListener implements ActionListener {
+
 	private OrDialog dialog;
 	
 	public OrButtonListener(NewPersonalEquivalenceListener listener, int key) {
-		this.setListener(listener);
-		this.setKey(key);
+		super(listener, key);
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		setDialog(new OrDialog(listener));
-	}
-
-	public int getKey() {
-		return key;
-	}
-
-	public void setKey(int key) {
-		this.key = key;
-	}
-
-	public NewPersonalEquivalenceListener getListener() {
-		return listener;
-	}
-
-	public void setListener(NewPersonalEquivalenceListener listener) {
-		this.listener = listener;
+		setDialog(new OrDialog(getListener()));
 	}
 
 	public OrDialog getDialog() {

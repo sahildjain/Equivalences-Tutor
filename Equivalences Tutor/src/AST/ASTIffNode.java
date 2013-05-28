@@ -91,7 +91,7 @@ public class ASTIffNode extends ASTPropositionalBinaryNode {
 		JPanel left = getLeft().createJPanel(l);
 		JPanel right = getRight().createJPanel(l);
 		JButton button = new JButton("\u2194");
-		IffButtonListener listener = new IffButtonListener(getKey());
+		IffButtonListener listener = new IffButtonListener(l, getKey());
 		button.addActionListener(listener);
 		panel.add(left, BorderLayout.WEST);
 		panel.add(button, BorderLayout.CENTER);

@@ -1,26 +1,30 @@
 package buttonlisteners;
 
+import gui.NewPersonalEquivalenceListener;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class IfButtonListener implements ActionListener {
+import dialogs.IfDialog;
+
+public class IfButtonListener extends AbstractButtonListener implements ActionListener {
 	
-	private int key;
+	private IfDialog dialog;
 	
-	public IfButtonListener(int key) {
-		this.setKey(key);
+	public IfButtonListener(NewPersonalEquivalenceListener listener, int key) {
+		super(listener, key);
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		
+		setDialog(new IfDialog(getListener()));
 	}
 
-	public int getKey() {
-		return key;
+	public IfDialog getDialog() {
+		return dialog;
 	}
 
-	public void setKey(int key) {
-		this.key = key;
+	public void setDialog(IfDialog dialog) {
+		this.dialog = dialog;
 	}
 
 }

@@ -24,6 +24,8 @@ public class IdentifierDialog extends JDialog {
 		this.setFrame(listener.getFrame());
 		panel = new JPanel(new MigLayout());
 		panel.add(addDoubleNegation(), BorderLayout.NORTH);
+		panel.add(addAndIdempotence(), BorderLayout.NORTH);
+		panel.add(addOrIdempotence(), BorderLayout.NORTH);
 		getContentPane().add(panel);
 		pack();
 		setLocationRelativeTo(getFrame());
@@ -32,6 +34,16 @@ public class IdentifierDialog extends JDialog {
 	
 	private JButton addDoubleNegation() {
 		JButton button = new JButton("Double Negation: A = \u00AC\u00ACA");
+		return button;
+	}
+	
+	private JButton addAndIdempotence() {
+		JButton button = new JButton("And Introduction: A = A \u2227 A");
+		return button;
+	}
+	
+	private JButton addOrIdempotence() {
+		JButton button = new JButton("And Introduction: A = A \u2228 A");
 		return button;
 	}
 

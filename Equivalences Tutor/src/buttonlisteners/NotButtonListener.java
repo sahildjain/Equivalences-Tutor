@@ -7,35 +7,16 @@ import java.awt.event.ActionListener;
 
 import dialogs.NotDialog;
 
-public class NotButtonListener implements ActionListener {
+public class NotButtonListener extends AbstractButtonListener implements ActionListener {
 	
-	private int key;
-	private NewPersonalEquivalenceListener listener;
 	private NotDialog dialog;
 	
 	public NotButtonListener(NewPersonalEquivalenceListener listener, int key) {
-		this.setListener(listener);
-		this.setKey(key);
+		super(listener, key);
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		setDialog(new NotDialog(listener));
-	}
-
-	public int getKey() {
-		return key;
-	}
-
-	public void setKey(int key) {
-		this.key = key;
-	}
-
-	public NewPersonalEquivalenceListener getListener() {
-		return listener;
-	}
-
-	public void setListener(NewPersonalEquivalenceListener listener) {
-		this.listener = listener;
+		setDialog(new NotDialog(getListener()));
 	}
 
 	public NotDialog getDialog() {
