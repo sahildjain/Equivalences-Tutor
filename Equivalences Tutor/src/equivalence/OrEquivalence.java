@@ -5,35 +5,50 @@ import AST.*;
 public class OrEquivalence extends Equivalence {
 	
 	private AST tree;
-	private ASTOrNode orNode;
+	private int key;
 	
-	public OrEquivalence(AST tree, ASTOrNode orNode) {
+	public OrEquivalence(AST tree, int key) {
 		this.setTree(tree);
-		this.setOrNode(orNode);
+		this.setKey(key);
 	}
 	
 	// A | B = B | A
 	public AST commutativity() {
 		AST tree = getTree();
-		ASTOrNode orNode = getOrNode();
-		ASTPropositionalNode left = orNode.getLeft();
-		ASTPropositionalNode right = orNode.getRight();
-		ASTOrNode newNode = new ASTOrNode(orNode.getKey(), right, left);
-		ASTPropositionalNode node = findAndReplace(tree.getRoot(), orNode, newNode);
-		tree.setRoot((ASTProgramNode) node);
-		return tree;
+		int key = getKey();
+		ASTNode node = find(tree.getRoot(), key);
+		if(node instanceof ASTOrNode) {
+			ASTOrNode orNode = (ASTOrNode) node;
+			ASTPropositionalNode left = orNode.getLeft();
+			ASTPropositionalNode right = orNode.getRight();
+			ASTOrNode newNode = new ASTOrNode(orNode.getKey(), right, left);
+			ASTPropositionalNode p = replace(tree.getRoot().getLeaf(), newNode, key);
+			ASTProgramNode program = tree.getRoot();
+			program.setLeaf(p);
+			AST t = new AST(tree.getKey() + 2, program);
+			return t;
+		}
+		return null;
 	}
 	
-	// A & A = A
+	// A | A = A
 	public AST idempotence() {
 		AST tree = getTree();
-		ASTOrNode orNode = getOrNode();
-		NodeEquivalence equivalence = new NodeEquivalence(orNode.getLeft(), orNode.getRight());
-		if(equivalence.isEquivalent()) {
-			ASTPropositionalNode node = findAndReplace(tree.getRoot(), orNode, orNode.getLeft());
-			tree.setRoot((ASTProgramNode) node);
+		int key = getKey();
+		ASTNode node = find(tree.getRoot(), key);
+		if(node instanceof ASTOrNode) {
+			ASTOrNode orNode = (ASTOrNode) node;
+			NodeEquivalence equivalence = new NodeEquivalence(orNode.getLeft(),orNode.getRight());
+			if(equivalence.isEquivalent()) {
+				ASTIdentifierNode identifer = new ASTIdentifierNode(tree.getKey() + 1, orNode.getLeft().toString());
+				ASTPropositionalNode p = replace(tree.getRoot().getLeaf(), identifer, key);
+				ASTProgramNode program = tree.getRoot();
+				program.setLeaf(p);
+				AST t = new AST(tree.getKey() + 2, program);
+				return t;
+			}
 		}
-		return tree;
+		return null;
 	}
 	
 	public AST getTree() {
@@ -43,13 +58,13 @@ public class OrEquivalence extends Equivalence {
 	public void setTree(AST tree) {
 		this.tree = tree;
 	}
-	
-	public ASTOrNode getOrNode() {
-		return orNode;
+
+	public int getKey() {
+		return key;
 	}
-	
-	public void setOrNode(ASTOrNode orNode) {
-		this.orNode = orNode;
+
+	public void setKey(int key) {
+		this.key = key;
 	}
 	
 }

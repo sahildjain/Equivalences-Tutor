@@ -16,7 +16,7 @@ public class IfButtonListener extends AbstractButtonListener implements ActionLi
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		setDialog(new IfDialog(getListener()));
+		setDialog(new IfDialog(getListener(), getKey()));
 	}
 
 	public IfDialog getDialog() {

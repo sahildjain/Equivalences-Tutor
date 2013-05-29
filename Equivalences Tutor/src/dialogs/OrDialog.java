@@ -1,7 +1,11 @@
 package dialogs;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import equivalence.EquivalenceLinkNode;
+import equivalence.OrEquivalence;
 import gui.NewPersonalEquivalenceListener;
 
 import javax.swing.JButton;
@@ -9,20 +13,22 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import AST.AST;
+
 import net.miginfocom.swing.MigLayout;
 
 @SuppressWarnings("serial")
 public class OrDialog extends JDialog {
 	
 	private JFrame frame;
-	
 	private JPanel panel;
-	
 	private NewPersonalEquivalenceListener listener;
+	private int key;
 	
-	public OrDialog(NewPersonalEquivalenceListener listener) {
+	public OrDialog(NewPersonalEquivalenceListener listener, int key) {
 		this.setListener(listener);
 		this.setFrame(listener.getFrame());
+		this.setKey(key);
 		panel = new JPanel(new MigLayout());
 		panel.add(addIdempotence(), BorderLayout.NORTH);
 		panel.add(addCommutativity(), BorderLayout.NORTH);
@@ -34,11 +40,13 @@ public class OrDialog extends JDialog {
 	
 	private JButton addIdempotence() {
 		JButton button = new JButton("Idempotence: A \u2228 A = A");
+		button.addActionListener(new IdempotenceListener());
 		return button;
 	}
 	
 	private JButton addCommutativity() {
 		JButton button = new JButton("Commutativity: A \u2228 B = B \u2228 A");
+		button.addActionListener(new CommutativityListener());
 		return button;
 	}
 
@@ -64,6 +72,38 @@ public class OrDialog extends JDialog {
 
 	public void setPanel(JPanel panel) {
 		this.panel = panel;
+	}
+
+	public int getKey() {
+		return key;
+	}
+
+	public void setKey(int key) {
+		this.key = key;
+	}
+	
+	private class IdempotenceListener implements ActionListener {
+
+		public void actionPerformed(ActionEvent e) {
+			OrEquivalence eq = new OrEquivalence(getListener().getLeft().getLast().getTree(), getKey());
+			AST tree = eq.idempotence();
+			EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
+			getListener().updateLeftList(node);
+			getListener().updateEquivalenceLeft();
+		}
+		
+	}
+	
+	private class CommutativityListener implements ActionListener {
+
+		public void actionPerformed(ActionEvent e) {
+			OrEquivalence eq = new OrEquivalence(getListener().getLeft().getLast().getTree(), getKey());
+			AST tree = eq.commutativity();
+			EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
+			getListener().updateLeftList(node);
+			getListener().updateEquivalenceLeft();
+		}
+		
 	}
 
 }

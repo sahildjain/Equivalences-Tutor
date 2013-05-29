@@ -16,7 +16,7 @@ public class IffButtonListener extends AbstractButtonListener implements ActionL
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		setDialog(new IffDialog(getListener()));
+		setDialog(new IffDialog(getListener(), getKey()));
 	}
 
 	public IffDialog getDialog() {
