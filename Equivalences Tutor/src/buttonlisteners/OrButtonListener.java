@@ -16,7 +16,7 @@ public class OrButtonListener extends AbstractButtonListener implements ActionLi
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		setDialog(new OrDialog(getListener()));
+		setDialog(new OrDialog(getListener(), getKey()));
 	}
 
 	public OrDialog getDialog() {

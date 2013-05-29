@@ -5,6 +5,7 @@ import java.awt.BorderLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import equivalence.EquivalenceLinkNode;
@@ -52,12 +53,20 @@ public class EasyEquivalence extends NewPersonalEquivalenceListener {
 		leftPanel.removeAll();
 		EquivalenceLinkedList list = getLeft();
 		EquivalenceLinkNode curr = list.getHead();
-		while(curr != null) {	
-			JPanel panel = curr.getTree().getRoot().createJPanel(this);
-			leftPanel.add(panel, BorderLayout.NORTH);
-			leftPanel.updateUI();
+		EquivalenceLinkNode next = curr.getNext();
+		while(next != null) {	
+			JTextArea textArea = new JTextArea();
+			textArea.setEditable(false);
+			textArea.setText("");
+			textArea.append(curr.getLineNumber() + "\t" + curr.getTree().toString());
+			textArea.append("\n");
+			leftPanel.add(textArea, BorderLayout.NORTH);
 			curr = curr.getNext();
+			next = curr.getNext();
 		}
+		JPanel panel = curr.getTree().getRoot().createJPanel(this);
+		leftPanel.add(panel, BorderLayout.NORTH);
+		leftPanel.updateUI();
 		setLeftPanel(leftPanel);
 	}
 

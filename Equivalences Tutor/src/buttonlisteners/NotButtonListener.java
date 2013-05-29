@@ -16,7 +16,7 @@ public class NotButtonListener extends AbstractButtonListener implements ActionL
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		setDialog(new NotDialog(getListener()));
+		setDialog(new NotDialog(getListener(), getKey()));
 	}
 
 	public NotDialog getDialog() {
