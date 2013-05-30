@@ -11,12 +11,12 @@ public class AndButtonListener extends AbstractButtonListener implements ActionL
 	
 	private AndDialog dialog;
 	
-	public AndButtonListener(NewPersonalEquivalenceListener listener, int key) {
-		super(listener, key);
+	public AndButtonListener(NewPersonalEquivalenceListener listener, int key, boolean side) {
+		super(listener, key, side);
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		setDialog(new AndDialog(getListener(), getKey()));
+		setDialog(new AndDialog(getListener(), getKey(), getSide()));
 	}
 
 	public AndDialog getDialog() {

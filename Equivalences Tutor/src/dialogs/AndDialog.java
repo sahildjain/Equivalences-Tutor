@@ -24,11 +24,13 @@ public class AndDialog extends JDialog {
 	private JPanel panel;
 	private NewPersonalEquivalenceListener listener;
 	private int key;
+	private boolean side;
 	
-	public AndDialog(NewPersonalEquivalenceListener listener, int key) {
+	public AndDialog(NewPersonalEquivalenceListener listener, int key, boolean side) {
 		this.setListener(listener);
 		this.setFrame(listener.getFrame());
 		this.setKey(key);
+		this.setSide(side);
 		panel = new JPanel(new MigLayout());
 		panel.add(addIdempotence(), BorderLayout.NORTH);
 		panel.add(addCommutativity(), BorderLayout.NORTH);
@@ -95,14 +97,31 @@ public class AndDialog extends JDialog {
 		this.key = key;
 	}
 	
+	public boolean isSide() {
+		return side;
+	}
+
+	public void setSide(boolean side) {
+		this.side = side;
+	}
+
 	private class IdempotenceListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
-			AndEquivalence eq = new AndEquivalence(getListener().getLeft().getLast().getTree(), getKey());
-			AST tree = eq.idempotence();
-			EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
-			getListener().updateLeftList(node);
-			getListener().updateEquivalenceLeft();
+			if(isSide()) {
+				AndEquivalence eq = new AndEquivalence(getListener().getLeft().getLast().getTree(), getKey());
+				AST tree = eq.idempotence();
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateLeftList(node);
+				getListener().updateEquivalenceLeft();
+			}
+			if(!isSide()) {
+				AndEquivalence eq = new AndEquivalence(getListener().getRight().getLast().getTree(), getKey());
+				AST tree = eq.idempotence();
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateRightList(node);
+				getListener().updateEquivalenceRight();
+			}
 		}
 		
 	}
@@ -110,11 +129,20 @@ public class AndDialog extends JDialog {
 	private class CommutativityListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
-			AndEquivalence eq = new AndEquivalence(getListener().getLeft().getLast().getTree(), getKey());
-			AST tree = eq.commutativity();
-			EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
-			getListener().updateLeftList(node);
-			getListener().updateEquivalenceLeft();
+			if(isSide()) {
+				AndEquivalence eq = new AndEquivalence(getListener().getLeft().getLast().getTree(), getKey());
+				AST tree = eq.commutativity();
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateLeftList(node);
+				getListener().updateEquivalenceLeft();
+			}
+			if(!isSide()) {
+				AndEquivalence eq = new AndEquivalence(getListener().getRight().getLast().getTree(), getKey());
+				AST tree = eq.commutativity();
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateRightList(node);
+				getListener().updateEquivalenceRight();
+			}
 		}
 		
 	}
@@ -122,11 +150,20 @@ public class AndDialog extends JDialog {
 	private class AssociativityLeftListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
-			AndEquivalence eq = new AndEquivalence(getListener().getLeft().getLast().getTree(), getKey());
-			AST tree = eq.associativityLeft();
-			EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
-			getListener().updateLeftList(node);
-			getListener().updateEquivalenceLeft();
+			if(isSide()) {
+				AndEquivalence eq = new AndEquivalence(getListener().getLeft().getLast().getTree(), getKey());
+				AST tree = eq.associativityLeft();
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateLeftList(node);
+				getListener().updateEquivalenceLeft();
+			}
+			if(!isSide()) {
+				AndEquivalence eq = new AndEquivalence(getListener().getRight().getLast().getTree(), getKey());
+				AST tree = eq.associativityLeft();
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateRightList(node);
+				getListener().updateEquivalenceRight();
+			}
 		}
 		
 	}
@@ -134,11 +171,20 @@ public class AndDialog extends JDialog {
 	private class AssociativityRightListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
-			AndEquivalence eq = new AndEquivalence(getListener().getLeft().getLast().getTree(), getKey());
-			AST tree = eq.associativityRight();
-			EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
-			getListener().updateLeftList(node);
-			getListener().updateEquivalenceLeft();
+			if(isSide()) {
+				AndEquivalence eq = new AndEquivalence(getListener().getRight().getLast().getTree(), getKey());
+				AST tree = eq.associativityRight();
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateRightList(node);
+				getListener().updateEquivalenceRight();
+			}
+			if(!isSide()) {
+				AndEquivalence eq = new AndEquivalence(getListener().getRight().getLast().getTree(), getKey());
+				AST tree = eq.associativityRight();
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateRightList(node);
+				getListener().updateEquivalenceRight();
+			}
 		}
 		
 	}
@@ -146,11 +192,20 @@ public class AndDialog extends JDialog {
 	private class DeMorganListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
-			AndEquivalence eq = new AndEquivalence(getListener().getLeft().getLast().getTree(), getKey());
-			AST tree = eq.deMorgan();
-			EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
-			getListener().updateLeftList(node);
-			getListener().updateEquivalenceLeft();
+			if(isSide()) {
+				AndEquivalence eq = new AndEquivalence(getListener().getLeft().getLast().getTree(), getKey());
+				AST tree = eq.deMorgan();
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateLeftList(node);
+				getListener().updateEquivalenceLeft();
+			}
+			if(!isSide()) {
+				AndEquivalence eq = new AndEquivalence(getListener().getRight().getLast().getTree(), getKey());
+				AST tree = eq.deMorgan();
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateRightList(node);
+				getListener().updateEquivalenceRight();
+			}
 		}
 		
 	}

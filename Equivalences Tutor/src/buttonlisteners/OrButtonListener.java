@@ -11,12 +11,12 @@ public class OrButtonListener extends AbstractButtonListener implements ActionLi
 
 	private OrDialog dialog;
 	
-	public OrButtonListener(NewPersonalEquivalenceListener listener, int key) {
-		super(listener, key);
+	public OrButtonListener(NewPersonalEquivalenceListener listener, int key, boolean side) {
+		super(listener, key, side);
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		setDialog(new OrDialog(getListener(), getKey()));
+		setDialog(new OrDialog(getListener(), getKey(), getSide()));
 	}
 
 	public OrDialog getDialog() {

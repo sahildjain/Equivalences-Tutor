@@ -64,10 +64,10 @@ public class ASTIdentifierNode extends ASTPropositionalNode {
 		return 0;
 	}
 
-	public JPanel createJPanel(NewPersonalEquivalenceListener l) {
+	public JPanel createJPanel(NewPersonalEquivalenceListener l, boolean side) {
 		JPanel panel = new JPanel(new MigLayout());
 		JButton button = new JButton(getLeaf());
-		IdentifierButtonListener listener = new IdentifierButtonListener(l, getKey());
+		IdentifierButtonListener listener = new IdentifierButtonListener(l, getKey(), side);
 		button.addActionListener(listener);
 		panel.add(button);
 		return panel;

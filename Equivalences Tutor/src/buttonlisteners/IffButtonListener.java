@@ -11,12 +11,12 @@ public class IffButtonListener extends AbstractButtonListener implements ActionL
 	
 	private IffDialog dialog;
 	
-	public IffButtonListener(NewPersonalEquivalenceListener listener, int key) {
-		super(listener, key);
+	public IffButtonListener(NewPersonalEquivalenceListener listener, int key, boolean side) {
+		super(listener, key, side);
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		setDialog(new IffDialog(getListener(), getKey()));
+		setDialog(new IffDialog(getListener(), getKey(), getSide()));
 	}
 
 	public IffDialog getDialog() {

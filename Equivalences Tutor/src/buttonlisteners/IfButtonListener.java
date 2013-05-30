@@ -11,12 +11,12 @@ public class IfButtonListener extends AbstractButtonListener implements ActionLi
 	
 	private IfDialog dialog;
 	
-	public IfButtonListener(NewPersonalEquivalenceListener listener, int key) {
-		super(listener, key);
+	public IfButtonListener(NewPersonalEquivalenceListener listener, int key, boolean side) {
+		super(listener, key, side);
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		setDialog(new IfDialog(getListener(), getKey()));
+		setDialog(new IfDialog(getListener(), getKey(), getSide()));
 	}
 
 	public IfDialog getDialog() {

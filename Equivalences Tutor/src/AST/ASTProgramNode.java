@@ -56,8 +56,8 @@ public class ASTProgramNode extends ASTPropositionalUnaryNode {
 		return getLeaf().value();
 	}
 
-	public JPanel createJPanel(NewPersonalEquivalenceListener l) {
-		return getLeaf().createJPanel(l);
+	public JPanel createJPanel(NewPersonalEquivalenceListener l, boolean side) {
+		return getLeaf().createJPanel(l, side);
 	}
 
 	

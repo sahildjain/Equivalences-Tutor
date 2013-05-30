@@ -24,11 +24,13 @@ public class OrDialog extends JDialog {
 	private JPanel panel;
 	private NewPersonalEquivalenceListener listener;
 	private int key;
+	private boolean side;
 	
-	public OrDialog(NewPersonalEquivalenceListener listener, int key) {
+	public OrDialog(NewPersonalEquivalenceListener listener, int key, boolean side) {
 		this.setListener(listener);
 		this.setFrame(listener.getFrame());
 		this.setKey(key);
+		this.setSide(side);
 		panel = new JPanel(new MigLayout());
 		panel.add(addIdempotence(), BorderLayout.NORTH);
 		panel.add(addCommutativity(), BorderLayout.NORTH);
@@ -82,6 +84,14 @@ public class OrDialog extends JDialog {
 		this.key = key;
 	}
 	
+	public boolean isSide() {
+		return side;
+	}
+
+	public void setSide(boolean side) {
+		this.side = side;
+	}
+
 	private class IdempotenceListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {

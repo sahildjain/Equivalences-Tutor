@@ -86,12 +86,12 @@ public class ASTAndNode extends ASTPropositionalBinaryNode {
 		return 0;
 	}
 
-	public JPanel createJPanel(NewPersonalEquivalenceListener l) {
+	public JPanel createJPanel(NewPersonalEquivalenceListener l, boolean side) {
 		JPanel panel = new JPanel(new MigLayout());
-		JPanel left = getLeft().createJPanel(l);
-		JPanel right = getRight().createJPanel(l);
+		JPanel left = getLeft().createJPanel(l, side);
+		JPanel right = getRight().createJPanel(l, side);
 		JButton button = new JButton("\u2227");
-		AndButtonListener listener = new AndButtonListener(l, getKey());
+		AndButtonListener listener = new AndButtonListener(l, getKey(), side);
 		button.addActionListener(listener);
 		panel.add(left, BorderLayout.WEST);
 		panel.add(button, BorderLayout.CENTER);

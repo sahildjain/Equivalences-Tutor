@@ -24,11 +24,13 @@ public class IfDialog extends JDialog {
 	private JPanel panel;
 	private NewPersonalEquivalenceListener listener;
 	private int key;
+	private boolean side;
 	
-	public IfDialog(NewPersonalEquivalenceListener listener, int key) {
+	public IfDialog(NewPersonalEquivalenceListener listener, int key, boolean side) {
 		this.setListener(listener);
 		this.setFrame(listener.getFrame());
 		this.setKey(key);
+		this.setSide(side);
 		panel = new JPanel(new MigLayout());
 		panel.add(addIfToOr(), BorderLayout.NORTH);
 		panel.add(addIfToAnd(), BorderLayout.NORTH);
@@ -74,14 +76,31 @@ public class IfDialog extends JDialog {
 		this.key = key;
 	}
 
+	public boolean isSide() {
+		return side;
+	}
+
+	public void setSide(boolean side) {
+		this.side = side;
+	}
+
 	private class IfToOrListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent arg0) {
-			IfEquivalence eq = new IfEquivalence(getListener().getLeft().getLast().getTree(), getKey());
-			AST tree = eq.ifToOrEquivalence();
-			EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
-			getListener().updateLeftList(node);
-			getListener().updateEquivalenceLeft();
+			if(isSide()) {
+				IfEquivalence eq = new IfEquivalence(getListener().getLeft().getLast().getTree(), getKey());
+				AST tree = eq.ifToOrEquivalence();
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateLeftList(node);
+				getListener().updateEquivalenceLeft();
+			}
+			if(!isSide()) {
+				IfEquivalence eq = new IfEquivalence(getListener().getRight().getLast().getTree(), getKey());
+				AST tree = eq.ifToOrEquivalence();
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateRightList(node);
+				getListener().updateEquivalenceRight();
+			}
 		}
 		
 	}
@@ -89,11 +108,20 @@ public class IfDialog extends JDialog {
 	private class IfToAndListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
-			IfEquivalence eq = new IfEquivalence(getListener().getLeft().getLast().getTree(), getKey());
-			AST tree = eq.ifToAndEquivalence();
-			EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
-			getListener().updateLeftList(node);
-			getListener().updateEquivalenceLeft();
+			if(isSide()) {
+				IfEquivalence eq = new IfEquivalence(getListener().getLeft().getLast().getTree(), getKey());
+				AST tree = eq.ifToAndEquivalence();
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateLeftList(node);
+				getListener().updateEquivalenceLeft();
+			}
+			if(!isSide()) {
+				IfEquivalence eq = new IfEquivalence(getListener().getRight().getLast().getTree(), getKey());
+				AST tree = eq.ifToAndEquivalence();
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateRightList(node);
+				getListener().updateEquivalenceRight();
+			}
 		}
 		
 	}

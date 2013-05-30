@@ -11,12 +11,12 @@ public class IdentifierButtonListener extends AbstractButtonListener implements 
 	
 	private IdentifierDialog dialog;
 	
-	public IdentifierButtonListener(NewPersonalEquivalenceListener listener, int key) {
-		super(listener, key);
+	public IdentifierButtonListener(NewPersonalEquivalenceListener listener, int key, boolean side) {
+		super(listener, key, side);
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		setDialog(new IdentifierDialog(getListener(), getKey()));
+		setDialog(new IdentifierDialog(getListener(), getKey(), getSide()));
 	}
 
 	public IdentifierDialog getDialog() {

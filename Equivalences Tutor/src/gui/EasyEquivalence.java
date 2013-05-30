@@ -2,11 +2,11 @@ package gui;
 
 import java.awt.BorderLayout;
 
-import javax.swing.JButton;
+//import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
+//import javax.swing.JTextField;
 
 import equivalence.EquivalenceLinkNode;
 import equivalence.EquivalenceLinkedList;
@@ -64,7 +64,7 @@ public class EasyEquivalence extends NewPersonalEquivalenceListener {
 			curr = curr.getNext();
 			next = curr.getNext();
 		}
-		JPanel panel = curr.getTree().getRoot().createJPanel(this);
+		JPanel panel = curr.getTree().getRoot().createJPanel(this, true);
 		leftPanel.add(panel, BorderLayout.NORTH);
 		leftPanel.updateUI();
 		setLeftPanel(leftPanel);
@@ -75,7 +75,7 @@ public class EasyEquivalence extends NewPersonalEquivalenceListener {
 		EquivalenceLinkedList list = getRight();
 		EquivalenceLinkNode curr = list.getHead();
 		while(curr != null) {
-			JPanel panel = curr.getTree().getRoot().createJPanel(this);
+			JPanel panel = curr.getTree().getRoot().createJPanel(this, false);
 			rightPanel.add(panel, BorderLayout.NORTH);
 			rightPanel.updateUI();
 			curr = curr.getNext();

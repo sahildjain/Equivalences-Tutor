@@ -24,11 +24,13 @@ public class IffDialog extends JDialog {
 	private JPanel panel;
 	private int key;
 	private NewPersonalEquivalenceListener listener;
+	private boolean side;
 	
-	public IffDialog(NewPersonalEquivalenceListener listener, int key) {
+	public IffDialog(NewPersonalEquivalenceListener listener, int key, boolean side) {
 		this.setListener(listener);
 		this.setFrame(listener.getFrame());
 		this.setKey(key);
+		this.setSide(side);
 		panel = new JPanel(new MigLayout());
 		panel.add(addIffToAnd(), BorderLayout.NORTH);
 		panel.add(addIffToOr(), BorderLayout.NORTH);
@@ -84,14 +86,31 @@ public class IffDialog extends JDialog {
 		this.key = key;
 	}
 
+	public boolean isSide() {
+		return side;
+	}
+
+	public void setSide(boolean side) {
+		this.side = side;
+	}
+
 	private class IffToAndListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
-			IffEquivalence eq = new IffEquivalence(getListener().getLeft().getLast().getTree(), getKey());
-			AST tree = eq.iffToAndEquivalence();
-			EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
-			getListener().updateLeftList(node);
-			getListener().updateEquivalenceLeft();
+			if(isSide()) {
+				IffEquivalence eq = new IffEquivalence(getListener().getLeft().getLast().getTree(), getKey());
+				AST tree = eq.iffToAndEquivalence();
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateLeftList(node);
+				getListener().updateEquivalenceLeft();
+			}
+			if(!isSide()) {
+				IffEquivalence eq = new IffEquivalence(getListener().getRight().getLast().getTree(), getKey());
+				AST tree = eq.iffToAndEquivalence();
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateRightList(node);
+				getListener().updateEquivalenceRight();
+			}
 		}
 		
 	}
@@ -99,11 +118,20 @@ public class IffDialog extends JDialog {
 	private class IffToOrListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
-			IffEquivalence eq = new IffEquivalence(getListener().getLeft().getLast().getTree(), getKey());
-			AST tree = eq.iffToOrEquivalence();
-			EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
-			getListener().updateLeftList(node);
-			getListener().updateEquivalenceLeft();
+			if(isSide()) {
+				IffEquivalence eq = new IffEquivalence(getListener().getLeft().getLast().getTree(), getKey());
+				AST tree = eq.iffToOrEquivalence();
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateLeftList(node);
+				getListener().updateEquivalenceLeft();
+			}
+			if(!isSide()) {
+				IffEquivalence eq = new IffEquivalence(getListener().getRight().getLast().getTree(), getKey());
+				AST tree = eq.iffToOrEquivalence();
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateRightList(node);
+				getListener().updateEquivalenceRight();
+			}
 		}
 		
 	}
@@ -111,11 +139,20 @@ public class IffDialog extends JDialog {
 	private class NotsListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
-			IffEquivalence eq = new IffEquivalence(getListener().getLeft().getLast().getTree(), getKey());
-			AST tree = eq.negate();
-			EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
-			getListener().updateLeftList(node);
-			getListener().updateEquivalenceLeft();
+			if(isSide()) {
+				IffEquivalence eq = new IffEquivalence(getListener().getLeft().getLast().getTree(), getKey());
+				AST tree = eq.negate();
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateLeftList(node);
+				getListener().updateEquivalenceLeft();
+			}
+			if(!isSide()) {
+				IffEquivalence eq = new IffEquivalence(getListener().getRight().getLast().getTree(), getKey());
+				AST tree = eq.negate();
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateRightList(node);
+				getListener().updateEquivalenceRight();
+			}
 		}
 		
 	}

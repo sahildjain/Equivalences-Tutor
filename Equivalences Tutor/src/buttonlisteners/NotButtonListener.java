@@ -11,12 +11,12 @@ public class NotButtonListener extends AbstractButtonListener implements ActionL
 	
 	private NotDialog dialog;
 	
-	public NotButtonListener(NewPersonalEquivalenceListener listener, int key) {
-		super(listener, key);
+	public NotButtonListener(NewPersonalEquivalenceListener listener, int key, boolean side) {
+		super(listener, key, side);
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		setDialog(new NotDialog(getListener(), getKey()));
+		setDialog(new NotDialog(getListener(), getKey(), getSide()));
 	}
 
 	public NotDialog getDialog() {
