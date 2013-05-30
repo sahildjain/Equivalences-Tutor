@@ -67,6 +67,7 @@ public class ASTIdentifierNode extends ASTPropositionalNode {
 	public JPanel createJPanel(NewPersonalEquivalenceListener l, boolean side) {
 		JPanel panel = new JPanel(new MigLayout());
 		JButton button = new JButton(getLeaf());
+		makeTransparent(button);
 		IdentifierButtonListener listener = new IdentifierButtonListener(l, getKey(), side);
 		button.addActionListener(listener);
 		panel.add(button);

@@ -91,11 +91,22 @@ public class ASTOrNode extends ASTPropositionalBinaryNode {
 		JPanel left = getLeft().createJPanel(l, side);
 		JPanel right = getRight().createJPanel(l, side);
 		JButton button = new JButton("\u2228");
+		makeTransparent(button);
+		JButton open = new JButton("(");
+		JButton close = new JButton(")");
+		makeTransparent(open);
+		makeTransparent(close);
+		JPanel openBracket = new JPanel();
+		openBracket.add(open);
+		JPanel closeBracket = new JPanel();
+		closeBracket.add(close);
 		OrButtonListener listener = new OrButtonListener(l, getKey(), side);
 		button.addActionListener(listener);
+		panel.add(openBracket, BorderLayout.WEST);
 		panel.add(left, BorderLayout.WEST);
-		panel.add(button, BorderLayout.CENTER);
-		panel.add(right, BorderLayout.EAST);
+		panel.add(button, BorderLayout.WEST);
+		panel.add(right, BorderLayout.WEST);
+		panel.add(closeBracket, BorderLayout.EAST);
 		return panel;
 	}
 

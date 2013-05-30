@@ -63,6 +63,7 @@ public class AST implements Cloneable {
 		return identifiers.size();
 	}
 	
+	@Override
 	public Object clone() {
 		try {
 			return super.clone();
