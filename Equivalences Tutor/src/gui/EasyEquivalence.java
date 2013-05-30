@@ -72,6 +72,7 @@ public class EasyEquivalence extends NewPersonalEquivalenceListener {
 
 	public void updateEquivalenceRight() {
 		JPanel rightPanel = getRightPanel();
+		rightPanel.removeAll();
 		EquivalenceLinkedList list = getRight();
 		EquivalenceLinkNode curr = list.getHead();
 		while(curr != null) {

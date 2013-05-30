@@ -95,11 +95,20 @@ public class OrDialog extends JDialog {
 	private class IdempotenceListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
-			OrEquivalence eq = new OrEquivalence(getListener().getLeft().getLast().getTree(), getKey());
-			AST tree = eq.idempotence();
-			EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
-			getListener().updateLeftList(node);
-			getListener().updateEquivalenceLeft();
+			if(isSide()) {
+				OrEquivalence eq = new OrEquivalence(getListener().getLeft().getLast().getTree(), getKey());
+				AST tree = eq.idempotence();
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateLeftList(node);
+				getListener().updateEquivalenceLeft();
+			}
+			if(!isSide()) {
+				OrEquivalence eq = new OrEquivalence(getListener().getRight().getLast().getTree(), getKey());
+				AST tree = eq.idempotence();
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateRightList(node);
+				getListener().updateEquivalenceRight();
+			}
 		}
 		
 	}
@@ -107,11 +116,20 @@ public class OrDialog extends JDialog {
 	private class CommutativityListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
-			OrEquivalence eq = new OrEquivalence(getListener().getLeft().getLast().getTree(), getKey());
-			AST tree = eq.commutativity();
-			EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
-			getListener().updateLeftList(node);
-			getListener().updateEquivalenceLeft();
+			if(isSide()) {
+				OrEquivalence eq = new OrEquivalence(getListener().getLeft().getLast().getTree(), getKey());
+				AST tree = eq.commutativity();
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateLeftList(node);
+				getListener().updateEquivalenceLeft();
+			}
+			if(!isSide()) {
+				OrEquivalence eq = new OrEquivalence(getListener().getRight().getLast().getTree(), getKey());
+				AST tree = eq.commutativity();
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateRightList(node);
+				getListener().updateEquivalenceRight();
+			}
 		}
 		
 	}

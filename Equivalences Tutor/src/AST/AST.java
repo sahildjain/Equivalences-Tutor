@@ -2,7 +2,7 @@ package AST;
 
 import java.util.TreeMap;
 
-public class AST {
+public class AST implements Cloneable {
 	
 	private ASTProgramNode root;
 	private int key;
@@ -61,6 +61,16 @@ public class AST {
 		TreeMap<String, Integer> identifiers = new TreeMap<String, Integer>();
 		identifiers = getRoot().numIdentifiers(identifiers);
 		return identifiers.size();
+	}
+	
+	public Object clone() {
+		try {
+			return super.clone();
+		}
+		catch(CloneNotSupportedException e) {
+			System.out.println("Clone not allowed");
+			return this;
+		}
 	}
 
 }
