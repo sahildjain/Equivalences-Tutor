@@ -15,6 +15,7 @@ public class ASTIdentifierNode extends ASTPropositionalNode {
 	
 	private String id;
 	private int key;
+	private int value;
 	
 	public ASTIdentifierNode(int key, String id) {
 		this.id = id;
@@ -57,11 +58,17 @@ public class ASTIdentifierNode extends ASTPropositionalNode {
 		return identifiers;
 	}
 
-	//TODO
-	@Override
-	public int value() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int value(TreeMap<String, Integer> id) {
+		setValue(id.get(getLeaf()));
+		return this.getValue();
+	}
+	
+	public int getValue() {
+		return this.value;
+	}
+	
+	public void setValue(int value) {
+		this.value = value;
 	}
 
 	public JPanel createJPanel(NewPersonalEquivalenceListener l, boolean side) {

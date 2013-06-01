@@ -16,14 +16,14 @@ import eqtutor.LogicParser;
 import equivalence.EquivalenceLinkedList;
 import equivalence.EquivalenceLinkNode;
 
-public class LoadEquivalenceListener implements ActionListener {
+public class LoadFromFileListener implements ActionListener {
 	
 	private JButton load;
 	private String fileContent;
 	private EquivalenceLinkedList left;
 	private EquivalenceLinkedList right;
 	
-	public LoadEquivalenceListener(JButton load) {
+	public LoadFromFileListener(JButton load) {
 		this.setLoad(load);
 	}
 

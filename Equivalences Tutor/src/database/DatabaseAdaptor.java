@@ -7,9 +7,9 @@ import java.util.Properties;
 
 public class DatabaseAdaptor {
 	
-	private final static String URL = "";
+	private final static String URL = "jdbc:postgresql://db:5432/sdj09";
 	private final static String USER = "sdj09";
-	private final static String PASSWORD = "";
+	private final static String PASSWORD = "shivi473";
 	
 	public static Connection connect() throws ClassNotFoundException, SQLException {
 		Class.forName("org.postgresql.Driver");

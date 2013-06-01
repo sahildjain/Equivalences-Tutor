@@ -52,8 +52,8 @@ public class ASTProgramNode extends ASTPropositionalUnaryNode {
 		return identifiers;
 	}
 
-	public int value() {
-		return getLeaf().value();
+	public int value(TreeMap<String, Integer> id) {
+		return getLeaf().value(id);
 	}
 
 	public JPanel createJPanel(NewPersonalEquivalenceListener l, boolean side) {

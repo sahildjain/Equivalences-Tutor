@@ -12,14 +12,14 @@ import javax.swing.JOptionPane;
 import equivalence.EquivalenceLinkNode;
 import equivalence.EquivalenceLinkedList;
 
-public class SaveListener implements ActionListener {
+public class SaveToFileListener implements ActionListener {
 	
 	private NewPersonalEquivalenceListener listener;
 	private EquivalenceLinkedList left;
 	private EquivalenceLinkedList right;
 	private StringBuilder fileContent;
 	
-	public SaveListener(NewPersonalEquivalenceListener listener) {
+	public SaveToFileListener(NewPersonalEquivalenceListener listener) {
 		this.setListener(listener);
 		this.setLeft(getListener().getLeft());
 		this.setRight(getListener().getRight());

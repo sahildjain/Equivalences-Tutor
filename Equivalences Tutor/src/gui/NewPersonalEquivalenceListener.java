@@ -39,7 +39,7 @@ public abstract class NewPersonalEquivalenceListener implements ActionListener {
 	private EquivalenceLinkedList left = new EquivalenceLinkedList();
 	private EquivalenceLinkedList right = new EquivalenceLinkedList();
 	
-	private SaveListener saveListener;
+	private SaveToFileListener saveListener;
 	
 	protected JTextField textFieldLeft;
 	protected JTextField textFieldRight;
@@ -78,7 +78,7 @@ public abstract class NewPersonalEquivalenceListener implements ActionListener {
 		
 		//Add the Save Button
 		saveButton = new JButton("Save");
-		saveListener = new SaveListener(this);
+		saveListener = new SaveToFileListener(this);
 		saveButton.addActionListener(saveListener);
 		
 		//Add the Quit Button

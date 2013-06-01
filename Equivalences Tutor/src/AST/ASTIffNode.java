@@ -77,9 +77,9 @@ public class ASTIffNode extends ASTPropositionalBinaryNode {
 		return identifiers;
 	}
 
-	public int value() {
-		int left = getLeft().value();
-		int right = getRight().value();
+	public int value(TreeMap<String, Integer> id) {
+		int left = getLeft().value(id);
+		int right = getRight().value(id);
 		if(left == right) {
 			return 1;
 		}
