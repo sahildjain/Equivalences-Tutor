@@ -16,6 +16,8 @@ import net.miginfocom.swing.MigLayout;
 
 public abstract class NewPersonalEquivalenceListener implements ActionListener {
 	
+	private int id;
+	
 	private JFrame frame;
 	
 	private JPanel menu;
@@ -30,6 +32,7 @@ public abstract class NewPersonalEquivalenceListener implements ActionListener {
 	protected JButton submitRight;
 	protected JButton undoLeft;
 	protected JButton undoRight;
+	protected JButton saveDbButton;
 	
 	private StatesInputDialogListener inputListener;
 	
@@ -40,6 +43,7 @@ public abstract class NewPersonalEquivalenceListener implements ActionListener {
 	private EquivalenceLinkedList right = new EquivalenceLinkedList();
 	
 	private SaveToFileListener saveListener;
+	private SaveToDbListener saveDbListener;
 	
 	protected JTextField textFieldLeft;
 	protected JTextField textFieldRight;
@@ -48,9 +52,10 @@ public abstract class NewPersonalEquivalenceListener implements ActionListener {
 	protected UndoListener undoRightListener;
 	
 
-	public NewPersonalEquivalenceListener(JFrame frame, JPanel menu) {
+	public NewPersonalEquivalenceListener(JFrame frame, JPanel menu, int id) {
 		this.setMenu(menu);
 		this.setFrame(frame);
+		this.setId(id);
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -76,10 +81,15 @@ public abstract class NewPersonalEquivalenceListener implements ActionListener {
 		//hidePanels();
 		//getMenu().setVisible(true);
 		
-		//Add the Save Button
-		saveButton = new JButton("Save");
+		//Add the Save To File Button
+		saveButton = new JButton("Save To File");
 		saveListener = new SaveToFileListener(this);
 		saveButton.addActionListener(saveListener);
+		
+		//Add the Save To File Button
+		saveDbButton = new JButton("Save To Database");
+		saveDbListener = new SaveToDbListener(this, getId());
+		saveDbButton.addActionListener(saveDbListener);
 		
 		//Add the Quit Button
 		quit = new JButton("Quit");
@@ -89,6 +99,7 @@ public abstract class NewPersonalEquivalenceListener implements ActionListener {
 		buttons.add(states, BorderLayout.WEST);
 		buttons.add(menuButton, BorderLayout.WEST);
 		buttons.add(saveButton, BorderLayout.WEST);
+		buttons.add(saveDbButton, BorderLayout.WEST);
 		buttons.add(quit, BorderLayout.EAST);
 		
 	}
@@ -175,6 +186,14 @@ public abstract class NewPersonalEquivalenceListener implements ActionListener {
 	
 	public JPanel getButtons() {
 		return this.buttons;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 }

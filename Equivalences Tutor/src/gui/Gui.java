@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import database.LoginDb;
 import database.RegisterDb;
 
 import net.miginfocom.swing.MigLayout;
@@ -26,12 +27,12 @@ public class Gui {
 	private JTextField user;
 	private JTextField pass;
 	
+	private int userid;
+	
 	public void createGui(int size) {
 		createFrame("Equivalences Tutor", size);
 		createLoginPanel();
 		addLoginToFrame();
-		//createMenuPanel();
-		//addToFrame();
 	}
 
 	private void addLoginToFrame() {
@@ -59,6 +60,8 @@ public class Gui {
 		password.add(p, BorderLayout.WEST);
 		password.add(pass, BorderLayout.WEST);
 		JButton submit = new JButton("Submit");
+		SubmitListener submitListener = new SubmitListener(true);
+		submit.addActionListener(submitListener);
 		JButton register = new JButton("Register");
 		RegisterListener regListener = new RegisterListener();
 		register.addActionListener(regListener);
@@ -71,10 +74,10 @@ public class Gui {
 	private void createMenuPanel() {
 		menu = new JPanel(new MigLayout());
 		hardEquivalence = new JButton("Hard Personal Equivalence");
-		HardEquivalence listener = new HardEquivalence(frame, menu);
+		HardEquivalence listener = new HardEquivalence(frame, menu, getUserid());
 		hardEquivalence.addActionListener(listener);
 		easyEquivalence = new JButton("Easy Personal Equivalence");
-		EasyEquivalence easyListener = new EasyEquivalence(frame, menu);
+		EasyEquivalence easyListener = new EasyEquivalence(frame, menu, getUserid());
 		easyEquivalence.addActionListener(easyListener);
 		loadEquivalence = new JButton("Load Equivalence From File");
 		LoadFromFileListener loadListener = new LoadFromFileListener(loadEquivalence);
@@ -93,6 +96,14 @@ public class Gui {
 		frame.setSize(size * 50, size * 40);
 	}
 	
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+
 	private class RegisterListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
@@ -129,10 +140,19 @@ public class Gui {
 		
 		public void actionPerformed(ActionEvent arg0) {
 			if(login) {
-				
+				int id = LoginDb.checkUserDetails(user.getText(), pass.getText());
+				if (id > 0) {
+					frame.remove(Gui.this.login);
+					setUserid(id);
+					createMenuPanel();
+					addMenuToFrame();
+				}
 			}
 			if(!login) {
 				RegisterDb.addUser(user.getText(), pass.getText());
+				frame.remove(register);
+				createLoginPanel();
+				addLoginToFrame();
 			}
 		}
 		

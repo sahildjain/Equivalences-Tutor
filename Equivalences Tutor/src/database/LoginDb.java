@@ -14,6 +14,7 @@ public class LoginDb {
 		}
 		catch (ClassNotFoundException e) {
 			System.err.println("Error connecting to DB on login: PSQL driver not present");
+			e.printStackTrace();
 			return 0;
 		}
 		catch (SQLException e) {

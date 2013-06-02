@@ -18,8 +18,8 @@ public class HardEquivalence extends NewPersonalEquivalenceListener {
 	private JTextArea textAreaLeft;
 	private JTextArea textAreaRight;
 
-	public HardEquivalence(JFrame frame, JPanel menu) {
-		super(frame, menu);
+	public HardEquivalence(JFrame frame, JPanel menu, int id) {
+		super(frame, menu, id);
 	}
 	
 	protected void createEquivalencePanel() {

@@ -18,8 +18,8 @@ public class EasyEquivalence extends NewPersonalEquivalenceListener {
 	private JPanel leftPanel;
 	private JPanel rightPanel;
 
-	public EasyEquivalence(JFrame frame, JPanel menu) {
-		super(frame, menu);
+	public EasyEquivalence(JFrame frame, JPanel menu, int id) {
+		super(frame, menu, id);
 	}
 
 	protected void createEquivalencePanel() {
@@ -55,7 +55,7 @@ public class EasyEquivalence extends NewPersonalEquivalenceListener {
 		EquivalenceLinkNode curr = list.getHead();
 		EquivalenceLinkNode next = curr.getNext();
 		while(next != null) {	
-			JTextArea textArea = new JTextArea();
+			JTextArea textArea = new JTextArea(1,1);
 			textArea.setEditable(false);
 			textArea.setText("");
 			textArea.append(curr.getLineNumber() + "\t" + curr.getTree().toString());
@@ -75,13 +75,33 @@ public class EasyEquivalence extends NewPersonalEquivalenceListener {
 		rightPanel.removeAll();
 		EquivalenceLinkedList list = getRight();
 		EquivalenceLinkNode curr = list.getHead();
+		EquivalenceLinkNode next = curr.getNext();
+		while(next != null) {	
+			JTextArea textArea = new JTextArea(1,1);
+			textArea.setEditable(false);
+			textArea.setText("");
+			textArea.append(curr.getLineNumber() + "\t" + curr.getTree().toString());
+			textArea.append("\n");
+			rightPanel.add(textArea, BorderLayout.NORTH);
+			curr = curr.getNext();
+			next = curr.getNext();
+		}
+		JPanel panel = curr.getTree().getRoot().createJPanel(this, false);
+		rightPanel.add(panel, BorderLayout.NORTH);
+		rightPanel.updateUI();
+		setRightPanel(rightPanel);
+		/*
+		JPanel rightPanel = getRightPanel();
+		rightPanel.removeAll();
+		EquivalenceLinkedList list = getRight();
+		EquivalenceLinkNode curr = list.getHead();
 		while(curr != null) {
 			JPanel panel = curr.getTree().getRoot().createJPanel(this, false);
 			rightPanel.add(panel, BorderLayout.NORTH);
 			rightPanel.updateUI();
 			curr = curr.getNext();
 		}
-		setRightPanel(rightPanel);
+		setRightPanel(rightPanel);*/
 	}
 	
 	//TODO

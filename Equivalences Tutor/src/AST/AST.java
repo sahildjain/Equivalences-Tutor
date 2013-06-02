@@ -119,5 +119,12 @@ public class AST implements Cloneable {
 			return this;
 		}
 	}
+	
+	public AST copy() {
+		AST t = new AST(0, null);
+		t.setKey(this.getKey());
+		t.setRoot(this.getRoot());
+		return t;
+	}
 
 }

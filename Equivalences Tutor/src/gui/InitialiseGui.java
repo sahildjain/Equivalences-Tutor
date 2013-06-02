@@ -11,7 +11,7 @@ public class InitialiseGui {
 		String[] tokens = content.split("\n");
 		for(int i = 0; i < tokens.length; ++i) {
 			System.out.println(i + ": " + tokens[i]);
-		}*/
+		}*//*
 		EQTutor eqtutor = new EQTutor(); 
 		String src = "a & a";
 		LogicParser parser = eqtutor.getParser(src);
@@ -19,13 +19,13 @@ public class InitialiseGui {
 		src = "a";
 		parser = eqtutor.getParser(src);
 		AST tree2 = eqtutor.getTree(parser);
-		System.out.println(tree1.equivalent(tree2));
-		/*
+		System.out.println(tree1.equivalent(tree2));*/
+		
 		javax.swing.SwingUtilities.invokeLater(new Runnable(){
 			public void run(){
 				final Gui gui = new Gui();
 				gui.createGui(20);
 			}
-		});*/
+		});
 	}
 }

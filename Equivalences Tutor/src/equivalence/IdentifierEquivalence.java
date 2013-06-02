@@ -23,9 +23,10 @@ public class IdentifierEquivalence extends Equivalence {
 		AST tree = getTree();
 		int key = getKey();
 		ASTNode node = find(tree.getRoot(), key);
-		ASTNotNode notNode = new ASTNotNode(tree.getKey() + 1, (ASTPropositionalNode) node);
-		ASTNotNode notNotNode = new ASTNotNode(tree.getKey() + 2, notNode);
-		tree.setKey(tree.getKey() + 3);
+		ASTNotNode notNode = new ASTNotNode(tree.getKey(), (ASTPropositionalNode) node);
+		tree.setKey(tree.getKey() + 1);
+		ASTNotNode notNotNode = new ASTNotNode(tree.getKey(), notNode);
+		tree.setKey(tree.getKey() + 1);
 		ASTPropositionalNode p = replace(tree.getRoot().getLeaf(), notNotNode, key);
 		ASTProgramNode program = tree.getRoot();
 		program.setLeaf(p);
@@ -38,8 +39,8 @@ public class IdentifierEquivalence extends Equivalence {
 		AST tree = getTree();
 		int key = getKey();
 		ASTNode node = find(tree.getRoot(), key);
-		ASTAndNode andNode = new ASTAndNode(tree.getKey() + 1, (ASTPropositionalNode) node, (ASTPropositionalNode) node);
-		tree.setKey(tree.getKey() + 3);
+		ASTAndNode andNode = new ASTAndNode(tree.getKey(), (ASTPropositionalNode) node, (ASTPropositionalNode) node);
+		tree.setKey(tree.getKey() + 1);
 		ASTPropositionalNode p = replace(tree.getRoot().getLeaf(), andNode, key);
 		ASTProgramNode program = tree.getRoot();
 		program.setLeaf(p);
@@ -52,8 +53,8 @@ public class IdentifierEquivalence extends Equivalence {
 		AST tree = getTree();
 		int key = getKey();
 		ASTNode node = find(tree.getRoot(), key);
-		ASTOrNode orNode = new ASTOrNode(tree.getKey() + 1, (ASTPropositionalNode) node, (ASTPropositionalNode) node);
-		tree.setKey(tree.getKey() + 3);
+		ASTOrNode orNode = new ASTOrNode(tree.getKey(), (ASTPropositionalNode) node, (ASTPropositionalNode) node);
+		tree.setKey(tree.getKey() + 1);
 		ASTPropositionalNode p = replace(tree.getRoot().getLeaf(), orNode, key);
 		ASTProgramNode program = tree.getRoot();
 		program.setLeaf(p);

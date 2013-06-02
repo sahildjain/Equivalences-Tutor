@@ -15,17 +15,19 @@ public class SaveToDbListener implements ActionListener {
 	private EquivalenceLinkedList right;
 	private StringBuilder leftContent;
 	private StringBuilder rightContent;
+	private int id;
 	
-	public SaveToDbListener(NewPersonalEquivalenceListener listener) {
+	public SaveToDbListener(NewPersonalEquivalenceListener listener, int id) {
 		this.setListener(listener);
 		this.setLeft(getListener().getLeft());
 		this.setRight(getListener().getRight());
+		this.id = id;
 	}
 
 	public void actionPerformed(ActionEvent arg0) {
 		createLeftContent();
 		createRightContent();
-		EquivalencesDb.addNewEquivalence(getLeftContent(), getRightContent(), 0); //TODO
+		EquivalencesDb.addNewEquivalence(getLeftContent(), getRightContent(), this.id);
 	}
 	
 	private void createLeftContent() {
