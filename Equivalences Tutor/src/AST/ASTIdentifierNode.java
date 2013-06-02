@@ -48,6 +48,10 @@ public class ASTIdentifierNode extends ASTPropositionalNode {
 	public String toString() {
 		return getLeaf();
 	}
+	
+	public String toParserString() {
+		return getLeaf();
+	}
 
 	public TreeMap<String, Integer> numIdentifiers(TreeMap<String, Integer> identifiers) {
 		int value = 1;

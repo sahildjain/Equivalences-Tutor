@@ -35,8 +35,8 @@ public class SaveToDbListener implements ActionListener {
 		EquivalenceLinkedList left = getLeft();
 		EquivalenceLinkNode curr = left.getHead();
 		while(curr != null) {
-			leftContent.append(curr.getTree().toString());
-			leftContent.append("\\");
+			leftContent.append(curr.getTree().toParserString());
+			leftContent.append(".");
 			curr = curr.getNext();
 		}
 		setLeftContent(leftContent);
@@ -47,8 +47,8 @@ public class SaveToDbListener implements ActionListener {
 		EquivalenceLinkedList right = getRight();
 		EquivalenceLinkNode curr = right.getHead();
 		while(curr != null) {
-			rightContent.append(curr.getTree().toString());
-			rightContent.append("\\");
+			rightContent.append(curr.getTree().toParserString());
+			rightContent.append(".");
 			curr = curr.getNext();
 		}
 		setRightContent(rightContent);

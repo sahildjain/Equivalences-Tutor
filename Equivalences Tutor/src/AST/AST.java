@@ -1,6 +1,5 @@
 package AST;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Set;
@@ -42,6 +41,10 @@ public class AST implements Cloneable {
 	
 	public String toString() {
 		return getRoot().toString();
+	}
+	
+	public String toParserString() {
+		return getRoot().toParserString();
 	}
 	
 	public boolean equivalent(AST tree) {

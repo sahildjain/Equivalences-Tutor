@@ -23,6 +23,7 @@ public class Gui {
 	private JButton easyEquivalence;
 	private JButton quit;
 	private JButton loadEquivalence;
+	private JButton loadDb;
 	
 	private JTextField user;
 	private JTextField pass;
@@ -82,12 +83,16 @@ public class Gui {
 		loadEquivalence = new JButton("Load Equivalence From File");
 		LoadFromFileListener loadListener = new LoadFromFileListener(loadEquivalence);
 		loadEquivalence.addActionListener(loadListener);
+		loadDb = new JButton("Load Equivalence From Database");
+		LoadFromDbListener loadDbListener = new LoadFromDbListener(frame, menu, getUserid());
+		loadDb.addActionListener(loadDbListener);
 		quit = new JButton("Quit");
 		QuitListener quitListener = new QuitListener();
 		quit.addActionListener(quitListener);
 		menu.add(easyEquivalence, BorderLayout.NORTH);
 		menu.add(hardEquivalence, BorderLayout.NORTH);
 		menu.add(loadEquivalence, BorderLayout.NORTH);
+		menu.add(loadDb, BorderLayout.NORTH);
 		menu.add(quit, BorderLayout.SOUTH);
 	}
 

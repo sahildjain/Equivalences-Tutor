@@ -70,6 +70,16 @@ public class ASTIffNode extends ASTPropositionalBinaryNode {
 		stringBuilder.append(")");
 		return stringBuilder.toString();
 	}
+	
+	public String toParserString() {
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("(");
+		stringBuilder.append(getLeft().toString());
+		stringBuilder.append(" <> ");
+		stringBuilder.append(getRight().toString());
+		stringBuilder.append(")");
+		return stringBuilder.toString();
+	}
 
 	public TreeMap<String, Integer> numIdentifiers(TreeMap<String, Integer> identifiers) {
 		identifiers = getLeft().numIdentifiers(identifiers);

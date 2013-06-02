@@ -60,4 +60,33 @@ public class EquivalencesDb {
 		}
 	}
 	
+	public static int getNumberOfEquivalencesForUser(int id) {
+		StringBuilder sql = new StringBuilder();
+		sql.append("SELECT COUNT(*) FROM equivalence WHERE account = ?;");
+		PreparedStatement preparedStatement;
+		try {
+			preparedStatement = DatabaseAdaptor.connect().prepareStatement(sql.toString());
+		}
+		catch (ClassNotFoundException e) {
+			System.err.println("Error connecting to DB on Register: PSQL driver not present");
+			return 0;
+		}
+		catch (SQLException e) {
+			System.err.println("SQL Error on Register");
+			return 0;
+		}
+		try {
+			preparedStatement.setInt(1, id);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			resultSet.next();
+			int num = resultSet.getInt("count");
+			return num;
+			
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
 }

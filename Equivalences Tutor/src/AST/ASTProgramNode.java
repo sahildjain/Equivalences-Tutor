@@ -47,6 +47,10 @@ public class ASTProgramNode extends ASTPropositionalUnaryNode {
 		return getLeaf().toString();
 	}
 	
+	public String toParserString() {
+		return getLeaf().toParserString();
+	}
+	
 	public TreeMap<String, Integer> numIdentifiers(TreeMap<String, Integer> identifiers) {
 		identifiers = getLeaf().numIdentifiers(identifiers);
 		return identifiers;

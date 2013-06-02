@@ -53,6 +53,10 @@ public class ASTNotNode extends ASTPropositionalUnaryNode {
 		return "\u00AC(" + getLeaf().toString() + ")";
 	}
 	
+	public String toParserString() {
+		return "!(" + getLeaf().toString() + ")";
+	}
+	
 	public TreeMap<String, Integer> numIdentifiers(TreeMap<String, Integer> identifiers) {
 		return getLeaf().numIdentifiers(identifiers);
 	}
