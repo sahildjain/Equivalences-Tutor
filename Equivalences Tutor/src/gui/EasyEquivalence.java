@@ -128,10 +128,6 @@ public class EasyEquivalence extends NewPersonalEquivalenceListener {
 	protected void hidePanels() {
 		getLeftPanel().setVisible(false);
 		getRightPanel().setVisible(false);
-		getTextFieldLeft().setVisible(false);
-		getTextFieldRight().setVisible(false);
-		getSubmitLeft().setVisible(false);
-		getSubmitRight().setVisible(false);
 		getButtons().setVisible(false);
 	}
 

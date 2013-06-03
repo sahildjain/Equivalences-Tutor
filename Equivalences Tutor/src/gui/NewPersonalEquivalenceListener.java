@@ -33,6 +33,7 @@ public abstract class NewPersonalEquivalenceListener implements ActionListener {
 	protected JButton undoLeft;
 	protected JButton undoRight;
 	protected JButton saveDbButton;
+	protected JButton switchView;
 	
 	private StatesInputDialogListener inputListener;
 	
@@ -50,6 +51,8 @@ public abstract class NewPersonalEquivalenceListener implements ActionListener {
 	
 	protected UndoListener undoLeftListener;
 	protected UndoListener undoRightListener;
+	
+	protected SwitchViewListener switchViewListener;
 	
 
 	public NewPersonalEquivalenceListener(JFrame frame, JPanel menu, int id) {
@@ -91,6 +94,11 @@ public abstract class NewPersonalEquivalenceListener implements ActionListener {
 		saveDbListener = new SaveToDbListener(this, getId());
 		saveDbButton.addActionListener(saveDbListener);
 		
+		//Switch view Button
+		switchView = new JButton("Switch view");
+		switchViewListener = new SwitchViewListener(this);
+		switchView.addActionListener(switchViewListener);
+		
 		//Add the Quit Button
 		quit = new JButton("Quit");
 		QuitListener quitListener = new QuitListener();
@@ -100,6 +108,7 @@ public abstract class NewPersonalEquivalenceListener implements ActionListener {
 		buttons.add(menuButton, BorderLayout.WEST);
 		buttons.add(saveButton, BorderLayout.WEST);
 		buttons.add(saveDbButton, BorderLayout.WEST);
+		buttons.add(switchView, BorderLayout.WEST);
 		buttons.add(quit, BorderLayout.EAST);
 		
 	}
