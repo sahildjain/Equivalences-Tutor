@@ -24,6 +24,7 @@ public class Gui {
 	private JButton quit;
 	private JButton loadEquivalence;
 	private JButton loadDb;
+	private JButton randomEquivalence;
 	
 	private JTextField user;
 	private JTextField pass;
@@ -80,6 +81,9 @@ public class Gui {
 		easyEquivalence = new JButton("Easy Personal Equivalence");
 		EasyEquivalence easyListener = new EasyEquivalence(frame, menu, getUserid());
 		easyEquivalence.addActionListener(easyListener);
+		randomEquivalence = new JButton("Generate a Random Equivalence");
+		RandomEquivalenceListener randomListener = new RandomEquivalenceListener(frame, menu, getUserid());
+		randomEquivalence.addActionListener(randomListener);
 		loadEquivalence = new JButton("Load Equivalence From File");
 		LoadFromFileListener loadListener = new LoadFromFileListener(loadEquivalence);
 		loadEquivalence.addActionListener(loadListener);
@@ -91,6 +95,7 @@ public class Gui {
 		quit.addActionListener(quitListener);
 		menu.add(easyEquivalence, BorderLayout.NORTH);
 		menu.add(hardEquivalence, BorderLayout.NORTH);
+		menu.add(randomEquivalence, BorderLayout.NORTH);
 		menu.add(loadEquivalence, BorderLayout.NORTH);
 		menu.add(loadDb, BorderLayout.NORTH);
 		menu.add(quit, BorderLayout.SOUTH);

@@ -2,8 +2,7 @@ package eqtutor;
 
 public class PredicateExpressionGenerator extends ExpressionGenerator {
 
-	public String generate() {
-		return null;
+	public void generate() {
 	}
 
 }

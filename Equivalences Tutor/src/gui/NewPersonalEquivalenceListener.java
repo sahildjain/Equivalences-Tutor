@@ -95,7 +95,7 @@ public abstract class NewPersonalEquivalenceListener implements ActionListener {
 		saveDbButton.addActionListener(saveDbListener);
 		
 		//Switch view Button
-		switchView = new JButton("Switch view");
+		switchView = new JButton("Switch View");
 		switchViewListener = new SwitchViewListener(this);
 		switchView.addActionListener(switchViewListener);
 		

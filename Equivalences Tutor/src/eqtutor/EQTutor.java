@@ -29,10 +29,10 @@ public class EQTutor {
 		
 	}*/
 	
-	public String getFormula() {
+	/*public String getFormula() {
 		PropositionalExpressionGenerator formula = new PropositionalExpressionGenerator(4, 0);
 		return formula.generate();
-	}
+	}*/
 	
 	public LogicParser getParser(String src) {
 		CharStream stream = new ANTLRStringStream(src);

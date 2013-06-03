@@ -4,7 +4,7 @@ import java.util.Random;
 
 public abstract class ExpressionGenerator {
 	
-	public abstract String generate();
+	public abstract void generate();
 	
 	public BinaryOperator getRandomOperator() {
 		Random rand = new Random();

@@ -1,9 +1,74 @@
 package eqtutor;
 
-import java.util.Random;
+import AST.AST;
 
 public class PropositionalExpressionGenerator extends ExpressionGenerator {
+	
+	private AST startState;
+	private AST endState;
+	
+	public void generate() {
+		int n = (int)(Math.random() * 10);
+		if(n < 5) {
+			generateCNF();
+		}
+		else {
+			generateDNF();
+		}
+		generateEndState();
+	}
+	
+	private void generateCNF() {
+		int atoms = 3 + (int)(Math.random() * ((6 - 3) + 1));
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(Character.toString((char) 97));
+		for(int i = 1; i < atoms; i++) {
+			stringBuilder.append(" & ");
+			stringBuilder.append(Character.toString((char) (97 + i)));
+		}
+		EQTutor eqtutor = new EQTutor(); 
+		LogicParser parser = eqtutor.getParser(stringBuilder.toString());
+		AST tree = eqtutor.getTree(parser);
+		setStartState(tree);
+	}
+	
+	private void generateDNF() {
+		int atoms = 3 + (int)(Math.random() * ((6 - 3) + 1));
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(Character.toString((char) 97));
+		for(int i = 1; i < atoms; i++) {
+			stringBuilder.append(" | ");
+			stringBuilder.append(Character.toString((char) (97 + i)));
+		}
+		EQTutor eqtutor = new EQTutor(); 
+		LogicParser parser = eqtutor.getParser(stringBuilder.toString());
+		AST tree = eqtutor.getTree(parser);
+		setStartState(tree);
+	}
+	
+	private void generateEndState() {
+		AST startTree = getStartState();
+		
+	}
 
+	public AST getStartState() {
+		return startState;
+	}
+
+	public void setStartState(AST startState) {
+		this.startState = startState;
+	}
+
+	public AST getEndState() {
+		return endState;
+	}
+
+	public void setEndState(AST endState) {
+		this.endState = endState;
+	}
+
+	
+	/*
 	private int atoms;
 	private int nestings;
 	
@@ -64,7 +129,5 @@ public class PropositionalExpressionGenerator extends ExpressionGenerator {
 	public int getNestings() {
 		return nestings;
 	}
-	
-	
-	
+	*/
 }
