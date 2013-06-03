@@ -81,8 +81,8 @@ public abstract class NewPersonalEquivalenceListener implements ActionListener {
 		
 		//Add the Back to Menu Button
 		menuButton = new JButton("Back to Menu");
-		//hidePanels();
-		//getMenu().setVisible(true);
+		BackToMenuListener menuListener = new BackToMenuListener(this);
+		menuButton.addActionListener(menuListener);
 		
 		//Add the Save To File Button
 		saveButton = new JButton("Save To File");
