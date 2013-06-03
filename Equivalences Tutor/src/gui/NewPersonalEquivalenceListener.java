@@ -68,7 +68,7 @@ public abstract class NewPersonalEquivalenceListener implements ActionListener {
 	
 	protected abstract void createEquivalencePanel();
 
-	private void createButtonsPanel() {
+	protected void createButtonsPanel() {
 		buttons = new JPanel(new MigLayout());
 		
 		//Add the New Equivalence Button
@@ -194,6 +194,14 @@ public abstract class NewPersonalEquivalenceListener implements ActionListener {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public JPanel getEquivalence() {
+		return this.equivalence;
+	}
+	
+	public void setEquivalence(JPanel equivalence) {
+		this.equivalence = equivalence;
 	}
 	
 }

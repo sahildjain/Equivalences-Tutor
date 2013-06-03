@@ -74,9 +74,9 @@ public class ASTAndNode extends ASTPropositionalBinaryNode {
 	public String toParserString() {
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append("(");
-		stringBuilder.append(getLeft().toString());
+		stringBuilder.append(getLeft().toParserString());
 		stringBuilder.append(" & ");
-		stringBuilder.append(getRight().toString());
+		stringBuilder.append(getRight().toParserString());
 		stringBuilder.append(")");
 		return stringBuilder.toString();
 	}
