@@ -34,6 +34,8 @@ public class OrDialog extends JDialog {
 		panel = new JPanel(new MigLayout());
 		panel.add(addIdempotence(), BorderLayout.NORTH);
 		panel.add(addCommutativity(), BorderLayout.NORTH);
+		panel.add(addDistributivity(), BorderLayout.NORTH);
+		panel.add(addDistributivityDiff(), BorderLayout.NORTH);
 		getContentPane().add(panel);
 		pack();
 		setLocationRelativeTo(getFrame());
@@ -49,6 +51,18 @@ public class OrDialog extends JDialog {
 	private JButton addCommutativity() {
 		JButton button = new JButton("Commutativity: A \u2228 B = B \u2228 A");
 		button.addActionListener(new CommutativityListener());
+		return button;
+	}
+	
+	private JButton addDistributivity() {
+		JButton button = new JButton("Distributivity: A \u2228 (B \u2227 C) =  (A \u2228 B) \u2227 (A \u2228 C)");
+		button.addActionListener(new DistributivityListener());
+		return button;
+	}
+	
+	private JButton addDistributivityDiff() {
+		JButton button = new JButton("Distributivity: (A \u2227 B) \u2228 (A \u2227 C) =  A \u2227 (B \u2228 C)");
+		button.addActionListener(new DistributivityDiffListener());
 		return button;
 	}
 
@@ -126,6 +140,47 @@ public class OrDialog extends JDialog {
 			if(!isSide()) {
 				OrEquivalence eq = new OrEquivalence(getListener().getRight().getLast().getTree().copy(), getKey());
 				AST tree = eq.commutativity();
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateRightList(node);
+				getListener().updateEquivalenceRight();
+			}
+		}
+		
+	}
+	
+	private class DistributivityListener implements ActionListener {
+		
+		public void actionPerformed(ActionEvent e) {
+			if(isSide()) {
+				OrEquivalence eq = new OrEquivalence(getListener().getLeft().getLast().getTree().copy(), getKey());
+				AST tree = eq.dist();
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateLeftList(node);
+				getListener().updateEquivalenceLeft();
+			}
+			if(!isSide()) {
+				OrEquivalence eq = new OrEquivalence(getListener().getRight().getLast().getTree().copy(), getKey());
+				AST tree = eq.dist();
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateRightList(node);
+				getListener().updateEquivalenceRight();
+			}
+		}
+	}
+	
+	private class DistributivityDiffListener implements ActionListener {
+		
+		public void actionPerformed(ActionEvent e) {
+			if(isSide()) {
+				OrEquivalence eq = new OrEquivalence(getListener().getLeft().getLast().getTree().copy(), getKey());
+				AST tree = eq.distdiff();
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateLeftList(node);
+				getListener().updateEquivalenceLeft();
+			}
+			if(!isSide()) {
+				OrEquivalence eq = new OrEquivalence(getListener().getRight().getLast().getTree().copy(), getKey());
+				AST tree = eq.distdiff();
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateRightList(node);
 				getListener().updateEquivalenceRight();

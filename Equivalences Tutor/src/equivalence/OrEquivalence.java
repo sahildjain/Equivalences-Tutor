@@ -51,6 +51,60 @@ public class OrEquivalence extends Equivalence {
 		return null;
 	}
 	
+	public AST dist() {
+		AST tree = getTree();
+		int key = getKey();
+		ASTNode node  = find(tree.getRoot(), key);
+		if(node instanceof ASTOrNode) {
+			ASTOrNode orNode = (ASTOrNode) node;
+			ASTPropositionalNode left = orNode.getLeft();
+			ASTPropositionalNode right = orNode.getRight();
+			if(right instanceof ASTAndNode) {
+				NodeEquivalence eq = new NodeEquivalence(((ASTAndNode) right).getLeft(), ((ASTAndNode) right).getRight());
+				if(!eq.isEquivalent()) {
+					ASTOrNode newLeft = new ASTOrNode(tree.getKey(), left, ((ASTAndNode) right).getLeft());
+					tree.setKey(getKey() + 1);
+					ASTOrNode newRight = new ASTOrNode(tree.getKey(), left, ((ASTAndNode) right).getRight());
+					tree.setKey(getKey() + 1);
+					ASTAndNode andNode = new ASTAndNode(tree.getKey(), newLeft, newRight);
+					tree.setKey(getKey() + 1);
+					ASTPropositionalNode p = replace(tree.getRoot().getLeaf(), andNode, key);
+					ASTProgramNode program = tree.getRoot();
+					program.setLeaf(p);
+					AST t = new AST(tree.getKey(), program);
+					return t;
+				}
+			}
+		}
+		return null;
+	}
+	
+	public AST distdiff() {
+		AST tree = getTree();
+		int key = getKey();
+		ASTNode node = find(tree.getRoot(), key);
+		if(node instanceof ASTOrNode) {
+			ASTOrNode orNode = (ASTOrNode) node;
+			ASTPropositionalNode left = orNode.getLeft();
+			ASTPropositionalNode right = orNode.getRight();
+			if(left instanceof ASTAndNode && right instanceof ASTAndNode) {
+				NodeEquivalence eq = new NodeEquivalence(((ASTAndNode) left).getLeft(), ((ASTAndNode) right).getLeft());
+				if(eq.isEquivalent()) {
+					ASTOrNode or = new ASTOrNode(tree.getKey(), ((ASTAndNode) left).getRight(), ((ASTAndNode) right).getRight());
+					tree.setKey(getKey() + 1);
+					ASTAndNode andNode = new ASTAndNode(tree.getKey(), ((ASTAndNode) left).getLeft(), or);
+					tree.setKey(getKey() + 1);
+					ASTPropositionalNode p = replace(tree.getRoot().getLeaf(), andNode, key);
+					ASTProgramNode program = tree.getRoot();
+					program.setLeaf(p);
+					AST t = new AST(tree.getKey() + 2, program);
+					return t;
+				}
+			}
+		}
+		return null;
+	}
+	
 	public AST getTree() {
 		return tree;
 	}
