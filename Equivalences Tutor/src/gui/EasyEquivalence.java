@@ -68,6 +68,9 @@ public class EasyEquivalence extends NewPersonalEquivalenceListener {
 		leftPanel.add(panel, BorderLayout.NORTH);
 		leftPanel.updateUI();
 		setLeftPanel(leftPanel);
+		if(list.getLast().getTree().toString().equals(getRight().getLast().getTree().toString())) {
+			completeEquivalence();
+		}
 	}
 
 	public void updateEquivalenceRight() {
@@ -90,6 +93,9 @@ public class EasyEquivalence extends NewPersonalEquivalenceListener {
 		rightPanel.add(panel, BorderLayout.NORTH);
 		rightPanel.updateUI();
 		setRightPanel(rightPanel);
+		if(list.getLast().getTree().toString().equals(getLeft().getLast().getTree().toString())) {
+			completeEquivalence();
+		}
 		/*
 		JPanel rightPanel = getRightPanel();
 		rightPanel.removeAll();
@@ -104,9 +110,18 @@ public class EasyEquivalence extends NewPersonalEquivalenceListener {
 		setRightPanel(rightPanel);*/
 	}
 	
-	//TODO
 	protected void completeEquivalence() {
-		
+		getEquivalence().setVisible(false);
+		getButtons().setVisible(false);
+		HardEquivalence hardEquivalence = new HardEquivalence(getFrame(), getMenu(), getId());
+		hardEquivalence.createEquivalencePanel();
+		hardEquivalence.createButtonsPanel();
+		hardEquivalence.getFrame().add(hardEquivalence.getEquivalence(), BorderLayout.NORTH);
+		hardEquivalence.getFrame().add(hardEquivalence.getButtons(), BorderLayout.SOUTH);
+		hardEquivalence.setLeft(getLeft());
+		hardEquivalence.setRight(getRight());
+		hardEquivalence.updateEquivalenceLeft();
+		hardEquivalence.updateEquivalenceRight();
 	}
 
 	public JPanel getLeftPanel() {

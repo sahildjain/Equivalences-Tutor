@@ -31,12 +31,35 @@ public class AndDialog extends JDialog {
 		this.setFrame(listener.getFrame());
 		this.setKey(key);
 		this.setSide(side);
+		/*AndEquivalence eq;
+		if(isSide()) {
+			AST temp = getListener().getLeft().getLast().getTree().copy();
+			eq = new AndEquivalence(temp, getKey());
+		}
+		else {
+			AST temp = getListener().getRight().getLast().getTree().copy();
+			eq = new AndEquivalence(temp, getKey());
+		}*/
 		panel = new JPanel(new MigLayout());
-		panel.add(addIdempotence(), BorderLayout.NORTH);
-		panel.add(addCommutativity(), BorderLayout.NORTH);
-		panel.add(addAssociaticityLeft(), BorderLayout.NORTH);
-		panel.add(addAssociaticityRight(), BorderLayout.NORTH);
-		panel.add(addDeMorgan(), BorderLayout.NORTH);
+		//if(eq.idempotence() != null) {
+			panel.add(addIdempotence(), BorderLayout.NORTH);
+		//}
+		//if(eq.commutativity() != null) {
+			panel.add(addCommutativity(), BorderLayout.NORTH);
+		//}
+		//if(eq.associativityLeft() != null) {
+			panel.add(addAssociaticityLeft(), BorderLayout.NORTH);
+		//}
+		//if(eq.associativityRight() != null) {
+			panel.add(addAssociaticityRight(), BorderLayout.NORTH);
+		//}
+		//if(eq.deMorgan() != null) {
+			panel.add(addDeMorgan(), BorderLayout.NORTH);
+		//}
+		//if(eq.iff() != null) {
+			panel.add(addIff(), BorderLayout.NORTH);
+		//}
+			panel.add(addDistributivityDiff(), BorderLayout.NORTH);
 		getContentPane().add(panel);
 		pack();
 		setLocationRelativeTo(getFrame());
@@ -70,6 +93,18 @@ public class AndDialog extends JDialog {
 	private JButton addDeMorgan() {
 		JButton button = new JButton("De Morgan's: A \u2227 B = \u00AC(\u00ACA \u2228 \u00ACB)");
 		button.addActionListener(new DeMorganListener());
+		return button;
+	}
+	
+	private JButton addIff() {
+		JButton button = new JButton("(A \u2192 B) \u2227 (B \u2192 A) = (A \u2194 B)");
+		button.addActionListener(new IffListener());
+		return button;
+	}
+	
+	private JButton addDistributivityDiff() {
+		JButton button = new JButton("Distributivity: A \u2227 (B \u2228 C) = (A \u2227 B) \u2228 (A \u2227 C)");
+		button.addActionListener(new DistributivityDiffListener());
 		return button;
 	}
 
@@ -217,6 +252,50 @@ public class AndDialog extends JDialog {
 				getListener().updateEquivalenceRight();
 			}
 		}
+	}
+	
+	private class IffListener implements ActionListener {
+
+		public void actionPerformed(ActionEvent e) {
+			if(isSide()) {
+				AST temp = getListener().getLeft().getLast().getTree().copy();
+				AndEquivalence eq = new AndEquivalence(temp, getKey());
+				AST tree = eq.iff();
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateLeftList(node);
+				getListener().updateEquivalenceLeft();
+			}
+			if(!isSide()) {
+				AST temp = getListener().getRight().getLast().getTree().copy();
+				AndEquivalence eq = new AndEquivalence(temp, getKey());
+				AST tree = eq.iff();
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateRightList(node);
+				getListener().updateEquivalenceRight();
+			}
+		} 
+
+	}
+	
+	private class DistributivityDiffListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			if(isSide()) {
+				AST temp = getListener().getLeft().getLast().getTree().copy();
+				AndEquivalence eq = new AndEquivalence(temp, getKey());
+				AST tree = eq.distdiff();
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateLeftList(node);
+				getListener().updateEquivalenceLeft();
+			}
+			if(!isSide()) {
+				AST temp = getListener().getRight().getLast().getTree().copy();
+				AndEquivalence eq = new AndEquivalence(temp, getKey());
+				AST tree = eq.distdiff();
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateRightList(node);
+				getListener().updateEquivalenceRight();
+			}
+		} 
 	}
 
 }

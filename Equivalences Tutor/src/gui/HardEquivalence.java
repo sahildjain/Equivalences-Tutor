@@ -95,6 +95,8 @@ public class HardEquivalence extends NewPersonalEquivalenceListener {
 		textFieldRight.setVisible(false);
 		submitLeft.setVisible(false);
 		submitRight.setVisible(false);
+		undoLeft.setVisible(false);
+		undoRight.setVisible(false);
 	}
 	
 	public JTextArea getTextAreaLeft() {
