@@ -105,6 +105,29 @@ public class OrEquivalence extends Equivalence {
 		return null;
 	}
 	
+	public AST distsame() {
+		AST tree = getTree();
+		int key = getKey();
+		ASTNode node = find(tree.getRoot(), key);
+		if(node instanceof ASTOrNode) {
+			ASTOrNode orNode = (ASTOrNode) node;
+			ASTPropositionalNode left = orNode.getLeft();
+			ASTPropositionalNode right = orNode.getRight();
+			if(right instanceof ASTAndNode) {
+				ASTAndNode andNode = (ASTAndNode) right;
+				NodeEquivalence eq = new NodeEquivalence(andNode.getLeft(), left);
+				if(eq.isEquivalent()) {
+					ASTPropositionalNode p = replace(tree.getRoot().getLeaf(), left, key);
+					ASTProgramNode program = tree.getRoot();
+					program.setLeaf(p);
+					AST t = new AST(tree.getKey() + 2, program);
+					return t;
+				}
+			}
+		}
+		return null;
+	}
+	
 	public AST getTree() {
 		return tree;
 	}

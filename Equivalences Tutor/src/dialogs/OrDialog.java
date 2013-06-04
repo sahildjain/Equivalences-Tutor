@@ -36,6 +36,7 @@ public class OrDialog extends JDialog {
 		panel.add(addCommutativity(), BorderLayout.NORTH);
 		panel.add(addDistributivity(), BorderLayout.NORTH);
 		panel.add(addDistributivityDiff(), BorderLayout.NORTH);
+		panel.add(addDistributivitySame(), BorderLayout.NORTH);
 		getContentPane().add(panel);
 		pack();
 		setLocationRelativeTo(getFrame());
@@ -63,6 +64,12 @@ public class OrDialog extends JDialog {
 	private JButton addDistributivityDiff() {
 		JButton button = new JButton("Distributivity: (A \u2227 B) \u2228 (A \u2227 C) =  A \u2227 (B \u2228 C)");
 		button.addActionListener(new DistributivityDiffListener());
+		return button;
+	}
+	
+	private JButton addDistributivitySame() {
+		JButton button = new JButton("Distributivity: A \u2228 (A \u2227 B) = A");
+		button.addActionListener(new DistributivitySameListener());
 		return button;
 	}
 
@@ -181,6 +188,27 @@ public class OrDialog extends JDialog {
 			if(!isSide()) {
 				OrEquivalence eq = new OrEquivalence(getListener().getRight().getLast().getTree().copy(), getKey());
 				AST tree = eq.distdiff();
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateRightList(node);
+				getListener().updateEquivalenceRight();
+			}
+		}
+		
+	}
+	
+private class DistributivitySameListener implements ActionListener {
+		
+		public void actionPerformed(ActionEvent e) {
+			if(isSide()) {
+				OrEquivalence eq = new OrEquivalence(getListener().getLeft().getLast().getTree().copy(), getKey());
+				AST tree = eq.distsame();
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateLeftList(node);
+				getListener().updateEquivalenceLeft();
+			}
+			if(!isSide()) {
+				OrEquivalence eq = new OrEquivalence(getListener().getRight().getLast().getTree().copy(), getKey());
+				AST tree = eq.distsame();
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateRightList(node);
 				getListener().updateEquivalenceRight();
