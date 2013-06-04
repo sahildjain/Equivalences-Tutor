@@ -119,6 +119,13 @@ public class ASTIffNode extends ASTPropositionalBinaryNode {
 		panel.add(closeBracket, BorderLayout.EAST);
 		return panel;
 	}
-
+	
+	public ASTPropositionalNode copy() {
+		ASTIffNode newNode = new ASTIffNode(0, null, null);
+		newNode.setLeft(getLeft().copy());
+		newNode.setRight(getRight().copy());
+		newNode.setKey(getKey());
+		return newNode;
+	}
 
 }

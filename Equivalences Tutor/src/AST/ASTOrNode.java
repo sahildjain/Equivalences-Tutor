@@ -119,5 +119,13 @@ public class ASTOrNode extends ASTPropositionalBinaryNode {
 		panel.add(closeBracket, BorderLayout.EAST);
 		return panel;
 	}
+	
+	public ASTPropositionalNode copy() {
+		ASTOrNode newNode = new ASTOrNode(0, null, null);
+		newNode.setLeft(getLeft().copy());
+		newNode.setRight(getRight().copy());
+		newNode.setKey(getKey());
+		return newNode;
+	}
 
 }

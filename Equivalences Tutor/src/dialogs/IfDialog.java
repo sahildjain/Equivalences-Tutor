@@ -88,14 +88,14 @@ public class IfDialog extends JDialog {
 
 		public void actionPerformed(ActionEvent arg0) {
 			if(isSide()) {
-				IfEquivalence eq = new IfEquivalence(getListener().getLeft().getLast().getTree(), getKey());
+				IfEquivalence eq = new IfEquivalence(getListener().getLeft().getLast().getTree().copy(), getKey());
 				AST tree = eq.ifToOrEquivalence();
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateLeftList(node);
 				getListener().updateEquivalenceLeft();
 			}
 			if(!isSide()) {
-				IfEquivalence eq = new IfEquivalence(getListener().getRight().getLast().getTree(), getKey());
+				IfEquivalence eq = new IfEquivalence(getListener().getRight().getLast().getTree().copy(), getKey());
 				AST tree = eq.ifToOrEquivalence();
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateRightList(node);
@@ -109,14 +109,14 @@ public class IfDialog extends JDialog {
 
 		public void actionPerformed(ActionEvent e) {
 			if(isSide()) {
-				IfEquivalence eq = new IfEquivalence(getListener().getLeft().getLast().getTree(), getKey());
+				IfEquivalence eq = new IfEquivalence(getListener().getLeft().getLast().getTree().copy(), getKey());
 				AST tree = eq.ifToAndEquivalence();
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateLeftList(node);
 				getListener().updateEquivalenceLeft();
 			}
 			if(!isSide()) {
-				IfEquivalence eq = new IfEquivalence(getListener().getRight().getLast().getTree(), getKey());
+				IfEquivalence eq = new IfEquivalence(getListener().getRight().getLast().getTree().copy(), getKey());
 				AST tree = eq.ifToAndEquivalence();
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateRightList(node);

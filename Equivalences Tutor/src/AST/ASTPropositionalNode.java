@@ -15,6 +15,7 @@ public abstract class ASTPropositionalNode extends ASTNode {
 	public abstract TreeMap<String, Integer> numIdentifiers(TreeMap<String, Integer> identifiers);
 	public abstract int value(TreeMap<String, Integer> id);
 	public abstract JPanel createJPanel(NewPersonalEquivalenceListener l, boolean side);
+	public abstract ASTPropositionalNode copy();
 	
 	public void makeTransparent(JButton button) {
 		button.setOpaque(false);

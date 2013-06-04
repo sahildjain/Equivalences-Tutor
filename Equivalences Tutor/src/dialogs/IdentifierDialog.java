@@ -95,14 +95,14 @@ public class IdentifierDialog extends JDialog {
 
 		public void actionPerformed(ActionEvent e) {
 			if(isSide()) {
-				IdentifierEquivalence eq = new IdentifierEquivalence(getListener().getLeft().getLast().getTree(), getKey());
+				IdentifierEquivalence eq = new IdentifierEquivalence(getListener().getLeft().getLast().getTree().copy(), getKey());
 				AST tree = eq.doubleNegation();
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateLeftList(node);
 				getListener().updateEquivalenceLeft();
 			}
 			if(!isSide()) {
-				IdentifierEquivalence eq = new IdentifierEquivalence(getListener().getRight().getLast().getTree(), getKey());
+				IdentifierEquivalence eq = new IdentifierEquivalence(getListener().getRight().getLast().getTree().copy(), getKey());
 				AST tree = eq.doubleNegation();
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateRightList(node);
@@ -116,14 +116,14 @@ public class IdentifierDialog extends JDialog {
 
 		public void actionPerformed(ActionEvent e) {
 			if(isSide()) {
-				IdentifierEquivalence eq = new IdentifierEquivalence(getListener().getLeft().getLast().getTree(), getKey());
+				IdentifierEquivalence eq = new IdentifierEquivalence(getListener().getLeft().getLast().getTree().copy(), getKey());
 				AST tree = eq.andIdempotence();
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateLeftList(node);
 				getListener().updateEquivalenceLeft();
 			}
 			if(!isSide()) {
-				IdentifierEquivalence eq = new IdentifierEquivalence(getListener().getRight().getLast().getTree(), getKey());
+				IdentifierEquivalence eq = new IdentifierEquivalence(getListener().getRight().getLast().getTree().copy(), getKey());
 				AST tree = eq.andIdempotence();
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateRightList(node);
@@ -137,14 +137,14 @@ public class IdentifierDialog extends JDialog {
 
 		public void actionPerformed(ActionEvent e) {
 			if(isSide()) {
-				IdentifierEquivalence eq = new IdentifierEquivalence(getListener().getLeft().getLast().getTree(), getKey());
+				IdentifierEquivalence eq = new IdentifierEquivalence(getListener().getLeft().getLast().getTree().copy(), getKey());
 				AST tree = eq.orIdempotence();
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateLeftList(node);
 				getListener().updateEquivalenceLeft();
 			}
 			if(!isSide()) {
-				IdentifierEquivalence eq = new IdentifierEquivalence(getListener().getRight().getLast().getTree(), getKey());
+				IdentifierEquivalence eq = new IdentifierEquivalence(getListener().getRight().getLast().getTree().copy(), getKey());
 				AST tree = eq.orIdempotence();
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateRightList(node);

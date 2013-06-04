@@ -26,6 +26,10 @@ public class ASTIdentifierNode extends ASTPropositionalNode {
 		return this.id;
 	}
 	
+	public void setLeaf(String id) {
+		this.id = id;
+	}
+	
 	public void visit(ASTVisitor visitor) {
 		visitor.visitIdentifierNode(this);
 	}
@@ -83,6 +87,13 @@ public class ASTIdentifierNode extends ASTPropositionalNode {
 		button.addActionListener(listener);
 		panel.add(button);
 		return panel;
+	}
+	
+	public ASTPropositionalNode copy() {
+		ASTIdentifierNode newNode = new ASTIdentifierNode(0, null);
+		newNode.setLeaf(getLeaf());
+		newNode.setKey(getKey());
+		return newNode;
 	}
 
 }

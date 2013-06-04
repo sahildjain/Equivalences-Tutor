@@ -109,7 +109,7 @@ public class AndDialog extends JDialog {
 
 		public void actionPerformed(ActionEvent e) {
 			if(isSide()) {
-				AST temp = (AST) getListener().getLeft().getLast().getTree().copy();
+				AST temp = getListener().getLeft().getLast().getTree().copy();
 				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.idempotence();
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
@@ -117,7 +117,8 @@ public class AndDialog extends JDialog {
 				getListener().updateEquivalenceLeft();
 			}
 			if(!isSide()) {
-				AndEquivalence eq = new AndEquivalence(getListener().getRight().getLast().getTree(), getKey());
+				AST temp = getListener().getRight().getLast().getTree().copy();
+				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.idempotence();
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateRightList(node);
@@ -131,7 +132,7 @@ public class AndDialog extends JDialog {
 
 		public void actionPerformed(ActionEvent e) {
 			if(isSide()) {
-				AST temp = (AST) getListener().getLeft().getLast().getTree().clone();
+				AST temp = getListener().getLeft().getLast().getTree().copy();
 				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.commutativity();
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
@@ -139,7 +140,8 @@ public class AndDialog extends JDialog {
 				getListener().updateEquivalenceLeft();
 			}
 			if(!isSide()) {
-				AndEquivalence eq = new AndEquivalence(getListener().getRight().getLast().getTree(), getKey());
+				AST temp = getListener().getRight().getLast().getTree().copy();
+				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.commutativity();
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateRightList(node);
@@ -153,7 +155,7 @@ public class AndDialog extends JDialog {
 
 		public void actionPerformed(ActionEvent e) {
 			if(isSide()) {
-				AST temp = (AST) getListener().getLeft().getLast().getTree().clone();
+				AST temp = getListener().getLeft().getLast().getTree().copy();
 				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.associativityLeft();
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
@@ -161,7 +163,8 @@ public class AndDialog extends JDialog {
 				getListener().updateEquivalenceLeft();
 			}
 			if(!isSide()) {
-				AndEquivalence eq = new AndEquivalence(getListener().getRight().getLast().getTree(), getKey());
+				AST temp = getListener().getRight().getLast().getTree().copy();
+				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.associativityLeft();
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateRightList(node);
@@ -175,14 +178,16 @@ public class AndDialog extends JDialog {
 
 		public void actionPerformed(ActionEvent e) {
 			if(isSide()) {
-				AndEquivalence eq = new AndEquivalence(getListener().getLeft().getLast().getTree(), getKey());
+				AST temp = getListener().getLeft().getLast().getTree().copy();
+				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.associativityRight();
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateLeftList(node);
 				getListener().updateEquivalenceLeft();
 			}
 			if(!isSide()) {
-				AndEquivalence eq = new AndEquivalence(getListener().getRight().getLast().getTree(), getKey());
+				AST temp = getListener().getRight().getLast().getTree().copy();
+				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.associativityRight();
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateRightList(node);
@@ -196,14 +201,16 @@ public class AndDialog extends JDialog {
 
 		public void actionPerformed(ActionEvent e) {
 			if(isSide()) {
-				AndEquivalence eq = new AndEquivalence(getListener().getLeft().getLast().getTree(), getKey());
+				AST temp = getListener().getLeft().getLast().getTree().copy();
+				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.deMorgan();
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateLeftList(node);
 				getListener().updateEquivalenceLeft();
 			}
 			if(!isSide()) {
-				AndEquivalence eq = new AndEquivalence(getListener().getRight().getLast().getTree(), getKey());
+				AST temp = getListener().getRight().getLast().getTree().copy();
+				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.deMorgan();
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateRightList(node);

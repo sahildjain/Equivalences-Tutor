@@ -95,14 +95,14 @@ public class NotDialog extends JDialog {
 
 		public void actionPerformed(ActionEvent e) {
 			if(isSide()) {
-				NotEquivalence eq = new NotEquivalence(getListener().getLeft().getLast().getTree(), getKey());
+				NotEquivalence eq = new NotEquivalence(getListener().getLeft().getLast().getTree().copy(), getKey());
 				AST tree = eq.doubleNegation();
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateLeftList(node);
 				getListener().updateEquivalenceLeft();
 			}
 			if(!isSide()) {
-				NotEquivalence eq = new NotEquivalence(getListener().getRight().getLast().getTree(), getKey());
+				NotEquivalence eq = new NotEquivalence(getListener().getRight().getLast().getTree().copy(), getKey());
 				AST tree = eq.doubleNegation();
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateRightList(node);
@@ -116,14 +116,14 @@ public class NotDialog extends JDialog {
 
 		public void actionPerformed(ActionEvent e) {
 			if(isSide()) {
-				NotEquivalence eq = new NotEquivalence(getListener().getLeft().getLast().getTree(), getKey());
+				NotEquivalence eq = new NotEquivalence(getListener().getLeft().getLast().getTree().copy(), getKey());
 				AST tree = eq.deMorganAnd();
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateLeftList(node);
 				getListener().updateEquivalenceLeft();
 			}
 			if(!isSide()) {
-				NotEquivalence eq = new NotEquivalence(getListener().getRight().getLast().getTree(), getKey());
+				NotEquivalence eq = new NotEquivalence(getListener().getRight().getLast().getTree().copy(), getKey());
 				AST tree = eq.deMorganAnd();
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateRightList(node);
@@ -137,14 +137,14 @@ public class NotDialog extends JDialog {
 
 		public void actionPerformed(ActionEvent e) {
 			if(isSide()) {
-				NotEquivalence eq = new NotEquivalence(getListener().getLeft().getLast().getTree(), getKey());
+				NotEquivalence eq = new NotEquivalence(getListener().getLeft().getLast().getTree().copy(), getKey());
 				AST tree = eq.deMorganOr();
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateLeftList(node);
 				getListener().updateEquivalenceLeft();
 			}
 			if(!isSide()) {
-				NotEquivalence eq = new NotEquivalence(getListener().getRight().getLast().getTree(), getKey());
+				NotEquivalence eq = new NotEquivalence(getListener().getRight().getLast().getTree().copy(), getKey());
 				AST tree = eq.deMorganOr();
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateRightList(node);

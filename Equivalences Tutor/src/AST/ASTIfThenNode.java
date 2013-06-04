@@ -120,5 +120,12 @@ public class ASTIfThenNode extends ASTPropositionalBinaryNode {
 		return panel;
 	}
 
-
+	public ASTPropositionalNode copy() {
+		ASTIfThenNode newNode = new ASTIfThenNode(0, null, null);
+		newNode.setLeft(getLeft().copy());
+		newNode.setRight(getRight().copy());
+		newNode.setKey(getKey());
+		return newNode;
+	}
+	
 }

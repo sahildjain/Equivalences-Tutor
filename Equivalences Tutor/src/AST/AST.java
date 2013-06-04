@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeMap;
 
-public class AST implements Cloneable {
+public class AST {
 	
 	private ASTProgramNode root;
 	private int key;
@@ -112,21 +112,10 @@ public class AST implements Cloneable {
 		return identifiers;
 	}
 	
-	@Override
-	public Object clone() {
-		try {
-			return super.clone();
-		}
-		catch(CloneNotSupportedException e) {
-			System.out.println("Clone not allowed");
-			return this;
-		}
-	}
-	
 	public AST copy() {
 		AST t = new AST(0, null);
 		t.setKey(this.getKey());
-		t.setRoot(this.getRoot());
+		t.setRoot((ASTProgramNode) this.getRoot().copy());
 		return t;
 	}
 

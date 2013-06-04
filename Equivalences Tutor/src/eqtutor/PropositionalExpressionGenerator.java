@@ -46,8 +46,9 @@ public class PropositionalExpressionGenerator extends ExpressionGenerator {
 		setStartState(tree);
 	}
 	
+	//TODO
 	private void generateEndState() {
-		AST startTree = getStartState();
+		//AST startTree = getStartState();
 		
 	}
 

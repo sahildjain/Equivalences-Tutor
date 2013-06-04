@@ -90,5 +90,12 @@ public class ASTNotNode extends ASTPropositionalUnaryNode {
 		panel.add(closeBracket, BorderLayout.EAST);
 		return panel;
 	}
+	
+	public ASTPropositionalNode copy() {
+		ASTNotNode newNode = new ASTNotNode(0, null);
+		newNode.setLeaf(getLeaf().copy());
+		newNode.setKey(getKey());
+		return newNode;
+	}
 
 }

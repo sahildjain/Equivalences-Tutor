@@ -120,4 +120,12 @@ public class ASTAndNode extends ASTPropositionalBinaryNode {
 		return panel;
 	}
 	
+	public ASTPropositionalNode copy() {
+		ASTAndNode newNode = new ASTAndNode(0, null, null);
+		newNode.setLeft(getLeft().copy());
+		newNode.setRight(getRight().copy());
+		newNode.setKey(getKey());
+		return newNode;
+	}
+	
 }

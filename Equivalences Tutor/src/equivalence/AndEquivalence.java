@@ -14,7 +14,7 @@ public class AndEquivalence extends Equivalence {
 	
 	// A & A = A
 	public AST idempotence() {
-		AST tree = getTree();
+		AST tree = getTree().copy();
 		int key = getKey();
 		ASTNode node = find(tree.getRoot(), key);
 		if(node instanceof ASTAndNode) {
