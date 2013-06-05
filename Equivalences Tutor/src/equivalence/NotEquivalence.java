@@ -84,6 +84,56 @@ public class NotEquivalence extends Equivalence {
 		}
 		return null;
 	}
+	
+	// !(A <-> B) = A <-> !B
+	public AST notIff() {
+		AST tree = getTree();
+		int key = getKey();
+		ASTNode node = find(tree.getRoot(), key);
+		if(node instanceof ASTNotNode) {
+			ASTNotNode notNode = (ASTNotNode) node;
+			ASTPropositionalNode leaf = notNode.getLeaf();
+			if(leaf instanceof ASTIffNode) {
+				ASTPropositionalNode left = ((ASTIffNode) leaf).getLeft();
+				ASTPropositionalNode right = ((ASTIffNode) leaf).getRight();
+				ASTNotNode notRight = new ASTNotNode(tree.getKey(), right);
+				tree.setKey(tree.getKey() + 1);
+				ASTIffNode iffNode = new ASTIffNode(tree.getKey(), left, notRight);
+				tree.setKey(tree.getKey() + 1);
+				ASTPropositionalNode p = replace(tree.getRoot().getLeaf(), iffNode, key);
+				ASTProgramNode program = tree.getRoot();
+				program.setLeaf(p);
+				AST t = new AST(tree.getKey() + 2, program);
+				return t;
+			}
+		}
+		return null;
+	}
+		
+	// !(A -> B) = A & !B
+	public AST notIfThen() {
+		AST tree = getTree();
+		int key = getKey();
+		ASTNode node = find(tree.getRoot(), key);
+		if(node instanceof ASTNotNode) {
+			ASTNotNode notNode = (ASTNotNode) node;
+			ASTPropositionalNode leaf = notNode.getLeaf();
+			if(leaf instanceof ASTIfThenNode) {
+				ASTPropositionalNode left = ((ASTIfThenNode) leaf).getLeft();
+				ASTPropositionalNode right = ((ASTIfThenNode) leaf).getRight();
+				ASTNotNode notRight = new ASTNotNode(tree.getKey(), right);
+				tree.setKey(tree.getKey() + 1);
+				ASTAndNode andNode = new ASTAndNode(tree.getKey(), left, notRight);
+				tree.setKey(tree.getKey() + 1);
+				ASTPropositionalNode p = replace(tree.getRoot().getLeaf(), andNode, key);
+				ASTProgramNode program = tree.getRoot();
+				program.setLeaf(p);
+				AST t = new AST(tree.getKey() + 2, program);
+				return t;
+			}
+		}
+		return null;
+	}
 
 	private boolean containsDoubleNegation(ASTNotNode notNode) {
 		ASTPropositionalNode leaf = notNode.getLeaf();

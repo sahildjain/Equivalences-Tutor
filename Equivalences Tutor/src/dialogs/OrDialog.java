@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import equivalence.AndEquivalence;
 import equivalence.EquivalenceLinkNode;
 import equivalence.OrEquivalence;
 import gui.NewPersonalEquivalenceListener;
@@ -34,6 +35,8 @@ public class OrDialog extends JDialog {
 		panel = new JPanel(new MigLayout());
 		panel.add(addIdempotence(), BorderLayout.NORTH);
 		panel.add(addCommutativity(), BorderLayout.NORTH);
+		panel.add(addAssociaticityLeft(), BorderLayout.NORTH);
+		panel.add(addAssociaticityRight(), BorderLayout.NORTH);
 		panel.add(addDistributivity(), BorderLayout.NORTH);
 		panel.add(addDistributivityDiff(), BorderLayout.NORTH);
 		panel.add(addDistributivitySame(), BorderLayout.NORTH);
@@ -70,6 +73,18 @@ public class OrDialog extends JDialog {
 	private JButton addDistributivitySame() {
 		JButton button = new JButton("Distributivity: A \u2228 (A \u2227 B) = A");
 		button.addActionListener(new DistributivitySameListener());
+		return button;
+	}
+	
+	private JButton addAssociaticityLeft() {
+		JButton button = new JButton("Associativity: (A \u2228 B) \u2228 C = A \u2228 (B \u2228 C)");
+		button.addActionListener(new AssociativityLeftListener());
+		return button;
+	}
+	
+	private JButton addAssociaticityRight() {
+		JButton button = new JButton("Associativity: A \u2228 (B \u2228 C) = (A \u2228 B) \u2228 C");
+		button.addActionListener(new AssociativityRightListener());
 		return button;
 	}
 
@@ -196,8 +211,8 @@ public class OrDialog extends JDialog {
 		
 	}
 	
-private class DistributivitySameListener implements ActionListener {
-		
+	private class DistributivitySameListener implements ActionListener {
+			
 		public void actionPerformed(ActionEvent e) {
 			if(isSide()) {
 				OrEquivalence eq = new OrEquivalence(getListener().getLeft().getLast().getTree().copy(), getKey());
@@ -216,5 +231,53 @@ private class DistributivitySameListener implements ActionListener {
 		}
 		
 	}
+	
+	private class AssociativityLeftListener implements ActionListener {
 
+		public void actionPerformed(ActionEvent e) {
+			if(isSide()) {
+				AST temp = getListener().getLeft().getLast().getTree().copy();
+				AndEquivalence eq = new AndEquivalence(temp, getKey());
+				AST tree = eq.associativityLeft();
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateLeftList(node);
+				getListener().updateEquivalenceLeft();
+			}
+			if(!isSide()) {
+				AST temp = getListener().getRight().getLast().getTree().copy();
+				AndEquivalence eq = new AndEquivalence(temp, getKey());
+				AST tree = eq.associativityLeft();
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateRightList(node);
+				getListener().updateEquivalenceRight();
+			}
+		}
+		
+	}
+
+	private class AssociativityRightListener implements ActionListener {
+
+		public void actionPerformed(ActionEvent e) {
+			if(isSide()) {
+				AST temp = getListener().getLeft().getLast().getTree().copy();
+				OrEquivalence eq = new OrEquivalence(temp, getKey());
+				AST tree = eq.associativityRight();
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateLeftList(node);
+				getListener().updateEquivalenceLeft();
+			}
+			if(!isSide()) {
+				AST temp = getListener().getRight().getLast().getTree().copy();
+				OrEquivalence eq = new OrEquivalence(temp, getKey());
+				AST tree = eq.associativityRight();
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateRightList(node);
+				getListener().updateEquivalenceRight();
+			}
+		}
+		
+	}
+	
 }
+
+

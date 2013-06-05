@@ -21,9 +21,10 @@ public class AndEquivalence extends Equivalence {
 			ASTAndNode andNode = (ASTAndNode) node;
 			NodeEquivalence equivalence = new NodeEquivalence(andNode.getLeft(),((ASTAndNode) node).getRight());
 			if(equivalence.isEquivalent()) {
-				ASTIdentifierNode identifer = new ASTIdentifierNode(tree.getKey(), andNode.getLeft().toString());
+				ASTPropositionalNode propNode = andNode.getLeft();
+				propNode.setKey(tree.getKey());
 				tree.setKey(tree.getKey() + 1);
-				ASTPropositionalNode p = replace(tree.getRoot().getLeaf(), identifer, key);
+				ASTPropositionalNode p = replace(tree.getRoot().getLeaf(), propNode, key);
 				ASTProgramNode program = tree.getRoot();
 				program.setLeaf(p);
 				AST t = new AST(tree.getKey(), program);
@@ -40,8 +41,7 @@ public class AndEquivalence extends Equivalence {
 		ASTNode node  = find(tree.getRoot(), key);
 		if(node instanceof ASTAndNode) {
 			ASTAndNode andNode = (ASTAndNode) node;
-			ASTAndNode newNode = new ASTAndNode(tree.getKey(), andNode.getRight(), andNode.getLeft());
-			tree.setKey(tree.getKey() + 1);
+			ASTAndNode newNode = new ASTAndNode(andNode.getKey(), andNode.getRight(), andNode.getLeft());
 			ASTPropositionalNode p = replace(tree.getRoot().getLeaf(), newNode, key);
 			ASTProgramNode program = tree.getRoot();
 			program.setLeaf(p);
@@ -173,11 +173,11 @@ public class AndEquivalence extends Equivalence {
 				NodeEquivalence eq = new NodeEquivalence(((ASTOrNode) right).getLeft(), ((ASTOrNode) right).getRight());
 				if(!eq.isEquivalent()) {
 					ASTAndNode newLeft = new ASTAndNode(tree.getKey(), left, ((ASTOrNode) right).getLeft());
-					tree.setKey(getKey() + 1);
+					tree.setKey(tree.getKey() + 1);
 					ASTAndNode newRight = new ASTAndNode(tree.getKey(), left, ((ASTOrNode) right).getRight());
-					tree.setKey(getKey() + 1);
+					tree.setKey(tree.getKey() + 1);
 					ASTOrNode orNode = new ASTOrNode(tree.getKey(), newLeft, newRight);
-					tree.setKey(getKey() + 1);
+					tree.setKey(tree.getKey() + 1);
 					ASTPropositionalNode p = replace(tree.getRoot().getLeaf(), orNode, key);
 					ASTProgramNode program = tree.getRoot();
 					program.setLeaf(p);
@@ -201,9 +201,9 @@ public class AndEquivalence extends Equivalence {
 				NodeEquivalence eq = new NodeEquivalence(((ASTOrNode) left).getLeft(), ((ASTOrNode) right).getLeft());
 				if(eq.isEquivalent()) {
 					ASTAndNode and = new ASTAndNode(tree.getKey(), ((ASTOrNode) left).getRight(), ((ASTOrNode) right).getRight());
-					tree.setKey(getKey() + 1);
+					tree.setKey(tree.getKey() + 1);
 					ASTOrNode orNode = new ASTOrNode(tree.getKey(), ((ASTOrNode) left).getLeft(), and);
-					tree.setKey(getKey() + 1);
+					tree.setKey(tree.getKey() + 1);
 					ASTPropositionalNode p = replace(tree.getRoot().getLeaf(), orNode, key);
 					ASTProgramNode program = tree.getRoot();
 					program.setLeaf(p);

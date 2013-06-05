@@ -27,7 +27,9 @@ public class EasyEquivalence extends NewPersonalEquivalenceListener {
 		JPanel left = new JPanel(new MigLayout());
 		JPanel centre = new JPanel(new MigLayout());
 		JPanel right = new JPanel(new MigLayout());
-		leftPanel = new JPanel(new MigLayout());
+		leftPanel = new JPanel(new MigLayout("debug"));
+		leftPanel.setSize(100, 100);
+		leftPanel.setAutoscrolls(true);
 		rightPanel = new JPanel(new MigLayout());
 		//textFieldLeft = new JTextField(60);
 		//textFieldRight = new JTextField(60);

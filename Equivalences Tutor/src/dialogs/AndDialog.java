@@ -41,22 +41,22 @@ public class AndDialog extends JDialog {
 			eq = new AndEquivalence(temp, getKey());
 		}*/
 		panel = new JPanel(new MigLayout());
-		//if(eq.idempotence() != null) {
+		//if(eq.idempotence() instanceof AST && eq.idempotence() != null) {
 			panel.add(addIdempotence(), BorderLayout.NORTH);
 		//}
-		//if(eq.commutativity() != null) {
+		//if(eq.commutativity() instanceof AST && eq.commutativity() != null) {
 			panel.add(addCommutativity(), BorderLayout.NORTH);
 		//}
-		//if(eq.associativityLeft() != null) {
+		//if(eq.associativityLeft() instanceof AST && eq.associativityLeft() != null) {
 			panel.add(addAssociaticityLeft(), BorderLayout.NORTH);
 		//}
-		//if(eq.associativityRight() != null) {
+		//if(eq.associativityRight() instanceof AST && eq.associativityRight() != null) {
 			panel.add(addAssociaticityRight(), BorderLayout.NORTH);
 		//}
-		//if(eq.deMorgan() != null) {
+		//if(eq.deMorgan() instanceof AST && eq.deMorgan() != null) {
 			panel.add(addDeMorgan(), BorderLayout.NORTH);
 		//}
-		//if(eq.iff() != null) {
+		//if(eq.iff() instanceof AST && eq.iff() != null) {
 			panel.add(addIff(), BorderLayout.NORTH);
 		//}
 			panel.add(addDistributivityDiff(), BorderLayout.NORTH);

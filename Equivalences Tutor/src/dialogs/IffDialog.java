@@ -35,6 +35,8 @@ public class IffDialog extends JDialog {
 		panel.add(addIffToAnd(), BorderLayout.NORTH);
 		panel.add(addIffToOr(), BorderLayout.NORTH);
 		panel.add(addNots(), BorderLayout.NORTH);
+		panel.add(addIffNot1(), BorderLayout.NORTH);
+		panel.add(addIffNot2(), BorderLayout.NORTH);
 		getContentPane().add(panel);
 		pack();
 		setLocationRelativeTo(getFrame());
@@ -59,6 +61,18 @@ public class IffDialog extends JDialog {
 	private JButton addNots() {
 		JButton button = new JButton("A \u2194 B = \u00ACA \u2194 \u00ACB");
 		button.addActionListener(new NotsListener());
+		return button;
+	}
+	
+	private JButton addIffNot1() {
+		JButton button = new JButton("A \u2194 \u00ACB = \u00ACA \u2194 B");
+		button.addActionListener(new IffNot1Listener());
+		return button;
+	}
+	
+	private JButton addIffNot2() {
+		JButton button = new JButton("\u00ACA \u2194 B = A \u2194 \u00ACB");
+		button.addActionListener(new IffNot2Listener());
 		return button;
 	}
 
@@ -155,6 +169,46 @@ public class IffDialog extends JDialog {
 			}
 		}
 		
+	}
+	
+	private class IffNot1Listener implements ActionListener {
+		
+		public void actionPerformed(ActionEvent e) {
+			if(isSide()) {
+				IffEquivalence eq = new IffEquivalence(getListener().getLeft().getLast().getTree().copy(), getKey());
+				AST tree = eq.iffNot1();
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateLeftList(node);
+				getListener().updateEquivalenceLeft();
+			}
+			if(!isSide()) {
+				IffEquivalence eq = new IffEquivalence(getListener().getRight().getLast().getTree().copy(), getKey());
+				AST tree = eq.iffNot1();
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateRightList(node);
+				getListener().updateEquivalenceRight();
+			}
+		}
+	}
+	
+private class IffNot2Listener implements ActionListener {
+		
+		public void actionPerformed(ActionEvent e) {
+			if(isSide()) {
+				IffEquivalence eq = new IffEquivalence(getListener().getLeft().getLast().getTree().copy(), getKey());
+				AST tree = eq.iffNot2();
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateLeftList(node);
+				getListener().updateEquivalenceLeft();
+			}
+			if(!isSide()) {
+				IffEquivalence eq = new IffEquivalence(getListener().getRight().getLast().getTree().copy(), getKey());
+				AST tree = eq.iffNot2();
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateRightList(node);
+				getListener().updateEquivalenceRight();
+			}
+		}
 	}
 
 }

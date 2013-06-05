@@ -85,6 +85,56 @@ public class IffEquivalence  extends Equivalence {
 		return null;
 	}
 	
+	//TODO A <-> !B = !A <-> B
+	public AST iffNot1() {
+		AST tree = getTree();
+		int key = getKey();
+		ASTNode node  = find(tree.getRoot(), key);
+		if(node instanceof ASTIffNode) {
+			ASTIffNode iffNode = (ASTIffNode) node;
+			ASTPropositionalNode left = iffNode.getLeft();
+			ASTPropositionalNode right = iffNode.getRight();
+			if(right instanceof ASTNotNode) {
+				ASTNotNode notLeft = new ASTNotNode(tree.getKey(), left);
+				tree.setKey(tree.getKey() + 1);
+				ASTPropositionalNode propNode = ((ASTNotNode) right).getLeaf();
+				ASTIffNode newIffNode = new ASTIffNode(tree.getKey(), notLeft, propNode);
+				ASTPropositionalNode p = replace(tree.getRoot().getLeaf(), newIffNode, key);
+				ASTProgramNode program = tree.getRoot();
+				program.setLeaf(p);
+				AST t = new AST(tree.getKey() + 2, program);
+				return t;
+			}
+		}
+		return null;
+	}
+	
+	
+	
+	// TODO !A <-> B = A <-> !B
+	public AST iffNot2() {
+		AST tree = getTree();
+		int key = getKey();
+		ASTNode node  = find(tree.getRoot(), key);
+		if(node instanceof ASTIffNode) {
+			ASTIffNode iffNode = (ASTIffNode) node;
+			ASTPropositionalNode left = iffNode.getLeft();
+			ASTPropositionalNode right = iffNode.getRight();
+			if(left instanceof ASTNotNode) {
+				ASTNotNode notRight = new ASTNotNode(tree.getKey(), right);
+				tree.setKey(tree.getKey() + 1);
+				ASTPropositionalNode propNode = ((ASTNotNode) left).getLeaf();
+				ASTIffNode newIffNode = new ASTIffNode(tree.getKey(), propNode, notRight);
+				ASTPropositionalNode p = replace(tree.getRoot().getLeaf(), newIffNode, key);
+				ASTProgramNode program = tree.getRoot();
+				program.setLeaf(p);
+				AST t = new AST(tree.getKey() + 2, program);
+				return t;
+			}
+		}
+		return null;
+	}
+	
 	// A <-> !B = !(A <-> B) AND !A <-> B = !(A <-> B)
 	/* TODO fix this method, seems wrong.
 	public AST notIff() {
