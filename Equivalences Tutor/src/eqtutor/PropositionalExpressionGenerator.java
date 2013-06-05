@@ -1,6 +1,8 @@
 package eqtutor;
 
-import AST.AST;
+import equivalence.*;
+import AST.*;
+
 
 public class PropositionalExpressionGenerator extends ExpressionGenerator {
 	
@@ -16,6 +18,8 @@ public class PropositionalExpressionGenerator extends ExpressionGenerator {
 			generateDNF();
 		}
 		generateEndState();
+		System.out.println(getStartState().toString());
+		System.out.println(getEndState().toString());
 	}
 	
 	private void generateCNF() {
@@ -46,12 +50,134 @@ public class PropositionalExpressionGenerator extends ExpressionGenerator {
 		setStartState(tree);
 	}
 	
-	//TODO
 	private void generateEndState() {
-		//AST startTree = getStartState();
-		
+		AST endState = getStartState().copy();
+		int random = (int)(Math.random() * 10);
+		int k = startState.getKey() - 1;
+		//System.out.println("random: " + random);
+		//System.out.println("k: " + k);
+		for(int i = 0 ; i < random; i++) {
+			int randKey = 1 + (int)(Math.random() * ((k - 1) + 1));
+			ASTNode node = Equivalence.find(startState.getRoot(), randKey);
+			//System.out.println(node.toString());
+			AST temp = null;
+			if(node instanceof ASTAndNode) {
+				temp = andInstance(endState, randKey);
+			}
+			else if(node instanceof ASTOrNode) {
+				temp = orInstance(endState, randKey);
+			}
+			else if(node instanceof ASTNotNode) {
+				temp = notInstance(endState, randKey);
+			}
+			else if(node instanceof ASTIfThenNode) {
+				temp = ifThenInstance(endState, randKey);
+			}
+			else if(node instanceof ASTIffNode) {
+				temp = iffInstance(endState, randKey);
+			}
+			else if(node instanceof ASTIdentifierNode) {
+				temp = identifierInstance(endState, randKey);
+			}
+			if(temp != null) {
+				endState = temp;
+			}
+		}
+		setEndState(endState);
+		NodeEquivalence n = new NodeEquivalence(getEndState().getRoot().getLeaf(), getStartState().getRoot().getLeaf());
+		if(n.isEquivalent()) {
+			generateEndState();
+		}
 	}
-
+	
+	private AST andInstance(AST endState, int randKey) {
+		AST temp = null;
+		AndEquivalence eq = new AndEquivalence(endState, randKey);
+		int r = 1 + (int)(Math.random() * ((8 - 1) + 1));
+		switch(r) {
+			case 1:	temp = eq.associativityLeft(); break;
+			case 2:	temp = eq.associativityRight(); break;
+			case 3:	temp = eq.commutativity(); break;
+			case 4:	temp = eq.deMorgan(); break;
+			case 5:	temp = eq.distback(); break;
+			case 6:	temp = eq.distdiff(); break;
+			case 7:	temp = eq.idempotence(); break;
+			case 8:	temp = eq.iff(); break;
+			default:
+		}
+		return temp;
+	}
+	
+	private AST orInstance(AST endState, int randKey) {
+		AST temp = null;
+		OrEquivalence eq = new OrEquivalence(endState, randKey);
+		int r = 1 + (int)(Math.random() * ((8 - 1) + 1));
+		switch(r) {
+			case 1:	temp = eq.associativityLeft(); break;
+			case 2:	temp = eq.associativityRight(); break;
+			case 3:	temp = eq.commutativity(); break;
+			case 4:	temp = eq.dist(); break;
+			case 5:	temp = eq.distdiff(); break;
+			case 7:	temp = eq.idempotence(); break;
+			case 8:	temp = eq.distsame(); break;
+			default:
+		}
+		return temp;
+	}
+	
+	private AST notInstance(AST endState, int randKey) {
+		AST temp = null;
+		NotEquivalence eq = new NotEquivalence(endState, randKey);
+		int r = 1 + (int)(Math.random() * ((3 - 1) + 1));
+		switch(r) {
+			case 1:	temp = eq.deMorganAnd(); break;
+			case 2:	temp = eq.deMorganOr(); break;
+			case 3:	temp = eq.doubleNegation(); break;
+			default:
+		}
+		return temp;
+	}
+	
+	private AST ifThenInstance(AST endState, int randKey) {
+		AST temp = null;
+		IfEquivalence eq = new IfEquivalence(endState, randKey);
+		int r = 1 + (int)(Math.random() * ((2 - 1) + 1));
+		switch(r) {
+			case 1:	temp = eq.ifToAndEquivalence(); break;
+			case 2:	temp = eq.ifToOrEquivalence(); break;
+			default:
+		}
+		return temp;
+	}
+	
+	private AST iffInstance(AST endState, int randKey) {
+		AST temp = null;
+		IffEquivalence eq = new IffEquivalence(endState, randKey);
+		int r = 1 + (int)(Math.random() * ((5 - 1) + 1));
+		switch(r) {
+			case 1:	temp = eq.iffNot1(); break;
+			case 2:	temp = eq.iffNot2(); break;
+			case 3:	temp = eq.iffToAndEquivalence(); break;
+			case 4:	temp = eq.iffToOrEquivalence(); break;
+			case 5:	temp = eq.negate(); break;
+			default:
+		}
+		return temp;
+	}
+	
+	private AST identifierInstance(AST endState, int randKey) {
+		AST temp = null;
+		IdentifierEquivalence eq = new IdentifierEquivalence(endState, randKey);
+		int r = 1 + (int)(Math.random() * ((3 - 1) + 1));
+		switch(r) {
+			case 1:	temp = eq.andIdempotence(); break;
+			case 2:	temp = eq.doubleNegation(); break;
+			case 3:	temp = eq.orIdempotence(); break;
+			default:
+		}
+		return temp;
+	}
+	
 	public AST getStartState() {
 		return startState;
 	}

@@ -4,107 +4,123 @@ import AST.*;
 
 public class IffEquivalence  extends Equivalence {
 	
-	private AST tree;
-	private int key;
-	
 	public IffEquivalence(AST tree, int key) {
-		this.setTree(tree);
-		this.setKey(key);
+		super(tree, key);
 	}
 	
 	// A <-> B = (A -> B) & (B -> A)
 	public AST iffToAndEquivalence() {
-		AST tree = getTree();
-		int key = getKey();
-		ASTNode node  = find(tree.getRoot(), key);
-		if(node instanceof ASTIffNode) {
-			ASTIffNode iffNode = (ASTIffNode) node;
-			ASTPropositionalNode left = iffNode.getLeft();
-			ASTPropositionalNode right = iffNode.getRight();
-			ASTIfThenNode ifThenNode1 = new ASTIfThenNode(tree.getKey(), left, right);
-			tree.setKey(tree.getKey() + 1);
-			ASTIfThenNode ifThenNode2 = new ASTIfThenNode(tree.getKey(), right, left);
-			tree.setKey(tree.getKey() + 1);
-			ASTAndNode andNode = new ASTAndNode(iffNode.getKey(), ifThenNode1, ifThenNode2);
-			ASTPropositionalNode p = replace(tree.getRoot().getLeaf(), andNode, key);
-			ASTProgramNode program = tree.getRoot();
-			program.setLeaf(p);
-			AST t = new AST(tree.getKey() + 2, program);
-			return t;
+		try {
+			AST tree = getTree();
+			int key = getKey();
+			ASTNode node  = find(tree.getRoot(), key);
+			if(node instanceof ASTIffNode) {
+				ASTIffNode iffNode = (ASTIffNode) node;
+				ASTPropositionalNode left = iffNode.getLeft();
+				ASTPropositionalNode right = iffNode.getRight();
+				ASTIfThenNode ifThenNode1 = new ASTIfThenNode(tree.getKey(), left, right);
+				tree.setKey(tree.getKey() + 1);
+				ASTIfThenNode ifThenNode2 = new ASTIfThenNode(tree.getKey(), right, left);
+				tree.setKey(tree.getKey() + 1);
+				ASTAndNode andNode = new ASTAndNode(iffNode.getKey(), ifThenNode1, ifThenNode2);
+				ASTPropositionalNode p = replace(tree.getRoot().getLeaf(), andNode, key);
+				ASTProgramNode program = tree.getRoot();
+				program.setLeaf(p);
+				AST t = new AST(tree.getKey() + 2, program);
+				return t;
+			}
+		}
+		catch(Exception e) {
+			return null;
 		}
 		return null;
 	}
 	
 	// A <-> B = (A & B) | (!A & !B)
 	public AST iffToOrEquivalence() {
-		AST tree = getTree();
-		int key = getKey();
-		ASTNode node  = find(tree.getRoot(), key);
-		if(node instanceof ASTIffNode) {
-			ASTIffNode iffNode = (ASTIffNode) node;
-			ASTPropositionalNode left = iffNode.getLeft();
-			ASTPropositionalNode right = iffNode.getRight();
-			ASTAndNode andNode1 = new ASTAndNode(tree.getKey(), left, right);
-			tree.setKey(tree.getKey() + 1);
-			ASTNotNode notLeft = new ASTNotNode(tree.getKey(), left);
-			tree.setKey(tree.getKey() + 1);
-			ASTNotNode notRight = new ASTNotNode(tree.getKey(), right);
-			tree.setKey(tree.getKey() + 1);
-			ASTAndNode andNode2 = new ASTAndNode(tree.getKey(), notLeft, notRight);
-			tree.setKey(tree.getKey() + 1);
-			ASTOrNode orNode = new ASTOrNode(iffNode.getKey(), andNode1, andNode2);
-			ASTPropositionalNode p = replace(tree.getRoot().getLeaf(), orNode, key);
-			ASTProgramNode program = tree.getRoot();
-			program.setLeaf(p);
-			AST t = new AST(tree.getKey() + 2, program);
-			return t;
+		try {
+			AST tree = getTree();
+			int key = getKey();
+			ASTNode node  = find(tree.getRoot(), key);
+			if(node instanceof ASTIffNode) {
+				ASTIffNode iffNode = (ASTIffNode) node;
+				ASTPropositionalNode left = iffNode.getLeft();
+				ASTPropositionalNode right = iffNode.getRight();
+				ASTAndNode andNode1 = new ASTAndNode(tree.getKey(), left, right);
+				tree.setKey(tree.getKey() + 1);
+				ASTNotNode notLeft = new ASTNotNode(tree.getKey(), left);
+				tree.setKey(tree.getKey() + 1);
+				ASTNotNode notRight = new ASTNotNode(tree.getKey(), right);
+				tree.setKey(tree.getKey() + 1);
+				ASTAndNode andNode2 = new ASTAndNode(tree.getKey(), notLeft, notRight);
+				tree.setKey(tree.getKey() + 1);
+				ASTOrNode orNode = new ASTOrNode(iffNode.getKey(), andNode1, andNode2);
+				ASTPropositionalNode p = replace(tree.getRoot().getLeaf(), orNode, key);
+				ASTProgramNode program = tree.getRoot();
+				program.setLeaf(p);
+				AST t = new AST(tree.getKey() + 2, program);
+				return t;
+			}
+		}
+		catch(Exception e) {
+			return null;
 		}
 		return null;
 	}
 	
 	// A <-> B = !A <-> !B
 	public AST negate() {
-		AST tree = getTree();
-		int key = getKey();
-		ASTNode node  = find(tree.getRoot(), key);
-		if(node instanceof ASTIffNode) {
-			ASTIffNode iffNode = (ASTIffNode) node;
-			ASTPropositionalNode left = iffNode.getLeft();
-			ASTPropositionalNode right = iffNode.getRight();
-			ASTNotNode notLeft = new ASTNotNode(tree.getKey(), left);
-			tree.setKey(tree.getKey() + 1);
-			ASTNotNode notRight = new ASTNotNode(tree.getKey(), right);
-			tree.setKey(tree.getKey() + 1);
-			ASTIffNode newIffNode = new ASTIffNode(iffNode.getKey(), notLeft, notRight);
-			ASTPropositionalNode p = replace(tree.getRoot().getLeaf(), newIffNode, key);
-			ASTProgramNode program = tree.getRoot();
-			program.setLeaf(p);
-			AST t = new AST(tree.getKey() + 2, program);
-			return t;
-		}
-		return null;
-	}
-	
-	//TODO A <-> !B = !A <-> B
-	public AST iffNot1() {
-		AST tree = getTree();
-		int key = getKey();
-		ASTNode node  = find(tree.getRoot(), key);
-		if(node instanceof ASTIffNode) {
-			ASTIffNode iffNode = (ASTIffNode) node;
-			ASTPropositionalNode left = iffNode.getLeft();
-			ASTPropositionalNode right = iffNode.getRight();
-			if(right instanceof ASTNotNode) {
+		try {
+			AST tree = getTree();
+			int key = getKey();
+			ASTNode node  = find(tree.getRoot(), key);
+			if(node instanceof ASTIffNode) {
+				ASTIffNode iffNode = (ASTIffNode) node;
+				ASTPropositionalNode left = iffNode.getLeft();
+				ASTPropositionalNode right = iffNode.getRight();
 				ASTNotNode notLeft = new ASTNotNode(tree.getKey(), left);
 				tree.setKey(tree.getKey() + 1);
-				ASTPropositionalNode propNode = ((ASTNotNode) right).getLeaf();
-				ASTIffNode newIffNode = new ASTIffNode(tree.getKey(), notLeft, propNode);
+				ASTNotNode notRight = new ASTNotNode(tree.getKey(), right);
+				tree.setKey(tree.getKey() + 1);
+				ASTIffNode newIffNode = new ASTIffNode(iffNode.getKey(), notLeft, notRight);
 				ASTPropositionalNode p = replace(tree.getRoot().getLeaf(), newIffNode, key);
 				ASTProgramNode program = tree.getRoot();
 				program.setLeaf(p);
 				AST t = new AST(tree.getKey() + 2, program);
 				return t;
 			}
+		}
+		catch(Exception e) {
+			return null;
+		}
+		return null;
+	}
+	
+	//TODO A <-> !B = !A <-> B
+	public AST iffNot1() {
+		try {
+			AST tree = getTree();
+			int key = getKey();
+			ASTNode node  = find(tree.getRoot(), key);
+			if(node instanceof ASTIffNode) {
+				ASTIffNode iffNode = (ASTIffNode) node;
+				ASTPropositionalNode left = iffNode.getLeft();
+				ASTPropositionalNode right = iffNode.getRight();
+				if(right instanceof ASTNotNode) {
+					ASTNotNode notLeft = new ASTNotNode(tree.getKey(), left);
+					tree.setKey(tree.getKey() + 1);
+					ASTPropositionalNode propNode = ((ASTNotNode) right).getLeaf();
+					ASTIffNode newIffNode = new ASTIffNode(tree.getKey(), notLeft, propNode);
+					ASTPropositionalNode p = replace(tree.getRoot().getLeaf(), newIffNode, key);
+					ASTProgramNode program = tree.getRoot();
+					program.setLeaf(p);
+					AST t = new AST(tree.getKey() + 2, program);
+					return t;
+				}
+			}
+		}
+		catch(Exception e) {
+			return null;
 		}
 		return null;
 	}
@@ -113,24 +129,29 @@ public class IffEquivalence  extends Equivalence {
 	
 	// TODO !A <-> B = A <-> !B
 	public AST iffNot2() {
-		AST tree = getTree();
-		int key = getKey();
-		ASTNode node  = find(tree.getRoot(), key);
-		if(node instanceof ASTIffNode) {
-			ASTIffNode iffNode = (ASTIffNode) node;
-			ASTPropositionalNode left = iffNode.getLeft();
-			ASTPropositionalNode right = iffNode.getRight();
-			if(left instanceof ASTNotNode) {
-				ASTNotNode notRight = new ASTNotNode(tree.getKey(), right);
-				tree.setKey(tree.getKey() + 1);
-				ASTPropositionalNode propNode = ((ASTNotNode) left).getLeaf();
-				ASTIffNode newIffNode = new ASTIffNode(tree.getKey(), propNode, notRight);
-				ASTPropositionalNode p = replace(tree.getRoot().getLeaf(), newIffNode, key);
-				ASTProgramNode program = tree.getRoot();
-				program.setLeaf(p);
-				AST t = new AST(tree.getKey() + 2, program);
-				return t;
+		try {
+			AST tree = getTree();
+			int key = getKey();
+			ASTNode node  = find(tree.getRoot(), key);
+			if(node instanceof ASTIffNode) {
+				ASTIffNode iffNode = (ASTIffNode) node;
+				ASTPropositionalNode left = iffNode.getLeft();
+				ASTPropositionalNode right = iffNode.getRight();
+				if(left instanceof ASTNotNode) {
+					ASTNotNode notRight = new ASTNotNode(tree.getKey(), right);
+					tree.setKey(tree.getKey() + 1);
+					ASTPropositionalNode propNode = ((ASTNotNode) left).getLeaf();
+					ASTIffNode newIffNode = new ASTIffNode(tree.getKey(), propNode, notRight);
+					ASTPropositionalNode p = replace(tree.getRoot().getLeaf(), newIffNode, key);
+					ASTProgramNode program = tree.getRoot();
+					program.setLeaf(p);
+					AST t = new AST(tree.getKey() + 2, program);
+					return t;
+				}
 			}
+		}
+		catch(Exception e) {
+			return null;
 		}
 		return null;
 	}
@@ -156,21 +177,5 @@ public class IffEquivalence  extends Equivalence {
 		return tree;
 	}
 	*/
-
-	public AST getTree() {
-		return tree;
-	}
-
-	public void setTree(AST tree) {
-		this.tree = tree;
-	}
-
-	public int getKey() {
-		return key;
-	}
-
-	public void setKey(int key) {
-		this.key = key;
-	}
 
 }

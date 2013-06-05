@@ -4,6 +4,14 @@ import AST.*;
 
 public abstract class Equivalence {
 	
+	private AST tree;
+	private int key;
+	
+	public Equivalence(AST tree, int key) {
+		this.setTree(tree);
+		this.setKey(key);
+	}
+	
 	public static ASTNode find(ASTNode node, int key) {
 		if(node.getKey() == key) {
 			return node;
@@ -49,6 +57,22 @@ public abstract class Equivalence {
 			return unary;
 		}
 		return null;
+	}
+
+	public AST getTree() {
+		return tree;
+	}
+
+	public void setTree(AST tree) {
+		this.tree = tree;
+	}
+
+	public int getKey() {
+		return key;
+	}
+
+	public void setKey(int key) {
+		this.key = key;
 	}
 
 }
