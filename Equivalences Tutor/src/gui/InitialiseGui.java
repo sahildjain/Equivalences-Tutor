@@ -1,7 +1,5 @@
 package gui;
 
-import eqtutor.PropositionalExpressionGenerator;
-
 public class InitialiseGui {
 	
 	public static void main(final String[] args){
