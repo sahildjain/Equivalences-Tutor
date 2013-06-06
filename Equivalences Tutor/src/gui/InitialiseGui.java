@@ -21,16 +21,17 @@ public class InitialiseGui {
 		System.out.println(tree1.toParserString());
 		System.out.println(tree2.toParserString());
 		*/
-		
+		/*
 		PropositionalExpressionGenerator gen = new PropositionalExpressionGenerator();
 		gen.generate();
-		/*
+		*/
+		
 		javax.swing.SwingUtilities.invokeLater(new Runnable(){
 			public void run(){
 				final Gui gui = new Gui();
 				gui.createGui(20);
 			}
 		});
-		*/
+		
 	}
 }
