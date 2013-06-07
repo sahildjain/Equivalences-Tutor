@@ -1,0 +1,13 @@
+\contentsline {chapter}{\numberline {1}Introduction}{3}
+\contentsline {chapter}{\numberline {2}Background}{5}
+\contentsline {chapter}{\numberline {3}Approach and Implementation details}{6}
+\contentsline {section}{\numberline {3.1}Modelling Logic Formulae}{6}
+\contentsline {subsection}{\numberline {3.1.1}Lexer}{6}
+\contentsline {subsubsection}{Lexical Grammar}{7}
+\contentsline {subsection}{\numberline {3.1.2}Parser}{7}
+\contentsline {subsubsection}{Parser Grammar}{7}
+\contentsline {chapter}{\numberline {4}Evaluation}{10}
+\contentsline {chapter}{\numberline {5}Conclusions and Future Work}{11}
+\contentsline {section}{\numberline {5.1}Learning outcomes}{11}
+\contentsline {section}{\numberline {5.2}Potential improvements}{11}
+\contentsline {section}{\numberline {5.3}Potential extensions}{11}

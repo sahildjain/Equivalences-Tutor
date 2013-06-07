@@ -11,7 +11,7 @@ public class AndEquivalence extends Equivalence {
 	// A & A = A
 	public AST idempotence() {
 		try {
-			AST tree = getTree().copy();
+			AST tree = getTree();
 			int key = getKey();
 			ASTNode node = find(tree.getRoot(), key);
 			if(node instanceof ASTAndNode) {
@@ -129,7 +129,8 @@ public class AndEquivalence extends Equivalence {
 				tree.setKey(tree.getKey() + 1);
 				ASTNotNode notRight = new ASTNotNode(tree.getKey(), right);
 				tree.setKey(tree.getKey() + 1);
-				ASTOrNode orNode = new ASTOrNode(andNode.getKey(), notLeft, notRight);
+				ASTOrNode orNode = new ASTOrNode(tree.getKey(), notLeft, notRight);
+				tree.setKey(tree.getKey() + 1);
 				ASTNotNode notNode = new ASTNotNode(tree.getKey(), orNode);
 				tree.setKey(tree.getKey() + 1);
 				ASTPropositionalNode p = replace(tree.getRoot().getLeaf(), notNode, key);

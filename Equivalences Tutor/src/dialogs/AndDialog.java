@@ -31,7 +31,7 @@ public class AndDialog extends JDialog {
 		this.setFrame(listener.getFrame());
 		this.setKey(key);
 		this.setSide(side);
-		/*AndEquivalence eq;
+		AndEquivalence eq;
 		if(isSide()) {
 			AST temp = getListener().getLeft().getLast().getTree().copy();
 			eq = new AndEquivalence(temp, getKey());
@@ -39,26 +39,26 @@ public class AndDialog extends JDialog {
 		else {
 			AST temp = getListener().getRight().getLast().getTree().copy();
 			eq = new AndEquivalence(temp, getKey());
-		}*/
+		}
 		panel = new JPanel(new MigLayout());
-		//if(eq.idempotence() instanceof AST && eq.idempotence() != null) {
+		if(eq.idempotence() != null) {
 			panel.add(addIdempotence(), BorderLayout.NORTH);
-		//}
-		//if(eq.commutativity() instanceof AST && eq.commutativity() != null) {
+		}
+		if(eq.commutativity() != null) {
 			panel.add(addCommutativity(), BorderLayout.NORTH);
-		//}
-		//if(eq.associativityLeft() instanceof AST && eq.associativityLeft() != null) {
+		}
+		if(eq.associativityLeft() != null) {
 			panel.add(addAssociaticityLeft(), BorderLayout.NORTH);
-		//}
-		//if(eq.associativityRight() instanceof AST && eq.associativityRight() != null) {
+		}
+		if(eq.associativityRight() != null) {
 			panel.add(addAssociaticityRight(), BorderLayout.NORTH);
-		//}
-		//if(eq.deMorgan() instanceof AST && eq.deMorgan() != null) {
+		}
+		if(eq.deMorgan() != null) {
 			panel.add(addDeMorgan(), BorderLayout.NORTH);
-		//}
-		//if(eq.iff() instanceof AST && eq.iff() != null) {
+		}
+		if(eq.iff() != null) {
 			panel.add(addIff(), BorderLayout.NORTH);
-		//}
+		}
 			panel.add(addDistributivityDiff(), BorderLayout.NORTH);
 			panel.add(addDistributivityBack(), BorderLayout.NORTH);
 			panel.add(addDistributivitySame(), BorderLayout.NORTH);

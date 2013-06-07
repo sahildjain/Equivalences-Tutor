@@ -1,0 +1,280 @@
+\documentclass{report}
+\usepackage{graphicx}
+\linespread{1.3}
+\begin{document}
+
+%-------------------------------------------------------------------------------
+% TITLE PAGE
+%-------------------------------------------------------------------------------
+
+\begin{titlepage}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\center
+\textsc{\LARGE Imperial College London} \\[0.5cm]
+\textsc{\Large Department of Computing} \\[0.5cm]
+\textsc{\large Third Year Individual Project} \\[1.5cm]
+\HRule \\[0.3cm]
+{\huge \bfseries Equivalences Tutor} \\[0.3cm]
+\HRule \\[1.5cm]
+
+% author and supervisors
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large \emph{Author:} \\
+Sahil \textsc{Jain}
+\end{flushleft}
+\end{minipage}~
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large \emph{Supervisor:} \\
+Fariba \textsc{Sadri}
+\end{flushright}
+\begin{flushright} \large \emph{Second marker:} \\
+Ian \textsc{Hodkinson}
+\end{flushright}
+\end{minipage}\\[4cm]
+{\large \today}\\[3cm]
+\vfill
+\end{titlepage}
+
+%-------------------------------------------------------------------------------
+% ABSTRACT
+%-------------------------------------------------------------------------------
+
+\begin{abstract}
+% TODO
+\end{abstract}
+
+
+%-------------------------------------------------------------------------------
+% ACKNOWLEDGEMENTS
+%-------------------------------------------------------------------------------
+
+\subsection*{\centering Acknowledgements}
+
+%-------------------------------------------------------------------------------
+% TABLE OF CONTENTS
+%-------------------------------------------------------------------------------
+
+\tableofcontents
+
+%-------------------------------------------------------------------------------
+% INTRODUCTION
+%-------------------------------------------------------------------------------
+
+\chapter{Introduction}
+% what is the project about
+% what did I set out to achieve, relevance, importance, difficulty
+% key aspects, non-technical
+
+\emph{Logic} refers to the study of different modes of reasoning conducted or 
+assessed according to strict principles of validity. Due to Logic being one of 
+the most fundamental aspects of Computer Science, it is taught to every student
+pursuing a Computing degree at Imperial College London. During the first term 
+in university, every Computing student is taught the Logic course, which aims to
+provide the students with knowledge of the syntax and semantics of Propositional 
+and Predicate logic. Students can apply this knowledge to complete equivalences
+and natural deduction proofs.
+
+A logical system is made up of three things:
+
+\begin{enumerate}
+  \item Syntax - this is the formal language specified to express different
+         concepts.
+  \item Semantics - this is what provides meaning to the language.
+  \item Proof theory - this is a way of arguing in the language. This allows us
+         to identify valid statements in the language.
+\end{enumerate}
+
+In logic, two statements are logically equivalent if they contain the same
+logical content. Mendelson stated that "two statements are equivalent if they
+have the same truth value in every model." This can be illustrated in the 
+following example: \\ \bigskip 
+Statement 1: \emph{If Sahil is a final year student, 
+then he has to do an individual project} \\ \bigskip 
+Statement 2: \emph{If Sahil is not 
+doing an individual project, then he is not a final year student} \\ \bigskip 
+As we can see, both statements have the same result in same models. When two logic 
+statements are equivalent, they can be derived by each other, with the use of 
+equivalences which we know to be true.
+
+
+%-------------------------------------------------------------------------------
+% BACKGROUND
+%-------------------------------------------------------------------------------
+
+\chapter{Background} % 10-20 pages
+
+%-------------------------------------------------------------------------------
+% MAIN BODY
+%-------------------------------------------------------------------------------
+
+\chapter{Approach and Implementation details}
+
+\section{Modelling Logic Formulae}
+
+The first part that had to be implemented was modelling logic formulae so that
+they could be manipulated when applying equivalences. In the first year Logic course
+taught by Ian Hodkinson, the students are taught the Logic formation tree.
+
+The example given in the first year slides is:
+% TODO insert the tree from first year slides
+
+Using this formation tree, we can model logical formulae in a tree structure in
+Java by creating our own data structure.
+
+\subsection{Lexer}
+
+The first step in modelling the logical formulae into a tree structure is lexical 
+analysis. This is the process of converting a sequence of characters into a sequence
+of tokens which can be parsed in the future.
+
+As writing a lexer from scratch would have been very time consuming and tedious,
+I researched about the tools which had been developed for generating lexers after
+inputting the lexical grammar. The best tool which I came across was ANTLR, as it
+provides a very easy to use debugger where you can load the generated code and step
+through it. 
+
+\subsubsection{Lexical Grammar}
+\begin{verbatim}
+lexer grammar LogicLexer;
+
+options {
+  language = Java;
+}
+
+@header {
+  package eqtutor;
+}
+
+WHITESPACE:			( '\t' | ' ' | '\r' | '\n' | '\u000C' )+ { $channel = HIDDEN; };
+
+AND	:						'&';
+OR	:						'|';
+IFTHEN	:				'->';
+IFF 	:					'<>';
+NOT 	:					'!';
+
+LPAREN  :				'(';
+RPAREN  :				')';
+
+ID	:						('A'..'Z'|'a'..'z') ('A'..'Z'|'a'..'z'|'_')*;
+\end{verbatim}
+
+\subsection{Parser}
+
+Once the formulae has been tokenised by the lexer, it then has to be parsed. Parsing
+is the process where the tokens are used to build a data structure, which is usually
+a hierarchical structure. This data structure gives a structural representation
+of the input.
+
+ANTLR provides both lexer and parser generators. Due to having the ability of doing both
+of these steps using one tool which I had become familiar with, I decided to use the
+ANTLR parser generator.
+
+
+\subsubsection{Parser Grammar}
+
+\begin{verbatim}
+parser grammar LogicParser;
+
+options {
+  tokenVocab = LogicLexer;
+}
+
+@header {
+  package eqtutor;
+
+  import java.util.LinkedList;
+  import java.util.List;
+  import AST.*;
+}
+
+@members {
+  private boolean hasFoundError = false;
+
+  public void displayRecognitionError(String[] tokenNames, RecognitionException e) {
+    hasFoundError = true;
+  }
+
+  public boolean hasFoundError() {
+    return this.hasFoundError;
+  }
+}
+
+program returns [AST tree]
+  : e = iffexpr {$tree = new AST(new ASTProgramNode($e.node));} EOF
+  ;
+
+iffexpr returns [ASTPropositionalNode node]
+  : ifthen = ifexpr {$node = $ifthen.node;} 
+	  (IFF iff = iffexpr {$node = new ASTIffNode($ifthen.node, $iff.node);})*
+  ;
+  	
+ifexpr returns [ASTPropositionalNode node]
+  : or = orexpr {$node = $or.node;} 
+		(IFTHEN ifthen = ifexpr {$node = new ASTIfThenNode($or.node, $ifthen.node);})*
+  ;
+
+orexpr returns [ASTPropositionalNode node]
+  : and = andexpr {$node = $and.node;} 
+		(OR or = orexpr {$node = new ASTOrNode($and.node, $or.node);})*
+  ;
+
+andexpr returns [ASTPropositionalNode node]
+  : not = notexpr {$node = $not.node;} 
+		(AND and = andexpr {$node = new ASTAndNode($not.node, $and.node);})*
+  ;
+
+notexpr returns [ASTPropositionalNode node]
+  : NOT not = notexpr {$node = new ASTNotNode($not.node);}
+  | id = identifier {$node = $id.node;}
+  ;
+
+identifier returns [ASTPropositionalNode node]
+  : ID {$node = new ASTIdentifierNode($ID.text);}
+  | LPAREN iffexpr RPAREN {$node = $iffexpr.node;}
+  ;
+\end{verbatim}
+
+\section{Abstract Syntax Tree}
+
+The Abstract Syntax Tree (AST) is the
+
+%-------------------------------------------------------------------------------
+% EVALUATION
+%-------------------------------------------------------------------------------
+
+\chapter{Evaluation}
+
+%-------------------------------------------------------------------------------
+% CONCLUSIONS AND FUTURE WORK
+%-------------------------------------------------------------------------------
+
+\chapter{Conclusions and Future Work}
+\section{Learning outcomes}
+\section{Potential improvements}
+\section{Potential extensions}
+
+%-------------------------------------------------------------------------------
+% BIBLIOGRAPHY
+%-------------------------------------------------------------------------------
+
+\begin{thebibliography}{9}
+%\bibitem{lamport94}
+% Leslie Lamport,
+% \emph{\LaTeX: A Document Preparation System}.
+% Addison Wesley, Massachusetts,
+% 2nd Edition,
+% 1994.
+\end{thebibliography}
+
+%-------------------------------------------------------------------------------
+% APPENDIX
+%-------------------------------------------------------------------------------
+
+\appendix
+% \chapter{Short demo}
+% \chapter{Program Listings}
+
+%-------------------------------------------------------------------------------
+
+\end{document}
