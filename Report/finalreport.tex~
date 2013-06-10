@@ -237,7 +237,7 @@ identifier returns [ASTPropositionalNode node]
 
 \section{Abstract Syntax Tree}
 
-
+The Abstract Syntax Tree (AST) is the
 
 %-------------------------------------------------------------------------------
 % EVALUATION
