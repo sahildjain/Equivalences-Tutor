@@ -13,7 +13,7 @@
 \center
 \textsc{\LARGE Imperial College London} \\[0.5cm]
 \textsc{\Large Department of Computing} \\[0.5cm]
-\textsc{\large Third Year Individual Project} \\[1.5cm]
+\textsc{\large Individual Project} \\[1.5cm]
 \HRule \\[0.3cm]
 {\huge \bfseries Equivalences Tutor} \\[0.3cm]
 \HRule \\[1.5cm]
@@ -50,6 +50,12 @@ Ian \textsc{Hodkinson}
 %-------------------------------------------------------------------------------
 
 \subsection*{\centering Acknowledgements}
+I would like to thank Dr. Fariba Sadri for her continuous support and guidance
+throughout the course of this project. I would also like to thank Dr. Ian
+Hodkinson for his value feedback to my interim report.
+
+Above all, I would like to thank my family for being there for me and giving
+me constant support through my education.
 
 %-------------------------------------------------------------------------------
 % TABLE OF CONTENTS
@@ -375,7 +381,7 @@ to use.
 % MAIN BODY
 %-------------------------------------------------------------------------------
 
-\chapter{Approach and Implementation details}
+\chapter{Implementation}
 
 \section{Modelling Logic Formulae}
 
@@ -546,9 +552,97 @@ public abstract class ASTPropositionalNode extends ASTNode {
 }
 \end{verbatim}
 
+
+
 \section{Logic Expression Generator}
 
-\section{Equivalence Solvers} 
+\section{Equivalence Solvers}
+
+\subsection{Checking if two formulae are logically equivalent}
+
+When a user starts a new equivalence, he has to first put input the start
+state and the end state. These two formulae are then checked to be equivalent
+or not, as the user should not be allowed to perform an equivalence problem
+if the start and end state are not equivalent.
+
+If we were doing this on paper, we would just construct the truth table for
+the two formulae, and then compare them to be equal. The same idea is programmed
+in the AST class. As the AST only contains the structure, we have to assign each
+identifier with a truth value, so that every situation is accounted for while
+creating a truth table.
+
+To achieve this, firstly a Tree Map of the identifiers is obtained. A Tree Map is
+used as it sorts the map according to the natural ordering of its keys, which are
+strings in this case, which means that the keys are stored alphabetically. This means
+the order of identifiers in the map of both formulae will be the same, allowing for
+easy comparison of truth tables. Once the tree map of the identifiers is obtained,
+the size of the map can be used to determine every situation. This is illustrated
+by the example below:
+
+Consider the formula p $\land$ q $\land$ r, the situations are:
+
+\begin{center}
+  \begin{tabular}{| c | c | c |}
+    \hline
+    p & q & r\\ \hline
+    0 & 0 & 0 \\
+    0 & 0 & 1 \\
+		0 & 1 & 0 \\
+		0 & 1 & 1 \\
+		1 & 0 & 0 \\
+		1 & 0 & 1 \\
+    1 & 1 & 0 \\
+    1 & 1 & 1 \\ \hline
+  \end{tabular}
+\end{center}
+
+If we look at each situation in order, we can see that they are binary numbers
+starting from 0, going to $2^n$ where n is the number of identifiers. This
+connection can be used to assign values to identifiers. The pseudocode is shown
+below:
+
+%TODO write pseudocode
+\begin{verbatim}
+
+public int[][] createTruthTable() {
+		TreeMap<String, Integer> identifiers = this.identifiers();
+		int numIdentifiers = identifiers.size();
+		int temp = (int) Math.pow(2, numIdentifiers);
+		int[][] truthTable = new int[temp][numIdentifiers + 1];
+		for(int i = 0; i < truthTable.length; i++) {
+			String binary = Integer.toBinaryString(i);
+			if(binary.length() < numIdentifiers) {
+				int numZeroes = numIdentifiers - binary.length();
+				String zeroes = "";
+				while(zeroes.length() < numZeroes) {
+					zeroes += "0";
+				}
+				binary = zeroes + binary;
+			}
+			for(int j = 0; j < truthTable[i].length - 1; j++) {
+				char c = binary.charAt(j);
+				int n = Integer.parseInt(Character.toString(c));
+				truthTable[i][j] = n;
+			}
+		}
+		for(int i = 0; i < truthTable.length; i++) {
+			Set<String> keys = identifiers.keySet();
+			TreeMap<String, Integer> id = new TreeMap<String, Integer>();
+			Iterator<String> it = keys.iterator();
+			int j = 0;
+			while(it.hasNext()) {
+				String key = (String) it.next();
+				id.put(key, truthTable[i][j]);
+				j++;
+			}
+			truthTable[i][j] = value(id);
+		}
+		return truthTable;
+	}
+
+\end{verbatim}
+
+
 
 \subsection{Easy Equivalence Solver}
 
