@@ -1,13 +1,54 @@
 \contentsline {chapter}{\numberline {1}Introduction}{3}
-\contentsline {chapter}{\numberline {2}Background}{5}
-\contentsline {chapter}{\numberline {3}Approach and Implementation details}{6}
-\contentsline {section}{\numberline {3.1}Modelling Logic Formulae}{6}
-\contentsline {subsection}{\numberline {3.1.1}Lexer}{6}
-\contentsline {subsubsection}{Lexical Grammar}{7}
-\contentsline {subsection}{\numberline {3.1.2}Parser}{7}
-\contentsline {subsubsection}{Parser Grammar}{7}
-\contentsline {chapter}{\numberline {4}Evaluation}{10}
-\contentsline {chapter}{\numberline {5}Conclusions and Future Work}{11}
-\contentsline {section}{\numberline {5.1}Learning outcomes}{11}
-\contentsline {section}{\numberline {5.2}Potential improvements}{11}
-\contentsline {section}{\numberline {5.3}Potential extensions}{11}
+\contentsline {chapter}{\numberline {2}Background}{4}
+\contentsline {section}{\numberline {2.1}Propositional Logic}{4}
+\contentsline {subsection}{\numberline {2.1.1}Syntax}{4}
+\contentsline {subsection}{\numberline {2.1.2}Semantics}{5}
+\contentsline {subsubsection}{And}{5}
+\contentsline {subsubsection}{Or}{5}
+\contentsline {subsubsection}{Not}{5}
+\contentsline {subsubsection}{If Then}{5}
+\contentsline {subsubsection}{If and Only If}{6}
+\contentsline {subsubsection}{Truth and Falsity}{6}
+\contentsline {section}{\numberline {2.2}Equivalences}{6}
+\contentsline {subsection}{\numberline {2.2.1}And Equivalences}{7}
+\contentsline {subsection}{\numberline {2.2.2}Or Equivalences}{7}
+\contentsline {subsection}{\numberline {2.2.3}Not Equivalences}{7}
+\contentsline {subsection}{\numberline {2.2.4}Implies Equivalences}{7}
+\contentsline {subsection}{\numberline {2.2.5}If and Only If Equivalences}{7}
+\contentsline {subsection}{\numberline {2.2.6}De Morgan Equivalences}{7}
+\contentsline {subsection}{\numberline {2.2.7}Distributibivity of And and Or}{7}
+\contentsline {section}{\numberline {2.3}Examples of Equivalence Problems}{8}
+\contentsline {subsection}{\numberline {2.3.1}Equivalence Examples}{8}
+\contentsline {section}{\numberline {2.4}Current Logic Tutorial Applications}{8}
+\contentsline {chapter}{\numberline {3}Approach and Implementation details}{9}
+\contentsline {section}{\numberline {3.1}Modelling Logic Formulae}{9}
+\contentsline {subsection}{\numberline {3.1.1}Lexer}{9}
+\contentsline {subsubsection}{Lexical Grammar}{9}
+\contentsline {subsection}{\numberline {3.1.2}Parser}{10}
+\contentsline {subsubsection}{Parser Grammar}{10}
+\contentsline {section}{\numberline {3.2}Abstract Syntax Tree}{12}
+\contentsline {section}{\numberline {3.3}Logic Expression Generator}{13}
+\contentsline {section}{\numberline {3.4}Equivalence Solvers}{13}
+\contentsline {subsection}{\numberline {3.4.1}Easy Equivalence Solver}{13}
+\contentsline {subsection}{\numberline {3.4.2}Hard Equivalence Solver}{13}
+\contentsline {chapter}{\numberline {4}Evaluation}{14}
+\contentsline {chapter}{\numberline {5}Conclusions and Future Work}{15}
+\contentsline {section}{\numberline {5.1}Learning outcomes}{15}
+\contentsline {section}{\numberline {5.2}Potential improvements}{15}
+\contentsline {section}{\numberline {5.3}Potential extensions}{15}
+\contentsline {chapter}{\numberline {A}Equivalences Truth Tables}{17}
+\contentsline {section}{\numberline {A.1}And Equivalences}{17}
+\contentsline {section}{\numberline {A.2}Or Equivalences}{18}
+\contentsline {section}{\numberline {A.3}Not Equivalences}{18}
+\contentsline {section}{\numberline {A.4}Implies Equivalences}{18}
+\contentsline {section}{\numberline {A.5}If and Only If Equivalences}{19}
+\contentsline {section}{\numberline {A.6}De Morgan Equivalences}{20}
+\contentsline {section}{\numberline {A.7}Distributibivity of And and Or}{20}
+\contentsline {chapter}{\numberline {B}Truth Tables of all Equivalences}{21}
+\contentsline {section}{\numberline {B.1}And Equivalences}{21}
+\contentsline {section}{\numberline {B.2}Or Equivalences}{22}
+\contentsline {section}{\numberline {B.3}Not Equivalences}{22}
+\contentsline {section}{\numberline {B.4}Implies Equivalences}{22}
+\contentsline {section}{\numberline {B.5}If and Only If Equivalences}{23}
+\contentsline {section}{\numberline {B.6}De Morgan Equivalences}{24}
+\contentsline {section}{\numberline {B.7}Distributibivity of And and Or}{24}
