@@ -1,5 +1,5 @@
 \documentclass{report}
-\usepackage{a4, fullpage}
+%\usepackage{a4, fullpage}
 \usepackage{graphicx}
 \linespread{1.3}
 \begin{document}
@@ -52,7 +52,7 @@ Ian \textsc{Hodkinson}
 \subsection*{\centering Acknowledgements}
 I would like to thank Dr. Fariba Sadri for her continuous support and guidance
 throughout the course of this project. I would also like to thank Dr. Ian
-Hodkinson for his value feedback to my interim report.
+Hodkinson for his value feedback on my interim report.
 
 Above all, I would like to thank my family for being there for me and giving
 me constant support through my education.
@@ -381,7 +381,7 @@ to use.
 % MAIN BODY
 %-------------------------------------------------------------------------------
 
-\chapter{Implementation}
+\chapter{Implementation and Features}
 
 \section{Modelling Logic Formulae}
 
@@ -552,11 +552,68 @@ public abstract class ASTPropositionalNode extends ASTNode {
 }
 \end{verbatim}
 
+\section{Equivalences Data Structure}
 
+The equivalences the user perform have to be used in several different features.
+To make it easy to use and manipulate the equivalences, a data structure in which
+the equivalences could be stored had to be decided upon. 
+
+Before I could decide on which data structure to use, I had to delve into the details
+of what I had to store in order to complete equivalences, and how exactly an
+equivalence was done. In an equivalence, you only ever have to use the previous
+formula to obtain the next equivalent formula. This is illustrated by the 
+example below:
+
+\begin{enumerate}
+    \item $\neg$(p $\to$ q)
+		\item $\neg$($\neg$(p $\land$ $\neg$q)) \hfill a, Implication rule
+    \item $\neg$($\neg$p $\lor$ q) \hfill a, Implication rule
+    \item $\neg$$\neg$p $\land$ $\neg$q \hfill c, De Morgan's law
+    \item p $\land$ $\neg$q \hfill d, Double Negation rule
+\end{enumerate}
+
+As we can see, line b is unneccesary in this equivalence, although true.
+We also notice that line d is obtained using line c, and line e from line d.
+
+Due to the presence of this feature, I considered the use of linked lists
+to store equivalences. A linked list is essentially a list implemented by
+each item having a link to the next item [3]. In the equivalences case, this
+means that every formula would have a link to a logically equivalent formula
+which has been derived by applying a single equivalence.
+
+Before I could create the Linked List class, I had to create the structure of
+each node. Below are the fields stored in a node:
+
+\begin{verbatim}
+/*--line number of the formula--*/
+private int lineNumber;
+
+/*--the Abstract Syntax Tree of the formula--*/
+private AST tree;
+
+/*--the next node in the equivalence--*/
+private EquivalenceLinkNode next;
+\end{verbatim}
 
 \section{Logic Expression Generator}
 
 \section{Equivalence Solvers}
+
+Two different interfaces are implemented which the user can use to solve equivalences.
+Both of the modes have several features in common. Firstly, regardless of what mode
+the user selects to perform an equivalence, the application is divided into two
+different distinct panels. Once the start and end state have been entered, the
+start state will be visible on the left panel, and the end state will be available on
+the right panel. The advantage of having the interface laid out like this is that
+it allows the user to work from the start state and from the end state, apply
+equivalences, and eventually meet in the middle. Once the final equivalences on each
+side match, the equivalence is complete. When performing these equivalences, the
+user can switch modes as they please.
+
+The user also has the ability to save an equivalence which they are doing, either
+to file or on a database. The user can undo their last equivalences from both panels
+as well.
+
 
 \subsection{Checking if two formulae are logically equivalent}
 
@@ -572,7 +629,7 @@ identifier with a truth value, so that every situation is accounted for while
 creating a truth table.
 
 To achieve this, firstly a Tree Map of the identifiers is obtained. A Tree Map is
-used as it sorts the map according to the natural ordering of its keys, which are
+used as it sorts the map according to the natural ordering of its keys [2], which are
 strings in this case, which means that the keys are stored alphabetically. This means
 the order of identifiers in the map of both formulae will be the same, allowing for
 easy comparison of truth tables. Once the tree map of the identifiers is obtained,
@@ -642,14 +699,17 @@ public int[][] createTruthTable() {
 
 \end{verbatim}
 
-
-
 \subsection{Easy Equivalence Solver}
 
-The easy equivalence solver is an interface for solving equivalences where
-the student can click on either an identifier or an operator, and then a dialog
-opens which shows the student which equivalences can be applied to the clicked
-node. 
+The first mode for solving equivalences is the easy mode. In this interface,
+the user can click on either an identifier or a connective. Once the user
+clicks on an identifier, a dialog opens up with all possible equivalences
+that can be applied to the identifier, for example, p $\equiv$ $\neg$$\neg$p.
+If the user clicks on an connective instead of an identifier, the dialog which
+opens up shows the equivalences that can be applied to the clicked connective,
+for example, if $\land$ was clicked from the formula a $\land$ b, then
+one of the equivalences that would be seen would be the commutativity
+equivalence, i.e a $\land$ b $\equiv$ b $\land$ a.
 
 %TODO add an image of the interface
 
