@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import AST.AST;
@@ -41,24 +42,24 @@ public class AndDialog extends JDialog {
 			eq = new AndEquivalence(temp, getKey());
 		}
 		panel = new JPanel(new MigLayout());
-		if(eq.idempotence() != null) {
+		//if(eq.idempotence() != null) {
 			panel.add(addIdempotence(), BorderLayout.NORTH);
-		}
-		if(eq.commutativity() != null) {
+		//}
+		//if(eq.commutativity() != null) {
 			panel.add(addCommutativity(), BorderLayout.NORTH);
-		}
-		if(eq.associativityLeft() != null) {
+		//}
+		//if(eq.associativityLeft() != null) {
 			panel.add(addAssociaticityLeft(), BorderLayout.NORTH);
-		}
-		if(eq.associativityRight() != null) {
+		//}
+		//if(eq.associativityRight() != null) {
 			panel.add(addAssociaticityRight(), BorderLayout.NORTH);
-		}
-		if(eq.deMorgan() != null) {
+		//}
+		//if(eq.deMorgan() != null) {
 			panel.add(addDeMorgan(), BorderLayout.NORTH);
-		}
-		if(eq.iff() != null) {
+		//}
+		//if(eq.iff() != null) {
 			panel.add(addIff(), BorderLayout.NORTH);
-		}
+		//}
 			panel.add(addDistributivityDiff(), BorderLayout.NORTH);
 			panel.add(addDistributivityBack(), BorderLayout.NORTH);
 			panel.add(addDistributivitySame(), BorderLayout.NORTH);
@@ -157,10 +158,23 @@ public class AndDialog extends JDialog {
 	private class IdempotenceListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
+			JPanel feedback = getListener().getFeedback();
+			feedback.removeAll();
+			JLabel label1 = new JLabel("Feedback");
+			feedback.add(label1, BorderLayout.NORTH);
+			getListener().setFeedback(feedback);
+			getListener().getEquivalence().updateUI();
 			if(isSide()) {
 				AST temp = getListener().getLeft().getLast().getTree().copy();
 				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.idempotence();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Idempotence cannot be applied to this And operator. Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateLeftList(node);
 				getListener().updateEquivalenceLeft();
@@ -169,6 +183,13 @@ public class AndDialog extends JDialog {
 				AST temp = getListener().getRight().getLast().getTree().copy();
 				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.idempotence();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Idempotence cannot be applied to this And operator. Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateRightList(node);
 				getListener().updateEquivalenceRight();
@@ -180,10 +201,23 @@ public class AndDialog extends JDialog {
 	private class CommutativityListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
+			JPanel feedback = getListener().getFeedback();
+			feedback.removeAll();
+			JLabel label1 = new JLabel("Feedback");
+			feedback.add(label1, BorderLayout.NORTH);
+			getListener().setFeedback(feedback);
+			getListener().getEquivalence().updateUI();
 			if(isSide()) {
 				AST temp = getListener().getLeft().getLast().getTree().copy();
 				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.commutativity();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Commutativity cannot be applied to this And operator. Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateLeftList(node);
 				getListener().updateEquivalenceLeft();
@@ -192,6 +226,13 @@ public class AndDialog extends JDialog {
 				AST temp = getListener().getRight().getLast().getTree().copy();
 				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.commutativity();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Commutativity cannot be applied to this And operator. Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateRightList(node);
 				getListener().updateEquivalenceRight();
@@ -203,10 +244,23 @@ public class AndDialog extends JDialog {
 	private class AssociativityLeftListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
+			JPanel feedback = getListener().getFeedback();
+			feedback.removeAll();
+			JLabel label1 = new JLabel("Feedback");
+			feedback.add(label1, BorderLayout.NORTH);
+			getListener().setFeedback(feedback);
+			getListener().getEquivalence().updateUI();
 			if(isSide()) {
 				AST temp = getListener().getLeft().getLast().getTree().copy();
 				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.associativityLeft();
+				if(tree == null) {
+					JLabel label2 = new JLabel("This Associativity equivalence cannot be applied to this And operator. Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateLeftList(node);
 				getListener().updateEquivalenceLeft();
@@ -215,6 +269,13 @@ public class AndDialog extends JDialog {
 				AST temp = getListener().getRight().getLast().getTree().copy();
 				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.associativityLeft();
+				if(tree == null) {
+					JLabel label2 = new JLabel("This Associativity equivalence cannot be applied to this And operator. Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateRightList(node);
 				getListener().updateEquivalenceRight();
@@ -226,10 +287,23 @@ public class AndDialog extends JDialog {
 	private class AssociativityRightListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
+			JPanel feedback = getListener().getFeedback();
+			feedback.removeAll();
+			JLabel label1 = new JLabel("Feedback");
+			feedback.add(label1, BorderLayout.NORTH);
+			getListener().setFeedback(feedback);
+			getListener().getEquivalence().updateUI();
 			if(isSide()) {
 				AST temp = getListener().getLeft().getLast().getTree().copy();
 				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.associativityRight();
+				if(tree == null) {
+					JLabel label2 = new JLabel("This Associativity equivalence cannot be applied to this And operator. Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateLeftList(node);
 				getListener().updateEquivalenceLeft();
@@ -238,6 +312,13 @@ public class AndDialog extends JDialog {
 				AST temp = getListener().getRight().getLast().getTree().copy();
 				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.associativityRight();
+				if(tree == null) {
+					JLabel label2 = new JLabel("This Associativity equivalence cannot be applied to this And operator. Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateRightList(node);
 				getListener().updateEquivalenceRight();
@@ -249,18 +330,39 @@ public class AndDialog extends JDialog {
 	private class DeMorganListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
+			JPanel feedback = getListener().getFeedback();
+			feedback.removeAll();
+			JLabel label1 = new JLabel("Feedback");
+			feedback.add(label1, BorderLayout.NORTH);
+			getListener().setFeedback(feedback);
+			getListener().getEquivalence().updateUI();
 			if(isSide()) {
 				AST temp = getListener().getLeft().getLast().getTree().copy();
 				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.deMorgan();
+				if(tree == null) {
+					JLabel label2 = new JLabel("You cannot apply DeMorgan's law to this And operator. Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateLeftList(node);
 				getListener().updateEquivalenceLeft();
 			}
 			if(!isSide()) {
+				
 				AST temp = getListener().getRight().getLast().getTree().copy();
 				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.deMorgan();
+				if(tree == null) {
+					JLabel label2 = new JLabel("You cannot apply DeMorgan's law to this And operator. Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateRightList(node);
 				getListener().updateEquivalenceRight();
@@ -271,10 +373,23 @@ public class AndDialog extends JDialog {
 	private class IffListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
+			JPanel feedback = getListener().getFeedback();
+			feedback.removeAll();
+			JLabel label1 = new JLabel("Feedback");
+			feedback.add(label1, BorderLayout.NORTH);
+			getListener().setFeedback(feedback);
+			getListener().getEquivalence().updateUI();
 			if(isSide()) {
 				AST temp = getListener().getLeft().getLast().getTree().copy();
 				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.iff();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Idempotence cannot be applied to this node. Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateLeftList(node);
 				getListener().updateEquivalenceLeft();
@@ -283,6 +398,13 @@ public class AndDialog extends JDialog {
 				AST temp = getListener().getRight().getLast().getTree().copy();
 				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.iff();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Idempotence cannot be applied to this node. Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateRightList(node);
 				getListener().updateEquivalenceRight();
@@ -294,10 +416,23 @@ public class AndDialog extends JDialog {
 	private class DistributivityDiffListener implements ActionListener {
 		
 		public void actionPerformed(ActionEvent e) {
+			JPanel feedback = getListener().getFeedback();
+			feedback.removeAll();
+			JLabel label1 = new JLabel("Feedback");
+			feedback.add(label1, BorderLayout.NORTH);
+			getListener().setFeedback(feedback);
+			getListener().getEquivalence().updateUI();
 			if(isSide()) {
 				AST temp = getListener().getLeft().getLast().getTree().copy();
 				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.distdiff();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Idempotence cannot be applied to this node. Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateLeftList(node);
 				getListener().updateEquivalenceLeft();
@@ -306,6 +441,13 @@ public class AndDialog extends JDialog {
 				AST temp = getListener().getRight().getLast().getTree().copy();
 				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.distdiff();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Idempotence cannot be applied to this node. Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateRightList(node);
 				getListener().updateEquivalenceRight();
@@ -317,10 +459,23 @@ public class AndDialog extends JDialog {
 	private class DistributivityBackwardsListener implements ActionListener {
 		
 		public void actionPerformed(ActionEvent e) {
+			JPanel feedback = getListener().getFeedback();
+			feedback.removeAll();
+			JLabel label1 = new JLabel("Feedback");
+			feedback.add(label1, BorderLayout.NORTH);
+			getListener().setFeedback(feedback);
+			getListener().getEquivalence().updateUI();
 			if(isSide()) {
 				AST temp = getListener().getLeft().getLast().getTree().copy();
 				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.distback();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Idempotence cannot be applied to this node. Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateLeftList(node);
 				getListener().updateEquivalenceLeft();
@@ -329,6 +484,13 @@ public class AndDialog extends JDialog {
 				AST temp = getListener().getRight().getLast().getTree().copy();
 				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.distback();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Idempotence cannot be applied to this node. Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateRightList(node);
 				getListener().updateEquivalenceRight();
@@ -340,10 +502,23 @@ public class AndDialog extends JDialog {
 	private class DistributivitySameListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent arg0) {
+			JPanel feedback = getListener().getFeedback();
+			feedback.removeAll();
+			JLabel label1 = new JLabel("Feedback");
+			feedback.add(label1, BorderLayout.NORTH);
+			getListener().setFeedback(feedback);
+			getListener().getEquivalence().updateUI();
 			if(isSide()) {
 				AST temp = getListener().getLeft().getLast().getTree().copy();
 				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.distsame();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Idempotence cannot be applied to this node. Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateLeftList(node);
 				getListener().updateEquivalenceLeft();
@@ -352,6 +527,13 @@ public class AndDialog extends JDialog {
 				AST temp = getListener().getRight().getLast().getTree().copy();
 				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.distsame();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Idempotence cannot be applied to this node. Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateRightList(node);
 				getListener().updateEquivalenceRight();

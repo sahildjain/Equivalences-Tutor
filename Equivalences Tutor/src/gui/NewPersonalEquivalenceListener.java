@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -23,6 +24,7 @@ public abstract class NewPersonalEquivalenceListener implements ActionListener {
 	private JPanel menu;
 	private JPanel buttons;
 	protected JPanel equivalence;
+	protected JPanel feedback;
 	
 	private JButton quit;
 	private JButton states;
@@ -63,13 +65,22 @@ public abstract class NewPersonalEquivalenceListener implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		getMenu().setVisible(false);
+		createFeedbackPanel();
 		createEquivalencePanel();
 		createButtonsPanel();
-		frame.add(buttons, BorderLayout.SOUTH);
 		frame.add(equivalence, BorderLayout.NORTH);
+		frame.add(buttons, BorderLayout.SOUTH);
+		
 	}
 	
 	protected abstract void createEquivalencePanel();
+	
+	protected void createFeedbackPanel() {
+		feedback = new JPanel(new MigLayout());
+		
+		JLabel label = new JLabel("Feedback");
+		feedback.add(label, BorderLayout.NORTH);
+	}
 
 	protected void createButtonsPanel() {
 		buttons = new JPanel(new MigLayout());
@@ -211,6 +222,14 @@ public abstract class NewPersonalEquivalenceListener implements ActionListener {
 	
 	public void setEquivalence(JPanel equivalence) {
 		this.equivalence = equivalence;
+	}
+	
+	public JPanel getFeedback() {
+		return this.feedback;
+	}
+	
+	public void setFeedback(JPanel Feedback) {
+		this.feedback = feedback;
 	}
 	
 }

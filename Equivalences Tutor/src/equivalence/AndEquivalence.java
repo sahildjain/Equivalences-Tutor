@@ -71,9 +71,9 @@ public class AndEquivalence extends Equivalence {
 				ASTPropositionalNode newRight = new ASTAndNode(key, ((ASTAndNode) left).getRight(), right);
 				ASTAndNode newAndNode = new ASTAndNode(left.getKey(), newLeft, newRight);
 				ASTPropositionalNode p = replace(tree.getRoot().getLeaf(), newAndNode, key);
-				if(p == null) {
+				/*if(p == null) {
 					return null;
-				}
+				}*/
 				ASTProgramNode program = tree.getRoot();
 				program.setLeaf(p);
 				AST t = new AST(tree.getKey(), program);
@@ -100,9 +100,9 @@ public class AndEquivalence extends Equivalence {
 				ASTPropositionalNode newLeft = new ASTAndNode(key, left, ((ASTAndNode) right).getLeft());
 				ASTAndNode newAndNode = new ASTAndNode(right.getKey(), newLeft, newRight);
 				ASTPropositionalNode p = replace(tree.getRoot().getLeaf(), newAndNode, key);
-				if(p == null) {
+				/*if(p == null) {
 					return null;
-				}
+				}*/
 				ASTProgramNode program = tree.getRoot();
 				program.setLeaf(p);
 				AST t = new AST(tree.getKey(), program);

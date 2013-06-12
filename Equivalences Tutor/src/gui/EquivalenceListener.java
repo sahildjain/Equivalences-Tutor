@@ -74,7 +74,10 @@ public class EquivalenceListener implements ActionListener{
 	private boolean compare(AST tree1, AST tree2) {
 		ASTPropositionalNode node1 = tree1.getRoot().getLeaf();
 		ASTPropositionalNode node2 = tree2.getRoot().getLeaf();
-		NodeEquivalence eq = new NodeEquivalence(node1, node2);
+		if(node1.getClass().toString().equals(node2.getClass().toString())) {
+			
+		}
+		/*NodeEquivalence eq = new NodeEquivalence(node1, node2);
 		if(eq.isEquivalent()) {
 			return true;
 		}
@@ -84,7 +87,7 @@ public class EquivalenceListener implements ActionListener{
 			AST temp1 = new AST(tree1.getKey(), null);
 			//ASTProgramNode program1 = new ASTProgramNode(key, doubleConditional)
 		}
-		return false;
+		return false;*/
 	}
 
 	public void setList(EquivalenceLinkedList list) {
