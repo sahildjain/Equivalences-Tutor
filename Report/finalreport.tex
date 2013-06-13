@@ -1,1267 +1,2522 @@
 \documentclass{report}
-%\usepackage{a4, fullpage}
+
+\usepackage{a4, fullpage}
+
 \usepackage{graphicx}
+
+\usepackage{alltt}
+
+\usepackage{listings}
+
+\usepackage{color}
+
+
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
 \linespread{1.3}
+
+
+
+\lstset{frame=tb,
+
+  language=Java,
+
+  aboveskip=3mm,
+
+  belowskip=3mm,
+
+  showstringspaces=false,
+
+  columns=flexible,
+
+  basicstyle={\small\ttfamily},
+
+  numbers=none,
+
+  numberstyle=\tiny\color{gray},
+
+  keywordstyle=\color{blue},
+
+  commentstyle=\color{dkgreen},
+
+  stringstyle=\color{mauve},
+
+  breaklines=true,
+
+  breakatwhitespace=true
+
+  tabsize=3
+
+}
+
 \begin{document}
 
+
+
 %-------------------------------------------------------------------------------
+
 % TITLE PAGE
+
 %-------------------------------------------------------------------------------
+
+
 
 \begin{titlepage}
+
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
 \center
+
 \textsc{\LARGE Imperial College London} \\[0.5cm]
+
 \textsc{\Large Department of Computing} \\[0.5cm]
+
 \textsc{\large Individual Project} \\[1.5cm]
+
 \HRule \\[0.3cm]
+
 {\huge \bfseries Equivalences Tutor} \\[0.3cm]
+
 \HRule \\[1.5cm]
 
+
+
 % author and supervisors
+
 \begin{minipage}{0.4\textwidth}
+
 \begin{flushleft} \large \emph{Author:} \\
+
 Sahil \textsc{Jain}
+
 \end{flushleft}
+
 \end{minipage}~
+
 \begin{minipage}{0.4\textwidth}
+
 \begin{flushright} \large \emph{Supervisor:} \\
+
 Fariba \textsc{Sadri}
+
 \end{flushright}
+
 \begin{flushright} \large \emph{Second marker:} \\
+
 Ian \textsc{Hodkinson}
+
 \end{flushright}
+
 \end{minipage}\\[4cm]
+
 {\large \today}\\[3cm]
+
 \vfill
+
 \end{titlepage}
 
-%-------------------------------------------------------------------------------
-% ABSTRACT
+
+
 %-------------------------------------------------------------------------------
 
+% ABSTRACT
+
+%-------------------------------------------------------------------------------
+
+
+
 \begin{abstract}
+
 % TODO
+
 \end{abstract}
 
 
+
+
+
 %-------------------------------------------------------------------------------
+
 % ACKNOWLEDGEMENTS
+
 %-------------------------------------------------------------------------------
+
+
 
 \subsection*{\centering Acknowledgements}
+
 I would like to thank Dr. Fariba Sadri for her continuous support and guidance
+
 throughout the course of this project. I would also like to thank Dr. Ian
+
 Hodkinson for his value feedback on my interim report.
 
+
+
 Above all, I would like to thank my family for being there for me and giving
+
 me constant support through my education.
 
+
+
 %-------------------------------------------------------------------------------
+
 % TABLE OF CONTENTS
+
 %-------------------------------------------------------------------------------
+
+
 
 \tableofcontents
 
+
+
 %-------------------------------------------------------------------------------
+
 % INTRODUCTION
+
 %-------------------------------------------------------------------------------
+
+
 
 \chapter{Introduction}
+
 % what is the project about
+
 % what did I set out to achieve, relevance, importance, difficulty
+
 % key aspects, non-technical
 
+
+
 \emph{Logic} refers to the study of different modes of reasoning conducted or 
+
 assessed according to strict principles of validity. Due to Logic being one of 
+
 the most fundamental aspects of Computer Science, it is taught to every student
+
 pursuing a Computing degree at Imperial College London. During the first term 
+
 in university, every Computing student is taught the Logic course, which aims to
+
 provide the students with knowledge of the syntax and semantics of Propositional 
+
 and Predicate logic. Students can apply this knowledge to complete equivalences
+
 and natural deduction proofs.
+
+
 
 A logical system is made up of three things:
 
+
+
 \begin{enumerate}
+
   \item Syntax - this is the formal language specified to express different
+
          concepts.
+
   \item Semantics - this is what provides meaning to the language.
+
   \item Proof theory - this is a way of arguing in the language. This allows us
+
          to identify valid statements in the language.
+
 \end{enumerate}
 
+
+
 In logic, two statements are logically equivalent if they contain the same
+
 logical content. Mendelson stated that "two statements are equivalent if they
+
 have the same truth value in every model." This can be illustrated in the 
+
 following example: \\ \bigskip 
+
 Statement 1: \emph{If Sahil is a final year student, 
+
 then he has to do an individual project} \\ \bigskip 
+
 Statement 2: \emph{If Sahil is not 
+
 doing an individual project, then he is not a final year student} \\ \bigskip 
+
 As we can see, both statements have the same result in same models. When two logic 
+
 statements are equivalent, they can be derived by each other, with the use of 
+
 equivalences which we know to be true.
 
 
+
+
+
 %-------------------------------------------------------------------------------
+
 % BACKGROUND
+
 %-------------------------------------------------------------------------------
+
+
 
 \chapter{Background} % 10-20 pages
 
+
+
 This section summarises the necessary background knowledge for understanding
+
 this report. It also introduces the concepts of Logic Equivalences.
 
+
+
 \section{Propositional Logic}
+
 Before we can define what Propositional Logic is, we have to define what a 
+
 proposition is. Essentially, a proposition is a statement which is either
+
 true or false. This then leads to defining Propositonal Logic as a branch of
+
 symbolic logic dealing with propositions as units and with their combinations
+
 and the connectives that relate them. [1]
 
+
+
 \subsection{Syntax}
+
 This is the formal language used in propositional logic. There are three different
+
 parts which make up the syntax of propositional logic; atoms, connectives and
+
 punctuation.
 
+
+
 A propositional atom, or propositional variable, is a symbol which has a truth
+
 value, either true or false. Usually, atoms are denoted by letters p, q, r, s, etc.
 
+
+
 Connectives are boolean operations which are applied to atoms. There are a total
+
 of seven connectives:
 
+
+
 \begin{itemize}
+
 	\item And - written as $\land$. Takes two arguments.
+
 	\item Or - written as $\lor$. Takes two arguments.
+
 	\item Not - written as $\neg$. Takes one argument.
+
 	\item If then - written as $\to$. Takes two arguments.
+
 	\item If and only if - written as $\leftrightarrow$. Takes two arguments.
+
 	\item Truth - written as $\top$. Takes zero arguments.
+
 	\item Falsity - written as $\bot$. Takes zero arguments.
+
 \end{itemize}
 
+
+
 \subsection{Semantics}
+
 This is the meaning of a logic formula. As each atom has a truth value, there can
+
 be several combinations of truth values for each atom. To be more specific, if there
+
 are n atoms in a logic formula, then there are a total of $2 ^ n$ combinations of
+
 truth values. Each combination is known as a situation.
 
+
+
 Each connective has a different meaning. These meanings can be shown using a truth
+
 table and using the atoms p and q. 
+
+
 
 \subsubsection{And}
 
+
+
 \begin{center}
+
   \begin{tabular}{| c | c | c |}
+
     \hline
+
     p & q & p $\land$ q \\ \hline
+
     0 & 0 & 0 \\
+
     0 & 1 & 0 \\
+
     1 & 0 & 0 \\
+
     1 & 1 & 1 \\ \hline
+
   \end{tabular}
+
 \end{center}
 
+
+
 As we can see, p $\land$ q is only true when both p and q are true. Otherwise,
+
 p $\land$ q is always false.
+
+
 
 \subsubsection{Or}
 
+
+
 \begin{center}
+
   \begin{tabular}{| c | c | c |}
+
     \hline
+
     p & q & p $\lor$ q \\ \hline
+
     0 & 0 & 0 \\
+
     0 & 1 & 1 \\
+
     1 & 0 & 1 \\
+
     1 & 1 & 1 \\ \hline
+
   \end{tabular}
+
 \end{center}
 
+
+
 As we can see, p $\lor$ q is true when either p or q is true. When both p and q
+
 are false, p $\lor$ q is false as well.
+
+
 
 \subsubsection{Not}
 
+
+
 \begin{center}
+
   \begin{tabular}{| c | c |}
+
     \hline
+
     p & $\neg$p \\ \hline
+
     0 & 1 \\
+
     1 & 0 \\ \hline
+
   \end{tabular}
+
 \end{center}
+
+
 
 The truth value of $\neg$p is always the opposite of p.
 
+
+
 \subsubsection{If Then}
 
+
+
 \begin{center}
+
   \begin{tabular}{| c | c | c |}
+
     \hline
+
     p & q & p $\to$ q \\ \hline
+
     0 & 0 & 1 \\
+
     0 & 1 & 1 \\
+
     1 & 0 & 0 \\
+
     1 & 1 & 1 \\ \hline
+
   \end{tabular}
+
 \end{center}
 
+
+
 p $\to$ q is true if p is false or/and if q is true. This means that there is
+
 only one situation where p $\to$ q is false, i.e p is true and q is false. 
+
+
 
 \subsubsection{If and Only If}
 
+
+
 \begin{center}
+
   \begin{tabular}{| c | c | c |}
+
     \hline
+
     p & q & p $\leftrightarrow$ q \\ \hline
+
     0 & 0 & 1 \\
+
     0 & 1 & 0 \\
+
     1 & 0 & 0 \\
+
     1 & 1 & 1 \\ \hline
+
   \end{tabular}
+
 \end{center}
+
+
 
 p $\leftrightarrow$ q is true if p and q both have the same truth value.
 
+
+
 \subsubsection{Truth and Falsity}
+
 Truth is an atom which is always true, and Falsity is an atom which is always false.
 
+
+
 \section{Equivalences}
+
 As we introduced the example of "\emph{If Sahil is a final year student, 
+
 then he has to do an individual project}" being the same as "\emph{If Sahil is not 
+
 doing an individual project, then he is not a final year student}", all logic
+
 formulae are equivalent to other logic formulae.
 
+
+
 We can show this by converting the above example into propositional logic. If we let
+
 the atom \emph{p} denote "\emph{Sahil is a final year student}" and let the atom \emph{q}
+
 denote "\emph{Sahil is doing an individual project}", then the statement "\emph{If Sahil 
+
 is a final year student, then he has to do an individual project}" becomes p $\to$ q
+
 and the statement "\emph{If Sahil is not doing an individual project, then he is 
+
 not a final year student}" becomes $\neg$q $\to$ $\neg$p.
+
+
 
 If we construct the truth tables of both of these formulae, we get:
 
-\begin{center}
-  \begin{tabular}{| c | c | c |}
-    \hline
-    p & q & p $\to$ q \\ \hline
-    0 & 0 & 1 \\
-    0 & 1 & 1 \\
-    1 & 0 & 0 \\
-    1 & 1 & 1 \\ \hline
-  \end{tabular}
-\end{center}
+
 
 \begin{center}
+
   \begin{tabular}{| c | c | c |}
+
     \hline
-    p & q & $\neg$q $\to$ $\neg$p \\ \hline
+
+    p & q & p $\to$ q \\ \hline
+
     0 & 0 & 1 \\
+
     0 & 1 & 1 \\
+
     1 & 0 & 0 \\
+
     1 & 1 & 1 \\ \hline
+
   \end{tabular}
+
 \end{center}
+
+
+
+\begin{center}
+
+  \begin{tabular}{| c | c | c |}
+
+    \hline
+
+    p & q & $\neg$q $\to$ $\neg$p \\ \hline
+
+    0 & 0 & 1 \\
+
+    0 & 1 & 1 \\
+
+    1 & 0 & 0 \\
+
+    1 & 1 & 1 \\ \hline
+
+  \end{tabular}
+
+\end{center}
+
+
 
 As we can see, both of the truth tables are the same. This means that in any given
+
 situation, both of the logic formulae have the same truth value, meaning that they
+
 are equivalent.
+
+
 
 There are several defined equivalences for each operator.
 
+
+
 \subsection{And Equivalences}
+
 \begin{enumerate}
+
+
 
   \item A $\land$ B $\equiv$ B $\land$ A \emph{(Commutativity of And)}
+
   \item A $\land$ A $\equiv$ A \emph{(Idempotence of And)}
+
   \item (A $\land$ B) $\land$ C $\equiv$ A $\land$ (B $\land$ C) \emph{(Associaticity of And)}
 
+
+
 \end{enumerate}
+
+
 
 \subsection{Or Equivalences}
+
 \begin{enumerate}
 
+
+
   \item A $\lor$ B $\equiv$ B $\lor$ A \emph{(Commutativity of Or)}
+
 	\item A $\lor$ A $\equiv$ A \emph{(Idempotence of Or)}
+
   \item (A $\lor$ B) $\lor$ C $\equiv$ A $\lor$ (B $\lor$ C) \emph{(Associaticity of Or)}
+
+
 
 \end{enumerate}
 
+
+
 \subsection{Not Equivalences}
+
 \begin{enumerate}
+
+
 
   \item A $\equiv$ $\neg$$\neg$A
 
+
+
 \end{enumerate}
+
+
 
 \subsection{Implies Equivalences}
+
 \begin{enumerate}
+
+
 
   \item A $\to$ B $\equiv$ $\neg$A $\lor$ B
+
   \item A $\to$ B $\equiv$ $\neg$(A $\land$ $\neg$B)
+
   \item $\neg$(A $\to$ B) $\equiv$ A $\land$ $\neg$B
 
+
+
 \end{enumerate}
+
+
 
 \subsection{If and Only If Equivalences}
+
 \begin{enumerate}
 
+
+
   \item A $\leftrightarrow$ B $\equiv$ (A $\to$ B) $\land$ (B $\to$ A)
+
   \item A $\leftrightarrow$ B $\equiv$ (A $\land$ B) $\lor$ ($\neg$A $\land$ $\neg$B)
 
+
+
 \end{enumerate}
+
+
 
 \subsection{De Morgan Equivalences}
 
+
+
 \begin{enumerate}
+
+
 
   \item $\neg$(A $\land$ B) $\equiv$ $\neg$A $\lor$ $\neg$B
+
   \item $\neg$(A $\lor$ B) $\equiv$ $\neg$A $\land$ $\neg$B
 
+
+
 \end{enumerate}
+
+
 
 \subsection{Distributibivity of And and Or}
+
 \begin{enumerate}
 
+
+
   \item A $\land$ (B $\lor$ C) $\equiv$ (A $\land$ B) $\lor$ (A $\land$ C)
+
   \item A $\lor$ (B $\land$ C) $\equiv$ (A $\lor$ B) $\land$ (A $\lor$ C)
 
+
+
 \end{enumerate}
+
+
 
 \section{Examples of Equivalence Problems}
 
+
+
 \subsection{Equivalence Examples}
+
 \begin{enumerate}
 
+
+
   \item $\neg$(p $\to$ q) $\equiv$ p $\land$ $\neg$q
+
   \begin{enumerate}
+
     \item $\neg$(p $\to$ q)
+
     \item $\neg$($\neg$p $\lor$ q) \hfill a, Implication rule
+
     \item $\neg$$\neg$p $\land$ $\neg$q \hfill b, De Morgan's law
+
     \item p $\land$ $\neg$q \hfill c, Double Negation rule
-  \end{enumerate}
-  
-  \item $\neg$((p $\land$ q) $\to$ r) $\equiv$ (p $\land$ q) $\land$ $\neg$r
-  \begin{enumerate}
-    \item $\neg$((p $\land$ q) $\to$ r)
-    \item $\neg$($\neg$(p $\land$ q) $\lor$ r) \hfill a, Implication rule
-    \item $\neg$$\neg$(p $\land$ q) $\land$ $\neg$ r \hfill b, De Morgan's law
-    \item (p $\land$ q) $\land$ $\neg$r \hfill c, Double Negation rule
+
   \end{enumerate}
 
-  \item $\neg$(p $\lor$ $\neg$q) $\lor$ ($\neg$p $\land$ $\neg$q) $\equiv$ $\neg$p
+  
+
+  \item $\neg$((p $\land$ q) $\to$ r) $\equiv$ (p $\land$ q) $\land$ $\neg$r
+
   \begin{enumerate}
-    \item $\neg$(p $\lor$ $\neg$q) $\lor$ ($\neg$p $\land$ $\neg$q)
-    \item $\neg$(p $\lor$ $\neg$q) $\lor$ $\neg$(p $\land$ q) \hfill a, De Morgan's law
-    \item $\neg$[(p $\lor$ $\neg$q) $\land$ (p $\land$ q)] \hfill b, De Morgan's law
-    \item $\neg$[p $\lor$ ($\neg$q $\land$ q)] \hfill c, Distributivity
-    \item $\neg$(p $\lor$ $\bot$) \hfill d, And rule
-    \item $\neg$p \hfill e, Or rule
+
+    \item $\neg$((p $\land$ q) $\to$ r)
+
+    \item $\neg$($\neg$(p $\land$ q) $\lor$ r) \hfill a, Implication rule
+
+    \item $\neg$$\neg$(p $\land$ q) $\land$ $\neg$ r \hfill b, De Morgan's law
+
+    \item (p $\land$ q) $\land$ $\neg$r \hfill c, Double Negation rule
+
   \end{enumerate}
+
+
+
+  \item $\neg$(p $\lor$ $\neg$q) $\lor$ ($\neg$p $\land$ $\neg$q) $\equiv$ $\neg$p
+
+  \begin{enumerate}
+
+    \item $\neg$(p $\lor$ $\neg$q) $\lor$ ($\neg$p $\land$ $\neg$q)
+
+    \item $\neg$(p $\lor$ $\neg$q) $\lor$ $\neg$(p $\land$ q) \hfill a, De Morgan's law
+
+    \item $\neg$[(p $\lor$ $\neg$q) $\land$ (p $\land$ q)] \hfill b, De Morgan's law
+
+    \item $\neg$[p $\lor$ ($\neg$q $\land$ q)] \hfill c, Distributivity
+
+    \item $\neg$(p $\lor$ $\bot$) \hfill d, And rule
+
+    \item $\neg$p \hfill e, Or rule
+
+  \end{enumerate}
+
 \end{enumerate}
+
+
 
 \section{Current Logic Tutorial Applications}
 
+
+
 In the first year Logic course, several different concepts are taught to the students.
+
 Some of the concepts have applications installed on the lab machines which are produced
+
 to help students understand these concepts better. Firstly, there is an application
+
 called \emph{Pandora}, which is a learning support tool designed to guide the
+
 construction of natural deduction proofs. The second application the department
+
 provides is \emph{LOST}, which helps students understand logic semantics better. 
 
+
+
 Equivalences is a large part of the Logic course, but currently, there is no
+
 tutorial application which the students can use to understand how to apply
+
 equivalences better, or which provides a user friendly interface for the students 
+
 to use. 
 
+
+
 %-------------------------------------------------------------------------------
+
 % MAIN BODY
+
 %-------------------------------------------------------------------------------
+
+
 
 \chapter{Implementation and Features}
 
+
+
 \section{Modelling Logic Formulae}
 
+
+
 The first part that had to be implemented was modelling logic formulae so that
+
 they could be manipulated when applying equivalences. In the first year Logic course
+
 taught by Ian Hodkinson, the students are taught the Logic formation tree.
 
+
+
 The example given in the first year slides is:
+
 % TODO insert the tree from first year slides
 
+
+
 Using this formation tree, we can model logical formulae in a tree structure in
+
 Java by creating our own data structure.
+
+
 
 \subsection{Lexer}
 
+
+
 The first step in modelling the logical formulae into a tree structure is lexical 
+
 analysis. This is the process of converting a sequence of characters into a sequence
+
 of tokens which can be parsed in the future.
 
+
+
 As writing a lexer from scratch would have been very time consuming and tedious,
+
 I researched about the tools which had been developed for generating lexers after
+
 inputting the lexical grammar. The best tool which I came across was ANTLR, as it
+
 provides a very easy to use debugger where you can load the generated code and step
+
 through it. 
 
+
+
 \subsubsection{Lexical Grammar}
+
 \begin{verbatim}
+
 lexer grammar LogicLexer;
 
+
+
 options {
+
   language = Java;
+
 }
 
+
+
 @header {
+
   package eqtutor;
+
 }
+
+
 
 WHITESPACE:			( '\t' | ' ' | '\r' | '\n' | '\u000C' )+ { $channel = HIDDEN; };
 
+
+
 AND	:						'&';
+
 OR	:						'|';
+
 IFTHEN	:				'->';
+
 IFF 	:					'<>';
+
 NOT 	:					'!';
 
+
+
 LPAREN  :				'(';
+
 RPAREN  :				')';
 
+
+
 ID	:						('A'..'Z'|'a'..'z') ('A'..'Z'|'a'..'z'|'_')*;
+
 \end{verbatim}
+
+
 
 \subsection{Parser}
 
+
+
 Once the formulae has been tokenised by the lexer, it then has to be parsed. Parsing
+
 is the process where the tokens are used to build a data structure, which is usually
+
 a hierarchical structure. This data structure gives a structural representation
+
 of the input.
 
+
+
 ANTLR provides both lexer and parser generators. Due to having the ability of doing both
+
 of these steps using one tool which I had become familiar with, I decided to use the
+
 ANTLR parser generator.
+
+
+
 
 
 \subsubsection{Parser Grammar}
 
+
+
 \begin{verbatim}
+
 parser grammar LogicParser;
 
+
+
 options {
+
   tokenVocab = LogicLexer;
+
 }
+
+
 
 @header {
+
   package eqtutor;
 
+
+
   import java.util.LinkedList;
+
   import java.util.List;
+
   import AST.*;
+
 }
+
+
 
 @members {
+
   private boolean hasFoundError = false;
 
+
+
   public void displayRecognitionError(String[] tokenNames, RecognitionException e) {
+
     hasFoundError = true;
+
   }
+
+
 
   public boolean hasFoundError() {
+
     return this.hasFoundError;
+
   }
+
 }
 
+
+
 program returns [AST tree]
+
   : e = iffexpr {$tree = new AST(new ASTProgramNode($e.node));} EOF
+
   ;
+
+
 
 iffexpr returns [ASTPropositionalNode node]
+
   : ifthen = ifexpr {$node = $ifthen.node;} 
+
 	  (IFF iff = iffexpr {$node = new ASTIffNode($ifthen.node, $iff.node);})*
+
   ;
+
   	
+
 ifexpr returns [ASTPropositionalNode node]
+
   : or = orexpr {$node = $or.node;} 
+
 		(IFTHEN ifthen = ifexpr {$node = new ASTIfThenNode($or.node, $ifthen.node);})*
+
   ;
+
+
 
 orexpr returns [ASTPropositionalNode node]
+
   : and = andexpr {$node = $and.node;} 
+
 		(OR or = orexpr {$node = new ASTOrNode($and.node, $or.node);})*
+
   ;
+
+
 
 andexpr returns [ASTPropositionalNode node]
+
   : not = notexpr {$node = $not.node;} 
+
 		(AND and = andexpr {$node = new ASTAndNode($not.node, $and.node);})*
+
   ;
+
+
 
 notexpr returns [ASTPropositionalNode node]
+
   : NOT not = notexpr {$node = new ASTNotNode($not.node);}
+
   | id = identifier {$node = $id.node;}
+
   ;
 
+
+
 identifier returns [ASTPropositionalNode node]
+
   : ID {$node = new ASTIdentifierNode($ID.text);}
+
   | LPAREN iffexpr RPAREN {$node = $iffexpr.node;}
+
   ;
+
 \end{verbatim}
+
+
 
 \section{Abstract Syntax Tree}
 
+
+
 The Abstract Syntax Tree (AST) is the tree representation of the structure
+
 of the logic expression. Each node of the tree represents either a connective
+
 or an identifier of the logic expression.
 
+
+
 ANTLR provided an implementation of the AST as well, but I decided not to use it
+
 since manipulation of the trees provided was tough and confusing. Due to this,
+
 I created my own data structure to store the logic expression.
 
+
+
 Once the tree is parsed, we obtain an object of type AST. The tree contains
+
 a node of type ASTProgramNode, which is the highest level of the tree. The ASTProgramNode
+
 node contains an ASTPropositionalNode. ASTPropositionalNode is an abstract class
+
 which contains the abstract methods for all of the propositional operators. The
+
 ASTPropositionalNode class is shown below:
 
-\begin{verbatim}
+
+
+\begin{lstlisting}[caption=Methods held in a Propositional Node, label=find]
+
 public abstract class ASTPropositionalNode extends ASTNode {
 
+
+
 	/*--Checks if the current node is equal to the input node--*/
+
 	public abstract boolean equals(ASTPropositionalNode node);
 
+
+
 	/*--Returns the string representation of the node--*/
+
 	public abstract String toString();
 
+
+
 	/*--Returns the string representation of the node which can be parsed--*/
+
 	public abstract String toParserString();
 
+
+
 	/*--Returns a tree map of the identifiers in the node--*/
+
 	public abstract TreeMap<String, Integer> numIdentifiers(TreeMap<String, Integer> identifiers);
+
 	
+
 	/*--Returns the value of the node, e.g TRUTH and TRUTH = TRUTH--*/
+
 	public abstract int value(TreeMap<String, Integer> id);
 
+
+
 	/*--Creates the JPanel for the node which is used to solve equivalences--*/
+
 	public abstract JPanel createJPanel(NewPersonalEquivalenceListener l, boolean side);
+
 	
+
 	/*--Copy constructor for the node--*/
+
 	public abstract ASTPropositionalNode copy();
 
+
+
 }
-\end{verbatim}
+
+\end{lstlisting}
+
+
 
 \section{Equivalences Data Structure}
 
+
+
 The equivalences the user perform have to be used in several different features.
+
 To make it easy to use and manipulate the equivalences, a data structure in which
+
 the equivalences could be stored had to be decided upon. 
 
+
+
 Before I could decide on which data structure to use, I had to delve into the details
+
 of what I had to store in order to complete equivalences, and how exactly an
+
 equivalence was done. In an equivalence, you only ever have to use the previous
+
 formula to obtain the next equivalent formula. This is illustrated by the 
+
 example below:
 
+
+
 \begin{enumerate}
+
     \item $\neg$(p $\to$ q)
-		\item $\neg$($\neg$(p $\land$ $\neg$q)) \hfill a, Implication rule
-    \item $\neg$($\neg$p $\lor$ q) \hfill a, Implication rule
-    \item $\neg$$\neg$p $\land$ $\neg$q \hfill c, De Morgan's law
-    \item p $\land$ $\neg$q \hfill d, Double Negation rule
+
+		\item $\neg$($\neg$(p $\land$ $\neg$q)) \hfill 1, Implication rule
+
+    \item $\neg$($\neg$p $\lor$ q) \hfill 1, Implication rule
+
+    \item $\neg$$\neg$p $\land$ $\neg$q \hfill 3, De Morgan's law
+
+    \item p $\land$ $\neg$q \hfill 4, Double Negation rule
+
 \end{enumerate}
 
+
+
 As we can see, line b is unneccesary in this equivalence, although true.
+
 We also notice that line d is obtained using line c, and line e from line d.
 
+
+
 Due to the presence of this feature, I considered the use of linked lists
+
 to store equivalences. A linked list is essentially a list implemented by
+
 each item having a link to the next item [3]. In the equivalences case, this
+
 means that every formula would have a link to a logically equivalent formula
+
 which has been derived by applying a single equivalence.
 
+
+
 Before I could create the Linked List class, I had to create the structure of
+
 each node. Below are the fields stored in a node:
 
-\begin{verbatim}
+
+
+\begin{lstlisting}[caption=Fields held in a list node, label=find]
+
 /*--line number of the formula--*/
+
 private int lineNumber;
 
+
+
 /*--the Abstract Syntax Tree of the formula--*/
+
 private AST tree;
 
+
+
 /*--the next node in the equivalence--*/
+
 private EquivalenceLinkNode next;
-\end{verbatim}
+
+\end{lstlisting}
+
+
+
+Once the node class was written, the list class could be implemented. Below
+
+are the fields and methods in the list class:
+
+
+
+\begin{lstlisting}[caption=Methods and fields in the Linked List class, label=find]
+
+public class EquivalenceLinkedList {
+
+	
+
+	/*--the first node of the list--*/
+
+	private EquivalenceLinkNode head;
+
+
+
+	/*--the number of nodes in the list--*/
+
+	private int size;
+
+
+
+	/*--constructor--*/
+
+	public EquivalenceLinkedList();
+
+
+
+	/*--returns true if the list is empty, false otherwise--*/	
+
+	public boolean isEmpty();
+
+
+
+	/*--adds a node to the end of the list--*/
+
+	public void add(EquivalenceLinkNode node);
+
+	
+
+	/*--removes the last element of the list--*/
+
+	public void removeLast();
+
+
+
+	/*--returns the first element of the list--*/
+
+	public EquivalenceLinkNode getHead();
+
+
+
+	/*--sets the parameter node as the head of the list--*/
+
+	public void setHead(EquivalenceLinkNode head);
+
+
+
+	/*--returns the size of the list--*/	
+
+	public int getSize();
+
+
+
+	/*--sets the parameter size as the size of the list--*/	
+
+	public void setSize(int size);
+
+
+
+	/*--returns the last node of the list--*/
+
+	public EquivalenceLinkNode getLast()
+
+
+
+}
+
+\end{lstlisting}
+
+
+
+\section{Implementation of Equivalences}
+
+
+
+As formulae are stored as a tree, to apply an equivalence to a formula, the tree
+
+structure has to be altered. As nodes had to be altered, the tree had to be traversed,
+
+which lead to a few problems. In the method which applied equivalences, which is
+
+discussed later, the node to be changed and the new node were passed in as parameters.
+
+The node was then altered. A problem arose due to the fact that there could be several
+
+instances of the node in the tree. For example, consider the formula (p $\land$ p) $\to$ 
+
+(q $\to$ (p $\land$ p)). Suppose we wanted to apply to equivalence (p $\land$ p) $\equiv$ p to
+
+the first instance of p $\land$ p. The method would initially return the tree with formula 
+
+p $\to$ (q $\to$ p). To overcome this problem, a key had to be designated to each node, so
+
+when an equivalence was applied, the key of the node would be a parameter in the method.
+
+This allows for the equivalence to be correctly applied to the formula.
+
+
+
+For each equivalence, there is a different method. An example method is shown below. The
+
+example is for the equivalence  p $\land$ q = $\neg$($\neg$p $\lor$ $\neg$q).
+
+
+
+\begin{lstlisting}[caption=Example of an equivalence method, label=equiveg]
+
+public AST deMorgan() {
+
+  try {
+
+    AST tree = getTree();
+
+    int key = getKey();
+
+		
+
+    /*--finds the node with the given key in the tree--*/
+
+    ASTNode node  = find(tree.getRoot(), key);
+
+
+
+    /*--only applies the equivalence if the found node is an instance
+
+        of an And node--*/
+
+    if(node instanceof ASTAndNode) {
+
+      ASTAndNode andNode = (ASTAndNode) node;
+
+      ASTPropositionalNode left = andNode.getLeft();
+
+      ASTPropositionalNode right = andNode.getRight();
+
+
+
+      /*--creates a not node of the left child of the and node--*/
+
+      ASTNotNode notLeft = new ASTNotNode(tree.getKey(), left);
+
+      tree.setKey(tree.getKey() + 1);
+
+
+
+      /*--creates a not node of the right child of the and node--*/
+
+      ASTNotNode notRight = new ASTNotNode(tree.getKey(), right);
+
+      tree.setKey(tree.getKey() + 1);
+
+
+
+      /*--creates the or node needed in the equivalence--*/
+
+      ASTOrNode orNode = new ASTOrNode(tree.getKey(), notLeft, notRight);
+
+      tree.setKey(tree.getKey() + 1);
+
+
+
+      /*--creates the not node which is equivalence to the initial and node--*/
+
+      ASTNotNode notNode = new ASTNotNode(tree.getKey(), orNode);
+
+      tree.setKey(tree.getKey() + 1);
+
+
+
+      /*--replaces the and node with the not node--*/
+
+      ASTPropositionalNode p = replace(tree.getRoot().getLeaf(), notNode, key);
+
+      ASTProgramNode program = tree.getRoot();
+
+      program.setLeaf(p);
+
+
+
+      /*--creates and returns the new logically equivalent tree--*/
+
+      AST t = new AST(tree.getKey(), program);
+
+      return t;
+
+    }
+
+  }
+
+  catch(Exception e) {
+
+    return null;
+
+  }
+
+  return null;
+
+}
+
+\end{lstlisting}
+
+
+
+The same structure is used for other equivalence methods.
+
+
+
+Clearly, the find and replace methods are essential to this method. The find method
+
+is shown in \ref{find}, and the replace method is shown in \ref{replace}
+
+
+
+\begin{lstlisting}[caption=Find method for equivalences, label=find]
+
+public static ASTNode find(ASTNode node, int key) {
+
+  if(node.getKey() == key) {
+
+    return node;
+
+  }
+
+  if(node instanceof ASTPropositionalBinaryNode) {
+
+    ASTPropositionalBinaryNode binary = (ASTPropositionalBinaryNode) node;
+
+    ASTNode left = find(binary.getLeft(), key);
+
+    ASTNode right = find(binary.getRight(), key);
+
+    if(left != null) {
+
+      return left;
+
+    }
+
+    if(right != null) {
+
+      return right;
+
+    }
+
+  }
+
+  if(node instanceof ASTPropositionalUnaryNode) {
+
+    ASTPropositionalUnaryNode unary = (ASTPropositionalUnaryNode) node;
+
+    ASTNode ret = find(unary.getLeaf(), key);
+
+    if(ret != null) {
+
+      return ret;
+
+    }
+
+  }
+
+  return null;
+
+}
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[caption=Replace method for equivalences, label=replace]
+
+public static ASTPropositionalNode replace(ASTPropositionalNode prop, ASTNode node, int key) {
+
+  if(prop.getKey() == key) {
+
+    return (ASTPropositionalNode) node;
+
+  }
+
+  if(prop instanceof ASTPropositionalBinaryNode) {
+
+    ASTPropositionalBinaryNode binary = (ASTPropositionalBinaryNode) prop;
+
+    if(find(binary.getLeft(), key) != null) {
+
+      binary.setLeft(replace(((ASTPropositionalBinaryNode) prop).getLeft(), node, key));
+
+    }
+
+    if(find(((ASTPropositionalBinaryNode) prop).getRight(), key) != null) {
+
+      binary.setRight(replace(((ASTPropositionalBinaryNode) prop).getRight(), node, key));
+
+    }
+
+    return binary;
+
+  }
+
+  if(prop instanceof ASTPropositionalUnaryNode) {
+
+    ASTPropositionalUnaryNode unary = (ASTPropositionalUnaryNode) prop;
+
+    unary.setLeaf(replace(unary.getLeaf(), node, key));
+
+    return unary;
+
+  }
+
+  return null;
+
+}
+
+\end{lstlisting}
+
+
+
+\section{Description of Packages}
+
+In this section, a description of each package written for the
+
+implementation of the application is given.
+
+
+
+\subsection{AST}
+
+This package contains all of the classes needed for the Logic tree structure.
+
+The top level class is the AST class, which contains all of the data about
+
+the tree, such as the top level node.
+
+
+
+For nodes, there is an abstract class called ASTNode, which each node extends.
+
+Every node has a key, so the getter and setter for the keys are abstract methods
+
+in the ASTNode class. Then, there is a ASTPropositionalNode abstract class, which
+
+every propositional node extends. As discussed in the Background section, there
+
+are two different types of propositional nodes; unary and binary. Unary nodes
+
+include Truth, Falsity and Not, and the binary nodes are the Or, And, If then,
+
+If and only if nodes. To accomodate for these two types of propositional nodes,
+
+two abstract classes were creates; ASTPropositionalBinaryNode and
+
+ASTPropositionalUnaryNode. Both of these classes contain respective methods
+
+needed for the manipulation of the trees.
+
+
+
+For testing purposes, the Visitor design pattern is used to print the tree
+
+to console. The Visitor design pattern allows the separation of an algorithm
+
+from an object structure on which it operates.
+
+
+
+\subsection{gui}
+
+This package contains all of the classes which are needed for the Graphical
+
+User Interface (GUI).
+
+
+
+\subsection{database}
+
+This package handles all of the database interaction that occurs in the program.
+
+As we are provided with PostgreSQL databases, I decided on using JDBC to interact
+
+with the database.
+
+Whenever the application makes a query to the database, it has to connect
+to it. To make this easy, a class DatabaseAdaptor contains a static method
+which connects to the database. Every query and update method calls this
+static method.
+
+During the implementation of the application, the database had to be reset
+several times. It became tedious to open terminal and clear and then
+initialise the database several times. To overcome this problem, a class
+DatabaseInitialisor was created, which resets and initialises the database
+with one method call.
+
+The other classes in the package contain all necessary methods for queries and
+updates to the database. Whenever a query is made, a ResultSet object is returned
+to the method. To keep all database interaction away from the main implementation
+of the code, the ResultSet is converted to another object which is suitable
+for the query.
+
+
+
+\subsection{buttonlisteners}
+
+
+
+\subsection{dialogs}
+
+
+
+\subsection{eqtutor}
+
+This is the package which contains the lexer, parser and logic expression
+
+generator.
+
+
+
+\subsection{equivalence}
+
+This package handles all of the equivalences and manipulation of the logic trees.
+
+There is one major abstract class, which all of the Equivalence classes
+
+extend. This class contains the find and replace methods, which have been explained
+earlier in this chapter.
+
+For every different type of node, there is a different class which contains
+the methods for all of its related equivalences. All of these methods return
+the new logically equivalent AST.
+
+This package also contains the data structure of the linked list and link node
+which are needed to store an equivalence which the user performs.
+
+
 
 \section{Logic Expression Generator}
 
+
+
 \section{Equivalence Solvers}
 
+
+
 Two different interfaces are implemented which the user can use to solve equivalences.
+
 Both of the modes have several features in common. Firstly, regardless of what mode
+
 the user selects to perform an equivalence, the application is divided into two
+
 different distinct panels. Once the start and end state have been entered, the
+
 start state will be visible on the left panel, and the end state will be available on
+
 the right panel. The advantage of having the interface laid out like this is that
+
 it allows the user to work from the start state and from the end state, apply
+
 equivalences, and eventually meet in the middle. Once the final equivalences on each
+
 side match, the equivalence is complete. When performing these equivalences, the
+
 user can switch modes as they please.
 
+
+
 The user also has the ability to save an equivalence which they are doing, either
+
 to file or on a database. The user can undo their last equivalences from both panels
+
 as well.
+
+
+
 
 
 \subsection{Checking if two formulae are logically equivalent}
 
+
+
 When a user starts a new equivalence, he has to first put input the start
+
 state and the end state. These two formulae are then checked to be equivalent
+
 or not, as the user should not be allowed to perform an equivalence problem
+
 if the start and end state are not equivalent.
 
+
+
 If we were doing this on paper, we would just construct the truth table for
+
 the two formulae, and then compare them to be equal. The same idea is programmed
+
 in the AST class. As the AST only contains the structure, we have to assign each
+
 identifier with a truth value, so that every situation is accounted for while
+
 creating a truth table.
 
+
+
 To achieve this, firstly a Tree Map of the identifiers is obtained. A Tree Map is
+
 used as it sorts the map according to the natural ordering of its keys [2], which are
+
 strings in this case, which means that the keys are stored alphabetically. This means
+
 the order of identifiers in the map of both formulae will be the same, allowing for
+
 easy comparison of truth tables. Once the tree map of the identifiers is obtained,
+
 the size of the map can be used to determine every situation. This is illustrated
+
 by the example below:
+
+
 
 Consider the formula p $\land$ q $\land$ r, the situations are:
 
+
+
 \begin{center}
+
   \begin{tabular}{| c | c | c |}
+
     \hline
+
     p & q & r\\ \hline
+
     0 & 0 & 0 \\
+
     0 & 0 & 1 \\
+
 		0 & 1 & 0 \\
+
 		0 & 1 & 1 \\
+
 		1 & 0 & 0 \\
+
 		1 & 0 & 1 \\
+
     1 & 1 & 0 \\
+
     1 & 1 & 1 \\ \hline
+
   \end{tabular}
+
 \end{center}
 
+
+
 If we look at each situation in order, we can see that they are binary numbers
+
 starting from 0, going to $2^n$ where n is the number of identifiers. This
+
 connection can be used to assign values to identifiers. The pseudocode is shown
+
 below:
 
+
+
 %TODO write pseudocode
-\begin{verbatim}
+
+\begin{lstlisting}
+
+
 
 public int[][] createTruthTable() {
-		TreeMap<String, Integer> identifiers = this.identifiers();
-		int numIdentifiers = identifiers.size();
-		int temp = (int) Math.pow(2, numIdentifiers);
-		int[][] truthTable = new int[temp][numIdentifiers + 1];
-		for(int i = 0; i < truthTable.length; i++) {
-			String binary = Integer.toBinaryString(i);
-			if(binary.length() < numIdentifiers) {
-				int numZeroes = numIdentifiers - binary.length();
-				String zeroes = "";
-				while(zeroes.length() < numZeroes) {
-					zeroes += "0";
-				}
-				binary = zeroes + binary;
-			}
-			for(int j = 0; j < truthTable[i].length - 1; j++) {
-				char c = binary.charAt(j);
-				int n = Integer.parseInt(Character.toString(c));
-				truthTable[i][j] = n;
-			}
-		}
-		for(int i = 0; i < truthTable.length; i++) {
-			Set<String> keys = identifiers.keySet();
-			TreeMap<String, Integer> id = new TreeMap<String, Integer>();
-			Iterator<String> it = keys.iterator();
-			int j = 0;
-			while(it.hasNext()) {
-				String key = (String) it.next();
-				id.put(key, truthTable[i][j]);
-				j++;
-			}
-			truthTable[i][j] = value(id);
-		}
-		return truthTable;
-	}
 
-\end{verbatim}
+  TreeMap<String, Integer> identifiers = this.identifiers();
+
+  int numIdentifiers = identifiers.size();
+
+  int temp = (int) Math.pow(2, numIdentifiers);
+
+  int[][] truthTable = new int[temp][numIdentifiers + 1];
+
+  for(int i = 0; i < truthTable.length; i++) {
+
+    String binary = Integer.toBinaryString(i);
+
+    if(binary.length() < numIdentifiers) {
+
+      int numZeroes = numIdentifiers - binary.length();
+
+      String zeroes = "";
+
+      while(zeroes.length() < numZeroes) {
+
+	      zeroes += "0";
+
+      }
+
+      binary = zeroes + binary;
+
+    }
+
+    for(int j = 0; j < truthTable[i].length - 1; j++) {
+
+      char c = binary.charAt(j);
+
+      int n = Integer.parseInt(Character.toString(c));
+
+      truthTable[i][j] = n;
+
+    }
+
+  }
+
+  for(int i = 0; i < truthTable.length; i++) {
+
+    Set<String> keys = identifiers.keySet();
+
+    TreeMap<String, Integer> id = new TreeMap<String, Integer>();
+
+    Iterator<String> it = keys.iterator();
+
+    int j = 0;
+
+    while(it.hasNext()) {
+
+      String key = (String) it.next();
+
+      id.put(key, truthTable[i][j]);
+
+      j++;
+
+    }
+
+    truthTable[i][j] = value(id);
+
+  }
+
+  return truthTable;
+
+}
+
+
+
+\end{lstlisting}
+
+
 
 \subsection{Easy Equivalence Solver}
 
+
+
 The first mode for solving equivalences is the easy mode. In this interface,
+
 the user can click on either an identifier or a connective. Once the user
+
 clicks on an identifier, a dialog opens up with all possible equivalences
+
 that can be applied to the identifier, for example, p $\equiv$ $\neg$$\neg$p.
+
 If the user clicks on an connective instead of an identifier, the dialog which
+
 opens up shows the equivalences that can be applied to the clicked connective,
+
 for example, if $\land$ was clicked from the formula a $\land$ b, then
+
 one of the equivalences that would be seen would be the commutativity
+
 equivalence, i.e a $\land$ b $\equiv$ b $\land$ a.
 
+
+
 %TODO add an image of the interface
+
+
 
 \subsection{Hard Equivalence Solver}
 
+
+
+
+
 The hard equivalence solver is an interface for solving equivalences where
+
 the student enters logic expressions into a text field. This expression is
+
 then compared to the previous expression to see if it is logically equivalent,
+
 and to see if only one of the given equivalences has been applied. 
+
+
 
 %TODO add an image of the interface
 
 
 
+
+
+
+
 %-------------------------------------------------------------------------------
+
 % EVALUATION
+
 %-------------------------------------------------------------------------------
+
+
 
 \chapter{Evaluation}
 
+
+
 %-------------------------------------------------------------------------------
+
 % CONCLUSIONS AND FUTURE WORK
+
 %-------------------------------------------------------------------------------
+
+
 
 \chapter{Conclusions and Future Work}
+
 \section{Learning outcomes}
+
 \section{Potential improvements}
+
 \section{Potential extensions}
 
+
+
 %-------------------------------------------------------------------------------
+
 % BIBLIOGRAPHY
+
 %-------------------------------------------------------------------------------
+
+
 
 \begin{thebibliography}{9}
+
 %\bibitem{lamport94}
+
 % Leslie Lamport,
+
 % \emph{\LaTeX: A Document Preparation System}.
+
 % Addison Wesley, Massachusetts,
+
 % 2nd Edition,
+
 % 1994.
+
 \end{thebibliography}
 
+
+
 %-------------------------------------------------------------------------------
+
 % APPENDIX
+
 %-------------------------------------------------------------------------------
+
+
 
 \appendix
+
 \chapter{Equivalences Truth Tables}
+
 \section{And Equivalences}
+
 \begin{enumerate}
+
+
 
   \item A $\land$ B $\equiv$ B $\land$ A \emph{(Commutativity of And)}
 
+
+
 \begin{center}
+
   \begin{tabular}{| c | c | c | c |}
+
     \hline
+
     A & B & A $\land$ B & B $\land$ A \\ \hline
+
     0 & 0 & 0 & 0 \\
+
     0 & 1 & 0 & 0 \\
+
     1 & 0 & 0 & 0 \\
+
     1 & 1 & 1 & 1 \\ \hline
+
   \end{tabular}
+
 \end{center}
+
+
 
   \item A $\land$ A $\equiv$ A \emph{(Idempotence of And)}
 
+
+
 \begin{center}
+
   \begin{tabular}{| c | c |}
+
     \hline
+
     A & A $\land$ A \\ \hline
+
     0 & 0 \\
+
     0 & 0 \\
+
     1 & 1 \\
+
     1 & 1 \\ \hline
+
   \end{tabular}
+
 \end{center}
+
+
 
   \item (A $\land$ B) $\land$ C $\equiv$ A $\land$ (B $\land$ C) \emph{(Associaticity of And)}
 
+
+
 \begin{center}
+
   \begin{tabular}{| c | c | c | c | c |}
+
     \hline
+
     A & B & C & (A $\land$ B) $\land$ C & A $\land$ (B $\land$ C) \\ \hline
+
     0 & 0 & 0 & 0 & 0 \\
+
     0 & 0 & 1 & 0 & 0 \\
+
     0 & 1 & 0 & 0 & 0 \\
+
     0 & 1 & 1 & 0 & 0 \\
+
     1 & 0 & 0 & 0 & 0 \\
+
     1 & 0 & 1 & 0 & 0 \\
+
     1 & 1 & 0 & 0 & 0 \\
+
     1 & 1 & 1 & 1 & 1 \\ \hline
+
   \end{tabular}
+
 \end{center}
+
 \end{enumerate}
 
+
+
 \section{Or Equivalences}
+
 \begin{enumerate}
+
+
 
   \item A $\lor$ B $\equiv$ B $\lor$ A \emph{(Commutativity of Or)}
 
+
+
 \begin{center}
+
   \begin{tabular}{| c | c | c | c |}
+
     \hline
+
     A & B & A $\lor$ B & B $\lor$ A\\ \hline
+
     0 & 0 & 0 & 0 \\
+
     0 & 1 & 1 & 1 \\
+
     1 & 0 & 1 & 1 \\
+
     1 & 1 & 1 & 1 \\ \hline
+
   \end{tabular}
+
 \end{center}
+
+
 
 \item A $\lor$ A $\equiv$ A \emph{(Idempotence of Or)}
 
+
+
 \begin{center}
+
   \begin{tabular}{| c | c |}
+
     \hline
+
     A & A $\lor$ A \\ \hline
+
     0 & 0 \\
+
     0 & 0 \\
+
     1 & 1 \\
+
     1 & 1 \\ \hline
+
   \end{tabular}
+
 \end{center}
+
+
 
   \item (A $\lor$ B) $\lor$ C $\equiv$ A $\lor$ (B $\lor$ C) \emph{(Associaticity of Or)}
 
+
+
 \begin{center}
+
   \begin{tabular}{| c | c | c | c | c |}
+
     \hline
+
     A & B & C & (A $\lor$ B) $\lor$ C & A $\lor$ (B $\lor$ C) \\ \hline
+
     0 & 0 & 0 & 0 & 0 \\
+
     0 & 0 & 1 & 1 & 1 \\
+
     0 & 1 & 0 & 1 & 1 \\
+
     0 & 1 & 1 & 1 & 1 \\
+
     1 & 0 & 0 & 1 & 1 \\
+
     1 & 0 & 1 & 1 & 1 \\
+
     1 & 1 & 0 & 1 & 1 \\
+
     1 & 1 & 1 & 1 & 1 \\ \hline
+
   \end{tabular}
+
 \end{center}
+
 \end{enumerate}
 
+
+
 \section{Not Equivalences}
+
 \begin{enumerate}
+
+
 
   \item A $\equiv$ $\neg$$\neg$A
 
+
+
 \begin{center}
+
   \begin{tabular}{| c | c | c |}
+
     \hline
+
     A & $\neg$A & $\neg$$\neg$A \\ \hline
+
     0 & 1 & 0 \\
+
     1 & 0 & 1 \\ \hline
+
   \end{tabular}
+
 \end{center}
+
+
 
 \end{enumerate}
 
+
+
 \section{Implies Equivalences}
+
 \begin{enumerate}
+
+
 
   \item A $\to$ B $\equiv$ $\neg$A $\lor$ B
 
+
+
 \begin{center}
+
   \begin{tabular}{| c | c | c | c | c |}
+
     \hline
+
     A & B & $\neg$A & A $\to$ B & $\neg$A $\lor$ B \\ \hline
+
     0 & 0 & 1 & 1 & 1 \\
+
     0 & 1 & 1 & 1 & 1 \\ 
+
     1 & 0 & 0 & 0 & 0 \\
+
     1 & 1 & 0 & 1 & 1 \\ \hline
+
   \end{tabular}
+
 \end{center}
+
+
 
   \item A $\to$ B $\equiv$ $\neg$(A $\land$ $\neg$B)
 
+
+
 \begin{center}
+
   \begin{tabular}{| c | c | c | c | c | c |}
+
     \hline
+
     A & B & $\neg$B & A $\land$ $\neg$B & A $\to$ B & $\neg$(A $\land$ $\neg$B) \\ \hline
+
     0 & 0 & 1 & 0 & 1 & 1 \\
+
     0 & 1 & 0 & 0 & 1 & 1 \\
+
     1 & 0 & 1 & 1 & 0 & 0 \\
+
     1 & 1 & 0 & 0 & 1 & 1 \\ \hline
+
   \end{tabular}
+
 \end{center}
+
+
 
   \item $\neg$(A $\to$ B) $\equiv$ A $\land$ $\neg$B
 
+
+
 \begin{center}
+
   \begin{tabular}{| c | c | c | c | c | c |}
+
     \hline
+
     A & B & $\neg$B & A $\to$ B & $\neg$(A $\to$ B) & A $\land$ $\neg$B \\ \hline
+
     0 & 0 & 1 & 1 & 0 & 0 \\
+
     0 & 1 & 0 & 1 & 0 & 0 \\
+
     1 & 0 & 1 & 0 & 1 & 1 \\
+
     1 & 1 & 0 & 1 & 0 & 0 \\ \hline
+
   \end{tabular}
+
 \end{center}
+
 \end{enumerate}
 
+
+
 \section{If and Only If Equivalences}
+
 \begin{enumerate}
+
+
 
   \item A $\leftrightarrow$ B $\equiv$ (A $\to$ B) $\land$ (B $\to$ A)
 
+
+
 \begin{center}
+
   \begin{tabular} {| c | c | c | c | c | c |}
+
     \hline
+
     A & B & A $\to$ B & B $\to$ A & A $\leftrightarrow$ B & (A $\to$ B) $\land$ (B $\to$ A) \\ \hline
+
     0 & 0 & 1 & 1 & 1 & 1 \\
+
     0 & 1 & 1 & 0 & 0 & 0 \\
+
     1 & 0 & 0 & 1 & 0 & 0 \\
+
     1 & 1 & 1 & 1 & 1 & 1 \\ \hline
+
   \end{tabular} 
+
 \end{center}
+
+
 
   \item A $\leftrightarrow$ B $\equiv$ (A $\land$ B) $\lor$ ($\neg$A $\land$ $\neg$B)
 
+
+
 \begin{center}
+
   \begin{tabular} {| c | c | c | c | c | c | c |}
+
     \hline
+
     A & B & A $\land$ B & $\neg$A & $\neg$B & A $\leftrightarrow$ B & (A $\land$ B) $\lor$ ($\neg$A $\land$ $\neg$B) \\ \hline
+
     0 & 0 & 0 & 1 & 1 & 1 & 1 \\
+
     0 & 1 & 0 & 1 & 0 & 0 & 0 \\
+
     1 & 0 & 0 & 0 & 1 & 0 & 0 \\
+
     1 & 1 & 1 & 0 & 0 & 1 & 1 \\ \hline
+
   \end{tabular} 
+
 \end{center}
+
 \end{enumerate}
+
+
 
 \section{De Morgan Equivalences}
 
+
+
 \begin{enumerate}
+
+
 
   \item $\neg$(A $\land$ B) $\equiv$ $\neg$A $\lor$ $\neg$B
 
+
+
 \begin{center}
+
   \begin{tabular}{| c | c | c | c |}
+
     \hline
+
     A & B & $\neg$(A $\land$ B) & $\neg$A $\lor$ $\neg$B \\ \hline
+
     0 & 0 & 1 & 1 \\
+
     0 & 1 & 1 & 1 \\ 
+
     1 & 0 & 1 & 1 \\
+
     1 & 1 & 0 & 0 \\ \hline
+
   \end{tabular}
+
 \end{center}
+
+
 
   \item $\neg$(A $\lor$ B) $\equiv$ $\neg$A $\land$ $\neg$B
 
+
+
 \begin{center}
+
   \begin{tabular}{| c | c | c | c |}
+
     \hline
+
     A & B & $\neg$(A $\lor$ B) & $\neg$A $\land$ $\neg$B \\ \hline
+
     0 & 0 & 1 & 1 \\
+
     0 & 1 & 0 & 0 \\ 
+
     1 & 0 & 0 & 0 \\
+
     1 & 1 & 0 & 0 \\ \hline
+
   \end{tabular}
+
 \end{center}
+
 \end{enumerate}
 
+
+
 \section{Distributibivity of And and Or}
+
 \begin{enumerate}
+
+
 
   \item A $\land$ (B $\lor$ C) $\equiv$ (A $\land$ B) $\lor$ (A $\land$ C)
 
+
+
 \begin{center}
+
   \begin{tabular}{| c | c | c | c | c |}
+
     \hline
+
     A & B & C & A $\land$ (B $\lor$ C) & (A $\land$ B) $\lor$ (A $\land$ C) \\ \hline
+
     0 & 0 & 0 & 0 & 0 \\
+
     0 & 0 & 1 & 0 & 0 \\
+
     0 & 1 & 0 & 0 & 0 \\
+
     0 & 1 & 1 & 0 & 0 \\
+
     1 & 0 & 0 & 0 & 0 \\
+
     1 & 0 & 1 & 1 & 1 \\
+
     1 & 1 & 0 & 1 & 1 \\
+
     1 & 1 & 1 & 1 & 1 \\ \hline
+
   \end{tabular}
+
 \end{center}
+
+
 
   \item A $\lor$ (B $\land$ C) $\equiv$ (A $\lor$ B) $\land$ (A $\lor$ C)
 
+
+
 \begin{center}
+
   \begin{tabular}{| c | c | c | c | c |}
+
     \hline
+
     A & B & C & A $\lor$ (B $\land$ C) & (A $\lor$ B) $\land$ (A $\lor$ C) \\ \hline
+
     0 & 0 & 0 & 0 & 0 \\
+
     0 & 0 & 1 & 0 & 0 \\
+
     0 & 1 & 0 & 0 & 0 \\
+
     0 & 1 & 1 & 1 & 1 \\
+
     1 & 0 & 0 & 1 & 1 \\
+
     1 & 0 & 1 & 1 & 1 \\
+
     1 & 1 & 0 & 1 & 1 \\
+
     1 & 1 & 1 & 1 & 1 \\ \hline
+
   \end{tabular}
-\end{center}
-\end{enumerate}
-\chapter{Truth Tables of all Equivalences}
-\section{And Equivalences}
-\begin{enumerate}
 
-  \item A $\land$ B $\equiv$ B $\land$ A \emph{(Commutativity of And)}
-
-\begin{center}
-  \begin{tabular}{| c | c | c | c |}
-    \hline
-    A & B & A $\land$ B & B $\land$ A \\ \hline
-    0 & 0 & 0 & 0 \\
-    0 & 1 & 0 & 0 \\
-    1 & 0 & 0 & 0 \\
-    1 & 1 & 1 & 1 \\ \hline
-  \end{tabular}
 \end{center}
 
-  \item A $\land$ A $\equiv$ A \emph{(Idempotence of And)}
-
-\begin{center}
-  \begin{tabular}{| c | c |}
-    \hline
-    A & A $\land$ A \\ \hline
-    0 & 0 \\
-    0 & 0 \\
-    1 & 1 \\
-    1 & 1 \\ \hline
-  \end{tabular}
-\end{center}
-
-  \item (A $\land$ B) $\land$ C $\equiv$ A $\land$ (B $\land$ C) \emph{(Associaticity of And)}
-
-\begin{center}
-  \begin{tabular}{| c | c | c | c | c |}
-    \hline
-    A & B & C & (A $\land$ B) $\land$ C & A $\land$ (B $\land$ C) \\ \hline
-    0 & 0 & 0 & 0 & 0 \\
-    0 & 0 & 1 & 0 & 0 \\
-    0 & 1 & 0 & 0 & 0 \\
-    0 & 1 & 1 & 0 & 0 \\
-    1 & 0 & 0 & 0 & 0 \\
-    1 & 0 & 1 & 0 & 0 \\
-    1 & 1 & 0 & 0 & 0 \\
-    1 & 1 & 1 & 1 & 1 \\ \hline
-  \end{tabular}
-\end{center}
-\end{enumerate}
-
-\section{Or Equivalences}
-\begin{enumerate}
-
-  \item A $\lor$ B $\equiv$ B $\lor$ A \emph{(Commutativity of Or)}
-
-\begin{center}
-  \begin{tabular}{| c | c | c | c |}
-    \hline
-    A & B & A $\lor$ B & B $\lor$ A\\ \hline
-    0 & 0 & 0 & 0 \\
-    0 & 1 & 1 & 1 \\
-    1 & 0 & 1 & 1 \\
-    1 & 1 & 1 & 1 \\ \hline
-  \end{tabular}
-\end{center}
-
-\item A $\lor$ A $\equiv$ A \emph{(Idempotence of Or)}
-
-\begin{center}
-  \begin{tabular}{| c | c |}
-    \hline
-    A & A $\lor$ A \\ \hline
-    0 & 0 \\
-    0 & 0 \\
-    1 & 1 \\
-    1 & 1 \\ \hline
-  \end{tabular}
-\end{center}
-
-  \item (A $\lor$ B) $\lor$ C $\equiv$ A $\lor$ (B $\lor$ C) \emph{(Associaticity of Or)}
-
-\begin{center}
-  \begin{tabular}{| c | c | c | c | c |}
-    \hline
-    A & B & C & (A $\lor$ B) $\lor$ C & A $\lor$ (B $\lor$ C) \\ \hline
-    0 & 0 & 0 & 0 & 0 \\
-    0 & 0 & 1 & 1 & 1 \\
-    0 & 1 & 0 & 1 & 1 \\
-    0 & 1 & 1 & 1 & 1 \\
-    1 & 0 & 0 & 1 & 1 \\
-    1 & 0 & 1 & 1 & 1 \\
-    1 & 1 & 0 & 1 & 1 \\
-    1 & 1 & 1 & 1 & 1 \\ \hline
-  \end{tabular}
-\end{center}
-\end{enumerate}
-
-\section{Not Equivalences}
-\begin{enumerate}
-
-  \item A $\equiv$ $\neg$$\neg$A
-
-\begin{center}
-  \begin{tabular}{| c | c | c |}
-    \hline
-    A & $\neg$A & $\neg$$\neg$A \\ \hline
-    0 & 1 & 0 \\
-    1 & 0 & 1 \\ \hline
-  \end{tabular}
-\end{center}
-
-\end{enumerate}
-
-\section{Implies Equivalences}
-\begin{enumerate}
-
-  \item A $\to$ B $\equiv$ $\neg$A $\lor$ B
-
-\begin{center}
-  \begin{tabular}{| c | c | c | c | c |}
-    \hline
-    A & B & $\neg$A & A $\to$ B & $\neg$A $\lor$ B \\ \hline
-    0 & 0 & 1 & 1 & 1 \\
-    0 & 1 & 1 & 1 & 1 \\ 
-    1 & 0 & 0 & 0 & 0 \\
-    1 & 1 & 0 & 1 & 1 \\ \hline
-  \end{tabular}
-\end{center}
-
-  \item A $\to$ B $\equiv$ $\neg$(A $\land$ $\neg$B)
-
-\begin{center}
-  \begin{tabular}{| c | c | c | c | c | c |}
-    \hline
-    A & B & $\neg$B & A $\land$ $\neg$B & A $\to$ B & $\neg$(A $\land$ $\neg$B) \\ \hline
-    0 & 0 & 1 & 0 & 1 & 1 \\
-    0 & 1 & 0 & 0 & 1 & 1 \\
-    1 & 0 & 1 & 1 & 0 & 0 \\
-    1 & 1 & 0 & 0 & 1 & 1 \\ \hline
-  \end{tabular}
-\end{center}
-
-  \item $\neg$(A $\to$ B) $\equiv$ A $\land$ $\neg$B
-
-\begin{center}
-  \begin{tabular}{| c | c | c | c | c | c |}
-    \hline
-    A & B & $\neg$B & A $\to$ B & $\neg$(A $\to$ B) & A $\land$ $\neg$B \\ \hline
-    0 & 0 & 1 & 1 & 0 & 0 \\
-    0 & 1 & 0 & 1 & 0 & 0 \\
-    1 & 0 & 1 & 0 & 1 & 1 \\
-    1 & 1 & 0 & 1 & 0 & 0 \\ \hline
-  \end{tabular}
-\end{center}
-\end{enumerate}
-
-\section{If and Only If Equivalences}
-\begin{enumerate}
-
-  \item A $\leftrightarrow$ B $\equiv$ (A $\to$ B) $\land$ (B $\to$ A)
-
-\begin{center}
-  \begin{tabular} {| c | c | c | c | c | c |}
-    \hline
-    A & B & A $\to$ B & B $\to$ A & A $\leftrightarrow$ B & (A $\to$ B) $\land$ (B $\to$ A) \\ \hline
-    0 & 0 & 1 & 1 & 1 & 1 \\
-    0 & 1 & 1 & 0 & 0 & 0 \\
-    1 & 0 & 0 & 1 & 0 & 0 \\
-    1 & 1 & 1 & 1 & 1 & 1 \\ \hline
-  \end{tabular} 
-\end{center}
-
-  \item A $\leftrightarrow$ B $\equiv$ (A $\land$ B) $\lor$ ($\neg$A $\land$ $\neg$B)
-
-\begin{center}
-  \begin{tabular} {| c | c | c | c | c | c | c |}
-    \hline
-    A & B & A $\land$ B & $\neg$A & $\neg$B & A $\leftrightarrow$ B & (A $\land$ B) $\lor$ ($\neg$A $\land$ $\neg$B) \\ \hline
-    0 & 0 & 0 & 1 & 1 & 1 & 1 \\
-    0 & 1 & 0 & 1 & 0 & 0 & 0 \\
-    1 & 0 & 0 & 0 & 1 & 0 & 0 \\
-    1 & 1 & 1 & 0 & 0 & 1 & 1 \\ \hline
-  \end{tabular} 
-\end{center}
-\end{enumerate}
-
-\section{De Morgan Equivalences}
-
-\begin{enumerate}
-
-  \item $\neg$(A $\land$ B) $\equiv$ $\neg$A $\lor$ $\neg$B
-
-\begin{center}
-  \begin{tabular}{| c | c | c | c |}
-    \hline
-    A & B & $\neg$(A $\land$ B) & $\neg$A $\lor$ $\neg$B \\ \hline
-    0 & 0 & 1 & 1 \\
-    0 & 1 & 1 & 1 \\ 
-    1 & 0 & 1 & 1 \\
-    1 & 1 & 0 & 0 \\ \hline
-  \end{tabular}
-\end{center}
-
-  \item $\neg$(A $\lor$ B) $\equiv$ $\neg$A $\land$ $\neg$B
-
-\begin{center}
-  \begin{tabular}{| c | c | c | c |}
-    \hline
-    A & B & $\neg$(A $\lor$ B) & $\neg$A $\land$ $\neg$B \\ \hline
-    0 & 0 & 1 & 1 \\
-    0 & 1 & 0 & 0 \\ 
-    1 & 0 & 0 & 0 \\
-    1 & 1 & 0 & 0 \\ \hline
-  \end{tabular}
-\end{center}
-\end{enumerate}
-
-\section{Distributibivity of And and Or}
-\begin{enumerate}
-
-  \item A $\land$ (B $\lor$ C) $\equiv$ (A $\land$ B) $\lor$ (A $\land$ C)
-
-\begin{center}
-  \begin{tabular}{| c | c | c | c | c |}
-    \hline
-    A & B & C & A $\land$ (B $\lor$ C) & (A $\land$ B) $\lor$ (A $\land$ C) \\ \hline
-    0 & 0 & 0 & 0 & 0 \\
-    0 & 0 & 1 & 0 & 0 \\
-    0 & 1 & 0 & 0 & 0 \\
-    0 & 1 & 1 & 0 & 0 \\
-    1 & 0 & 0 & 0 & 0 \\
-    1 & 0 & 1 & 1 & 1 \\
-    1 & 1 & 0 & 1 & 1 \\
-    1 & 1 & 1 & 1 & 1 \\ \hline
-  \end{tabular}
-\end{center}
-
-  \item A $\lor$ (B $\land$ C) $\equiv$ (A $\lor$ B) $\land$ (A $\lor$ C)
-
-\begin{center}
-  \begin{tabular}{| c | c | c | c | c |}
-    \hline
-    A & B & C & A $\lor$ (B $\land$ C) & (A $\lor$ B) $\land$ (A $\lor$ C) \\ \hline
-    0 & 0 & 0 & 0 & 0 \\
-    0 & 0 & 1 & 0 & 0 \\
-    0 & 1 & 0 & 0 & 0 \\
-    0 & 1 & 1 & 1 & 1 \\
-    1 & 0 & 0 & 1 & 1 \\
-    1 & 0 & 1 & 1 & 1 \\
-    1 & 1 & 0 & 1 & 1 \\
-    1 & 1 & 1 & 1 & 1 \\ \hline
-  \end{tabular}
-\end{center}
 \end{enumerate}
 
 %-------------------------------------------------------------------------------
+
+
 
 \end{document}
