@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import equivalence.EquivalenceLinkNode;
@@ -55,6 +56,9 @@ public abstract class NewPersonalEquivalenceListener implements ActionListener {
 	protected UndoListener undoRightListener;
 	
 	protected SwitchViewListener switchViewListener;
+	
+	protected JTextArea textAreaLeft;
+	protected JTextArea textAreaRight;
 	
 
 	public NewPersonalEquivalenceListener(JFrame frame, JPanel menu, int id) {
@@ -228,8 +232,24 @@ public abstract class NewPersonalEquivalenceListener implements ActionListener {
 		return this.feedback;
 	}
 	
-	public void setFeedback(JPanel Feedback) {
+	public void setFeedback(JPanel feedback) {
 		this.feedback = feedback;
+	}
+	
+	public void setTextAreaRight(JTextArea textAreaRight) {
+		this.textAreaRight = textAreaRight;
+	}
+	
+	public void setTextAreaLeft(JTextArea textAreaLeft) {
+		this.textAreaLeft = textAreaLeft;
+	}
+	
+	public JTextArea getTextAreaRight() {
+		return this.textAreaRight;
+	}
+	
+	public JTextArea getTextAreaLeft() {
+		return this.textAreaLeft;
 	}
 	
 }

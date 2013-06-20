@@ -2,9 +2,9 @@ package AST;
 
 public abstract class ASTPropositionalBinaryNode extends ASTPropositionalNode {
 	
-	public abstract ASTPropositionalNode getLeft();
-	public abstract ASTPropositionalNode getRight();
-	public abstract void setLeft(ASTPropositionalNode left);
-	public abstract void setRight(ASTPropositionalNode right);
+	public abstract ASTNode getLeft();
+	public abstract ASTNode getRight();
+	public abstract void setLeft(ASTNode left);
+	public abstract void setRight(ASTNode right);
 
 }

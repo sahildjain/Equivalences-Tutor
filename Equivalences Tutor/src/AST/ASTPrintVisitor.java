@@ -74,4 +74,23 @@ public class ASTPrintVisitor implements ASTVisitor {
 		padding = oldPadding;
 	}
 
+	public void visitForAllNode(ASTForAllNode node) {
+		String oldPadding = padding;
+		stream.println(padding + "For All");
+		node.getIdentifier().visit(this);
+		padding = padding + indent;
+		node.getNode().visit(this);
+		padding = oldPadding;
+	}
+
+	public void visitExistsNode(ASTExistsNode node) {
+		String oldPadding = padding;
+		stream.println(padding + "Exists");
+		node.getIdentifier().visit(this);
+		padding = padding + indent;
+		node.getNode().visit(this);
+		padding = oldPadding;
+		
+	}
+
 }

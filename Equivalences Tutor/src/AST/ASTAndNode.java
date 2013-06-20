@@ -14,21 +14,21 @@ import net.miginfocom.swing.MigLayout;
 
 public class ASTAndNode extends ASTPropositionalBinaryNode {
 	
-	private ASTPropositionalNode unary;
-	private ASTPropositionalNode propositional;
+	private ASTNode unary;
+	private ASTNode propositional;
 	private int key;
 	
-	public ASTAndNode(int key, ASTPropositionalNode unary, ASTPropositionalNode propositional) {
+	public ASTAndNode(int key, ASTNode unary, ASTNode propositional) {
 		this.unary = unary;
 		this.propositional = propositional;
 		this.setKey(key);
 	}
 	
-	public ASTPropositionalNode getLeft() {
+	public ASTNode getLeft() {
 		return this.unary;
 	}
 	
-	public ASTPropositionalNode getRight() {
+	public ASTNode getRight() {
 		return this.propositional;
 	}
 	
@@ -36,11 +36,11 @@ public class ASTAndNode extends ASTPropositionalBinaryNode {
 		visitor.visitAndNode(this);
 	}
 
-	public void setLeft(ASTPropositionalNode left) {
+	public void setLeft(ASTNode left) {
 		this.unary = left;
 	}
 
-	public void setRight(ASTPropositionalNode right) {
+	public void setRight(ASTNode right) {
 		this.propositional = right;
 	}
 
@@ -82,18 +82,25 @@ public class ASTAndNode extends ASTPropositionalBinaryNode {
 	}
 
 	public TreeMap<String, Integer> numIdentifiers(TreeMap<String, Integer> identifiers) {
-		identifiers = getLeft().numIdentifiers(identifiers);
-		identifiers = getRight().numIdentifiers(identifiers);
+		if(getLeft() instanceof ASTPropositionalNode) {
+			identifiers = ((ASTPropositionalNode) getLeft()).numIdentifiers(identifiers);
+		}
+		if(getRight() instanceof ASTPropositionalNode) {
+			identifiers = ((ASTPropositionalNode) getRight()).numIdentifiers(identifiers);
+		}
 		return identifiers;
 	}
 
 	public int value(TreeMap<String, Integer> id) {
-		int left = getLeft().value(id);
-		int right = getRight().value(id);
-		if (right == 1 && left == 1) {
-			return 1;
+		if(getLeft() instanceof ASTPropositionalNode && getRight() instanceof ASTPropositionalNode) {
+			int left = ((ASTPropositionalNode) getLeft()).value(id);
+			int right = ((ASTPropositionalNode) getRight()).value(id);
+			if (right == 1 && left == 1) {
+				return 1;
+			}
+			return 0;
 		}
-		return 0;
+		return -1;
 	}
 
 	public JPanel createJPanel(NewPersonalEquivalenceListener l, boolean side) {

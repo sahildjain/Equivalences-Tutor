@@ -1,5 +1,9 @@
 package gui;
 
+import AST.AST;
+import eqtutor.EQTutor;
+import eqtutor.LogicParser;
+
 public class InitialiseGui {
 	
 	public static void main(final String[] args){
@@ -10,14 +14,10 @@ public class InitialiseGui {
 		}*/
 		/*
 		EQTutor eqtutor = new EQTutor(); 
-		String src = "a & a";
+		String src = "(E)a (A)a (E)a (!a)";
 		LogicParser parser = eqtutor.getParser(src);
 		AST tree1 = eqtutor.getTree(parser);
-		src = "a & b -> c";
-		parser = eqtutor.getParser(src);
-		AST tree2 = eqtutor.getTree(parser);
-		System.out.println(tree1.toParserString());
-		System.out.println(tree2.toParserString());
+		System.out.println(tree1.toString());
 		*/
 		/*
 		PropositionalExpressionGenerator gen = new PropositionalExpressionGenerator();

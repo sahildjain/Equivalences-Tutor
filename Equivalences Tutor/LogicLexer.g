@@ -21,3 +21,6 @@ LPAREN  :	'(';
 RPAREN  :	')';
 
 ID	:	('A'..'Z'|'a'..'z') ('A'..'Z'|'a'..'z'|'_')*;
+
+FORALL	: '(A)';
+EXISTS	: '(E)';

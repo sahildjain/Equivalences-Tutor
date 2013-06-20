@@ -11,6 +11,7 @@ import gui.NewPersonalEquivalenceListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import AST.AST;
@@ -94,6 +95,12 @@ public class NotDialog extends JDialog {
 	private class DoubleNegationListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
+			JPanel feedback = getListener().getFeedback();
+			feedback.removeAll();
+			JLabel label1 = new JLabel("Feedback");
+			feedback.add(label1, BorderLayout.NORTH);
+			getListener().setFeedback(feedback);
+			getListener().getEquivalence().updateUI();
 			if(isSide()) {
 				NotEquivalence eq = new NotEquivalence(getListener().getLeft().getLast().getTree().copy(), getKey());
 				AST tree = eq.doubleNegation();

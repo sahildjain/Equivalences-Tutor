@@ -30,28 +30,32 @@ program returns [AST tree]
   : e = iffexpr {$tree = new AST(++counter, new ASTProgramNode($e.node));} EOF
   ;
 
-iffexpr returns [ASTPropositionalNode node]
+iffexpr returns [ASTNode node]
   : ifthen = ifexpr {$node = $ifthen.node;} (IFF iff = iffexpr {$node = new ASTIffNode(++counter, $ifthen.node, $iff.node);})*
   ;
   	
-ifexpr returns [ASTPropositionalNode node]
+ifexpr returns [ASTNode node]
   : or = orexpr {$node = $or.node;} (IFTHEN ifthen = ifexpr {$node = new ASTIfThenNode(++counter, $or.node, $ifthen.node);})*
   ;
 
-orexpr returns [ASTPropositionalNode node]
+orexpr returns [ASTNode node]
   : and = andexpr {$node = $and.node;} (OR or = orexpr {$node = new ASTOrNode(++counter, $and.node, $or.node);})*
   ;
 
-andexpr returns [ASTPropositionalNode node]
+andexpr returns [ASTNode node]
   : not = notexpr {$node = $not.node;} (AND and = andexpr {$node = new ASTAndNode(++counter, $not.node, $and.node);})*
   ;
   
-notexpr returns [ASTPropositionalNode node]
+notexpr returns [ASTNode node]
   : NOT not = notexpr {$node = new ASTNotNode(++counter, $not.node);}
   | id = identifier {$node = $id.node;}
   ;
+  
+  
+forallexpr returns [ASTNode node]
+  : FORALL LPAREN ID RPAREN LPAREN iffexpr RPAREN = forallexpr {$node = new ASTForAllNode}
 
-identifier returns [ASTPropositionalNode node]
+identifier returns [ASTNode node]
   : ID {$node = new ASTIdentifierNode(++counter, $ID.text);}
   | LPAREN iffexpr RPAREN {$node = $iffexpr.node;}
   ;

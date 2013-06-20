@@ -14,21 +14,21 @@ import net.miginfocom.swing.MigLayout;
 
 public class ASTIffNode extends ASTPropositionalBinaryNode {
 	
-	private ASTPropositionalNode conditional;
-	private ASTPropositionalNode doubleConditional;
+	private ASTNode conditional;
+	private ASTNode doubleConditional;
 	private int key;
 
-	public ASTIffNode(int key, ASTPropositionalNode conditional, ASTPropositionalNode doubleConditional) {
+	public ASTIffNode(int key, ASTNode conditional, ASTNode doubleConditional) {
 		this.conditional = conditional;
 		this.doubleConditional = doubleConditional;
 		this.setKey(key);
 	}
 	
-	public ASTPropositionalNode getLeft() {
+	public ASTNode getLeft() {
 		return this.conditional;
 	}
 	
-	public ASTPropositionalNode getRight() {
+	public ASTNode getRight() {
 		return this.doubleConditional;
 	}
 	
@@ -36,11 +36,11 @@ public class ASTIffNode extends ASTPropositionalBinaryNode {
 		visitor.visitIffNode(this);
 	}
 
-	public void setLeft(ASTPropositionalNode left) {
+	public void setLeft(ASTNode left) {
 		this.conditional = left;
 	}
 
-	public void setRight(ASTPropositionalNode right) {
+	public void setRight(ASTNode right) {
 		this.doubleConditional = right;
 	}
 
@@ -82,14 +82,24 @@ public class ASTIffNode extends ASTPropositionalBinaryNode {
 	}
 
 	public TreeMap<String, Integer> numIdentifiers(TreeMap<String, Integer> identifiers) {
-		identifiers = getLeft().numIdentifiers(identifiers);
-		identifiers = getRight().numIdentifiers(identifiers);
+		if(getLeft() instanceof ASTPropositionalNode) {
+			identifiers = ((ASTPropositionalNode) getLeft()).numIdentifiers(identifiers);
+		}
+		if(getRight() instanceof ASTPropositionalNode) {
+			identifiers = ((ASTPropositionalNode) getRight()).numIdentifiers(identifiers);
+		}
 		return identifiers;
 	}
 
 	public int value(TreeMap<String, Integer> id) {
-		int left = getLeft().value(id);
-		int right = getRight().value(id);
+		int left = -1;
+		int right = -1;
+		if(getLeft() instanceof ASTPropositionalNode) {
+			left = ((ASTPropositionalNode) getLeft()).value(id);
+		}
+		if(getRight() instanceof ASTPropositionalNode) {
+			right = ((ASTPropositionalNode) getRight()).value(id);
+		}
 		if(left == right) {
 			return 1;
 		}

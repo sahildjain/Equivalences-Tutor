@@ -16,11 +16,15 @@ public class EasyEquivalence extends NewPersonalEquivalenceListener {
 	
 	private JPanel leftPanel;
 	private JPanel rightPanel;
-	private JTextArea textAreaLeft;
-	private JTextArea textAreaRight;
 
 	public EasyEquivalence(JFrame frame, JPanel menu, int id) {
 		super(frame, menu, id);
+		if(textAreaLeft != null) {
+			textAreaLeft.removeAll();
+		}
+		if(textAreaRight != null) {
+			textAreaRight.removeAll();
+		}
 	}
 
 	protected void createEquivalencePanel() {
@@ -189,22 +193,6 @@ public class EasyEquivalence extends NewPersonalEquivalenceListener {
 		getLeftPanel().setVisible(false);
 		getRightPanel().setVisible(false);
 		getButtons().setVisible(false);
-	}
-	
-	public JTextArea getTextAreaLeft() {
-		return this.textAreaLeft;
-	}
-	
-	public void setTextAreaLeft(JTextArea left) {
-		this.textAreaLeft = left;
-	}
-	
-	public JTextArea getTextAreaRight() {
-		return this.textAreaRight;
-	}
-	
-	public void setTextAreaRight(JTextArea right) {
-		this.textAreaRight = right;
 	}
 
 }

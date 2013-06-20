@@ -34,12 +34,26 @@ public abstract class Equivalence {
 				return ret;
 			}
 		}
+		if(node instanceof ASTForAllNode) {
+			ASTForAllNode predicate = (ASTForAllNode) node;
+			ASTNode ret = find(predicate.getNode(), key);
+			if(ret != null) {
+				return ret;
+			}
+		}
+		if(node instanceof ASTExistsNode) {
+			ASTExistsNode predicate = (ASTExistsNode) node;
+			ASTNode ret = find(predicate.getNode(), key);
+			if(ret != null) {
+				return ret;
+			}
+		}
 		return null;
 	}
 	
-	public static ASTPropositionalNode replace(ASTPropositionalNode prop, ASTNode node, int key) {
+	public static ASTNode replace(ASTNode prop, ASTNode node, int key) {
 		if(prop.getKey() == key) {
-			return (ASTPropositionalNode) node;
+			return node;
 		}
 		if(prop instanceof ASTPropositionalBinaryNode) {
 			ASTPropositionalBinaryNode binary = (ASTPropositionalBinaryNode) prop;
@@ -55,6 +69,18 @@ public abstract class Equivalence {
 			ASTPropositionalUnaryNode unary = (ASTPropositionalUnaryNode) prop;
 			unary.setLeaf(replace(unary.getLeaf(), node, key));
 			return unary;
+		}
+		if(prop instanceof ASTForAllNode) {
+			System.out.println("test1");
+			ASTForAllNode forAll = (ASTForAllNode) prop;
+			forAll.setNode(replace(forAll.getNode(), node, key));
+			return forAll;
+		}
+		if(prop instanceof ASTExistsNode) {
+			System.out.println("test2");
+			ASTExistsNode exists = (ASTExistsNode) prop;
+			exists.setNode(replace(exists.getNode(), node, key));
+			return exists;
 		}
 		return null;
 	}

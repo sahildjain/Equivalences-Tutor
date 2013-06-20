@@ -14,21 +14,21 @@ import net.miginfocom.swing.MigLayout;
 
 public class ASTIfThenNode extends ASTPropositionalBinaryNode {
 	
-	private ASTPropositionalNode disjunction;
-	private ASTPropositionalNode conditional;
+	private ASTNode disjunction;
+	private ASTNode conditional;
 	private int key;
 
-	public ASTIfThenNode(int key, ASTPropositionalNode disjunction, ASTPropositionalNode conditional) {
+	public ASTIfThenNode(int key, ASTNode disjunction, ASTNode conditional) {
 		this.disjunction = disjunction;
 		this.conditional = conditional;
 		this.setKey(key);
 	}
 	
-	public ASTPropositionalNode getLeft() {
+	public ASTNode getLeft() {
 		return this.disjunction;
 	}
 	
-	public ASTPropositionalNode getRight() {
+	public ASTNode getRight() {
 		return this.conditional;
 	}
 	
@@ -36,11 +36,11 @@ public class ASTIfThenNode extends ASTPropositionalBinaryNode {
 		visitor.visitIfThenNode(this);
 	}
 
-	public void setLeft(ASTPropositionalNode left) {
+	public void setLeft(ASTNode left) {
 		this.disjunction = left;
 	}
 
-	public void setRight(ASTPropositionalNode right) {
+	public void setRight(ASTNode right) {
 		this.conditional = right;
 	}
 
@@ -82,14 +82,24 @@ public class ASTIfThenNode extends ASTPropositionalBinaryNode {
 	}
 	
 	public TreeMap<String, Integer> numIdentifiers(TreeMap<String, Integer> identifiers) {
-		identifiers = getLeft().numIdentifiers(identifiers);
-		identifiers = getRight().numIdentifiers(identifiers);
+		if(getLeft() instanceof ASTPropositionalNode) {
+			identifiers = ((ASTPropositionalNode) getLeft()).numIdentifiers(identifiers);
+		}
+		if(getRight() instanceof ASTPropositionalNode) {
+			identifiers = ((ASTPropositionalNode) getRight()).numIdentifiers(identifiers);
+		}
 		return identifiers;
 	}
 
 	public int value(TreeMap<String, Integer> id) {
-		int left = getLeft().value(id);
-		int right = getRight().value(id);
+		int left = -1;
+		int right = -1;
+		if(getLeft() instanceof ASTPropositionalNode) {
+			left = ((ASTPropositionalNode) getLeft()).value(id);
+		}
+		if(getRight() instanceof ASTPropositionalNode) {
+			right = ((ASTPropositionalNode) getRight()).value(id);
+		}
 		if(left == 1 && right == 0) {
 			return 0;
 		}

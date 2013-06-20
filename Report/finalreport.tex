@@ -1,7 +1,31 @@
 \documentclass{report}
-%\usepackage{a4, fullpage}
+\usepackage{a4, fullpage}
 \usepackage{graphicx}
+\usepackage{alltt}
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
 \linespread{1.3}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true
+  tabsize=3
+}
 \begin{document}
 
 %-------------------------------------------------------------------------------
@@ -525,7 +549,7 @@ node contains an ASTPropositionalNode. ASTPropositionalNode is an abstract class
 which contains the abstract methods for all of the propositional operators. The
 ASTPropositionalNode class is shown below:
 
-\begin{verbatim}
+\begin{lstlisting}[caption=Methods held in a Propositional Node, label=find]
 public abstract class ASTPropositionalNode extends ASTNode {
 
 	/*--Checks if the current node is equal to the input node--*/
@@ -550,7 +574,7 @@ public abstract class ASTPropositionalNode extends ASTNode {
 	public abstract ASTPropositionalNode copy();
 
 }
-\end{verbatim}
+\end{lstlisting}
 
 \section{Equivalences Data Structure}
 
@@ -566,14 +590,14 @@ example below:
 
 \begin{enumerate}
     \item $\neg$(p $\to$ q)
-		\item $\neg$($\neg$(p $\land$ $\neg$q)) \hfill a, Implication rule
-    \item $\neg$($\neg$p $\lor$ q) \hfill a, Implication rule
-    \item $\neg$$\neg$p $\land$ $\neg$q \hfill c, De Morgan's law
-    \item p $\land$ $\neg$q \hfill d, Double Negation rule
+		\item $\neg$($\neg$(p $\land$ $\neg$q)) \hfill 1, Implication rule
+    \item $\neg$($\neg$p $\lor$ q) \hfill 1, Implication rule
+    \item $\neg$$\neg$p $\land$ $\neg$q \hfill 3, De Morgan's law
+    \item p $\land$ $\neg$q \hfill 4, Double Negation rule
 \end{enumerate}
 
-As we can see, line b is unneccesary in this equivalence, although true.
-We also notice that line d is obtained using line c, and line e from line d.
+As we can see, line 2 is unneccesary in this equivalence, although true.
+We also notice that line 4 is obtained using line 3, and line 5 from line 4.
 
 Due to the presence of this feature, I considered the use of linked lists
 to store equivalences. A linked list is essentially a list implemented by
@@ -584,7 +608,7 @@ which has been derived by applying a single equivalence.
 Before I could create the Linked List class, I had to create the structure of
 each node. Below are the fields stored in a node:
 
-\begin{verbatim}
+\begin{lstlisting}[caption=Fields held in a list node, label=find]
 /*--line number of the formula--*/
 private int lineNumber;
 
@@ -593,7 +617,173 @@ private AST tree;
 
 /*--the next node in the equivalence--*/
 private EquivalenceLinkNode next;
-\end{verbatim}
+\end{lstlisting}
+
+Once the node class was written, the list class could be implemented. Below
+are the fields and methods in the list class:
+
+\begin{lstlisting}[caption=Methods and fields in the Linked List class, label=find]
+public class EquivalenceLinkedList {
+	
+	/*--the first node of the list--*/
+	private EquivalenceLinkNode head;
+
+	/*--the number of nodes in the list--*/
+	private int size;
+
+	/*--constructor--*/
+	public EquivalenceLinkedList();
+
+	/*--returns true if the list is empty, false otherwise--*/	
+	public boolean isEmpty();
+
+	/*--adds a node to the end of the list--*/
+	public void add(EquivalenceLinkNode node);
+	
+	/*--removes the last element of the list--*/
+	public void removeLast();
+
+	/*--returns the first element of the list--*/
+	public EquivalenceLinkNode getHead();
+
+	/*--sets the parameter node as the head of the list--*/
+	public void setHead(EquivalenceLinkNode head);
+
+	/*--returns the size of the list--*/	
+	public int getSize();
+
+	/*--sets the parameter size as the size of the list--*/	
+	public void setSize(int size);
+
+	/*--returns the last node of the list--*/
+	public EquivalenceLinkNode getLast()
+
+}
+\end{lstlisting}
+
+\section{Implementation of Equivalences}
+
+As formulae are stored as a tree, to apply an equivalence to a formula, the tree
+structure has to be altered. As nodes had to be altered, the tree had to be traversed,
+which lead to a few problems. In the method which applied equivalences, which is
+discussed later, the node to be changed and the new node were passed in as parameters.
+The node was then altered. A problem arose due to the fact that there could be several
+instances of the node in the tree. For example, consider the formula (p $\land$ p) $\to$ 
+(q $\to$ (p $\land$ p)). Suppose we wanted to apply to equivalence (p $\land$ p) $\equiv$ p to
+the first instance of p $\land$ p. The method would initially return the tree with formula 
+p $\to$ (q $\to$ p). To overcome this problem, a key had to be designated to each node, so
+when an equivalence was applied, the key of the node would be a parameter in the method.
+This allows for the equivalence to be correctly applied to the formula.
+
+For each equivalence, there is a different method. An example method is shown below. The
+example is for the equivalence  p $\land$ q = $\neg$($\neg$p $\lor$ $\neg$q).
+
+\begin{lstlisting}[caption=Example of an equivalence method, label=equiveg]
+public AST deMorgan() {
+  try {
+    AST tree = getTree();
+    int key = getKey();
+		
+    /*--finds the node with the given key in the tree--*/
+    ASTNode node  = find(tree.getRoot(), key);
+
+    /*--only applies the equivalence if the found node is an instance
+        of an And node--*/
+    if(node instanceof ASTAndNode) {
+      ASTAndNode andNode = (ASTAndNode) node;
+      ASTPropositionalNode left = andNode.getLeft();
+      ASTPropositionalNode right = andNode.getRight();
+
+      /*--creates a not node of the left child of the and node--*/
+      ASTNotNode notLeft = new ASTNotNode(tree.getKey(), left);
+      tree.setKey(tree.getKey() + 1);
+
+      /*--creates a not node of the right child of the and node--*/
+      ASTNotNode notRight = new ASTNotNode(tree.getKey(), right);
+      tree.setKey(tree.getKey() + 1);
+
+      /*--creates the or node needed in the equivalence--*/
+      ASTOrNode orNode = new ASTOrNode(tree.getKey(), notLeft, notRight);
+      tree.setKey(tree.getKey() + 1);
+
+      /*--creates the not node which is equivalence to the initial and node--*/
+      ASTNotNode notNode = new ASTNotNode(tree.getKey(), orNode);
+      tree.setKey(tree.getKey() + 1);
+
+      /*--replaces the and node with the not node--*/
+      ASTPropositionalNode p = replace(tree.getRoot().getLeaf(), notNode, key);
+      ASTProgramNode program = tree.getRoot();
+      program.setLeaf(p);
+
+      /*--creates and returns the new logically equivalent tree--*/
+      AST t = new AST(tree.getKey(), program);
+      return t;
+    }
+  }
+  catch(Exception e) {
+    return null;
+  }
+  return null;
+}
+\end{lstlisting}
+
+The same structure is used for other equivalence methods.
+
+Clearly, the find and replace methods are essential to this method. The find method
+is shown in \ref{find}, and the replace method is shown in \ref{replace}
+
+\begin{lstlisting}[caption=Find method for equivalences, label=find]
+public static ASTNode find(ASTNode node, int key) {
+  if(node.getKey() == key) {
+    return node;
+  }
+  if(node instanceof ASTPropositionalBinaryNode) {
+    ASTPropositionalBinaryNode binary = (ASTPropositionalBinaryNode) node;
+    ASTNode left = find(binary.getLeft(), key);
+    ASTNode right = find(binary.getRight(), key);
+    if(left != null) {
+      return left;
+    }
+    if(right != null) {
+      return right;
+    }
+  }
+  if(node instanceof ASTPropositionalUnaryNode) {
+    ASTPropositionalUnaryNode unary = (ASTPropositionalUnaryNode) node;
+    ASTNode ret = find(unary.getLeaf(), key);
+    if(ret != null) {
+      return ret;
+    }
+  }
+  return null;
+}
+\end{lstlisting}
+
+\begin{lstlisting}[caption=Replace method for equivalences, label=replace]
+public static ASTPropositionalNode replace(ASTPropositionalNode prop, ASTNode node, int key) {
+  if(prop.getKey() == key) {
+    return (ASTPropositionalNode) node;
+  }
+  if(prop instanceof ASTPropositionalBinaryNode) {
+    ASTPropositionalBinaryNode binary = (ASTPropositionalBinaryNode) prop;
+    if(find(binary.getLeft(), key) != null) {
+      binary.setLeft(replace(((ASTPropositionalBinaryNode) prop).getLeft(), node, key));
+    }
+    if(find(((ASTPropositionalBinaryNode) prop).getRight(), key) != null) {
+      binary.setRight(replace(((ASTPropositionalBinaryNode) prop).getRight(), node, key));
+    }
+    return binary;
+  }
+  if(prop instanceof ASTPropositionalUnaryNode) {
+    ASTPropositionalUnaryNode unary = (ASTPropositionalUnaryNode) prop;
+    unary.setLeaf(replace(unary.getLeaf(), node, key));
+    return unary;
+  }
+  return null;
+}
+\end{lstlisting}
+
+\section{Graphical User Interface}
 
 \section{Logic Expression Generator}
 
@@ -659,45 +849,45 @@ connection can be used to assign values to identifiers. The pseudocode is shown
 below:
 
 %TODO write pseudocode
-\begin{verbatim}
+\begin{lstlisting}
 
 public int[][] createTruthTable() {
-		TreeMap<String, Integer> identifiers = this.identifiers();
-		int numIdentifiers = identifiers.size();
-		int temp = (int) Math.pow(2, numIdentifiers);
-		int[][] truthTable = new int[temp][numIdentifiers + 1];
-		for(int i = 0; i < truthTable.length; i++) {
-			String binary = Integer.toBinaryString(i);
-			if(binary.length() < numIdentifiers) {
-				int numZeroes = numIdentifiers - binary.length();
-				String zeroes = "";
-				while(zeroes.length() < numZeroes) {
-					zeroes += "0";
-				}
-				binary = zeroes + binary;
-			}
-			for(int j = 0; j < truthTable[i].length - 1; j++) {
-				char c = binary.charAt(j);
-				int n = Integer.parseInt(Character.toString(c));
-				truthTable[i][j] = n;
-			}
-		}
-		for(int i = 0; i < truthTable.length; i++) {
-			Set<String> keys = identifiers.keySet();
-			TreeMap<String, Integer> id = new TreeMap<String, Integer>();
-			Iterator<String> it = keys.iterator();
-			int j = 0;
-			while(it.hasNext()) {
-				String key = (String) it.next();
-				id.put(key, truthTable[i][j]);
-				j++;
-			}
-			truthTable[i][j] = value(id);
-		}
-		return truthTable;
-	}
+  TreeMap<String, Integer> identifiers = this.identifiers();
+  int numIdentifiers = identifiers.size();
+  int temp = (int) Math.pow(2, numIdentifiers);
+  int[][] truthTable = new int[temp][numIdentifiers + 1];
+  for(int i = 0; i < truthTable.length; i++) {
+    String binary = Integer.toBinaryString(i);
+    if(binary.length() < numIdentifiers) {
+      int numZeroes = numIdentifiers - binary.length();
+      String zeroes = "";
+      while(zeroes.length() < numZeroes) {
+	      zeroes += "0";
+      }
+      binary = zeroes + binary;
+    }
+    for(int j = 0; j < truthTable[i].length - 1; j++) {
+      char c = binary.charAt(j);
+      int n = Integer.parseInt(Character.toString(c));
+      truthTable[i][j] = n;
+    }
+  }
+  for(int i = 0; i < truthTable.length; i++) {
+    Set<String> keys = identifiers.keySet();
+    TreeMap<String, Integer> id = new TreeMap<String, Integer>();
+    Iterator<String> it = keys.iterator();
+    int j = 0;
+    while(it.hasNext()) {
+      String key = (String) it.next();
+      id.put(key, truthTable[i][j]);
+      j++;
+    }
+    truthTable[i][j] = value(id);
+  }
+  return truthTable;
+}
 
-\end{verbatim}
+\end{lstlisting}
 
 \subsection{Easy Equivalence Solver}
 
@@ -722,6 +912,113 @@ and to see if only one of the given equivalences has been applied.
 
 %TODO add an image of the interface
 
+\section{Overview of Packages}
+In this section, a description of each package written for the
+implementation of the application is given.
+
+\subsection{AST}
+This package contains all of the classes needed for the Logic tree structure.
+The top level class is the AST class, which contains all of the data about
+the tree, such as the top level node.
+
+For nodes, there is an abstract class called ASTNode, which each node extends.
+Every node has a key, so the getter and setter for the keys are abstract methods
+in the ASTNode class. Then, there is a ASTPropositionalNode abstract class, which
+every propositional node extends. As discussed in the Background section, there
+are two different types of propositional nodes; unary and binary. Unary nodes
+include Truth, Falsity and Not, and the binary nodes are the Or, And, If then,
+If and only if nodes. To accomodate for these two types of propositional nodes,
+two abstract classes were creates; ASTPropositionalBinaryNode and
+ASTPropositionalUnaryNode. Both of these classes contain respective methods
+needed for the manipulation of the trees.
+
+For testing purposes, the Visitor design pattern is used to print the tree
+to console. The Visitor design pattern allows the separation of an algorithm
+from an object structure on which it operates.
+
+\subsection{gui}
+This package contains all of the classes which are needed for the Graphical
+User Interface (GUI). This package also contains the main method in the
+InitialiseGui class.
+
+It also contains classes which model all aspects of the GUI. Most of the functionality
+of the GUI has been places in other packages, so the functionality does not
+interfere with how the GUI looks. As there are two modes in which the equivalence
+can be performed, the methods they contain are essentially the same with different
+functionalities. Therefore, an abstract class is created which handles
+all equivalences.
+
+The package also contains how the login, register and load from database page
+look.
+
+\subsection{database}
+This package handles all of the database interaction that occurs in the program.
+As we are provided with PostgreSQL databases, I decided on using JDBC to interact
+with the database.
+
+Whenever the application makes a query to the database, it has to connect
+to it. To make this easy, a class DatabaseAdaptor contains a static method
+which connects to the database. Every query and update method calls this
+static method.
+
+During the implementation of the application, the database had to be reset
+several times. It became tedious to open terminal and clear and then
+initialise the database several times. To overcome this problem, a class
+DatabaseInitialisor was created, which resets and initialises the database
+with one method call.
+
+The other classes in the package contain all necessary methods for queries and
+updates to the database. Whenever a query is made, a ResultSet object is returned
+to the method. To keep all database interaction away from the main implementation
+of the code, the ResultSet is converted to another object which is suitable
+for the query.
+
+\subsection{buttonlisteners}
+This package contains Action Listeners for the buttons which are clicked 
+when completing an equivalence in the Easy mode. 
+
+There is a listener class for each different type of node. Every listener
+creates a new dialog for its respective node.
+
+\subsection{dialogs}
+This package contains all of the custom dialogs which open when a connective
+or identifier is clicked while completing an equivalence in the Easy mode.
+
+In each dialog, there is a button of which equivalence can be applied to that
+node. These buttons perform the equivalences whose methods are in the 
+equivalence package.
+
+When an equivalence is applied which cannot be applied, the dialog realises
+it and updates the feedback panel on the page to tell the user what the problem
+is. 
+
+
+\subsection{eqtutor}
+This is the package which contains the lexer, parser and logic expression
+generator.
+
+The lexer and parser classes are generated using ANTLR, and have been imported
+into the eqtutor package. 
+
+The other part of the package is the expression generator. The propositional
+expression generator firstly generates either a DNF (disjunctive natural form)
+or a CNF (conjunctive natural form). Once this has been generated, it applied random
+equivalences several times to give a logically equivalent expression, which
+the student can complete.
+
+\subsection{equivalence}
+This package handles all of the equivalences and manipulation of the logic trees.
+There is one major abstract class, which all of the Equivalence classes
+extend. This class contains the find and replace methods, which have been explained
+earlier in this chapter.
+
+For every different type of node, there is a different class which contains
+the methods for all of its related equivalences. All of these methods return
+the new logically equivalent AST.
+
+This package also contains the data structure of the linked list and link node
+which are needed to store an equivalence which the user performs.
+
 
 
 %-------------------------------------------------------------------------------
@@ -735,9 +1032,6 @@ and to see if only one of the given equivalences has been applied.
 %-------------------------------------------------------------------------------
 
 \chapter{Conclusions and Future Work}
-\section{Learning outcomes}
-\section{Potential improvements}
-\section{Potential extensions}
 
 %-------------------------------------------------------------------------------
 % BIBLIOGRAPHY
@@ -1009,259 +1303,6 @@ and to see if only one of the given equivalences has been applied.
   \end{tabular}
 \end{center}
 \end{enumerate}
-\chapter{Truth Tables of all Equivalences}
-\section{And Equivalences}
-\begin{enumerate}
-
-  \item A $\land$ B $\equiv$ B $\land$ A \emph{(Commutativity of And)}
-
-\begin{center}
-  \begin{tabular}{| c | c | c | c |}
-    \hline
-    A & B & A $\land$ B & B $\land$ A \\ \hline
-    0 & 0 & 0 & 0 \\
-    0 & 1 & 0 & 0 \\
-    1 & 0 & 0 & 0 \\
-    1 & 1 & 1 & 1 \\ \hline
-  \end{tabular}
-\end{center}
-
-  \item A $\land$ A $\equiv$ A \emph{(Idempotence of And)}
-
-\begin{center}
-  \begin{tabular}{| c | c |}
-    \hline
-    A & A $\land$ A \\ \hline
-    0 & 0 \\
-    0 & 0 \\
-    1 & 1 \\
-    1 & 1 \\ \hline
-  \end{tabular}
-\end{center}
-
-  \item (A $\land$ B) $\land$ C $\equiv$ A $\land$ (B $\land$ C) \emph{(Associaticity of And)}
-
-\begin{center}
-  \begin{tabular}{| c | c | c | c | c |}
-    \hline
-    A & B & C & (A $\land$ B) $\land$ C & A $\land$ (B $\land$ C) \\ \hline
-    0 & 0 & 0 & 0 & 0 \\
-    0 & 0 & 1 & 0 & 0 \\
-    0 & 1 & 0 & 0 & 0 \\
-    0 & 1 & 1 & 0 & 0 \\
-    1 & 0 & 0 & 0 & 0 \\
-    1 & 0 & 1 & 0 & 0 \\
-    1 & 1 & 0 & 0 & 0 \\
-    1 & 1 & 1 & 1 & 1 \\ \hline
-  \end{tabular}
-\end{center}
-\end{enumerate}
-
-\section{Or Equivalences}
-\begin{enumerate}
-
-  \item A $\lor$ B $\equiv$ B $\lor$ A \emph{(Commutativity of Or)}
-
-\begin{center}
-  \begin{tabular}{| c | c | c | c |}
-    \hline
-    A & B & A $\lor$ B & B $\lor$ A\\ \hline
-    0 & 0 & 0 & 0 \\
-    0 & 1 & 1 & 1 \\
-    1 & 0 & 1 & 1 \\
-    1 & 1 & 1 & 1 \\ \hline
-  \end{tabular}
-\end{center}
-
-\item A $\lor$ A $\equiv$ A \emph{(Idempotence of Or)}
-
-\begin{center}
-  \begin{tabular}{| c | c |}
-    \hline
-    A & A $\lor$ A \\ \hline
-    0 & 0 \\
-    0 & 0 \\
-    1 & 1 \\
-    1 & 1 \\ \hline
-  \end{tabular}
-\end{center}
-
-  \item (A $\lor$ B) $\lor$ C $\equiv$ A $\lor$ (B $\lor$ C) \emph{(Associaticity of Or)}
-
-\begin{center}
-  \begin{tabular}{| c | c | c | c | c |}
-    \hline
-    A & B & C & (A $\lor$ B) $\lor$ C & A $\lor$ (B $\lor$ C) \\ \hline
-    0 & 0 & 0 & 0 & 0 \\
-    0 & 0 & 1 & 1 & 1 \\
-    0 & 1 & 0 & 1 & 1 \\
-    0 & 1 & 1 & 1 & 1 \\
-    1 & 0 & 0 & 1 & 1 \\
-    1 & 0 & 1 & 1 & 1 \\
-    1 & 1 & 0 & 1 & 1 \\
-    1 & 1 & 1 & 1 & 1 \\ \hline
-  \end{tabular}
-\end{center}
-\end{enumerate}
-
-\section{Not Equivalences}
-\begin{enumerate}
-
-  \item A $\equiv$ $\neg$$\neg$A
-
-\begin{center}
-  \begin{tabular}{| c | c | c |}
-    \hline
-    A & $\neg$A & $\neg$$\neg$A \\ \hline
-    0 & 1 & 0 \\
-    1 & 0 & 1 \\ \hline
-  \end{tabular}
-\end{center}
-
-\end{enumerate}
-
-\section{Implies Equivalences}
-\begin{enumerate}
-
-  \item A $\to$ B $\equiv$ $\neg$A $\lor$ B
-
-\begin{center}
-  \begin{tabular}{| c | c | c | c | c |}
-    \hline
-    A & B & $\neg$A & A $\to$ B & $\neg$A $\lor$ B \\ \hline
-    0 & 0 & 1 & 1 & 1 \\
-    0 & 1 & 1 & 1 & 1 \\ 
-    1 & 0 & 0 & 0 & 0 \\
-    1 & 1 & 0 & 1 & 1 \\ \hline
-  \end{tabular}
-\end{center}
-
-  \item A $\to$ B $\equiv$ $\neg$(A $\land$ $\neg$B)
-
-\begin{center}
-  \begin{tabular}{| c | c | c | c | c | c |}
-    \hline
-    A & B & $\neg$B & A $\land$ $\neg$B & A $\to$ B & $\neg$(A $\land$ $\neg$B) \\ \hline
-    0 & 0 & 1 & 0 & 1 & 1 \\
-    0 & 1 & 0 & 0 & 1 & 1 \\
-    1 & 0 & 1 & 1 & 0 & 0 \\
-    1 & 1 & 0 & 0 & 1 & 1 \\ \hline
-  \end{tabular}
-\end{center}
-
-  \item $\neg$(A $\to$ B) $\equiv$ A $\land$ $\neg$B
-
-\begin{center}
-  \begin{tabular}{| c | c | c | c | c | c |}
-    \hline
-    A & B & $\neg$B & A $\to$ B & $\neg$(A $\to$ B) & A $\land$ $\neg$B \\ \hline
-    0 & 0 & 1 & 1 & 0 & 0 \\
-    0 & 1 & 0 & 1 & 0 & 0 \\
-    1 & 0 & 1 & 0 & 1 & 1 \\
-    1 & 1 & 0 & 1 & 0 & 0 \\ \hline
-  \end{tabular}
-\end{center}
-\end{enumerate}
-
-\section{If and Only If Equivalences}
-\begin{enumerate}
-
-  \item A $\leftrightarrow$ B $\equiv$ (A $\to$ B) $\land$ (B $\to$ A)
-
-\begin{center}
-  \begin{tabular} {| c | c | c | c | c | c |}
-    \hline
-    A & B & A $\to$ B & B $\to$ A & A $\leftrightarrow$ B & (A $\to$ B) $\land$ (B $\to$ A) \\ \hline
-    0 & 0 & 1 & 1 & 1 & 1 \\
-    0 & 1 & 1 & 0 & 0 & 0 \\
-    1 & 0 & 0 & 1 & 0 & 0 \\
-    1 & 1 & 1 & 1 & 1 & 1 \\ \hline
-  \end{tabular} 
-\end{center}
-
-  \item A $\leftrightarrow$ B $\equiv$ (A $\land$ B) $\lor$ ($\neg$A $\land$ $\neg$B)
-
-\begin{center}
-  \begin{tabular} {| c | c | c | c | c | c | c |}
-    \hline
-    A & B & A $\land$ B & $\neg$A & $\neg$B & A $\leftrightarrow$ B & (A $\land$ B) $\lor$ ($\neg$A $\land$ $\neg$B) \\ \hline
-    0 & 0 & 0 & 1 & 1 & 1 & 1 \\
-    0 & 1 & 0 & 1 & 0 & 0 & 0 \\
-    1 & 0 & 0 & 0 & 1 & 0 & 0 \\
-    1 & 1 & 1 & 0 & 0 & 1 & 1 \\ \hline
-  \end{tabular} 
-\end{center}
-\end{enumerate}
-
-\section{De Morgan Equivalences}
-
-\begin{enumerate}
-
-  \item $\neg$(A $\land$ B) $\equiv$ $\neg$A $\lor$ $\neg$B
-
-\begin{center}
-  \begin{tabular}{| c | c | c | c |}
-    \hline
-    A & B & $\neg$(A $\land$ B) & $\neg$A $\lor$ $\neg$B \\ \hline
-    0 & 0 & 1 & 1 \\
-    0 & 1 & 1 & 1 \\ 
-    1 & 0 & 1 & 1 \\
-    1 & 1 & 0 & 0 \\ \hline
-  \end{tabular}
-\end{center}
-
-  \item $\neg$(A $\lor$ B) $\equiv$ $\neg$A $\land$ $\neg$B
-
-\begin{center}
-  \begin{tabular}{| c | c | c | c |}
-    \hline
-    A & B & $\neg$(A $\lor$ B) & $\neg$A $\land$ $\neg$B \\ \hline
-    0 & 0 & 1 & 1 \\
-    0 & 1 & 0 & 0 \\ 
-    1 & 0 & 0 & 0 \\
-    1 & 1 & 0 & 0 \\ \hline
-  \end{tabular}
-\end{center}
-\end{enumerate}
-
-\section{Distributibivity of And and Or}
-\begin{enumerate}
-
-  \item A $\land$ (B $\lor$ C) $\equiv$ (A $\land$ B) $\lor$ (A $\land$ C)
-
-\begin{center}
-  \begin{tabular}{| c | c | c | c | c |}
-    \hline
-    A & B & C & A $\land$ (B $\lor$ C) & (A $\land$ B) $\lor$ (A $\land$ C) \\ \hline
-    0 & 0 & 0 & 0 & 0 \\
-    0 & 0 & 1 & 0 & 0 \\
-    0 & 1 & 0 & 0 & 0 \\
-    0 & 1 & 1 & 0 & 0 \\
-    1 & 0 & 0 & 0 & 0 \\
-    1 & 0 & 1 & 1 & 1 \\
-    1 & 1 & 0 & 1 & 1 \\
-    1 & 1 & 1 & 1 & 1 \\ \hline
-  \end{tabular}
-\end{center}
-
-  \item A $\lor$ (B $\land$ C) $\equiv$ (A $\lor$ B) $\land$ (A $\lor$ C)
-
-\begin{center}
-  \begin{tabular}{| c | c | c | c | c |}
-    \hline
-    A & B & C & A $\lor$ (B $\land$ C) & (A $\lor$ B) $\land$ (A $\lor$ C) \\ \hline
-    0 & 0 & 0 & 0 & 0 \\
-    0 & 0 & 1 & 0 & 0 \\
-    0 & 1 & 0 & 0 & 0 \\
-    0 & 1 & 1 & 1 & 1 \\
-    1 & 0 & 0 & 1 & 1 \\
-    1 & 0 & 1 & 1 & 1 \\
-    1 & 1 & 0 & 1 & 1 \\
-    1 & 1 & 1 & 1 & 1 \\ \hline
-  \end{tabular}
-\end{center}
-\end{enumerate}
-
 %-------------------------------------------------------------------------------
 
 \end{document}

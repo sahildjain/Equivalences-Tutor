@@ -14,21 +14,21 @@ import net.miginfocom.swing.MigLayout;
 
 public class ASTOrNode extends ASTPropositionalBinaryNode {
 	
-	private ASTPropositionalNode conjunction;
-	private ASTPropositionalNode disjunction;
+	private ASTNode conjunction;
+	private ASTNode disjunction;
 	private int key;
 
-	public ASTOrNode(int key, ASTPropositionalNode conjunction, ASTPropositionalNode disjunction) {
+	public ASTOrNode(int key, ASTNode conjunction, ASTNode disjunction) {
 		this.conjunction = conjunction;
 		this.disjunction = disjunction;
 		this.setKey(key);
 	}
 	
-	public ASTPropositionalNode getLeft() {
+	public ASTNode getLeft() {
 		return this.conjunction;
 	}
 	
-	public ASTPropositionalNode getRight() {
+	public ASTNode getRight() {
 		return this.disjunction;
 	}
 
@@ -36,11 +36,11 @@ public class ASTOrNode extends ASTPropositionalBinaryNode {
 		visitor.visitOrNode(this);
 	}
 
-	public void setLeft(ASTPropositionalNode left) {
+	public void setLeft(ASTNode left) {
 		this.conjunction = left;
 	}
 
-	public void setRight(ASTPropositionalNode right) {
+	public void setRight(ASTNode right) {
 		this.disjunction = right;
 	}
 
@@ -82,14 +82,27 @@ public class ASTOrNode extends ASTPropositionalBinaryNode {
 	}
 	
 	public TreeMap<String, Integer> numIdentifiers(TreeMap<String, Integer> identifiers) {
-		identifiers = getLeft().numIdentifiers(identifiers);
-		identifiers = getRight().numIdentifiers(identifiers);
+		if(getLeft() instanceof ASTPropositionalNode) {
+			identifiers = ((ASTPropositionalNode) getLeft()).numIdentifiers(identifiers);
+		}
+		if(getRight() instanceof ASTPropositionalNode) {
+			identifiers = ((ASTPropositionalNode) getRight()).numIdentifiers(identifiers);
+		}
 		return identifiers;
 	}
 
 	public int value(TreeMap<String, Integer> id) {
-		int left = getLeft().value(id);
-		int right = getRight().value(id);
+		int left = -1;
+		int right = -1;
+		if(getLeft() instanceof ASTPropositionalNode) {
+			left = ((ASTPropositionalNode) getLeft()).value(id);
+		}
+		if(getRight() instanceof ASTPropositionalNode) {
+			right = ((ASTPropositionalNode) getRight()).value(id);
+		}
+		if(left == -1 || right == -1) {
+			return -1;
+		}
 		if(left == 1 || right == 1) {
 			return 1;
 		}
@@ -120,7 +133,7 @@ public class ASTOrNode extends ASTPropositionalBinaryNode {
 		return panel;
 	}
 	
-	public ASTPropositionalNode copy() {
+	public ASTNode copy() {
 		ASTOrNode newNode = new ASTOrNode(0, null, null);
 		newNode.setLeft(getLeft().copy());
 		newNode.setRight(getRight().copy());

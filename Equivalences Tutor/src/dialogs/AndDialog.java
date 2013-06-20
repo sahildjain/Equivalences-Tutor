@@ -32,15 +32,15 @@ public class AndDialog extends JDialog {
 		this.setFrame(listener.getFrame());
 		this.setKey(key);
 		this.setSide(side);
-		AndEquivalence eq;
-		if(isSide()) {
+		//AndEquivalence eq;
+		/*if(isSide()) {
 			AST temp = getListener().getLeft().getLast().getTree().copy();
-			eq = new AndEquivalence(temp, getKey());
+			//eq = new AndEquivalence(temp, getKey());
 		}
 		else {
 			AST temp = getListener().getRight().getLast().getTree().copy();
-			eq = new AndEquivalence(temp, getKey());
-		}
+			//eq = new AndEquivalence(temp, getKey());
+		}*/
 		panel = new JPanel(new MigLayout());
 		//if(eq.idempotence() != null) {
 			panel.add(addIdempotence(), BorderLayout.NORTH);
@@ -169,7 +169,7 @@ public class AndDialog extends JDialog {
 				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.idempotence();
 				if(tree == null) {
-					JLabel label2 = new JLabel("Idempotence cannot be applied to this And operator. Please try another equivalence!");
+					JLabel label2 = new JLabel("Idempotence cannot be applied to this And connective. Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();
@@ -184,7 +184,7 @@ public class AndDialog extends JDialog {
 				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.idempotence();
 				if(tree == null) {
-					JLabel label2 = new JLabel("Idempotence cannot be applied to this And operator. Please try another equivalence!");
+					JLabel label2 = new JLabel("Idempotence cannot be applied to this And connective. Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();
@@ -212,7 +212,7 @@ public class AndDialog extends JDialog {
 				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.commutativity();
 				if(tree == null) {
-					JLabel label2 = new JLabel("Commutativity cannot be applied to this And operator. Please try another equivalence!");
+					JLabel label2 = new JLabel("Commutativity cannot be applied to this And connective. Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();
@@ -227,7 +227,7 @@ public class AndDialog extends JDialog {
 				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.commutativity();
 				if(tree == null) {
-					JLabel label2 = new JLabel("Commutativity cannot be applied to this And operator. Please try another equivalence!");
+					JLabel label2 = new JLabel("Commutativity cannot be applied to this And connective. Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();
@@ -255,7 +255,7 @@ public class AndDialog extends JDialog {
 				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.associativityLeft();
 				if(tree == null) {
-					JLabel label2 = new JLabel("This Associativity equivalence cannot be applied to this And operator. Please try another equivalence!");
+					JLabel label2 = new JLabel("This Associativity equivalence cannot be applied to this And connective. Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();
@@ -270,7 +270,7 @@ public class AndDialog extends JDialog {
 				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.associativityLeft();
 				if(tree == null) {
-					JLabel label2 = new JLabel("This Associativity equivalence cannot be applied to this And operator. Please try another equivalence!");
+					JLabel label2 = new JLabel("This Associativity equivalence cannot be applied to this And connective. Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();
@@ -298,7 +298,7 @@ public class AndDialog extends JDialog {
 				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.associativityRight();
 				if(tree == null) {
-					JLabel label2 = new JLabel("This Associativity equivalence cannot be applied to this And operator. Please try another equivalence!");
+					JLabel label2 = new JLabel("This Associativity equivalence cannot be applied to this And connective. Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();
@@ -313,7 +313,7 @@ public class AndDialog extends JDialog {
 				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.associativityRight();
 				if(tree == null) {
-					JLabel label2 = new JLabel("This Associativity equivalence cannot be applied to this And operator. Please try another equivalence!");
+					JLabel label2 = new JLabel("This Associativity equivalence cannot be applied to this And connective. Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();
@@ -341,7 +341,7 @@ public class AndDialog extends JDialog {
 				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.deMorgan();
 				if(tree == null) {
-					JLabel label2 = new JLabel("You cannot apply DeMorgan's law to this And operator. Please try another equivalence!");
+					JLabel label2 = new JLabel("You cannot apply DeMorgan's law to this And connective. Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();
@@ -357,7 +357,7 @@ public class AndDialog extends JDialog {
 				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.deMorgan();
 				if(tree == null) {
-					JLabel label2 = new JLabel("You cannot apply DeMorgan's law to this And operator. Please try another equivalence!");
+					JLabel label2 = new JLabel("You cannot apply DeMorgan's law to this And connectiver. Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();

@@ -1,6 +1,6 @@
-// $ANTLR 3.4 /homes/sdj09/LogicLexer.g 2013-01-28 19:16:17
+// $ANTLR 3.4 /homes/sdj09/LogicLexer.g 2013-06-19 19:14:06
 
-package eqtutor;
+  package eqtutor;
 
 
 import org.antlr.runtime.*;
@@ -12,16 +12,19 @@ import java.util.ArrayList;
 public class LogicLexer extends Lexer {
     public static final int EOF=-1;
     public static final int AND=4;
-    public static final int ID=5;
-    public static final int IFF=6;
-    public static final int IFTHEN=7;
-    public static final int LPAREN=8;
-    public static final int NOT=9;
-    public static final int OR=10;
-    public static final int RPAREN=11;
-    public static final int WHITESPACE=12;
+    public static final int EXISTS=5;
+    public static final int FORALL=6;
+    public static final int ID=7;
+    public static final int IFF=8;
+    public static final int IFTHEN=9;
+    public static final int LPAREN=10;
+    public static final int NOT=11;
+    public static final int OR=12;
+    public static final int RPAREN=13;
+    public static final int WHITESPACE=14;
 
     // delegates
+    // delegators
     public Lexer[] getDelegates() {
         return new Lexer[] {};
     }
@@ -309,9 +312,55 @@ public class LogicLexer extends Lexer {
     }
     // $ANTLR end "ID"
 
+    // $ANTLR start "FORALL"
+    public final void mFORALL() throws RecognitionException {
+        try {
+            int _type = FORALL;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // /homes/sdj09/LogicLexer.g:25:9: ( '(A)' )
+            // /homes/sdj09/LogicLexer.g:25:11: '(A)'
+            {
+            match("(A)"); 
+
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "FORALL"
+
+    // $ANTLR start "EXISTS"
+    public final void mEXISTS() throws RecognitionException {
+        try {
+            int _type = EXISTS;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // /homes/sdj09/LogicLexer.g:26:9: ( '(E)' )
+            // /homes/sdj09/LogicLexer.g:26:11: '(E)'
+            {
+            match("(E)"); 
+
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "EXISTS"
+
     public void mTokens() throws RecognitionException {
-        // /homes/sdj09/LogicLexer.g:1:8: ( WHITESPACE | AND | OR | IFTHEN | IFF | NOT | LPAREN | RPAREN | ID )
-        int alt3=9;
+        // /homes/sdj09/LogicLexer.g:1:8: ( WHITESPACE | AND | OR | IFTHEN | IFF | NOT | LPAREN | RPAREN | ID | FORALL | EXISTS )
+        int alt3=11;
         switch ( input.LA(1) ) {
         case '\t':
         case '\n':
@@ -349,7 +398,21 @@ public class LogicLexer extends Lexer {
             break;
         case '(':
             {
-            alt3=7;
+            switch ( input.LA(2) ) {
+            case 'A':
+                {
+                alt3=10;
+                }
+                break;
+            case 'E':
+                {
+                alt3=11;
+                }
+                break;
+            default:
+                alt3=7;
+            }
+
             }
             break;
         case ')':
@@ -490,6 +553,22 @@ public class LogicLexer extends Lexer {
                 // /homes/sdj09/LogicLexer.g:1:57: ID
                 {
                 mID(); 
+
+
+                }
+                break;
+            case 10 :
+                // /homes/sdj09/LogicLexer.g:1:60: FORALL
+                {
+                mFORALL(); 
+
+
+                }
+                break;
+            case 11 :
+                // /homes/sdj09/LogicLexer.g:1:67: EXISTS
+                {
+                mEXISTS(); 
 
 
                 }

@@ -8,19 +8,19 @@ import javax.swing.JPanel;
 
 public class ASTProgramNode extends ASTPropositionalUnaryNode {
 
-	private ASTPropositionalNode doubleConditional;
+	private ASTNode doubleConditional;
 	private int key;
 	
-	public ASTProgramNode(int key, ASTPropositionalNode doubleConditional) {
+	public ASTProgramNode(int key, ASTNode doubleConditional) {
 		this.doubleConditional = doubleConditional;
 		this.setKey(key);
 	}
 	
-	public ASTPropositionalNode getLeaf() {
+	public ASTNode getLeaf() {
 		return this.doubleConditional;
 	}
 	
-	public void setLeaf(ASTPropositionalNode leaf) {
+	public void setLeaf(ASTNode leaf) {
 		this.doubleConditional = leaf;
 	}
 	
@@ -52,12 +52,17 @@ public class ASTProgramNode extends ASTPropositionalUnaryNode {
 	}
 	
 	public TreeMap<String, Integer> numIdentifiers(TreeMap<String, Integer> identifiers) {
-		identifiers = getLeaf().numIdentifiers(identifiers);
+		if(getLeaf() instanceof ASTPropositionalNode) {
+			identifiers = ((ASTPropositionalNode) getLeaf()).numIdentifiers(identifiers);
+		}
 		return identifiers;
 	}
 
 	public int value(TreeMap<String, Integer> id) {
-		return getLeaf().value(id);
+		if(getLeaf() instanceof ASTPropositionalNode) {
+			return ((ASTPropositionalNode) getLeaf()).value(id);
+		}
+		return -1;
 	}
 
 	public JPanel createJPanel(NewPersonalEquivalenceListener l, boolean side) {

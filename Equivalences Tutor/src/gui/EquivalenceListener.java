@@ -4,15 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import AST.AST;
-import AST.ASTProgramNode;
-import AST.ASTPropositionalBinaryNode;
 import AST.ASTPropositionalNode;
 
 import eqtutor.EQTutor;
 import eqtutor.LogicParser;
 import equivalence.EquivalenceLinkNode;
 import equivalence.EquivalenceLinkedList;
-import equivalence.NodeEquivalence;
 
 public class EquivalenceListener implements ActionListener{
 	
@@ -77,6 +74,7 @@ public class EquivalenceListener implements ActionListener{
 		if(node1.getClass().toString().equals(node2.getClass().toString())) {
 			
 		}
+		return false;//temp
 		/*NodeEquivalence eq = new NodeEquivalence(node1, node2);
 		if(eq.isEquivalent()) {
 			return true;

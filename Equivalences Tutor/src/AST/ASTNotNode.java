@@ -14,15 +14,15 @@ import net.miginfocom.swing.MigLayout;
 
 public class ASTNotNode extends ASTPropositionalUnaryNode {
 	
-	private ASTPropositionalNode unary;
+	private ASTNode unary;
 	private int key;
 	
-	public ASTNotNode(int key, ASTPropositionalNode unary) {
+	public ASTNotNode(int key, ASTNode unary) {
 		this.unary = unary;
 		this.setKey(key);
 	}
 	
-	public ASTPropositionalNode getLeaf() {
+	public ASTNode getLeaf() {
 		return this.unary;
 	}
 	
@@ -30,7 +30,7 @@ public class ASTNotNode extends ASTPropositionalUnaryNode {
 		visitor.visitNotNode(this);
 	}
 
-	public void setLeaf(ASTPropositionalNode leaf) {
+	public void setLeaf(ASTNode leaf) {
 		this.unary = leaf;
 	}
 
@@ -58,15 +58,21 @@ public class ASTNotNode extends ASTPropositionalUnaryNode {
 	}
 	
 	public TreeMap<String, Integer> numIdentifiers(TreeMap<String, Integer> identifiers) {
-		return getLeaf().numIdentifiers(identifiers);
+		if(getLeaf() instanceof ASTPropositionalNode) {
+			return ((ASTPropositionalNode) getLeaf()).numIdentifiers(identifiers);
+		}
+		return identifiers;
 	}
 
 	public int value(TreeMap<String, Integer> id) {
-		int leaf = getLeaf().value(id);
-		if(leaf == 1) {
-			return 0;
+		if(getLeaf() instanceof ASTPropositionalNode) {
+			int leaf = ((ASTPropositionalNode) getLeaf()).value(id);
+			if(leaf == 1) {
+				return 0;
+			}
+			return 1;
 		}
-		return 1;
+		return -1;
 	}
 
 	public JPanel createJPanel(NewPersonalEquivalenceListener l, boolean side) {

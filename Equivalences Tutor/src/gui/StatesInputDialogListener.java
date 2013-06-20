@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import eqtutor.EQTutor;
 import eqtutor.LogicParser;
 import equivalence.EquivalenceLinkNode;
+import equivalence.EquivalenceLinkedList;
 
 import AST.AST;
 
@@ -20,6 +21,10 @@ public class StatesInputDialogListener implements ActionListener{
 
 	public StatesInputDialogListener(NewPersonalEquivalenceListener listener) {
 		this.setListener(listener);
+		getListener().setRight(new EquivalenceLinkedList());
+		getListener().setLeft(new EquivalenceLinkedList());
+		getListener().getTextAreaLeft().setText("");
+		getListener().getTextAreaRight().setText("");
 	}
 
 	public void actionPerformed(ActionEvent e) {

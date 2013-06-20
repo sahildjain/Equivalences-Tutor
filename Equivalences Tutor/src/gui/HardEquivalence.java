@@ -14,9 +14,6 @@ import equivalence.EquivalenceLinkedList;
 import net.miginfocom.swing.MigLayout;
 
 public class HardEquivalence extends NewPersonalEquivalenceListener {
-	
-	private JTextArea textAreaLeft;
-	private JTextArea textAreaRight;
 
 	public HardEquivalence(JFrame frame, JPanel menu, int id) {
 		super(frame, menu, id);
@@ -97,22 +94,6 @@ public class HardEquivalence extends NewPersonalEquivalenceListener {
 		submitRight.setVisible(false);
 		undoLeft.setVisible(false);
 		undoRight.setVisible(false);
-	}
-	
-	public JTextArea getTextAreaLeft() {
-		return this.textAreaLeft;
-	}
-	
-	public void setTextAreaLeft(JTextArea left) {
-		this.textAreaLeft = left;
-	}
-	
-	public JTextArea getTextAreaRight() {
-		return this.textAreaRight;
-	}
-	
-	public void setTextAreaRight(JTextArea right) {
-		this.textAreaRight = right;
 	}
 
 	protected void hidePanels() {
