@@ -12,6 +12,7 @@ import gui.NewPersonalEquivalenceListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import AST.AST;
@@ -40,6 +41,7 @@ public class OrDialog extends JDialog {
 		panel.add(addDistributivity(), BorderLayout.NORTH);
 		panel.add(addDistributivityDiff(), BorderLayout.NORTH);
 		panel.add(addDistributivitySame(), BorderLayout.NORTH);
+		panel.add(addFalsityElimination(), BorderLayout.NORTH);
 		getContentPane().add(panel);
 		pack();
 		setLocationRelativeTo(getFrame());
@@ -87,6 +89,12 @@ public class OrDialog extends JDialog {
 		button.addActionListener(new AssociativityRightListener());
 		return button;
 	}
+	
+	private JButton addFalsityElimination() {
+		JButton button = new JButton("A \u2228 \u22A5 = A");
+		button.addActionListener(new FalsityEliminationListener());
+		return button;
+	}
 
 	public NewPersonalEquivalenceListener getListener() {
 		return listener;
@@ -131,9 +139,22 @@ public class OrDialog extends JDialog {
 	private class IdempotenceListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
+			JPanel feedback = getListener().getFeedback();
+			feedback.removeAll();
+			JLabel label1 = new JLabel("Feedback");
+			feedback.add(label1, BorderLayout.NORTH);
+			getListener().setFeedback(feedback);
+			getListener().getEquivalence().updateUI();
 			if(isSide()) {
 				OrEquivalence eq = new OrEquivalence(getListener().getLeft().getLast().getTree().copy(), getKey());
 				AST tree = eq.idempotence();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateLeftList(node);
 				getListener().updateEquivalenceLeft();
@@ -141,6 +162,13 @@ public class OrDialog extends JDialog {
 			if(!isSide()) {
 				OrEquivalence eq = new OrEquivalence(getListener().getRight().getLast().getTree().copy(), getKey());
 				AST tree = eq.idempotence();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateRightList(node);
 				getListener().updateEquivalenceRight();
@@ -152,9 +180,22 @@ public class OrDialog extends JDialog {
 	private class CommutativityListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
+			JPanel feedback = getListener().getFeedback();
+			feedback.removeAll();
+			JLabel label1 = new JLabel("Feedback");
+			feedback.add(label1, BorderLayout.NORTH);
+			getListener().setFeedback(feedback);
+			getListener().getEquivalence().updateUI();
 			if(isSide()) {
 				OrEquivalence eq = new OrEquivalence(getListener().getLeft().getLast().getTree().copy(), getKey());
 				AST tree = eq.commutativity();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateLeftList(node);
 				getListener().updateEquivalenceLeft();
@@ -162,6 +203,13 @@ public class OrDialog extends JDialog {
 			if(!isSide()) {
 				OrEquivalence eq = new OrEquivalence(getListener().getRight().getLast().getTree().copy(), getKey());
 				AST tree = eq.commutativity();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateRightList(node);
 				getListener().updateEquivalenceRight();
@@ -173,9 +221,22 @@ public class OrDialog extends JDialog {
 	private class DistributivityListener implements ActionListener {
 		
 		public void actionPerformed(ActionEvent e) {
+			JPanel feedback = getListener().getFeedback();
+			feedback.removeAll();
+			JLabel label1 = new JLabel("Feedback");
+			feedback.add(label1, BorderLayout.NORTH);
+			getListener().setFeedback(feedback);
+			getListener().getEquivalence().updateUI();
 			if(isSide()) {
 				OrEquivalence eq = new OrEquivalence(getListener().getLeft().getLast().getTree().copy(), getKey());
 				AST tree = eq.dist();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateLeftList(node);
 				getListener().updateEquivalenceLeft();
@@ -183,6 +244,13 @@ public class OrDialog extends JDialog {
 			if(!isSide()) {
 				OrEquivalence eq = new OrEquivalence(getListener().getRight().getLast().getTree().copy(), getKey());
 				AST tree = eq.dist();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateRightList(node);
 				getListener().updateEquivalenceRight();
@@ -193,6 +261,12 @@ public class OrDialog extends JDialog {
 	private class DistributivityDiffListener implements ActionListener {
 		
 		public void actionPerformed(ActionEvent e) {
+			JPanel feedback = getListener().getFeedback();
+			feedback.removeAll();
+			JLabel label1 = new JLabel("Feedback");
+			feedback.add(label1, BorderLayout.NORTH);
+			getListener().setFeedback(feedback);
+			getListener().getEquivalence().updateUI();
 			if(isSide()) {
 				OrEquivalence eq = new OrEquivalence(getListener().getLeft().getLast().getTree().copy(), getKey());
 				AST tree = eq.distdiff();
@@ -203,6 +277,13 @@ public class OrDialog extends JDialog {
 			if(!isSide()) {
 				OrEquivalence eq = new OrEquivalence(getListener().getRight().getLast().getTree().copy(), getKey());
 				AST tree = eq.distdiff();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateRightList(node);
 				getListener().updateEquivalenceRight();
@@ -214,9 +295,22 @@ public class OrDialog extends JDialog {
 	private class DistributivitySameListener implements ActionListener {
 			
 		public void actionPerformed(ActionEvent e) {
+			JPanel feedback = getListener().getFeedback();
+			feedback.removeAll();
+			JLabel label1 = new JLabel("Feedback");
+			feedback.add(label1, BorderLayout.NORTH);
+			getListener().setFeedback(feedback);
+			getListener().getEquivalence().updateUI();
 			if(isSide()) {
 				OrEquivalence eq = new OrEquivalence(getListener().getLeft().getLast().getTree().copy(), getKey());
 				AST tree = eq.distsame();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateLeftList(node);
 				getListener().updateEquivalenceLeft();
@@ -224,6 +318,13 @@ public class OrDialog extends JDialog {
 			if(!isSide()) {
 				OrEquivalence eq = new OrEquivalence(getListener().getRight().getLast().getTree().copy(), getKey());
 				AST tree = eq.distsame();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateRightList(node);
 				getListener().updateEquivalenceRight();
@@ -235,10 +336,23 @@ public class OrDialog extends JDialog {
 	private class AssociativityLeftListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
+			JPanel feedback = getListener().getFeedback();
+			feedback.removeAll();
+			JLabel label1 = new JLabel("Feedback");
+			feedback.add(label1, BorderLayout.NORTH);
+			getListener().setFeedback(feedback);
+			getListener().getEquivalence().updateUI();
 			if(isSide()) {
 				AST temp = getListener().getLeft().getLast().getTree().copy();
 				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.associativityLeft();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateLeftList(node);
 				getListener().updateEquivalenceLeft();
@@ -247,6 +361,13 @@ public class OrDialog extends JDialog {
 				AST temp = getListener().getRight().getLast().getTree().copy();
 				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.associativityLeft();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateRightList(node);
 				getListener().updateEquivalenceRight();
@@ -258,10 +379,23 @@ public class OrDialog extends JDialog {
 	private class AssociativityRightListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
+			JPanel feedback = getListener().getFeedback();
+			feedback.removeAll();
+			JLabel label1 = new JLabel("Feedback");
+			feedback.add(label1, BorderLayout.NORTH);
+			getListener().setFeedback(feedback);
+			getListener().getEquivalence().updateUI();
 			if(isSide()) {
 				AST temp = getListener().getLeft().getLast().getTree().copy();
 				OrEquivalence eq = new OrEquivalence(temp, getKey());
 				AST tree = eq.associativityRight();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateLeftList(node);
 				getListener().updateEquivalenceLeft();
@@ -270,6 +404,56 @@ public class OrDialog extends JDialog {
 				AST temp = getListener().getRight().getLast().getTree().copy();
 				OrEquivalence eq = new OrEquivalence(temp, getKey());
 				AST tree = eq.associativityRight();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateRightList(node);
+				getListener().updateEquivalenceRight();
+			}
+		}
+		
+	}
+	
+	private class FalsityEliminationListener implements ActionListener {
+
+		public void actionPerformed(ActionEvent e) {
+			JPanel feedback = getListener().getFeedback();
+			feedback.removeAll();
+			JLabel label1 = new JLabel("Feedback");
+			feedback.add(label1, BorderLayout.NORTH);
+			getListener().setFeedback(feedback);
+			getListener().getEquivalence().updateUI();
+			if(isSide()) {
+				AST temp = getListener().getLeft().getLast().getTree().copy();
+				OrEquivalence eq = new OrEquivalence(temp, getKey());
+				AST tree = eq.falsityElimination();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateLeftList(node);
+				getListener().updateEquivalenceLeft();
+			}
+			if(!isSide()) {
+				AST temp = getListener().getRight().getLast().getTree().copy();
+				OrEquivalence eq = new OrEquivalence(temp, getKey());
+				AST tree = eq.falsityElimination();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateRightList(node);
 				getListener().updateEquivalenceRight();

@@ -341,7 +341,7 @@ public class AndDialog extends JDialog {
 				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.deMorgan();
 				if(tree == null) {
-					JLabel label2 = new JLabel("You cannot apply DeMorgan's law to this And connective. Please try another equivalence!");
+					JLabel label2 = new JLabel("Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();
@@ -357,7 +357,7 @@ public class AndDialog extends JDialog {
 				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.deMorgan();
 				if(tree == null) {
-					JLabel label2 = new JLabel("You cannot apply DeMorgan's law to this And connectiver. Please try another equivalence!");
+					JLabel label2 = new JLabel("Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();
@@ -384,7 +384,7 @@ public class AndDialog extends JDialog {
 				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.iff();
 				if(tree == null) {
-					JLabel label2 = new JLabel("Idempotence cannot be applied to this node. Please try another equivalence!");
+					JLabel label2 = new JLabel("Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();
@@ -399,7 +399,7 @@ public class AndDialog extends JDialog {
 				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.iff();
 				if(tree == null) {
-					JLabel label2 = new JLabel("Idempotence cannot be applied to this node. Please try another equivalence!");
+					JLabel label2 = new JLabel("Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();
@@ -427,7 +427,7 @@ public class AndDialog extends JDialog {
 				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.distdiff();
 				if(tree == null) {
-					JLabel label2 = new JLabel("Idempotence cannot be applied to this node. Please try another equivalence!");
+					JLabel label2 = new JLabel("Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();
@@ -442,7 +442,7 @@ public class AndDialog extends JDialog {
 				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.distdiff();
 				if(tree == null) {
-					JLabel label2 = new JLabel("Idempotence cannot be applied to this node. Please try another equivalence!");
+					JLabel label2 = new JLabel("Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();
@@ -470,7 +470,7 @@ public class AndDialog extends JDialog {
 				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.distback();
 				if(tree == null) {
-					JLabel label2 = new JLabel("Idempotence cannot be applied to this node. Please try another equivalence!");
+					JLabel label2 = new JLabel("Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();
@@ -485,7 +485,7 @@ public class AndDialog extends JDialog {
 				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.distback();
 				if(tree == null) {
-					JLabel label2 = new JLabel("Idempotence cannot be applied to this node. Please try another equivalence!");
+					JLabel label2 = new JLabel("Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();
@@ -513,7 +513,7 @@ public class AndDialog extends JDialog {
 				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.distsame();
 				if(tree == null) {
-					JLabel label2 = new JLabel("Idempotence cannot be applied to this node. Please try another equivalence!");
+					JLabel label2 = new JLabel("Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();
@@ -528,7 +528,7 @@ public class AndDialog extends JDialog {
 				AndEquivalence eq = new AndEquivalence(temp, getKey());
 				AST tree = eq.distsame();
 				if(tree == null) {
-					JLabel label2 = new JLabel("Idempotence cannot be applied to this node. Please try another equivalence!");
+					JLabel label2 = new JLabel("Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();

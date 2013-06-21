@@ -210,5 +210,27 @@ public class OrEquivalence extends Equivalence {
 		}
 		return null;
 	}
+
+	public AST falsityElimination() {
+		try {
+			AST tree = getTree();
+			int key = getKey();
+			ASTNode node  = find(tree.getRoot(), key);
+			if(node instanceof ASTOrNode) {
+				ASTOrNode orNode = (ASTOrNode) node;
+				if(orNode.getRight() instanceof ASTFalsityNode) {
+					ASTNode p = replace(tree.getRoot().getLeaf(), orNode.getLeft(), key);
+					ASTProgramNode program = tree.getRoot();
+					program.setLeaf(p);
+					AST t = new AST(tree.getKey(), program);
+					return t;
+				}
+			}
+		}
+		catch(Exception e) {
+			return null;
+		}
+		return null;
+	}
 	
 }

@@ -128,7 +128,7 @@ public class TruthDialog extends JDialog {
 				TruthEquivalence eq = new TruthEquivalence(temp, getKey());
 				AST tree = eq.implicationIntroduction();
 				if(tree == null) {
-					JLabel label2 = new JLabel("Idempotence cannot be applied to this And connective. Please try another equivalence!");
+					JLabel label2 = new JLabel("Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();
@@ -143,7 +143,7 @@ public class TruthDialog extends JDialog {
 				TruthEquivalence eq = new TruthEquivalence(temp, getKey());
 				AST tree = eq.implicationIntroduction();
 				if(tree == null) {
-					JLabel label2 = new JLabel("Idempotence cannot be applied to this And connective. Please try another equivalence!");
+					JLabel label2 = new JLabel("Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();
@@ -170,7 +170,7 @@ public class TruthDialog extends JDialog {
 				TruthEquivalence eq = new TruthEquivalence(temp, getKey());
 				AST tree = eq.implicationIntroduction2();
 				if(tree == null) {
-					JLabel label2 = new JLabel("Idempotence cannot be applied to this And connective. Please try another equivalence!");
+					JLabel label2 = new JLabel("Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();
@@ -185,7 +185,7 @@ public class TruthDialog extends JDialog {
 				TruthEquivalence eq = new TruthEquivalence(temp, getKey());
 				AST tree = eq.implicationIntroduction2();
 				if(tree == null) {
-					JLabel label2 = new JLabel("Idempotence cannot be applied to this And connective. Please try another equivalence!");
+					JLabel label2 = new JLabel("Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();
@@ -212,7 +212,7 @@ public class TruthDialog extends JDialog {
 				TruthEquivalence eq = new TruthEquivalence(temp, getKey());
 				AST tree = eq.implicationIntroduction3();
 				if(tree == null) {
-					JLabel label2 = new JLabel("Idempotence cannot be applied to this And connective. Please try another equivalence!");
+					JLabel label2 = new JLabel("Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();
@@ -227,7 +227,7 @@ public class TruthDialog extends JDialog {
 				TruthEquivalence eq = new TruthEquivalence(temp, getKey());
 				AST tree = eq.implicationIntroduction3();
 				if(tree == null) {
-					JLabel label2 = new JLabel("Idempotence cannot be applied to this And connective. Please try another equivalence!");
+					JLabel label2 = new JLabel("Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();
@@ -254,7 +254,7 @@ public class TruthDialog extends JDialog {
 				TruthEquivalence eq = new TruthEquivalence(temp, getKey());
 				AST tree = eq.falsityIntroduction();
 				if(tree == null) {
-					JLabel label2 = new JLabel("Idempotence cannot be applied to this And connective. Please try another equivalence!");
+					JLabel label2 = new JLabel("Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();
@@ -269,7 +269,7 @@ public class TruthDialog extends JDialog {
 				TruthEquivalence eq = new TruthEquivalence(temp, getKey());
 				AST tree = eq.falsityIntroduction();
 				if(tree == null) {
-					JLabel label2 = new JLabel("Idempotence cannot be applied to this And connective. Please try another equivalence!");
+					JLabel label2 = new JLabel("Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();
@@ -296,7 +296,7 @@ public class TruthDialog extends JDialog {
 				TruthEquivalence eq = new TruthEquivalence(temp, getKey());
 				AST tree = eq.orIntroduction1();
 				if(tree == null) {
-					JLabel label2 = new JLabel("Idempotence cannot be applied to this And connective. Please try another equivalence!");
+					JLabel label2 = new JLabel("Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();
@@ -311,7 +311,7 @@ public class TruthDialog extends JDialog {
 				TruthEquivalence eq = new TruthEquivalence(temp, getKey());
 				AST tree = eq.orIntroduction1();
 				if(tree == null) {
-					JLabel label2 = new JLabel("Idempotence cannot be applied to this And connective. Please try another equivalence!");
+					JLabel label2 = new JLabel("Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();
@@ -338,7 +338,7 @@ public class TruthDialog extends JDialog {
 				TruthEquivalence eq = new TruthEquivalence(temp, getKey());
 				AST tree = eq.orIntroduction2();
 				if(tree == null) {
-					JLabel label2 = new JLabel("Idempotence cannot be applied to this And connective. Please try another equivalence!");
+					JLabel label2 = new JLabel("Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();
@@ -353,7 +353,7 @@ public class TruthDialog extends JDialog {
 				TruthEquivalence eq = new TruthEquivalence(temp, getKey());
 				AST tree = eq.orIntroduction2();
 				if(tree == null) {
-					JLabel label2 = new JLabel("Idempotence cannot be applied to this And connective. Please try another equivalence!");
+					JLabel label2 = new JLabel("Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();

@@ -11,6 +11,7 @@ import gui.NewPersonalEquivalenceListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import AST.AST;
@@ -87,9 +88,22 @@ public class IfDialog extends JDialog {
 	private class IfToOrListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent arg0) {
+			JPanel feedback = getListener().getFeedback();
+			feedback.removeAll();
+			JLabel label1 = new JLabel("Feedback");
+			feedback.add(label1, BorderLayout.NORTH);
+			getListener().setFeedback(feedback);
+			getListener().getEquivalence().updateUI();
 			if(isSide()) {
 				IfEquivalence eq = new IfEquivalence(getListener().getLeft().getLast().getTree().copy(), getKey());
 				AST tree = eq.ifToOrEquivalence();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateLeftList(node);
 				getListener().updateEquivalenceLeft();
@@ -97,6 +111,13 @@ public class IfDialog extends JDialog {
 			if(!isSide()) {
 				IfEquivalence eq = new IfEquivalence(getListener().getRight().getLast().getTree().copy(), getKey());
 				AST tree = eq.ifToOrEquivalence();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateRightList(node);
 				getListener().updateEquivalenceRight();
@@ -108,9 +129,22 @@ public class IfDialog extends JDialog {
 	private class IfToAndListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
+			JPanel feedback = getListener().getFeedback();
+			feedback.removeAll();
+			JLabel label1 = new JLabel("Feedback");
+			feedback.add(label1, BorderLayout.NORTH);
+			getListener().setFeedback(feedback);
+			getListener().getEquivalence().updateUI();
 			if(isSide()) {
 				IfEquivalence eq = new IfEquivalence(getListener().getLeft().getLast().getTree().copy(), getKey());
 				AST tree = eq.ifToAndEquivalence();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateLeftList(node);
 				getListener().updateEquivalenceLeft();
@@ -118,6 +152,13 @@ public class IfDialog extends JDialog {
 			if(!isSide()) {
 				IfEquivalence eq = new IfEquivalence(getListener().getRight().getLast().getTree().copy(), getKey());
 				AST tree = eq.ifToAndEquivalence();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateRightList(node);
 				getListener().updateEquivalenceRight();

@@ -11,6 +11,7 @@ import gui.NewPersonalEquivalenceListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import AST.AST;
@@ -35,6 +36,7 @@ public class IdentifierDialog extends JDialog {
 		panel.add(addDoubleNegation(), BorderLayout.NORTH);
 		panel.add(addAndIdempotence(), BorderLayout.NORTH);
 		panel.add(addOrIdempotence(), BorderLayout.NORTH);
+		panel.add(addFalsityIntroduction(), BorderLayout.NORTH);
 		getContentPane().add(panel);
 		pack();
 		setLocationRelativeTo(getFrame());
@@ -56,6 +58,12 @@ public class IdentifierDialog extends JDialog {
 	private JButton addOrIdempotence() {
 		JButton button = new JButton("Or Idempotence: A = A \u2228 A");
 		button.addActionListener(new OrIdempotenceListener());
+		return button;
+	}
+	
+	private JButton addFalsityIntroduction() {
+		JButton button = new JButton("A = A \u2228 \u22A5");
+		button.addActionListener(new FalsityIntroductionListener());
 		return button;
 	}
 
@@ -94,9 +102,22 @@ public class IdentifierDialog extends JDialog {
 	private class DoubleNegationListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
+			JPanel feedback = getListener().getFeedback();
+			feedback.removeAll();
+			JLabel label1 = new JLabel("Feedback");
+			feedback.add(label1, BorderLayout.NORTH);
+			getListener().setFeedback(feedback);
+			getListener().getEquivalence().updateUI();
 			if(isSide()) {
 				IdentifierEquivalence eq = new IdentifierEquivalence(getListener().getLeft().getLast().getTree().copy(), getKey());
 				AST tree = eq.doubleNegation();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateLeftList(node);
 				getListener().updateEquivalenceLeft();
@@ -104,6 +125,13 @@ public class IdentifierDialog extends JDialog {
 			if(!isSide()) {
 				IdentifierEquivalence eq = new IdentifierEquivalence(getListener().getRight().getLast().getTree().copy(), getKey());
 				AST tree = eq.doubleNegation();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateRightList(node);
 				getListener().updateEquivalenceRight();
@@ -115,9 +143,22 @@ public class IdentifierDialog extends JDialog {
 	private class AndIdempotenceListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
+			JPanel feedback = getListener().getFeedback();
+			feedback.removeAll();
+			JLabel label1 = new JLabel("Feedback");
+			feedback.add(label1, BorderLayout.NORTH);
+			getListener().setFeedback(feedback);
+			getListener().getEquivalence().updateUI();
 			if(isSide()) {
 				IdentifierEquivalence eq = new IdentifierEquivalence(getListener().getLeft().getLast().getTree().copy(), getKey());
 				AST tree = eq.andIdempotence();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateLeftList(node);
 				getListener().updateEquivalenceLeft();
@@ -125,6 +166,13 @@ public class IdentifierDialog extends JDialog {
 			if(!isSide()) {
 				IdentifierEquivalence eq = new IdentifierEquivalence(getListener().getRight().getLast().getTree().copy(), getKey());
 				AST tree = eq.andIdempotence();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateRightList(node);
 				getListener().updateEquivalenceRight();
@@ -136,9 +184,22 @@ public class IdentifierDialog extends JDialog {
 	private class OrIdempotenceListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
+			JPanel feedback = getListener().getFeedback();
+			feedback.removeAll();
+			JLabel label1 = new JLabel("Feedback");
+			feedback.add(label1, BorderLayout.NORTH);
+			getListener().setFeedback(feedback);
+			getListener().getEquivalence().updateUI();
 			if(isSide()) {
 				IdentifierEquivalence eq = new IdentifierEquivalence(getListener().getLeft().getLast().getTree().copy(), getKey());
 				AST tree = eq.orIdempotence();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateLeftList(node);
 				getListener().updateEquivalenceLeft();
@@ -146,6 +207,54 @@ public class IdentifierDialog extends JDialog {
 			if(!isSide()) {
 				IdentifierEquivalence eq = new IdentifierEquivalence(getListener().getRight().getLast().getTree().copy(), getKey());
 				AST tree = eq.orIdempotence();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateRightList(node);
+				getListener().updateEquivalenceRight();
+			}
+		}
+		
+	}
+	
+	private class FalsityIntroductionListener implements ActionListener {
+
+		public void actionPerformed(ActionEvent e) {
+			JPanel feedback = getListener().getFeedback();
+			feedback.removeAll();
+			JLabel label1 = new JLabel("Feedback");
+			feedback.add(label1, BorderLayout.NORTH);
+			getListener().setFeedback(feedback);
+			getListener().getEquivalence().updateUI();
+			if(isSide()) {
+				IdentifierEquivalence eq = new IdentifierEquivalence(getListener().getLeft().getLast().getTree().copy(), getKey());
+				AST tree = eq.falsityIntroduction();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateLeftList(node);
+				getListener().updateEquivalenceLeft();
+			}
+			if(!isSide()) {
+				IdentifierEquivalence eq = new IdentifierEquivalence(getListener().getRight().getLast().getTree().copy(), getKey());
+				AST tree = eq.falsityIntroduction();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateRightList(node);
 				getListener().updateEquivalenceRight();

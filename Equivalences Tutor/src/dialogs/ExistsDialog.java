@@ -136,7 +136,7 @@ public class ExistsDialog  extends JDialog {
 				ExistsEquivalence eq = new ExistsEquivalence(temp, getKey());
 				AST tree = eq.equivalence1();
 				if(tree == null) {
-					JLabel label2 = new JLabel("Idempotence cannot be applied to this And connective. Please try another equivalence!");
+					JLabel label2 = new JLabel("Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();
@@ -151,7 +151,7 @@ public class ExistsDialog  extends JDialog {
 				ExistsEquivalence eq = new ExistsEquivalence(temp, getKey());
 				AST tree = eq.equivalence1();
 				if(tree == null) {
-					JLabel label2 = new JLabel("Idempotence cannot be applied to this And connective. Please try another equivalence!");
+					JLabel label2 = new JLabel("Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();
@@ -178,7 +178,7 @@ public class ExistsDialog  extends JDialog {
 				ExistsEquivalence eq = new ExistsEquivalence(temp, getKey());
 				AST tree = eq.equivalence2();
 				if(tree == null) {
-					JLabel label2 = new JLabel("Idempotence cannot be applied to this And connective. Please try another equivalence!");
+					JLabel label2 = new JLabel("Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();
@@ -193,7 +193,7 @@ public class ExistsDialog  extends JDialog {
 				ExistsEquivalence eq = new ExistsEquivalence(temp, getKey());
 				AST tree = eq.equivalence2();
 				if(tree == null) {
-					JLabel label2 = new JLabel("Idempotence cannot be applied to this And connective. Please try another equivalence!");
+					JLabel label2 = new JLabel("Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();
@@ -220,7 +220,7 @@ public class ExistsDialog  extends JDialog {
 				ExistsEquivalence eq = new ExistsEquivalence(temp, getKey());
 				AST tree = eq.equivalence3();
 				if(tree == null) {
-					JLabel label2 = new JLabel("Idempotence cannot be applied to this And connective. Please try another equivalence!");
+					JLabel label2 = new JLabel("Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();
@@ -235,7 +235,7 @@ public class ExistsDialog  extends JDialog {
 				ExistsEquivalence eq = new ExistsEquivalence(temp, getKey());
 				AST tree = eq.equivalence3();
 				if(tree == null) {
-					JLabel label2 = new JLabel("Idempotence cannot be applied to this And connective. Please try another equivalence!");
+					JLabel label2 = new JLabel("Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();
@@ -262,7 +262,7 @@ public class ExistsDialog  extends JDialog {
 				ExistsEquivalence eq = new ExistsEquivalence(temp, getKey());
 				AST tree = eq.equivalence4();
 				if(tree == null) {
-					JLabel label2 = new JLabel("Idempotence cannot be applied to this And connective. Please try another equivalence!");
+					JLabel label2 = new JLabel("Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();
@@ -277,7 +277,7 @@ public class ExistsDialog  extends JDialog {
 				ExistsEquivalence eq = new ExistsEquivalence(temp, getKey());
 				AST tree = eq.equivalence4();
 				if(tree == null) {
-					JLabel label2 = new JLabel("Idempotence cannot be applied to this And connective. Please try another equivalence!");
+					JLabel label2 = new JLabel("Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();
@@ -304,7 +304,7 @@ public class ExistsDialog  extends JDialog {
 				ExistsEquivalence eq = new ExistsEquivalence(temp, getKey());
 				AST tree = eq.equivalence5();
 				if(tree == null) {
-					JLabel label2 = new JLabel("Idempotence cannot be applied to this And connective. Please try another equivalence!");
+					JLabel label2 = new JLabel("Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();
@@ -319,7 +319,7 @@ public class ExistsDialog  extends JDialog {
 				ExistsEquivalence eq = new ExistsEquivalence(temp, getKey());
 				AST tree = eq.equivalence5();
 				if(tree == null) {
-					JLabel label2 = new JLabel("Idempotence cannot be applied to this And connective. Please try another equivalence!");
+					JLabel label2 = new JLabel("Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();
@@ -346,7 +346,7 @@ public class ExistsDialog  extends JDialog {
 				ExistsEquivalence eq = new ExistsEquivalence(temp, getKey());
 				AST tree = eq.equivalence6();
 				if(tree == null) {
-					JLabel label2 = new JLabel("Idempotence cannot be applied to this And connective. Please try another equivalence!");
+					JLabel label2 = new JLabel("Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();
@@ -361,7 +361,7 @@ public class ExistsDialog  extends JDialog {
 				ExistsEquivalence eq = new ExistsEquivalence(temp, getKey());
 				AST tree = eq.equivalence6();
 				if(tree == null) {
-					JLabel label2 = new JLabel("Idempotence cannot be applied to this And connective. Please try another equivalence!");
+					JLabel label2 = new JLabel("Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();
@@ -388,7 +388,7 @@ public class ExistsDialog  extends JDialog {
 				ExistsEquivalence eq = new ExistsEquivalence(temp, getKey());
 				AST tree = eq.equivalence7();
 				if(tree == null) {
-					JLabel label2 = new JLabel("Idempotence cannot be applied to this And connective. Please try another equivalence!");
+					JLabel label2 = new JLabel("Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();
@@ -403,7 +403,7 @@ public class ExistsDialog  extends JDialog {
 				ExistsEquivalence eq = new ExistsEquivalence(temp, getKey());
 				AST tree = eq.equivalence7();
 				if(tree == null) {
-					JLabel label2 = new JLabel("Idempotence cannot be applied to this And connective. Please try another equivalence!");
+					JLabel label2 = new JLabel("Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);
 					getListener().setFeedback(feedback);
 					getListener().getEquivalence().updateUI();

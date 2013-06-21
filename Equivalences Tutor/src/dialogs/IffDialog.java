@@ -11,6 +11,7 @@ import gui.NewPersonalEquivalenceListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import AST.AST;
@@ -111,9 +112,22 @@ public class IffDialog extends JDialog {
 	private class IffToAndListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
+			JPanel feedback = getListener().getFeedback();
+			feedback.removeAll();
+			JLabel label1 = new JLabel("Feedback");
+			feedback.add(label1, BorderLayout.NORTH);
+			getListener().setFeedback(feedback);
+			getListener().getEquivalence().updateUI();
 			if(isSide()) {
 				IffEquivalence eq = new IffEquivalence(getListener().getLeft().getLast().getTree().copy(), getKey());
 				AST tree = eq.iffToAndEquivalence();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateLeftList(node);
 				getListener().updateEquivalenceLeft();
@@ -121,6 +135,13 @@ public class IffDialog extends JDialog {
 			if(!isSide()) {
 				IffEquivalence eq = new IffEquivalence(getListener().getRight().getLast().getTree().copy(), getKey());
 				AST tree = eq.iffToAndEquivalence();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateRightList(node);
 				getListener().updateEquivalenceRight();
@@ -132,9 +153,22 @@ public class IffDialog extends JDialog {
 	private class IffToOrListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
+			JPanel feedback = getListener().getFeedback();
+			feedback.removeAll();
+			JLabel label1 = new JLabel("Feedback");
+			feedback.add(label1, BorderLayout.NORTH);
+			getListener().setFeedback(feedback);
+			getListener().getEquivalence().updateUI();
 			if(isSide()) {
 				IffEquivalence eq = new IffEquivalence(getListener().getLeft().getLast().getTree().copy(), getKey());
 				AST tree = eq.iffToOrEquivalence();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateLeftList(node);
 				getListener().updateEquivalenceLeft();
@@ -142,6 +176,13 @@ public class IffDialog extends JDialog {
 			if(!isSide()) {
 				IffEquivalence eq = new IffEquivalence(getListener().getRight().getLast().getTree().copy(), getKey());
 				AST tree = eq.iffToOrEquivalence();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateRightList(node);
 				getListener().updateEquivalenceRight();
@@ -153,9 +194,22 @@ public class IffDialog extends JDialog {
 	private class NotsListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
+			JPanel feedback = getListener().getFeedback();
+			feedback.removeAll();
+			JLabel label1 = new JLabel("Feedback");
+			feedback.add(label1, BorderLayout.NORTH);
+			getListener().setFeedback(feedback);
+			getListener().getEquivalence().updateUI();
 			if(isSide()) {
 				IffEquivalence eq = new IffEquivalence(getListener().getLeft().getLast().getTree().copy(), getKey());
 				AST tree = eq.negate();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateLeftList(node);
 				getListener().updateEquivalenceLeft();
@@ -163,6 +217,13 @@ public class IffDialog extends JDialog {
 			if(!isSide()) {
 				IffEquivalence eq = new IffEquivalence(getListener().getRight().getLast().getTree().copy(), getKey());
 				AST tree = eq.negate();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateRightList(node);
 				getListener().updateEquivalenceRight();
@@ -174,9 +235,22 @@ public class IffDialog extends JDialog {
 	private class IffNot1Listener implements ActionListener {
 		
 		public void actionPerformed(ActionEvent e) {
+			JPanel feedback = getListener().getFeedback();
+			feedback.removeAll();
+			JLabel label1 = new JLabel("Feedback");
+			feedback.add(label1, BorderLayout.NORTH);
+			getListener().setFeedback(feedback);
+			getListener().getEquivalence().updateUI();
 			if(isSide()) {
 				IffEquivalence eq = new IffEquivalence(getListener().getLeft().getLast().getTree().copy(), getKey());
 				AST tree = eq.iffNot1();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateLeftList(node);
 				getListener().updateEquivalenceLeft();
@@ -184,6 +258,13 @@ public class IffDialog extends JDialog {
 			if(!isSide()) {
 				IffEquivalence eq = new IffEquivalence(getListener().getRight().getLast().getTree().copy(), getKey());
 				AST tree = eq.iffNot1();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateRightList(node);
 				getListener().updateEquivalenceRight();
@@ -194,9 +275,22 @@ public class IffDialog extends JDialog {
 private class IffNot2Listener implements ActionListener {
 		
 		public void actionPerformed(ActionEvent e) {
+			JPanel feedback = getListener().getFeedback();
+			feedback.removeAll();
+			JLabel label1 = new JLabel("Feedback");
+			feedback.add(label1, BorderLayout.NORTH);
+			getListener().setFeedback(feedback);
+			getListener().getEquivalence().updateUI();
 			if(isSide()) {
 				IffEquivalence eq = new IffEquivalence(getListener().getLeft().getLast().getTree().copy(), getKey());
 				AST tree = eq.iffNot2();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateLeftList(node);
 				getListener().updateEquivalenceLeft();
@@ -204,6 +298,13 @@ private class IffNot2Listener implements ActionListener {
 			if(!isSide()) {
 				IffEquivalence eq = new IffEquivalence(getListener().getRight().getLast().getTree().copy(), getKey());
 				AST tree = eq.iffNot2();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
 				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
 				getListener().updateRightList(node);
 				getListener().updateEquivalenceRight();
