@@ -14,7 +14,7 @@ public class InitialiseGui {
 		}*/
 		/*
 		EQTutor eqtutor = new EQTutor(); 
-		String src = "(E)a (A)a (E)a (!a)";
+		String src = "(B)";
 		LogicParser parser = eqtutor.getParser(src);
 		AST tree1 = eqtutor.getTree(parser);
 		System.out.println(tree1.toString());

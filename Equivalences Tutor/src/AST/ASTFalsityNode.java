@@ -2,9 +2,14 @@ package AST;
 
 import gui.NewPersonalEquivalenceListener;
 
+import java.awt.BorderLayout;
 import java.util.TreeMap;
 
+import javax.swing.JButton;
 import javax.swing.JPanel;
+
+import net.miginfocom.swing.MigLayout;
+import buttonlisteners.TruthButtonListener;
 
 public class ASTFalsityNode extends ASTPropositionalNode {
 	
@@ -27,14 +32,21 @@ public class ASTFalsityNode extends ASTPropositionalNode {
 		return 0;
 	}
 
-	@Override
 	public JPanel createJPanel(NewPersonalEquivalenceListener l, boolean side) {
-		return null;
+		JPanel panel = new JPanel(new MigLayout());
+		JButton button = new JButton("\u22A5");
+		makeTransparent(button);
+		TruthButtonListener listener = new TruthButtonListener(l, getKey(), side);
+		button.addActionListener(listener);
+		panel.add(button, BorderLayout.WEST);
+		return panel;
 	}
 
 	@Override
 	public ASTPropositionalNode copy() {
-		return null;
+		ASTFalsityNode newNode = new ASTFalsityNode(0);
+		newNode.setKey(getKey());
+		return newNode;
 	}
 
 	@Override
@@ -59,7 +71,7 @@ public class ASTFalsityNode extends ASTPropositionalNode {
 
 	@Override
 	public String toParserString() {
-		return null;
+		return "(B)";
 	}
 
 }

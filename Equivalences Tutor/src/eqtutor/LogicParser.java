@@ -1,4 +1,4 @@
-// $ANTLR 3.4 /homes/sdj09/LogicParser.g 2013-06-20 12:59:08
+// $ANTLR 3.4 /homes/sdj09/LogicParser.g 2013-06-21 10:12:14
 
   package eqtutor;
   
@@ -17,21 +17,24 @@ import java.util.HashMap;
 @SuppressWarnings({"all", "warnings", "unchecked"})
 public class LogicParser extends Parser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "AND", "EXISTS", "FORALL", "ID", "IFF", "IFTHEN", "LPAREN", "NOT", "OR", "RPAREN", "WHITESPACE"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "AND", "COMMA", "EXISTS", "FALSITY", "FORALL", "ID", "IFF", "IFTHEN", "LPAREN", "NOT", "OR", "RPAREN", "TRUTH", "WHITESPACE"
     };
 
     public static final int EOF=-1;
     public static final int AND=4;
-    public static final int EXISTS=5;
-    public static final int FORALL=6;
-    public static final int ID=7;
-    public static final int IFF=8;
-    public static final int IFTHEN=9;
-    public static final int LPAREN=10;
-    public static final int NOT=11;
-    public static final int OR=12;
-    public static final int RPAREN=13;
-    public static final int WHITESPACE=14;
+    public static final int COMMA=5;
+    public static final int EXISTS=6;
+    public static final int FALSITY=7;
+    public static final int FORALL=8;
+    public static final int ID=9;
+    public static final int IFF=10;
+    public static final int IFTHEN=11;
+    public static final int LPAREN=12;
+    public static final int NOT=13;
+    public static final int OR=14;
+    public static final int RPAREN=15;
+    public static final int TRUTH=16;
+    public static final int WHITESPACE=17;
 
     // delegates
     public Parser[] getDelegates() {
@@ -445,7 +448,7 @@ public class LogicParser extends Parser {
             if ( (LA5_0==NOT) ) {
                 alt5=1;
             }
-            else if ( ((LA5_0 >= EXISTS && LA5_0 <= ID)||LA5_0==LPAREN) ) {
+            else if ( ((LA5_0 >= EXISTS && LA5_0 <= ID)||LA5_0==LPAREN||LA5_0==TRUTH) ) {
                 alt5=2;
             }
             else {
@@ -503,7 +506,7 @@ public class LogicParser extends Parser {
 
 
     // $ANTLR start "forallexpr"
-    // /homes/sdj09/LogicParser.g:60:1: forallexpr returns [ASTNode node] : ( FORALL ID forall= forallexpr | EXISTS ID exists= forallexpr | identifier );
+    // /homes/sdj09/LogicParser.g:55:1: forallexpr returns [ASTNode node] : ( FORALL ID forall= forallexpr | EXISTS ID exists= forallexpr | identifier );
     public final ASTNode forallexpr() throws RecognitionException {
         ASTNode node = null;
 
@@ -518,7 +521,7 @@ public class LogicParser extends Parser {
 
 
         try {
-            // /homes/sdj09/LogicParser.g:62:3: ( FORALL ID forall= forallexpr | EXISTS ID exists= forallexpr | identifier )
+            // /homes/sdj09/LogicParser.g:56:3: ( FORALL ID forall= forallexpr | EXISTS ID exists= forallexpr | identifier )
             int alt6=3;
             switch ( input.LA(1) ) {
             case FORALL:
@@ -531,8 +534,10 @@ public class LogicParser extends Parser {
                 alt6=2;
                 }
                 break;
+            case FALSITY:
             case ID:
             case LPAREN:
+            case TRUTH:
                 {
                 alt6=3;
                 }
@@ -548,43 +553,43 @@ public class LogicParser extends Parser {
 
             switch (alt6) {
                 case 1 :
-                    // /homes/sdj09/LogicParser.g:62:5: FORALL ID forall= forallexpr
+                    // /homes/sdj09/LogicParser.g:56:5: FORALL ID forall= forallexpr
                     {
-                    match(input,FORALL,FOLLOW_FORALL_in_forallexpr270); if (state.failed) return node;
+                    match(input,FORALL,FOLLOW_FORALL_in_forallexpr262); if (state.failed) return node;
 
-                    ID2=(Token)match(input,ID,FOLLOW_ID_in_forallexpr272); if (state.failed) return node;
+                    ID2=(Token)match(input,ID,FOLLOW_ID_in_forallexpr264); if (state.failed) return node;
 
-                    pushFollow(FOLLOW_forallexpr_in_forallexpr278);
+                    pushFollow(FOLLOW_forallexpr_in_forallexpr270);
                     forall=forallexpr();
 
                     state._fsp--;
                     if (state.failed) return node;
 
-                    if ( state.backtracking==0 ) {node = new ASTForAllNode(++counter, new ASTIdentifierNode(++counter, (ID2!=null?ID2.getText():null)), forall);}
+                    if ( state.backtracking==0 ) {node = new ASTForAllNode(++counter, new ASTIdentifierNode(++counter, (ID2!=null?ID2.getText():null), null, null), forall);}
 
                     }
                     break;
                 case 2 :
-                    // /homes/sdj09/LogicParser.g:63:5: EXISTS ID exists= forallexpr
+                    // /homes/sdj09/LogicParser.g:57:5: EXISTS ID exists= forallexpr
                     {
-                    match(input,EXISTS,FOLLOW_EXISTS_in_forallexpr286); if (state.failed) return node;
+                    match(input,EXISTS,FOLLOW_EXISTS_in_forallexpr278); if (state.failed) return node;
 
-                    ID3=(Token)match(input,ID,FOLLOW_ID_in_forallexpr288); if (state.failed) return node;
+                    ID3=(Token)match(input,ID,FOLLOW_ID_in_forallexpr280); if (state.failed) return node;
 
-                    pushFollow(FOLLOW_forallexpr_in_forallexpr294);
+                    pushFollow(FOLLOW_forallexpr_in_forallexpr286);
                     exists=forallexpr();
 
                     state._fsp--;
                     if (state.failed) return node;
 
-                    if ( state.backtracking==0 ) {node = new ASTExistsNode(++counter, new ASTIdentifierNode(++counter, (ID3!=null?ID3.getText():null)), exists);}
+                    if ( state.backtracking==0 ) {node = new ASTExistsNode(++counter, new ASTIdentifierNode(++counter, (ID3!=null?ID3.getText():null), null, null), exists);}
 
                     }
                     break;
                 case 3 :
-                    // /homes/sdj09/LogicParser.g:64:5: identifier
+                    // /homes/sdj09/LogicParser.g:58:5: identifier
                     {
-                    pushFollow(FOLLOW_identifier_in_forallexpr302);
+                    pushFollow(FOLLOW_identifier_in_forallexpr294);
                     identifier4=identifier();
 
                     state._fsp--;
@@ -612,27 +617,86 @@ public class LogicParser extends Parser {
 
 
     // $ANTLR start "identifier"
-    // /homes/sdj09/LogicParser.g:67:1: identifier returns [ASTNode node] : ( ID | LPAREN iffexpr RPAREN );
+    // /homes/sdj09/LogicParser.g:61:1: identifier returns [ASTNode node] : ( ID |relation= ID LPAREN id= ID RPAREN |relation= ID LPAREN id1= ID COMMA id2= ID RPAREN | TRUTH | FALSITY | LPAREN iffexpr RPAREN );
     public final ASTNode identifier() throws RecognitionException {
         ASTNode node = null;
 
 
+        Token relation=null;
+        Token id=null;
+        Token id1=null;
+        Token id2=null;
         Token ID5=null;
         ASTNode iffexpr6 =null;
 
 
         try {
-            // /homes/sdj09/LogicParser.g:68:3: ( ID | LPAREN iffexpr RPAREN )
-            int alt7=2;
-            int LA7_0 = input.LA(1);
+            // /homes/sdj09/LogicParser.g:62:3: ( ID |relation= ID LPAREN id= ID RPAREN |relation= ID LPAREN id1= ID COMMA id2= ID RPAREN | TRUTH | FALSITY | LPAREN iffexpr RPAREN )
+            int alt7=6;
+            switch ( input.LA(1) ) {
+            case ID:
+                {
+                int LA7_1 = input.LA(2);
 
-            if ( (LA7_0==ID) ) {
-                alt7=1;
-            }
-            else if ( (LA7_0==LPAREN) ) {
-                alt7=2;
-            }
-            else {
+                if ( (LA7_1==LPAREN) ) {
+                    int LA7_5 = input.LA(3);
+
+                    if ( (LA7_5==ID) ) {
+                        int LA7_7 = input.LA(4);
+
+                        if ( (LA7_7==RPAREN) ) {
+                            alt7=2;
+                        }
+                        else if ( (LA7_7==COMMA) ) {
+                            alt7=3;
+                        }
+                        else {
+                            if (state.backtracking>0) {state.failed=true; return node;}
+                            NoViableAltException nvae =
+                                new NoViableAltException("", 7, 7, input);
+
+                            throw nvae;
+
+                        }
+                    }
+                    else {
+                        if (state.backtracking>0) {state.failed=true; return node;}
+                        NoViableAltException nvae =
+                            new NoViableAltException("", 7, 5, input);
+
+                        throw nvae;
+
+                    }
+                }
+                else if ( (LA7_1==EOF||LA7_1==AND||(LA7_1 >= IFF && LA7_1 <= IFTHEN)||(LA7_1 >= OR && LA7_1 <= RPAREN)) ) {
+                    alt7=1;
+                }
+                else {
+                    if (state.backtracking>0) {state.failed=true; return node;}
+                    NoViableAltException nvae =
+                        new NoViableAltException("", 7, 1, input);
+
+                    throw nvae;
+
+                }
+                }
+                break;
+            case TRUTH:
+                {
+                alt7=4;
+                }
+                break;
+            case FALSITY:
+                {
+                alt7=5;
+                }
+                break;
+            case LPAREN:
+                {
+                alt7=6;
+                }
+                break;
+            default:
                 if (state.backtracking>0) {state.failed=true; return node;}
                 NoViableAltException nvae =
                     new NoViableAltException("", 7, 0, input);
@@ -640,28 +704,81 @@ public class LogicParser extends Parser {
                 throw nvae;
 
             }
+
             switch (alt7) {
                 case 1 :
-                    // /homes/sdj09/LogicParser.g:68:5: ID
+                    // /homes/sdj09/LogicParser.g:62:5: ID
                     {
-                    ID5=(Token)match(input,ID,FOLLOW_ID_in_identifier321); if (state.failed) return node;
+                    ID5=(Token)match(input,ID,FOLLOW_ID_in_identifier313); if (state.failed) return node;
 
-                    if ( state.backtracking==0 ) {node = new ASTIdentifierNode(++counter, (ID5!=null?ID5.getText():null));}
+                    if ( state.backtracking==0 ) {node = new ASTIdentifierNode(++counter, (ID5!=null?ID5.getText():null), null, null);}
 
                     }
                     break;
                 case 2 :
-                    // /homes/sdj09/LogicParser.g:69:5: LPAREN iffexpr RPAREN
+                    // /homes/sdj09/LogicParser.g:63:5: relation= ID LPAREN id= ID RPAREN
                     {
-                    match(input,LPAREN,FOLLOW_LPAREN_in_identifier329); if (state.failed) return node;
+                    relation=(Token)match(input,ID,FOLLOW_ID_in_identifier325); if (state.failed) return node;
 
-                    pushFollow(FOLLOW_iffexpr_in_identifier331);
+                    match(input,LPAREN,FOLLOW_LPAREN_in_identifier327); if (state.failed) return node;
+
+                    id=(Token)match(input,ID,FOLLOW_ID_in_identifier333); if (state.failed) return node;
+
+                    match(input,RPAREN,FOLLOW_RPAREN_in_identifier335); if (state.failed) return node;
+
+                    if ( state.backtracking==0 ) {node = new ASTIdentifierNode(++counter, (relation!=null?relation.getText():null), (id!=null?id.getText():null), null);}
+
+                    }
+                    break;
+                case 3 :
+                    // /homes/sdj09/LogicParser.g:64:5: relation= ID LPAREN id1= ID COMMA id2= ID RPAREN
+                    {
+                    relation=(Token)match(input,ID,FOLLOW_ID_in_identifier347); if (state.failed) return node;
+
+                    match(input,LPAREN,FOLLOW_LPAREN_in_identifier349); if (state.failed) return node;
+
+                    id1=(Token)match(input,ID,FOLLOW_ID_in_identifier355); if (state.failed) return node;
+
+                    match(input,COMMA,FOLLOW_COMMA_in_identifier357); if (state.failed) return node;
+
+                    id2=(Token)match(input,ID,FOLLOW_ID_in_identifier363); if (state.failed) return node;
+
+                    match(input,RPAREN,FOLLOW_RPAREN_in_identifier365); if (state.failed) return node;
+
+                    if ( state.backtracking==0 ) {node = new ASTIdentifierNode(++counter, (relation!=null?relation.getText():null), (id1!=null?id1.getText():null), (id2!=null?id2.getText():null));}
+
+                    }
+                    break;
+                case 4 :
+                    // /homes/sdj09/LogicParser.g:65:5: TRUTH
+                    {
+                    match(input,TRUTH,FOLLOW_TRUTH_in_identifier373); if (state.failed) return node;
+
+                    if ( state.backtracking==0 ) {node = new ASTTruthNode(++counter);}
+
+                    }
+                    break;
+                case 5 :
+                    // /homes/sdj09/LogicParser.g:66:5: FALSITY
+                    {
+                    match(input,FALSITY,FOLLOW_FALSITY_in_identifier381); if (state.failed) return node;
+
+                    if ( state.backtracking==0 ) {node = new ASTFalsityNode(++counter);}
+
+                    }
+                    break;
+                case 6 :
+                    // /homes/sdj09/LogicParser.g:67:5: LPAREN iffexpr RPAREN
+                    {
+                    match(input,LPAREN,FOLLOW_LPAREN_in_identifier389); if (state.failed) return node;
+
+                    pushFollow(FOLLOW_iffexpr_in_identifier391);
                     iffexpr6=iffexpr();
 
                     state._fsp--;
                     if (state.failed) return node;
 
-                    match(input,RPAREN,FOLLOW_RPAREN_in_identifier333); if (state.failed) return node;
+                    match(input,RPAREN,FOLLOW_RPAREN_in_identifier393); if (state.failed) return node;
 
                     if ( state.backtracking==0 ) {node = iffexpr6;}
 
@@ -830,39 +947,51 @@ public class LogicParser extends Parser {
 
     public static final BitSet FOLLOW_iffexpr_in_program57 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_program61 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ifexpr_in_iffexpr82 = new BitSet(new long[]{0x0000000000000102L});
-    public static final BitSet FOLLOW_IFF_in_iffexpr87 = new BitSet(new long[]{0x0000000000000CE0L});
-    public static final BitSet FOLLOW_iffexpr_in_iffexpr93 = new BitSet(new long[]{0x0000000000000102L});
-    public static final BitSet FOLLOW_orexpr_in_ifexpr121 = new BitSet(new long[]{0x0000000000000202L});
-    public static final BitSet FOLLOW_IFTHEN_in_ifexpr126 = new BitSet(new long[]{0x0000000000000CE0L});
-    public static final BitSet FOLLOW_ifexpr_in_ifexpr132 = new BitSet(new long[]{0x0000000000000202L});
-    public static final BitSet FOLLOW_andexpr_in_orexpr157 = new BitSet(new long[]{0x0000000000001002L});
-    public static final BitSet FOLLOW_OR_in_orexpr162 = new BitSet(new long[]{0x0000000000000CE0L});
-    public static final BitSet FOLLOW_orexpr_in_orexpr168 = new BitSet(new long[]{0x0000000000001002L});
+    public static final BitSet FOLLOW_ifexpr_in_iffexpr82 = new BitSet(new long[]{0x0000000000000402L});
+    public static final BitSet FOLLOW_IFF_in_iffexpr87 = new BitSet(new long[]{0x00000000000133C0L});
+    public static final BitSet FOLLOW_iffexpr_in_iffexpr93 = new BitSet(new long[]{0x0000000000000402L});
+    public static final BitSet FOLLOW_orexpr_in_ifexpr121 = new BitSet(new long[]{0x0000000000000802L});
+    public static final BitSet FOLLOW_IFTHEN_in_ifexpr126 = new BitSet(new long[]{0x00000000000133C0L});
+    public static final BitSet FOLLOW_ifexpr_in_ifexpr132 = new BitSet(new long[]{0x0000000000000802L});
+    public static final BitSet FOLLOW_andexpr_in_orexpr157 = new BitSet(new long[]{0x0000000000004002L});
+    public static final BitSet FOLLOW_OR_in_orexpr162 = new BitSet(new long[]{0x00000000000133C0L});
+    public static final BitSet FOLLOW_orexpr_in_orexpr168 = new BitSet(new long[]{0x0000000000004002L});
     public static final BitSet FOLLOW_notexpr_in_andexpr193 = new BitSet(new long[]{0x0000000000000012L});
-    public static final BitSet FOLLOW_AND_in_andexpr198 = new BitSet(new long[]{0x0000000000000CE0L});
+    public static final BitSet FOLLOW_AND_in_andexpr198 = new BitSet(new long[]{0x00000000000133C0L});
     public static final BitSet FOLLOW_andexpr_in_andexpr204 = new BitSet(new long[]{0x0000000000000012L});
-    public static final BitSet FOLLOW_NOT_in_notexpr227 = new BitSet(new long[]{0x0000000000000CE0L});
+    public static final BitSet FOLLOW_NOT_in_notexpr227 = new BitSet(new long[]{0x00000000000133C0L});
     public static final BitSet FOLLOW_notexpr_in_notexpr233 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_forallexpr_in_notexpr241 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_FORALL_in_forallexpr270 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_ID_in_forallexpr272 = new BitSet(new long[]{0x00000000000004E0L});
-    public static final BitSet FOLLOW_forallexpr_in_forallexpr278 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_EXISTS_in_forallexpr286 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_ID_in_forallexpr288 = new BitSet(new long[]{0x00000000000004E0L});
-    public static final BitSet FOLLOW_forallexpr_in_forallexpr294 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_identifier_in_forallexpr302 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ID_in_identifier321 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_LPAREN_in_identifier329 = new BitSet(new long[]{0x0000000000000CE0L});
-    public static final BitSet FOLLOW_iffexpr_in_identifier331 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_RPAREN_in_identifier333 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IFF_in_synpred1_LogicParser87 = new BitSet(new long[]{0x0000000000000CE0L});
+    public static final BitSet FOLLOW_FORALL_in_forallexpr262 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_ID_in_forallexpr264 = new BitSet(new long[]{0x00000000000113C0L});
+    public static final BitSet FOLLOW_forallexpr_in_forallexpr270 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_EXISTS_in_forallexpr278 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_ID_in_forallexpr280 = new BitSet(new long[]{0x00000000000113C0L});
+    public static final BitSet FOLLOW_forallexpr_in_forallexpr286 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_identifier_in_forallexpr294 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ID_in_identifier313 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ID_in_identifier325 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_LPAREN_in_identifier327 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_ID_in_identifier333 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_RPAREN_in_identifier335 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ID_in_identifier347 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_LPAREN_in_identifier349 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_ID_in_identifier355 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_COMMA_in_identifier357 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_ID_in_identifier363 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_RPAREN_in_identifier365 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_TRUTH_in_identifier373 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_FALSITY_in_identifier381 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_LPAREN_in_identifier389 = new BitSet(new long[]{0x00000000000133C0L});
+    public static final BitSet FOLLOW_iffexpr_in_identifier391 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_RPAREN_in_identifier393 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IFF_in_synpred1_LogicParser87 = new BitSet(new long[]{0x00000000000133C0L});
     public static final BitSet FOLLOW_iffexpr_in_synpred1_LogicParser93 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IFTHEN_in_synpred2_LogicParser126 = new BitSet(new long[]{0x0000000000000CE0L});
+    public static final BitSet FOLLOW_IFTHEN_in_synpred2_LogicParser126 = new BitSet(new long[]{0x00000000000133C0L});
     public static final BitSet FOLLOW_ifexpr_in_synpred2_LogicParser132 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_OR_in_synpred3_LogicParser162 = new BitSet(new long[]{0x0000000000000CE0L});
+    public static final BitSet FOLLOW_OR_in_synpred3_LogicParser162 = new BitSet(new long[]{0x00000000000133C0L});
     public static final BitSet FOLLOW_orexpr_in_synpred3_LogicParser168 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_AND_in_synpred4_LogicParser198 = new BitSet(new long[]{0x0000000000000CE0L});
+    public static final BitSet FOLLOW_AND_in_synpred4_LogicParser198 = new BitSet(new long[]{0x00000000000133C0L});
     public static final BitSet FOLLOW_andexpr_in_synpred4_LogicParser204 = new BitSet(new long[]{0x0000000000000002L});
 
 }

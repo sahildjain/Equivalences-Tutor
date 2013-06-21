@@ -38,6 +38,10 @@ public class ExistsDialog  extends JDialog {
 		panel.add(addEquivalence1(), BorderLayout.NORTH);
 		panel.add(addEquivalence2(), BorderLayout.NORTH);
 		panel.add(addEquivalence3(), BorderLayout.NORTH);
+		panel.add(addEquivalence4(), BorderLayout.NORTH);
+		panel.add(addEquivalence5(), BorderLayout.NORTH);
+		panel.add(addEquivalence6(), BorderLayout.NORTH);
+		panel.add(addEquivalence7(), BorderLayout.NORTH);
 		getContentPane().add(panel);
 		pack();
 		setLocationRelativeTo(getFrame());
@@ -57,8 +61,32 @@ public class ExistsDialog  extends JDialog {
 	}
 	
 	private JButton addEquivalence3() {
-		JButton button = new JButton("");
+		JButton button = new JButton("\u00AC\u2203xA = \u2200x\u00ACA");
 		button.addActionListener(new Equivalence3Listener());
+		return button;
+	}
+	
+	private JButton addEquivalence4() {
+		JButton button = new JButton("If x does not occur free in A, then \u2203xA = \u2200xA");
+		button.addActionListener(new Equivalence4Listener());
+		return button;
+	}
+	
+	private JButton addEquivalence5() {
+		JButton button = new JButton("If x does not occur free in A, then \u2203x(A \u2227 B) = A \u2227 \u2200xB");
+		button.addActionListener(new Equivalence5Listener());
+		return button;
+	}
+	
+	private JButton addEquivalence6() {
+		JButton button = new JButton("If x does not occur free in A, then \u2203x(A \u2192 B) = A \u2192 \u2203xB");
+		button.addActionListener(new Equivalence6Listener());
+		return button;
+	}
+	
+	private JButton addEquivalence7() {
+		JButton button = new JButton("If x does not occur free in B, then \u2203x(A \u2192 B) = \u2200xA \u2192 B");
+		button.addActionListener(new Equivalence7Listener());
 		return button;
 	}
 
@@ -206,6 +234,174 @@ public class ExistsDialog  extends JDialog {
 				AST temp = getListener().getRight().getLast().getTree().copy();
 				ExistsEquivalence eq = new ExistsEquivalence(temp, getKey());
 				AST tree = eq.equivalence3();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Idempotence cannot be applied to this And connective. Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateRightList(node);
+				getListener().updateEquivalenceRight();
+			}
+		}
+	}
+	
+	private class Equivalence4Listener implements ActionListener {
+
+		public void actionPerformed(ActionEvent arg0) {
+			JPanel feedback = getListener().getFeedback();
+			feedback.removeAll();
+			JLabel label1 = new JLabel("Feedback");
+			feedback.add(label1, BorderLayout.NORTH);
+			getListener().setFeedback(feedback);
+			getListener().getEquivalence().updateUI();
+			if(isSide()) {
+				AST temp = getListener().getLeft().getLast().getTree().copy();
+				ExistsEquivalence eq = new ExistsEquivalence(temp, getKey());
+				AST tree = eq.equivalence4();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Idempotence cannot be applied to this And connective. Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateLeftList(node);
+				getListener().updateEquivalenceLeft();
+			}
+			if(!isSide()) {
+				AST temp = getListener().getRight().getLast().getTree().copy();
+				ExistsEquivalence eq = new ExistsEquivalence(temp, getKey());
+				AST tree = eq.equivalence4();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Idempotence cannot be applied to this And connective. Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateRightList(node);
+				getListener().updateEquivalenceRight();
+			}
+		}
+	}
+	
+	private class Equivalence5Listener implements ActionListener {
+
+		public void actionPerformed(ActionEvent arg0) {
+			JPanel feedback = getListener().getFeedback();
+			feedback.removeAll();
+			JLabel label1 = new JLabel("Feedback");
+			feedback.add(label1, BorderLayout.NORTH);
+			getListener().setFeedback(feedback);
+			getListener().getEquivalence().updateUI();
+			if(isSide()) {
+				AST temp = getListener().getLeft().getLast().getTree().copy();
+				ExistsEquivalence eq = new ExistsEquivalence(temp, getKey());
+				AST tree = eq.equivalence5();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Idempotence cannot be applied to this And connective. Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateLeftList(node);
+				getListener().updateEquivalenceLeft();
+			}
+			if(!isSide()) {
+				AST temp = getListener().getRight().getLast().getTree().copy();
+				ExistsEquivalence eq = new ExistsEquivalence(temp, getKey());
+				AST tree = eq.equivalence5();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Idempotence cannot be applied to this And connective. Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateRightList(node);
+				getListener().updateEquivalenceRight();
+			}
+		}
+	}
+	
+	private class Equivalence6Listener implements ActionListener {
+
+		public void actionPerformed(ActionEvent arg0) {
+			JPanel feedback = getListener().getFeedback();
+			feedback.removeAll();
+			JLabel label1 = new JLabel("Feedback");
+			feedback.add(label1, BorderLayout.NORTH);
+			getListener().setFeedback(feedback);
+			getListener().getEquivalence().updateUI();
+			if(isSide()) {
+				AST temp = getListener().getLeft().getLast().getTree().copy();
+				ExistsEquivalence eq = new ExistsEquivalence(temp, getKey());
+				AST tree = eq.equivalence6();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Idempotence cannot be applied to this And connective. Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateLeftList(node);
+				getListener().updateEquivalenceLeft();
+			}
+			if(!isSide()) {
+				AST temp = getListener().getRight().getLast().getTree().copy();
+				ExistsEquivalence eq = new ExistsEquivalence(temp, getKey());
+				AST tree = eq.equivalence6();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Idempotence cannot be applied to this And connective. Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateRightList(node);
+				getListener().updateEquivalenceRight();
+			}
+		}
+	}
+	
+	private class Equivalence7Listener implements ActionListener {
+
+		public void actionPerformed(ActionEvent arg0) {
+			JPanel feedback = getListener().getFeedback();
+			feedback.removeAll();
+			JLabel label1 = new JLabel("Feedback");
+			feedback.add(label1, BorderLayout.NORTH);
+			getListener().setFeedback(feedback);
+			getListener().getEquivalence().updateUI();
+			if(isSide()) {
+				AST temp = getListener().getLeft().getLast().getTree().copy();
+				ExistsEquivalence eq = new ExistsEquivalence(temp, getKey());
+				AST tree = eq.equivalence7();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Idempotence cannot be applied to this And connective. Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateLeftList(node);
+				getListener().updateEquivalenceLeft();
+			}
+			if(!isSide()) {
+				AST temp = getListener().getRight().getLast().getTree().copy();
+				ExistsEquivalence eq = new ExistsEquivalence(temp, getKey());
+				AST tree = eq.equivalence7();
 				if(tree == null) {
 					JLabel label2 = new JLabel("Idempotence cannot be applied to this And connective. Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);

@@ -1,4 +1,4 @@
-// $ANTLR 3.4 /homes/sdj09/LogicLexer.g 2013-06-19 19:14:06
+// $ANTLR 3.4 /homes/sdj09/LogicLexer.g 2013-06-21 10:12:09
 
   package eqtutor;
 
@@ -12,16 +12,19 @@ import java.util.ArrayList;
 public class LogicLexer extends Lexer {
     public static final int EOF=-1;
     public static final int AND=4;
-    public static final int EXISTS=5;
-    public static final int FORALL=6;
-    public static final int ID=7;
-    public static final int IFF=8;
-    public static final int IFTHEN=9;
-    public static final int LPAREN=10;
-    public static final int NOT=11;
-    public static final int OR=12;
-    public static final int RPAREN=13;
-    public static final int WHITESPACE=14;
+    public static final int COMMA=5;
+    public static final int EXISTS=6;
+    public static final int FALSITY=7;
+    public static final int FORALL=8;
+    public static final int ID=9;
+    public static final int IFF=10;
+    public static final int IFTHEN=11;
+    public static final int LPAREN=12;
+    public static final int NOT=13;
+    public static final int OR=14;
+    public static final int RPAREN=15;
+    public static final int TRUTH=16;
+    public static final int WHITESPACE=17;
 
     // delegates
     // delegators
@@ -358,9 +361,76 @@ public class LogicLexer extends Lexer {
     }
     // $ANTLR end "EXISTS"
 
+    // $ANTLR start "COMMA"
+    public final void mCOMMA() throws RecognitionException {
+        try {
+            int _type = COMMA;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // /homes/sdj09/LogicLexer.g:27:7: ( ',' )
+            // /homes/sdj09/LogicLexer.g:27:9: ','
+            {
+            match(','); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "COMMA"
+
+    // $ANTLR start "TRUTH"
+    public final void mTRUTH() throws RecognitionException {
+        try {
+            int _type = TRUTH;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // /homes/sdj09/LogicLexer.g:28:9: ( '(T)' )
+            // /homes/sdj09/LogicLexer.g:28:11: '(T)'
+            {
+            match("(T)"); 
+
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "TRUTH"
+
+    // $ANTLR start "FALSITY"
+    public final void mFALSITY() throws RecognitionException {
+        try {
+            int _type = FALSITY;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // /homes/sdj09/LogicLexer.g:29:9: ( '(B)' )
+            // /homes/sdj09/LogicLexer.g:29:11: '(B)'
+            {
+            match("(B)"); 
+
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "FALSITY"
+
     public void mTokens() throws RecognitionException {
-        // /homes/sdj09/LogicLexer.g:1:8: ( WHITESPACE | AND | OR | IFTHEN | IFF | NOT | LPAREN | RPAREN | ID | FORALL | EXISTS )
-        int alt3=11;
+        // /homes/sdj09/LogicLexer.g:1:8: ( WHITESPACE | AND | OR | IFTHEN | IFF | NOT | LPAREN | RPAREN | ID | FORALL | EXISTS | COMMA | TRUTH | FALSITY )
+        int alt3=14;
         switch ( input.LA(1) ) {
         case '\t':
         case '\n':
@@ -407,6 +477,16 @@ public class LogicLexer extends Lexer {
             case 'E':
                 {
                 alt3=11;
+                }
+                break;
+            case 'T':
+                {
+                alt3=13;
+                }
+                break;
+            case 'B':
+                {
+                alt3=14;
                 }
                 break;
             default:
@@ -474,6 +554,11 @@ public class LogicLexer extends Lexer {
         case 'z':
             {
             alt3=9;
+            }
+            break;
+        case ',':
+            {
+            alt3=12;
             }
             break;
         default:
@@ -569,6 +654,30 @@ public class LogicLexer extends Lexer {
                 // /homes/sdj09/LogicLexer.g:1:67: EXISTS
                 {
                 mEXISTS(); 
+
+
+                }
+                break;
+            case 12 :
+                // /homes/sdj09/LogicLexer.g:1:74: COMMA
+                {
+                mCOMMA(); 
+
+
+                }
+                break;
+            case 13 :
+                // /homes/sdj09/LogicLexer.g:1:80: TRUTH
+                {
+                mTRUTH(); 
+
+
+                }
+                break;
+            case 14 :
+                // /homes/sdj09/LogicLexer.g:1:86: FALSITY
+                {
+                mFALSITY(); 
 
 
                 }
