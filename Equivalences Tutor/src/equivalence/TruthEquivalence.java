@@ -108,5 +108,57 @@ public class TruthEquivalence extends Equivalence {
 		}
 		return null;
 	}
+	
+	public AST orIntroduction1() {
+		try {
+			AST tree = getTree();
+			int key = getKey();
+			ASTNode node = find(tree.getRoot(), key);
+			if(node instanceof ASTTruthNode) {
+				String variable = JOptionPane.showInputDialog("What would you like to call the new variable?");
+				ASTIdentifierNode id1 = new ASTIdentifierNode(tree.getKey(), variable, null, null);
+				tree.setKey(tree.getKey() + 1);
+				ASTIdentifierNode id2 = new ASTIdentifierNode(tree.getKey(), variable, null, null);
+				tree.setKey(tree.getKey() + 1);
+				ASTNotNode notNode = new ASTNotNode(tree.getKey(), id2);
+				tree.setKey(tree.getKey() + 1);
+				ASTOrNode orNode = new ASTOrNode(tree.getKey(), id1, notNode);
+				tree.setKey(tree.getKey() + 1);
+				ASTNode p = replace(tree.getRoot().getLeaf(), orNode, key);
+				ASTProgramNode program = tree.getRoot();
+				program.setLeaf(p);
+				AST t = new AST(tree.getKey(), program);
+				return t;
+			}
+		}
+		catch(Exception e) {
+			return null;
+		}
+		return null;
+	}
+	
+	public AST orIntroduction2() {
+		try {
+			AST tree = getTree();
+			int key = getKey();
+			ASTNode node = find(tree.getRoot(), key);
+			if(node instanceof ASTTruthNode) {
+				String variable = JOptionPane.showInputDialog("What would you like to call the new variable?");
+				ASTIdentifierNode id1 = new ASTIdentifierNode(tree.getKey(), variable, null, null);
+				tree.setKey(tree.getKey() + 1);
+				ASTOrNode orNode = new ASTOrNode(tree.getKey(), id1, node);
+				tree.setKey(tree.getKey() + 1);
+				ASTNode p = replace(tree.getRoot().getLeaf(), orNode, key);
+				ASTProgramNode program = tree.getRoot();
+				program.setLeaf(p);
+				AST t = new AST(tree.getKey(), program);
+				return t;
+			}
+		}
+		catch(Exception e) {
+			return null;
+		}
+		return null;
+	}
 
 }

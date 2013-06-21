@@ -1,9 +1,5 @@
 package gui;
 
-import AST.AST;
-import eqtutor.EQTutor;
-import eqtutor.LogicParser;
-
 public class InitialiseGui {
 	
 	public static void main(final String[] args){

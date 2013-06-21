@@ -38,6 +38,8 @@ public class TruthDialog extends JDialog {
 		panel.add(addImplicationIntroduction2(), BorderLayout.NORTH);
 		panel.add(addImplicationIntroduction3(), BorderLayout.NORTH);
 		panel.add(addFalsityIntroduction(), BorderLayout.NORTH);
+		panel.add(addOrIntroduction1(), BorderLayout.NORTH);
+		panel.add(addOrIntroduction2(), BorderLayout.NORTH);
 		getContentPane().add(panel);
 		pack();
 		setLocationRelativeTo(getFrame());
@@ -65,6 +67,18 @@ public class TruthDialog extends JDialog {
 	private JButton addFalsityIntroduction() {
 		JButton button = new JButton("\u22A4 = \u00AC\u22A5");
 		button.addActionListener(new FalsityIntroductionListener());
+		return button;
+	}
+	
+	private JButton addOrIntroduction1() {
+		JButton button = new JButton("\u22A4 = A \u2228 \u00ACA");
+		button.addActionListener(new OrIntroduction1Listener());
+		return button;
+	}
+	
+	private JButton addOrIntroduction2() {
+		JButton button = new JButton("\u22A4 = A \u2228 \u22A4");
+		button.addActionListener(new OrIntroduction2Listener());
 		return button;
 	}
 
@@ -254,6 +268,90 @@ public class TruthDialog extends JDialog {
 				AST temp = getListener().getRight().getLast().getTree().copy();
 				TruthEquivalence eq = new TruthEquivalence(temp, getKey());
 				AST tree = eq.falsityIntroduction();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Idempotence cannot be applied to this And connective. Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateRightList(node);
+				getListener().updateEquivalenceRight();
+			}
+		}
+	}
+	
+	private class OrIntroduction1Listener implements ActionListener {
+
+		public void actionPerformed(ActionEvent arg0) {
+			JPanel feedback = getListener().getFeedback();
+			feedback.removeAll();
+			JLabel label1 = new JLabel("Feedback");
+			feedback.add(label1, BorderLayout.NORTH);
+			getListener().setFeedback(feedback);
+			getListener().getEquivalence().updateUI();
+			if(isSide()) {
+				AST temp = getListener().getLeft().getLast().getTree().copy();
+				TruthEquivalence eq = new TruthEquivalence(temp, getKey());
+				AST tree = eq.orIntroduction1();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Idempotence cannot be applied to this And connective. Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateLeftList(node);
+				getListener().updateEquivalenceLeft();
+			}
+			if(!isSide()) {
+				AST temp = getListener().getRight().getLast().getTree().copy();
+				TruthEquivalence eq = new TruthEquivalence(temp, getKey());
+				AST tree = eq.orIntroduction1();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Idempotence cannot be applied to this And connective. Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getRight().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateRightList(node);
+				getListener().updateEquivalenceRight();
+			}
+		}
+	}
+	
+	private class OrIntroduction2Listener implements ActionListener {
+
+		public void actionPerformed(ActionEvent arg0) {
+			JPanel feedback = getListener().getFeedback();
+			feedback.removeAll();
+			JLabel label1 = new JLabel("Feedback");
+			feedback.add(label1, BorderLayout.NORTH);
+			getListener().setFeedback(feedback);
+			getListener().getEquivalence().updateUI();
+			if(isSide()) {
+				AST temp = getListener().getLeft().getLast().getTree().copy();
+				TruthEquivalence eq = new TruthEquivalence(temp, getKey());
+				AST tree = eq.orIntroduction2();
+				if(tree == null) {
+					JLabel label2 = new JLabel("Idempotence cannot be applied to this And connective. Please try another equivalence!");
+					feedback.add(label2, BorderLayout.SOUTH);
+					getListener().setFeedback(feedback);
+					getListener().getEquivalence().updateUI();
+					return;
+				}
+				EquivalenceLinkNode node = new EquivalenceLinkNode(getListener().getLeft().getLast().getLineNumber() + 1, tree, null, null);
+				getListener().updateLeftList(node);
+				getListener().updateEquivalenceLeft();
+			}
+			if(!isSide()) {
+				AST temp = getListener().getRight().getLast().getTree().copy();
+				TruthEquivalence eq = new TruthEquivalence(temp, getKey());
+				AST tree = eq.orIntroduction2();
 				if(tree == null) {
 					JLabel label2 = new JLabel("Idempotence cannot be applied to this And connective. Please try another equivalence!");
 					feedback.add(label2, BorderLayout.SOUTH);

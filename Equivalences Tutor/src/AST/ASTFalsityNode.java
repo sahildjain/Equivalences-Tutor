@@ -9,7 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import net.miginfocom.swing.MigLayout;
-import buttonlisteners.TruthButtonListener;
+import buttonlisteners.FalsityButtonListener;
 
 public class ASTFalsityNode extends ASTPropositionalNode {
 	
@@ -36,7 +36,7 @@ public class ASTFalsityNode extends ASTPropositionalNode {
 		JPanel panel = new JPanel(new MigLayout());
 		JButton button = new JButton("\u22A5");
 		makeTransparent(button);
-		TruthButtonListener listener = new TruthButtonListener(l, getKey(), side);
+		FalsityButtonListener listener = new FalsityButtonListener(l, getKey(), side);
 		button.addActionListener(listener);
 		panel.add(button, BorderLayout.WEST);
 		return panel;

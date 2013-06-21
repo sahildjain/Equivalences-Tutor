@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import AST.AST;
-import AST.ASTPropositionalNode;
 
 import eqtutor.EQTutor;
 import eqtutor.LogicParser;
@@ -69,11 +68,11 @@ public class EquivalenceListener implements ActionListener{
 	 * TODO
 	 */
 	private boolean compare(AST tree1, AST tree2) {
-		ASTPropositionalNode node1 = tree1.getRoot().getLeaf();
-		ASTPropositionalNode node2 = tree2.getRoot().getLeaf();
-		if(node1.getClass().toString().equals(node2.getClass().toString())) {
+		//ASTPropositionalNode node1 = tree1.getRoot().getLeaf();
+		//ASTPropositionalNode node2 = tree2.getRoot().getLeaf();
+		//if(node1.getClass().toString().equals(node2.getClass().toString())) {
 			
-		}
+		//}
 		return false;//temp
 		/*NodeEquivalence eq = new NodeEquivalence(node1, node2);
 		if(eq.isEquivalent()) {
